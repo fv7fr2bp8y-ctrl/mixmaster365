@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="MixMaster">
+
+    <link rel="apple-touch-icon" href="https://drive.google.com/file/d/1jPwjw6VBZAK2Gm7-zxl1EXZRjKWdLNnc/view?usp=drive_link">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>MixMaster · Atelier</title>
+
+    <link rel="icon" href="https://lh3.googleusercontent.com/u/0/d/1jPwjw6VBZAK2Gm7-zxl1EXZRjKWdLNnc" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Forum&family=Poiret+One&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: '#0a0908',
+                        'ink-soft': '#161311',
+                        gold: {
+                            DEFAULT: '#c9a961',
+                            bright: '#e8c987',
+                            dim: '#7a6535',
+                            faint: 'rgba(201, 169, 97, 0.15)'
+                        },
+                        cream: {
+                            DEFAULT: '#f0e4cf',
+                            dim: '#b9a98a',
+                            faint: 'rgba(240, 228, 207, 0.5)'
+                        },
+                    },
+                    fontFamily: {
+                        display: ['"Poiret One"', 'serif'],
+                        roman: ['Forum', 'serif'],
+                        body: ['"Cormorant Garamond"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --gold: #c9a961;
+            --gold-bright: #e8c987;
+            --gold-dim: #7a6535;
+            --cream: #f0e4cf;
+            --cream-dim: #b9a98a;
+            --ink: #0a0908;
+            --ink-soft: #161311;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background-color: var(--ink);
+            color: var(--cream);
+            margin: 0;
+            /* Subtle radial vignette for depth */
+            background-image:
+                radial-gradient(ellipse at top, rgba(201, 169, 97, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom, rgba(74, 14, 14, 0.08) 0%, transparent 60%);
+            background-attachment: fixed;
+        }
+
+        /* Subtle paper-grain noise overlay, super faint */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.025;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        input { font-size: 16px; font-family: 'Cormorant Garamond', serif; }
+        ::placeholder { color: var(--cream-dim); opacity: 0.6; font-style: italic; }
+
+        .hidden { display: none !important; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+
+        /* === Deco ornaments === */
+        .deco-divider {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--gold);
+        }
+        .deco-divider::before, .deco-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
+        }
+
+        /* Card frame with deco corners */
+        .deco-card {
+            position: relative;
+            background: var(--ink-soft);
+            border: 1px solid var(--gold-dim);
+        }
+        .deco-card::before, .deco-card::after,
+        .deco-card > .corners::before, .deco-card > .corners::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border: 1.5px solid var(--gold);
+            pointer-events: none;
+            z-index: 2;
+        }
+        .deco-card::before { top: 6px; left: 6px; border-right: none; border-bottom: none; }
+        .deco-card::after { top: 6px; right: 6px; border-left: none; border-bottom: none; }
+        .deco-card > .corners::before { bottom: 6px; left: 6px; border-right: none; border-top: none; }
+        .deco-card > .corners::after { bottom: 6px; right: 6px; border-left: none; border-top: none; }
+
+        /* Image gold frame */
+        .image-frame {
+            position: relative;
+            border: 1px solid var(--gold);
+            outline: 1px solid var(--gold-dim);
+            outline-offset: 4px;
+        }
+
+        /* Active filter underline */
+        .filter-active {
+            color: var(--gold-bright) !important;
+        }
+        .filter-active .filter-underline {
+            transform: scaleX(1) !important;
+            opacity: 1 !important;
+        }
+        .filter-underline {
+            transform: scaleX(0);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Roman numeral medallion */
+        .numeral-medallion {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-family: 'Forum', serif;
+        }
+
+        /* Sunburst rays behind cocktail icon */
+        .sunburst {
+            position: absolute;
+            inset: 0;
+            opacity: 0.25;
+            background:
+                conic-gradient(from 0deg,
+                    transparent 0deg, var(--gold) 1deg, transparent 2deg,
+                    transparent 14deg, var(--gold) 15deg, transparent 16deg,
+                    transparent 28deg, var(--gold) 29deg, transparent 30deg,
+                    transparent 44deg, var(--gold) 45deg, transparent 46deg,
+                    transparent 58deg, var(--gold) 59deg, transparent 60deg,
+                    transparent 74deg, var(--gold) 75deg, transparent 76deg,
+                    transparent 88deg, var(--gold) 89deg, transparent 90deg,
+                    transparent 104deg, var(--gold) 105deg, transparent 106deg,
+                    transparent 118deg, var(--gold) 119deg, transparent 120deg,
+                    transparent 134deg, var(--gold) 135deg, transparent 136deg,
+                    transparent 148deg, var(--gold) 149deg, transparent 150deg,
+                    transparent 164deg, var(--gold) 165deg, transparent 166deg,
+                    transparent 178deg, var(--gold) 179deg, transparent 180deg,
+                    transparent 194deg, var(--gold) 195deg, transparent 196deg,
+                    transparent 208deg, var(--gold) 209deg, transparent 210deg,
+                    transparent 224deg, var(--gold) 225deg, transparent 226deg,
+                    transparent 238deg, var(--gold) 239deg, transparent 240deg,
+                    transparent 254deg, var(--gold) 255deg, transparent 256deg,
+                    transparent 268deg, var(--gold) 269deg, transparent 270deg,
+                    transparent 284deg, var(--gold) 285deg, transparent 286deg,
+                    transparent 298deg, var(--gold) 299deg, transparent 300deg,
+                    transparent 314deg, var(--gold) 315deg, transparent 316deg,
+                    transparent 328deg, var(--gold) 329deg, transparent 330deg,
+                    transparent 344deg, var(--gold) 345deg, transparent 346deg);
+            -webkit-mask: radial-gradient(circle, transparent 30%, black 35%, black 90%, transparent 100%);
+                    mask: radial-gradient(circle, transparent 30%, black 35%, black 90%, transparent 100%);
+            border-radius: 50%;
+        }
+
+        /* Gold button */
+        .btn-gold {
+            background: linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 50%, var(--gold-dim) 100%);
+            color: var(--ink);
+            font-family: 'Forum', serif;
+            letter-spacing: 0.25em;
+            border: 1px solid var(--gold);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+                0 4px 20px rgba(201, 169, 97, 0.2);
+        }
+        .btn-gold:active { transform: translateY(1px); }
+
+        /* Animations */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        .cocktail-card { animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards; }
+
+        @keyframes goldPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(232, 201, 135, 0.6), inset 0 0 0 1px var(--gold); }
+            50% { box-shadow: 0 0 0 18px rgba(232, 201, 135, 0), inset 0 0 0 2px var(--gold-bright); }
+        }
+        .highlight { animation: goldPulse 1.6s ease-out 2; }
+
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .sheet-overlay { animation: fadeIn 0.25s ease-out; }
+        .sheet-panel { animation: slideUp 0.4s cubic-bezier(0.32, 0.72, 0, 1); }
+
+        @keyframes diamondPop {
+            0%, 100% { transform: scale(1) rotate(0); }
+            45% { transform: scale(1.4) rotate(45deg); }
+        }
+        .star-pop { animation: diamondPop 0.45s ease-out; }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .deco-spin { animation: spin 2s linear infinite; }
+
+        /* Recipe content (rendered HTML from sheets) */
+        .recipe-content { font-family: 'Cormorant Garamond', serif; font-style: italic; line-height: 1.7; }
+        .recipe-content a { color: var(--gold-bright); text-decoration: underline; text-decoration-color: var(--gold-dim); }
+        .recipe-content strong, .recipe-content b { color: var(--cream); font-weight: 600; font-style: normal; }
+        .recipe-content p { margin: 0.4em 0; }
+        .recipe-content ul, .recipe-content ol { padding-left: 1.2em; margin: 0.4em 0; }
+
+        /* Safe area for iPhone notch / home bar */
+        .safe-bottom { padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); }
+
+        /* Page edge frame (subtle gold rule on each side) */
+        .page-frame {
+            position: relative;
+        }
+        .page-frame::before {
+            content: '';
+            position: absolute;
+            top: 1.5rem;
+            bottom: 1.5rem;
+            left: 0.25rem;
+            right: 0.25rem;
+            border-left: 1px solid var(--gold-dim);
+            border-right: 1px solid var(--gold-dim);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="text-cream">
+    <div class="page-frame max-w-md mx-auto min-h-screen px-5 pb-44 relative" style="z-index: 2;">
+
+        <!-- HEADER -->
+        <header class="pt-10 pb-6 text-center relative">
+            <div class="flex items-center justify-center gap-4 mb-3">
+                <span class="text-gold text-xl">◆</span>
+                <h1 class="font-display text-[2.6rem] leading-none text-gold tracking-[0.25em] pl-[0.25em]">MIXMASTER</h1>
+                <span class="text-gold text-xl">◆</span>
+            </div>
+            <div class="deco-divider mx-auto max-w-[280px]">
+                <span class="font-roman text-cream-dim text-[0.65rem] tracking-[0.4em] uppercase whitespace-nowrap">Cocktail Atelier · MMXXIV</span>
+            </div>
+        </header>
+
+        <!-- MODE TOGGLE: Cocktails / Mocktails -->
+        <div class="mb-8 flex border border-gold-dim overflow-hidden">
+            <button id="tab-cocktails" onclick="setMode('cocktails')"
+                style="background:var(--gold);color:var(--ink);"
+                class="flex-1 py-3 font-roman text-xs tracking-[0.3em] uppercase transition flex items-center justify-center gap-2">
+                <span>🍸</span><span>Коктейли</span>
+            </button>
+            <button id="tab-mocktails" onclick="setMode('mocktails')"
+                style="background:transparent;color:var(--cream-dim);"
+                class="flex-1 py-3 font-roman text-xs tracking-[0.3em] uppercase transition flex items-center justify-center gap-2">
+                <span>🍹</span><span>Безалкохолни</span>
+            </button>
+        </div>
+
+        <!-- COCKTAIL OF THE DAY -->
+        <section id="cotd-section" class="hidden mb-10">
+            <div class="deco-divider mb-5">
+                <span class="font-roman text-gold text-[0.6rem] tracking-[0.45em] uppercase whitespace-nowrap">✦ Коктейл на Деня ✦</span>
+            </div>
+            <div id="cotd-card" class="deco-card relative overflow-hidden cursor-pointer active:scale-[0.99] transition-transform" style="height:300px" onclick="goToCOTD()">
+                <div class="corners"></div>
+                <img id="cotd-img" src="" alt="" class="absolute inset-0 w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-ink/10"></div>
+
+                <!-- Date badge -->
+                <div class="absolute top-4 left-4 border border-gold-dim bg-ink/80 backdrop-blur-sm px-3 py-2 text-center min-w-[44px]">
+                    <div id="cotd-day" class="font-display text-2xl text-gold-bright leading-none"></div>
+                    <div id="cotd-month" class="font-roman text-gold-dim text-[0.55rem] tracking-[0.25em] uppercase mt-0.5"></div>
+                </div>
+
+                <!-- Icon sunburst top-right -->
+                <div class="absolute top-4 right-4 w-14 h-14 flex items-center justify-center opacity-80">
+                    <div class="sunburst"></div>
+                    <span id="cotd-icon" class="text-2xl relative z-10">🍸</span>
+                </div>
+
+                <!-- Content bottom -->
+                <div class="absolute bottom-0 left-0 right-0 p-6">
+                    <div id="cotd-base" class="font-roman text-gold-dim text-[0.6rem] tracking-[0.45em] uppercase mb-2"></div>
+                    <h2 id="cotd-name" class="font-display text-[2rem] leading-tight text-cream tracking-[0.04em] mb-4"></h2>
+                    <div class="flex items-center gap-2 text-gold font-roman text-xs tracking-[0.3em] uppercase">
+                        <span>Виж рецептата</span>
+                        <span>›</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEARCH -->
+        <div class="mb-8 relative">
+            <div class="border border-gold-dim relative">
+                <input
+                    type="text"
+                    id="search-input"
+                    oninput="onSearch(this.value)"
+                    placeholder="Търсене по име или съставка"
+                    class="w-full bg-transparent text-cream pl-12 pr-12 py-4 outline-none focus:bg-ink-soft transition"
+                />
+                <span id="search-icon" class="absolute left-4 top-1/2 -translate-y-1/2 text-gold pointer-events-none">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-4.3-4.3"/></svg>
+                </span>
+                <button id="search-clear" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-7 h-7 border border-gold-dim text-gold-dim hover:text-gold hover:border-gold flex items-center justify-center text-xs transition">✕</button>
+            </div>
+        </div>
+
+        <!-- FILTERS (menu sections) -->
+        <nav class="mb-6 overflow-x-auto no-scrollbar">
+            <div class="flex gap-7 px-1 pb-1 min-w-min" id="filters-container"></div>
+        </nav>
+
+        <!-- META BAR: count + favorites toggle -->
+        <div class="mb-8 flex justify-between items-center pt-3 border-t border-gold-dim/50">
+            <span id="result-count" class="font-roman text-cream-dim text-xs tracking-[0.3em] uppercase"></span>
+            <button id="fav-toggle" onclick="toggleFavoritesView()" class="flex items-center gap-2 font-roman text-xs tracking-[0.25em] uppercase text-cream-dim hover:text-gold transition active:scale-95">
+                <span id="fav-icon" class="text-base leading-none">◇</span>
+                <span id="fav-label">Избрани</span>
+                <span id="fav-count" class="opacity-70">·  0</span>
+            </button>
+        </div>
+
+        <!-- LOADER -->
+        <!-- AGE GATE -->
+        <div id="age-gate" class="fixed inset-0 z-[60] bg-ink flex flex-col items-center justify-center p-8 text-center">
+            <div class="max-w-xs w-full">
+                <div class="flex items-center justify-center gap-4 mb-8">
+                    <span class="text-gold text-2xl">◆</span>
+                    <h1 class="font-display text-[2.2rem] leading-none text-gold tracking-[0.25em] pl-[0.25em]">MIXMASTER</h1>
+                    <span class="text-gold text-2xl">◆</span>
+                </div>
+                <div class="border border-gold-dim p-8 relative">
+                    <div class="absolute top-3 left-3 w-3 h-3 border-t border-l border-gold"></div>
+                    <div class="absolute top-3 right-3 w-3 h-3 border-t border-r border-gold"></div>
+                    <div class="absolute bottom-3 left-3 w-3 h-3 border-b border-l border-gold"></div>
+                    <div class="absolute bottom-3 right-3 w-3 h-3 border-b border-r border-gold"></div>
+                    <div class="text-gold text-5xl mb-5 font-display">18</div>
+                    <p class="font-roman text-cream text-sm tracking-[0.15em] uppercase mb-2">Навършили ли сте</p>
+                    <p class="font-roman text-cream text-sm tracking-[0.15em] uppercase mb-7">18 години?</p>
+                    <div class="space-y-3">
+                        <button onclick="ageVerify(true)" class="btn-gold w-full py-3 font-roman text-sm tracking-[0.3em] uppercase">
+                            Да, навършил/а съм
+                        </button>
+                        <button onclick="ageVerify(false)" class="w-full border border-gold-dim text-cream-dim py-3 font-roman text-xs tracking-[0.25em] uppercase hover:border-gold hover:text-cream transition">
+                            Не
+                        </button>
+                    </div>
+                </div>
+                <p class="font-body italic text-cream-dim/50 text-xs mt-6">Този сайт съдържа алкохолно съдържание.<br>Достъпът е разрешен само за пълнолетни.</p>
+            </div>
+        </div>
+
+        <!-- BLOCKED SCREEN -->
+        <div id="age-blocked" class="hidden fixed inset-0 z-[60] bg-ink flex flex-col items-center justify-center p-8 text-center">
+            <div class="text-gold text-4xl mb-6 opacity-40">✦</div>
+            <h2 class="font-display text-2xl text-gold tracking-[0.2em] mb-4">ДОСТЪПЪТ Е ОГРАНИЧЕН</h2>
+            <p class="font-body italic text-cream-dim max-w-xs">За да посетите MixMaster Atelier, трябва да сте навършили 18 години.</p>
+        </div>
+
+        <div id="loader" class="fixed inset-0 z-50 bg-ink flex flex-col items-center justify-center p-8 hidden">
+            <div class="flex items-center gap-4 mb-6">
+                <span class="text-gold text-3xl">◆</span>
+                <h2 class="font-display text-3xl text-gold tracking-[0.25em]">MIXMASTER</h2>
+                <span class="text-gold text-3xl">◆</span>
+            </div>
+            <div class="relative w-12 h-12 mb-4">
+                <div class="absolute inset-0 border border-gold-dim deco-spin" style="clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);"></div>
+                <div class="absolute inset-2 border border-gold deco-spin" style="animation-direction: reverse; animation-duration: 3s;"></div>
+            </div>
+            <p id="loader-text" class="font-roman text-xs tracking-[0.4em] uppercase text-cream-dim">Подготвяне на бара</p>
+        </div>
+
+        <!-- COCKTAIL LIST -->
+        <div id="cocktail-list" class="space-y-12 min-h-[40vh]"></div>
+
+        <!-- FOOTER ORNAMENT -->
+        <div class="deco-divider mt-16 mb-2 max-w-[200px] mx-auto">
+            <span class="text-gold text-xs">❦</span>
+        </div>
+    </div>
+
+    <!-- Hidden camera input -->
+    <input type="file" id="camera-input" accept="image/*" capture="environment" class="hidden" onchange="handleCameraInput(this)">
+
+    <!-- SCAN RESULTS MODAL -->
+    <div id="scan-modal" class="fixed inset-0 z-50 hidden">
+        <div onclick="closeScan()" class="sheet-overlay absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        <div class="sheet-panel absolute bottom-0 left-0 right-0 max-w-md mx-auto max-h-[90vh] overflow-y-auto no-scrollbar">
+            <div class="bg-ink border-t border-gold p-6 pb-10 safe-bottom">
+                <div class="deco-divider mx-auto max-w-[100px] mb-5">
+                    <span class="text-gold text-sm">◆</span>
+                </div>
+                <h2 class="font-display text-3xl text-gold tracking-[0.15em] text-center mb-1">АНАЛИЗ</h2>
+                <p class="font-body italic text-cream-dim text-sm text-center mb-6">— Разпознати бутилки —</p>
+
+                <!-- Preview image -->
+                <div id="scan-preview-wrap" class="hidden mb-6">
+                    <div class="image-frame overflow-hidden h-40">
+                        <img id="scan-preview" class="w-full h-full object-cover opacity-70">
+                    </div>
+                </div>
+
+                <!-- Status / loading -->
+                <div id="scan-status" class="text-center py-6">
+                    <div class="relative w-10 h-10 mx-auto mb-4">
+                        <div class="absolute inset-0 border border-gold-dim deco-spin" style="clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);"></div>
+                    </div>
+                    <p class="font-roman text-xs tracking-[0.4em] uppercase text-cream-dim">Анализирам снимката...</p>
+                </div>
+
+                <!-- Detected spirits -->
+                <div id="scan-spirits" class="hidden mb-6">
+                    <div class="deco-divider mb-4">
+                        <span class="font-roman text-gold text-[0.6rem] tracking-[0.4em] uppercase whitespace-nowrap">Разпознати спиртове</span>
+                    </div>
+                    <div id="scan-spirits-list" class="flex flex-wrap gap-2 justify-center"></div>
+                </div>
+
+                <!-- Suggested cocktails -->
+                <div id="scan-results" class="hidden space-y-3"></div>
+
+                <!-- No match -->
+                <div id="scan-none" class="hidden text-center py-4">
+                    <p class="font-body italic text-cream-dim">Не разпознах алкохол на снимката.<br>Опитай с по-ясна снимка.</p>
+                </div>
+
+                <button onclick="closeScan()" class="w-full mt-6 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
+                    Затвори
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM AI BUTTON -->
+    <div class="fixed bottom-0 left-0 right-0 px-5 pt-5 bg-gradient-to-t from-ink via-ink to-ink/0 z-40 safe-bottom">
+        <div class="max-w-md mx-auto">
+            <button onclick="openAISheet()" class="btn-gold w-full py-4 px-6 flex items-center justify-center gap-3 text-sm uppercase active:scale-[0.98] transition relative">
+                <span>✦</span>
+                <span>Препоръка на бармана</span>
+                <span>✦</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- AI ACTION SHEET -->
+    <div id="ai-sheet" class="fixed inset-0 z-50 hidden">
+        <div onclick="closeAISheet()" class="sheet-overlay absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        <div class="sheet-panel absolute bottom-0 left-0 right-0 max-w-md mx-auto">
+            <div class="bg-ink border-t border-gold p-6 pb-10 safe-bottom">
+                <div class="deco-divider mx-auto max-w-[100px] mb-5">
+                    <span class="text-gold text-sm">◆</span>
+                </div>
+                <h2 class="font-display text-3xl text-gold tracking-[0.15em] text-center mb-1">ПРЕПОРЪКА</h2>
+                <p class="font-body italic text-cream-dim text-sm text-center mb-7">— Какво да приготвим? —</p>
+                <div class="space-y-3" id="ai-actions"></div>
+                <button onclick="closeAISheet()" class="w-full mt-5 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
+                    Затвори
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- STATS MODAL -->
+    <div id="stats-modal" class="fixed inset-0 z-50 hidden">
+        <div onclick="closeStats()" class="sheet-overlay absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        <div class="sheet-panel absolute bottom-0 left-0 right-0 max-w-md mx-auto max-h-[88vh] overflow-y-auto no-scrollbar">
+            <div class="bg-ink border-t border-gold p-6 pb-10 safe-bottom">
+                <div class="deco-divider mx-auto max-w-[100px] mb-5">
+                    <span class="text-gold text-sm">◆</span>
+                </div>
+                <h2 class="font-display text-3xl text-gold tracking-[0.15em] text-center mb-1">АТЕЛИЕ</h2>
+                <p class="font-body italic text-cream-dim text-sm text-center mb-7">— Анализ на колекцията —</p>
+                <div id="stats-content" class="space-y-5"></div>
+                <button onclick="closeStats()" class="w-full mt-6 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
+                    Затвори
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // === AGE GATE ===
+        function ageVerify(isAdult) {
+            if (isAdult) {
+                try { localStorage.setItem('mixmaster-age-ok', '1'); } catch(e) {}
+                document.getElementById('age-gate').classList.add('hidden');
+                document.getElementById('loader').classList.remove('hidden');
+                init();
+            } else {
+                document.getElementById('age-gate').classList.add('hidden');
+                document.getElementById('age-blocked').classList.remove('hidden');
+            }
+        }
+
+        // Check if already verified
+        (function() {
+            try {
+                if (localStorage.getItem('mixmaster-age-ok') === '1') {
+                    document.getElementById('age-gate').classList.add('hidden');
+                    document.getElementById('loader').classList.remove('hidden');
+                }
+            } catch(e) {}
+        })();
+
+        const apiUrl         = "https://script.google.com/macros/s/AKfycbyJHL9yaG_eXWg5LyRxhbQtLWjE3z7vwoDF7GZ5ssG9oASczQFhCLfL-4_0W0RhTCKVlA/exec";
+        const mocktailsUrl   = "https://script.google.com/macros/s/AKfycbzpOuOoqZeaS6UlweobSXH3-7pXcr-dyqU1iuaX5f4qp_hhxMhBeXu_5zekdYRDxoXmFw/exec";
+        const geminiKey      = "AIzaSyBbeOrGZHGOWs6AwVWsidl_eiLxyWqJHps";
+
+        // === STATE ===
+        let allCocktails  = [];
+        let allMocktails  = [];
+        let cotdCocktail  = null;
+        let currentMode   = 'cocktails'; // 'cocktails' | 'mocktails'
+        const PAGE_SIZE   = 20;
+        let currentPage   = 1;
+
+        const MOCKTAIL_FILTERS = [
+            { label: 'Всички',            match: null },
+            { label: 'Плодов сок',        match: ['плодов сок'] },
+            { label: 'Цитрусов сок',      match: ['цитрусов сок'] },
+            { label: 'Газирана вода',      match: ['газирана вода'] },
+            { label: 'Чай',               match: ['чай'] },
+            { label: 'Кокосова вода',      match: ['кокосова вода'] },
+            { label: 'Комбуча',            match: ['комбуча'] },
+            { label: 'Лимонада',           match: ['лимонада'] },
+        ];
+        let currentFilter = 'Всички';
+        let searchQuery = '';
+        let showFavoritesOnly = false;
+        let favorites = [];
+        try { favorites = JSON.parse(localStorage.getItem('mixmaster-favorites') || '[]'); } catch (e) { favorites = []; }
+
+        const FILTERS = [
+            { label: 'Всички', match: null },
+            { label: 'Водка', match: ['водка', 'vodka'] },
+            { label: 'Джин', match: ['джин', 'gin'] },
+            { label: 'Ром', match: ['ром', 'rum'] },
+            { label: 'Текила', match: ['текила', 'tequila'] },
+            { label: 'Уиски', match: ['уиски', 'whisky', 'whiskey', 'bourbon'] },
+        ];
+
+        // === HELPERS ===
+        function getDriveImg(link) {
+            if (!link || !link.includes("drive.google.com")) return link || 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600';
+            try {
+                const id = link.match(/\/d\/(.+?)\//)[1];
+                return `https://lh3.googleusercontent.com/u/0/d/${id}`;
+            } catch (e) { return link; }
+        }
+
+        function escapeHtml(s) {
+            return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        }
+
+        function toRoman(num) {
+            const lookup = [['M',1000],['CM',900],['D',500],['CD',400],['C',100],['XC',90],['L',50],['XL',40],['X',10],['IX',9],['V',5],['IV',4],['I',1]];
+            let result = '';
+            for (const [letter, value] of lookup) {
+                while (num >= value) { result += letter; num -= value; }
+            }
+            return result || 'I';
+        }
+
+        function activeList()    { return currentMode === 'mocktails' ? allMocktails : allCocktails; }
+        function activeFilters() { return currentMode === 'mocktails' ? MOCKTAIL_FILTERS : FILTERS; }
+
+        function matchesBase(cocktail, filter) {
+            if (!filter || !filter.match) return true;
+            const b = (cocktail.base || '').toLowerCase();
+            return filter.match.some(m => b.includes(m));
+        }
+
+        function getFiltered() {
+            let result = activeList().filter(c => c && c.name);
+
+            if (showFavoritesOnly) {
+                result = result.filter(c => favorites.includes(c.name));
+            }
+
+            const filterObj = FILTERS.find(f => f.label === currentFilter);
+            if (filterObj && filterObj.match) {
+                result = result.filter(c => matchesBase(c, filterObj));
+            }
+
+            if (searchQuery) {
+                const q = searchQuery.toLowerCase().trim();
+                result = result.filter(c =>
+                    (c.name || '').toLowerCase().includes(q) ||
+                    (c.recipe || '').toLowerCase().includes(q) ||
+                    (c.base || '').toLowerCase().includes(q)
+                );
+            }
+            return result;
+        }
+
+        // === MODE SWITCH ===
+        function setMode(mode) {
+            currentMode = mode;
+            currentFilter = 'Всички';
+            searchQuery = '';
+            showFavoritesOnly = false;
+            document.getElementById('search-input').value = '';
+            document.getElementById('search-clear').classList.add('hidden');
+            document.getElementById('search-icon').classList.remove('hidden');
+
+            // Tab styling via inline style (reliable across Tailwind CDN)
+            const tabC = document.getElementById('tab-cocktails');
+            const tabM = document.getElementById('tab-mocktails');
+            if (mode === 'cocktails') {
+                tabC.style.background = 'var(--gold)'; tabC.style.color = 'var(--ink)';
+                tabM.style.background = 'transparent'; tabM.style.color = 'var(--cream-dim)';
+            } else {
+                tabM.style.background = 'var(--gold)'; tabM.style.color = 'var(--ink)';
+                tabC.style.background = 'transparent'; tabC.style.color = 'var(--cream-dim)';
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            renderFilters();
+            render();
+            renderCOTD();
+        }
+
+        // === COCKTAIL OF THE DAY ===
+        function renderCOTD() {
+            const pool = activeList().filter(c => c && c.name);
+            if (!pool.length) return;
+
+            const today = new Date();
+            const seed  = today.getFullYear() * 1000 + today.getMonth() * 50 + today.getDate();
+            cotdCocktail = pool[seed % pool.length];
+
+            const months = ['Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември'];
+
+            document.getElementById('cotd-img').src   = getDriveImg(cotdCocktail.image);
+            document.getElementById('cotd-name').textContent  = cotdCocktail.name;
+            document.getElementById('cotd-base').textContent  = cotdCocktail.base ? '— ' + cotdCocktail.base + ' —' : '';
+            document.getElementById('cotd-icon').textContent  = cotdCocktail.icon || '🍸';
+            document.getElementById('cotd-day').textContent   = today.getDate();
+            document.getElementById('cotd-month').textContent = months[today.getMonth()];
+
+            document.getElementById('cotd-section').classList.remove('hidden');
+        }
+
+        function goToCOTD() {
+            if (!cotdCocktail) return;
+            currentFilter  = 'Всички';
+            searchQuery    = '';
+            showFavoritesOnly = false;
+            document.getElementById('search-input').value = '';
+            document.getElementById('search-clear').classList.add('hidden');
+            document.getElementById('search-icon').classList.remove('hidden');
+            renderFilters();
+
+            // Render enough pages so the COTD card is visible
+            const data = getFiltered();
+            const idx  = data.findIndex(d => d._idx === cotdCocktail._idx);
+            currentPage = Math.max(1, Math.ceil((idx + 1) / PAGE_SIZE));
+            render(false);
+
+            setTimeout(() => highlightCocktail(cotdCocktail), 150);
+        }
+
+        // === INIT ===
+        async function init() {
+            try {
+                // 1. Load cocktails first — critical path (same as v3)
+                const res = await fetch(apiUrl);
+                const data = await res.json();
+                allCocktails = Array.isArray(data) ? data : [];
+                allCocktails.forEach((c, i) => { if (c) c._idx = i; });
+
+                renderFilters();
+                render();
+                renderCOTD();
+                document.getElementById('loader').classList.add('hidden');
+
+                // 2. Load mocktails silently in background — never blocks
+                fetch(mocktailsUrl)
+                    .then(r => r.json())
+                    .then(d => {
+                        if (!Array.isArray(d)) return;
+                        allMocktails = d;
+                        allMocktails.forEach((c, i) => { if (c) c._idx = i; });
+                    })
+                    .catch(() => {});
+            } catch (e) {
+                document.getElementById('loader-text').innerHTML = "<span class='text-red-400'>Връзката прекъсна</span>";
+            }
+        }
+
+        // === RENDER ===
+        function renderFilters() {
+            const container = document.getElementById('filters-container');
+            const list = activeList();
+            container.innerHTML = activeFilters().map(f => {
+                const count = f.match
+                    ? list.filter(c => c && c.name && matchesBase(c, f)).length
+                    : list.filter(c => c && c.name).length;
+                if (count === 0 && f.match) return '';
+                const isActive = currentFilter === f.label;
+                return `<button onclick="filterBy('${escapeHtml(f.label)}')" class="${isActive ? 'filter-active' : ''} group relative flex flex-col items-center gap-1 py-1 text-cream-dim hover:text-gold transition whitespace-nowrap">
+                    <span class="font-roman text-sm tracking-[0.2em] uppercase">${escapeHtml(f.label)}</span>
+                    <span class="text-[0.65rem] opacity-60">${toRoman(count)}</span>
+                    <span class="filter-underline absolute bottom-0 left-0 right-0 h-px bg-gold"></span>
+                </button>`;
+            }).join('');
+        }
+
+        function updateFavBar() {
+            document.getElementById('fav-count').textContent = `· ${toRoman(favorites.length) || '–'}`;
+            const btn = document.getElementById('fav-toggle');
+            const icon = document.getElementById('fav-icon');
+            const label = document.getElementById('fav-label');
+            if (showFavoritesOnly) {
+                btn.classList.add('!text-gold-bright');
+                icon.textContent = '◆';
+                label.textContent = 'Всички';
+            } else {
+                btn.classList.remove('!text-gold-bright');
+                icon.textContent = '◇';
+                label.textContent = 'Избрани';
+            }
+        }
+
+        function renderCard(d, i) {
+            const isFav = favorites.includes(d.name);
+            const cardId = `card-${d._idx}`;
+            const number = i + 1;
+            const delay = Math.min(i * 0.06, 0.4);
+
+            return `
+                    <article class="cocktail-card deco-card" id="${cardId}" style="animation-delay: ${delay}s">
+                        <div class="corners"></div>
+
+                        <!-- Number header -->
+                        <div class="flex items-center justify-center gap-4 pt-7 pb-5 px-8">
+                            <span class="h-px flex-1 bg-gradient-to-r from-transparent via-gold-dim to-gold"></span>
+                            <span class="font-roman text-gold text-xs tracking-[0.3em]">Nº</span>
+                            <span class="font-roman text-gold-bright text-2xl tracking-[0.1em]">${number}</span>
+                            <span class="h-px flex-1 bg-gradient-to-l from-transparent via-gold-dim to-gold"></span>
+                        </div>
+
+                        <!-- Image with gold frame -->
+                        <div class="px-7 pb-6">
+                            <div class="image-frame relative h-56 bg-ink overflow-hidden">
+                                <img src="${getDriveImg(d.image)}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-60"></div>
+
+                                <!-- Sunburst + icon -->
+                                <div class="absolute bottom-3 right-3 w-16 h-16 flex items-center justify-center">
+                                    <div class="sunburst"></div>
+                                    <span class="text-3xl relative z-10">${escapeHtml(d.icon || '🍸')}</span>
+                                </div>
+
+                                <!-- Favorite diamond -->
+                                <button data-cocktail="${escapeHtml(d.name)}" onclick="toggleFavorite(this, event)"
+                                        aria-label="Toggle favorite"
+                                        class="fav-btn absolute top-3 right-3 w-10 h-10 bg-ink/70 backdrop-blur-sm border ${isFav ? 'border-gold-bright text-gold-bright' : 'border-gold-dim text-cream-dim'} flex items-center justify-center text-base hover:border-gold hover:text-gold active:scale-90 transition">
+                                    ${isFav ? '◆' : '◇'}
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Title block -->
+                        <div class="px-8 pb-4 text-center">
+                            ${d.base ? `<div class="font-roman text-gold-dim text-[0.65rem] tracking-[0.45em] uppercase mb-3">— ${escapeHtml(d.base)} —</div>` : ''}
+                            <h2 class="font-display text-[1.85rem] leading-tight text-cream tracking-[0.05em] mb-3">${escapeHtml(d.name)}</h2>
+                            <div class="deco-divider max-w-[140px] mx-auto">
+                                <span class="text-gold text-xs">◆</span>
+                            </div>
+                        </div>
+
+                        <!-- Ingredients -->
+                        ${d.ingredients ? `
+                        <div class="px-8 pb-5 pt-2">
+                            <ul class="space-y-1.5">
+                                ${String(d.ingredients).split(',').map(ing => ing.trim()).filter(Boolean).map(ing => `
+                                <li class="flex items-baseline gap-3">
+                                    <span class="text-gold text-[0.5rem] shrink-0 mt-1">◆</span>
+                                    <span class="font-roman text-cream-dim text-sm tracking-[0.08em]">${escapeHtml(ing)}</span>
+                                </li>`).join('')}
+                            </ul>
+                        </div>` : ''}
+
+                        <!-- Recipe -->
+                        <div class="px-8 pb-9 pt-2 border-t border-gold-dim/30">
+                            <div class="recipe-content text-cream/80 text-sm text-center pt-4">
+                                ${d.recipe || ''}
+                            </div>
+                        </div>
+                    </article>
+                `;
+        }
+
+        function render(resetPage = true) {
+            const data = getFiltered();
+            const container = document.getElementById('cocktail-list');
+            const countEl = document.getElementById('result-count');
+
+            const word = data.length === 1 ? 'коктейл' : 'коктейла';
+            countEl.textContent = `${toRoman(data.length) || '–'} · ${word}`;
+            updateFavBar();
+
+            if (resetPage) currentPage = 1;
+
+            if (data.length === 0) {
+                let msg;
+                if (showFavoritesOnly && favorites.length === 0) {
+                    msg = 'Все още нямате избрани.<br><span class="font-roman text-xs tracking-widest text-cream-dim/70 mt-3 inline-block">— ОТБЕЛЕЖЕТЕ С ◇ —</span>';
+                } else if (searchQuery) {
+                    msg = `Няма съвпадение с <span class="text-gold italic">«${escapeHtml(searchQuery)}»</span>`;
+                } else {
+                    msg = 'Тази селекция е празна.';
+                }
+                container.innerHTML = `
+                    <div class="text-center py-20">
+                        <div class="text-gold text-4xl mb-6 opacity-30">✦ ◆ ✦</div>
+                        <p class="font-body italic text-cream-dim">${msg}</p>
+                    </div>`;
+                return;
+            }
+
+            const page   = data.slice(0, currentPage * PAGE_SIZE);
+            const hasMore = data.length > page.length;
+
+            container.innerHTML = page.map((d, i) => renderCard(d, i)).join('') +
+                (hasMore ? `
+                <div class="text-center py-8">
+                    <button onclick="loadMore()" class="border border-gold-dim text-cream-dim hover:text-gold hover:border-gold font-roman text-xs tracking-[0.3em] uppercase py-3 px-8 transition">
+                        Зареди още · ${toRoman(data.length - page.length)}
+                    </button>
+                </div>` : '');
+        }
+
+        function loadMore() {
+            currentPage++;
+            render(false);
+            // Keep scroll position
+        }
+
+        // === SEARCH ===
+        function onSearch(q) {
+            searchQuery = q;
+            document.getElementById('search-clear').classList.toggle('hidden', !q);
+            document.getElementById('search-icon').classList.toggle('hidden', !!q);
+            render();
+        }
+        function clearSearch() {
+            document.getElementById('search-input').value = '';
+            onSearch('');
+        }
+
+        // === FILTERS ===
+        function filterBy(category) {
+            currentFilter = category;
+            renderFilters();
+            render();
+        }
+
+        // === FAVORITES ===
+        function toggleFavorite(btn, event) {
+            event.stopPropagation();
+            event.preventDefault();
+            const name = btn.dataset.cocktail;
+            if (!name) return;
+
+            const wasFav = favorites.includes(name);
+            if (wasFav) {
+                favorites = favorites.filter(f => f !== name);
+            } else {
+                favorites.push(name);
+                btn.classList.add('star-pop');
+                setTimeout(() => btn.classList.remove('star-pop'), 450);
+            }
+            try { localStorage.setItem('mixmaster-favorites', JSON.stringify(favorites)); } catch (e) {}
+
+            const isFav = !wasFav;
+            btn.innerHTML = isFav ? '◆' : '◇';
+            btn.className = `fav-btn absolute top-3 right-3 w-10 h-10 bg-ink/70 backdrop-blur-sm border ${isFav ? 'border-gold-bright text-gold-bright' : 'border-gold-dim text-cream-dim'} flex items-center justify-center text-base hover:border-gold hover:text-gold active:scale-90 transition`;
+
+            updateFavBar();
+            if (showFavoritesOnly && !isFav) render();
+        }
+
+        function toggleFavoritesView() {
+            showFavoritesOnly = !showFavoritesOnly;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            render();
+        }
+
+        // === BOTTLE SCANNER ===
+        function openScanner() {
+            closeAISheet();
+            document.getElementById('camera-input').click();
+        }
+
+        function handleCameraInput(input) {
+            if (!input.files || !input.files[0]) return;
+            const file = input.files[0];
+            input.value = '';
+
+            // Show modal with loading state
+            document.getElementById('scan-status').classList.remove('hidden');
+            document.getElementById('scan-spirits').classList.add('hidden');
+            document.getElementById('scan-results').classList.add('hidden');
+            document.getElementById('scan-none').classList.add('hidden');
+            document.getElementById('scan-preview-wrap').classList.remove('hidden');
+            document.getElementById('scan-modal').classList.remove('hidden');
+
+            // Preview image
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                const dataUrl = e.target.result;
+                document.getElementById('scan-preview').src = dataUrl;
+
+                const base64 = dataUrl.split(',')[1];
+                const mime   = file.type || 'image/jpeg';
+                await analyzeBottles(base64, mime);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function analyzeBottles(base64, mime) {
+            try {
+                const resp = await fetch(
+                    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiKey}`,
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{
+                                parts: [
+                                    { inline_data: { mime_type: mime, data: base64 } },
+                                    { text: 'Погледни снимката. Изброй само алкохолните напитки / спиртове, които виждаш на бутилките (напр. водка, джин, ром, текила, уиски, бърбън, мескал, коняк, ликьор и т.н.). Върни САМО JSON масив с имената на български, без обяснения. Пример: ["водка","джин"]. Ако не виждаш алкохол, върни [].' }
+                                ]
+                            }]
+                        })
+                    }
+                );
+
+                const json = await resp.json();
+                const text = json.candidates?.[0]?.content?.parts?.[0]?.text || '[]';
+
+                // Extract JSON array from response
+                const match = text.match(/\[[\s\S]*?\]/);
+                const spirits = match ? JSON.parse(match[0]) : [];
+
+                showScanResults(spirits);
+            } catch (e) {
+                showScanResults([]);
+            }
+        }
+
+        function showScanResults(spirits) {
+            document.getElementById('scan-status').classList.add('hidden');
+
+            if (!spirits.length) {
+                document.getElementById('scan-none').classList.remove('hidden');
+                return;
+            }
+
+            // Show detected spirits as tags
+            const spiritsEl = document.getElementById('scan-spirits');
+            document.getElementById('scan-spirits-list').innerHTML = spirits.map(s =>
+                `<span class="border border-gold-dim text-gold font-roman text-xs tracking-[0.2em] uppercase px-3 py-1">${escapeHtml(s)}</span>`
+            ).join('');
+            spiritsEl.classList.remove('hidden');
+
+            // Match cocktails
+            const spiritsLower = spirits.map(s => s.toLowerCase());
+            const matched = allCocktails.filter(c => {
+                if (!c || !c.name) return false;
+                const base = (c.base || '').toLowerCase();
+                return spiritsLower.some(s => base.includes(s) || s.includes(base.split(' ')[0]));
+            });
+
+            // Shuffle and take up to 5
+            const picks = matched.sort(() => Math.random() - 0.5).slice(0, 5);
+
+            if (!picks.length) {
+                document.getElementById('scan-none').classList.remove('hidden');
+                return;
+            }
+
+            const resultsEl = document.getElementById('scan-results');
+            resultsEl.innerHTML = `
+                <div class="deco-divider mb-4">
+                    <span class="font-roman text-gold text-[0.6rem] tracking-[0.4em] uppercase whitespace-nowrap">Предложения · ${toRoman(picks.length)}</span>
+                </div>
+                ${picks.map(c => `
+                <button onclick="closeScan(); highlightCocktail(allCocktails.find(x=>x&&x.name==='${escapeHtml(c.name).replace(/'/g,"\\'")}'))"
+                        class="w-full border border-gold-dim hover:border-gold hover:bg-ink-soft active:scale-[0.99] transition p-4 flex items-center gap-4 text-left group">
+                    <span class="text-2xl w-8 text-center">${escapeHtml(c.icon || '🍸')}</span>
+                    <div class="flex-1 min-w-0">
+                        <div class="font-roman text-cream tracking-[0.1em] uppercase text-sm group-hover:text-gold-bright transition truncate">${escapeHtml(c.name)}</div>
+                        <div class="font-body italic text-xs text-cream-dim">${escapeHtml(c.base || '')}</div>
+                    </div>
+                    <span class="text-gold-dim group-hover:text-gold transition shrink-0">›</span>
+                </button>`).join('')}`;
+            resultsEl.classList.remove('hidden');
+        }
+
+        function closeScan() {
+            document.getElementById('scan-modal').classList.add('hidden');
+        }
+
+        // === AI ACTION SHEET ===
+        function openAISheet() {
+            const actions = [
+                { icon: '📷', title: 'Снимай бутилките', desc: 'AI предлага коктейл от наличното', action: 'openScanner()' },
+                { icon: '✦', title: 'Изненада', desc: 'Случаен коктейл от селекцията', action: 'pickRandom()' },
+                { icon: showFavoritesOnly ? '◇' : '◆', title: showFavoritesOnly ? 'Покажи всички' : `Избрани · ${toRoman(favorites.length) || '–'}`, desc: showFavoritesOnly ? 'Изключи филтъра' : 'Покажи запазените', action: 'fromSheetFavorites()' },
+                { icon: '❦', title: 'Анализ на ателието', desc: 'Статистика за колекцията', action: 'showStats()' },
+            ];
+
+            document.getElementById('ai-actions').innerHTML = actions.map(a => `
+                <button onclick="${a.action}" class="w-full border border-gold-dim hover:border-gold hover:bg-ink-soft active:scale-[0.99] transition p-4 flex items-center gap-4 text-left group">
+                    <span class="text-2xl text-gold w-8 text-center">${a.icon}</span>
+                    <div class="flex-1 min-w-0">
+                        <div class="font-roman text-cream tracking-[0.15em] uppercase text-sm group-hover:text-gold-bright transition">${escapeHtml(a.title)}</div>
+                        <div class="font-body italic text-xs text-cream-dim truncate">${escapeHtml(a.desc)}</div>
+                    </div>
+                    <span class="text-gold-dim group-hover:text-gold transition">›</span>
+                </button>
+            `).join('');
+
+            document.getElementById('ai-sheet').classList.remove('hidden');
+        }
+
+        function closeAISheet() { document.getElementById('ai-sheet').classList.add('hidden'); }
+
+        function pickRandom() {
+            closeAISheet();
+            const pool = getFiltered();
+            if (pool.length === 0) { alert('Селекцията е празна. Изчистете филтрите.'); return; }
+            const pick = pool[Math.floor(Math.random() * pool.length)];
+            highlightCocktail(pick);
+        }
+
+        function cocktailOfTheDay() {
+            closeAISheet();
+            const pool = allCocktails.filter(c => c && c.name);
+            if (pool.length === 0) return;
+            const today = new Date();
+            const seed = today.getFullYear() * 1000 + today.getMonth() * 50 + today.getDate();
+            const pick = pool[seed % pool.length];
+
+            currentFilter = 'Всички';
+            searchQuery = '';
+            showFavoritesOnly = false;
+            document.getElementById('search-input').value = '';
+            document.getElementById('search-clear').classList.add('hidden');
+            document.getElementById('search-icon').classList.remove('hidden');
+            renderFilters();
+            render();
+
+            setTimeout(() => highlightCocktail(pick), 200);
+        }
+
+        function fromSheetFavorites() {
+            closeAISheet();
+            toggleFavoritesView();
+        }
+
+        function highlightCocktail(cocktail) {
+            const el = document.getElementById(`card-${cocktail._idx}`);
+            if (el) {
+                el.scrollIntoView({ behavior: 'instant', block: 'center' });
+                setTimeout(() => {
+                    el.classList.add('highlight');
+                    setTimeout(() => el.classList.remove('highlight'), 3500);
+                }, 450);
+            }
+        }
+
+        // === STATS ===
+        function showStats() {
+            closeAISheet();
+            const valid = allCocktails.filter(c => c && c.name);
+            const total = valid.length;
+
+            const baseStats = {};
+            valid.forEach(c => {
+                const b = (c.base || 'Други').trim();
+                baseStats[b] = (baseStats[b] || 0) + 1;
+            });
+            const sortedBases = Object.entries(baseStats).sort((a, b) => b[1] - a[1]);
+            const topBase = sortedBases[0] || ['—', 0];
+
+            const hour = new Date().getHours();
+            let timeRec;
+            if (hour < 12) timeRec = 'нещо освежаващо за бранч';
+            else if (hour < 17) timeRec = 'нещо леко и плодово';
+            else if (hour < 22) timeRec = 'класика за вечер';
+            else timeRec = 'нещо силно за късен час';
+
+            const html = `
+                <!-- Two big numbers -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="border border-gold-dim p-5 text-center">
+                        <div class="font-display text-5xl text-gold-bright leading-none mb-2">${toRoman(total)}</div>
+                        <div class="font-roman text-cream-dim text-[0.65rem] tracking-[0.4em] uppercase">Коктейла</div>
+                    </div>
+                    <div class="border border-gold-dim p-5 text-center">
+                        <div class="font-display text-5xl text-gold-bright leading-none mb-2">${toRoman(favorites.length) || '–'}</div>
+                        <div class="font-roman text-cream-dim text-[0.65rem] tracking-[0.4em] uppercase">Избрани</div>
+                    </div>
+                </div>
+
+                <!-- Distribution -->
+                <div class="border border-gold-dim p-5">
+                    <div class="deco-divider mb-5">
+                        <span class="font-roman text-gold text-[0.65rem] tracking-[0.4em] uppercase whitespace-nowrap">Разпределение</span>
+                    </div>
+                    ${sortedBases.slice(0, 8).map(([base, count]) => {
+                        const pct = total ? Math.round(count / total * 100) : 0;
+                        return `
+                            <div class="mb-4 last:mb-0">
+                                <div class="flex justify-between items-baseline mb-1.5">
+                                    <span class="font-roman text-cream text-sm tracking-[0.1em] uppercase">${escapeHtml(base)}</span>
+                                    <span class="font-body italic text-cream-dim text-xs">${toRoman(count)} · ${pct}%</span>
+                                </div>
+                                <div class="h-px bg-gold-dim/40 relative overflow-hidden">
+                                    <div class="absolute inset-y-0 left-0 bg-gradient-to-r from-gold-dim via-gold to-gold-bright" style="width: ${pct}%; height: 2px; top: -0.5px;"></div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+
+                <!-- Recommendation block -->
+                <div class="border border-gold relative p-6">
+                    <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-ink px-3 font-roman text-gold text-[0.6rem] tracking-[0.5em] uppercase">Препоръка</span>
+                    <p class="font-body italic text-cream text-base leading-relaxed text-center">
+                        Сега, около <span class="text-gold-bright">${hour}:00 ч.</span>, е подходящо за <span class="text-gold-bright">${timeRec}</span>.
+                    </p>
+                    <p class="font-body italic text-cream-dim text-sm leading-relaxed text-center mt-3">
+                        Най-разнообразната ви категория е <span class="text-gold not-italic font-roman tracking-[0.1em] uppercase">${escapeHtml(topBase[0])}</span> с <span class="text-gold-bright">${toRoman(topBase[1])}</span> опции.
+                    </p>
+                </div>
+            `;
+
+            document.getElementById('stats-content').innerHTML = html;
+            document.getElementById('stats-modal').classList.remove('hidden');
+        }
+
+        function closeStats() { document.getElementById('stats-modal').classList.add('hidden'); }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') { closeAISheet(); closeStats(); closeScan(); }
+        });
+
+        // Init only if age already verified (new users go through age gate first)
+        try {
+            if (localStorage.getItem('mixmaster-age-ok') === '1') init();
+        } catch(e) { init(); }
+    </script>
+</body>
+</html>
