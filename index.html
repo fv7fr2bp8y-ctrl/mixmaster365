@@ -262,6 +262,13 @@
 
         <!-- HEADER -->
         <header class="pt-10 pb-6 text-center relative">
+            <button onclick="shareApp()" aria-label="Сподели"
+                class="absolute right-0 top-10 w-9 h-9 border border-gold-dim text-gold-dim hover:text-gold hover:border-gold flex items-center justify-center transition active:scale-90">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                </svg>
+            </button>
             <div class="flex items-center justify-center gap-4 mb-3">
                 <span class="text-gold text-xl">◆</span>
                 <h1 class="font-display text-[2.6rem] leading-none text-gold tracking-[0.25em] pl-[0.25em]">MIXMASTER</h1>
@@ -461,6 +468,19 @@
                 </button>
             </div>
         </div>
+    </div>
+
+    <!-- BACK TO TOP -->
+    <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Нагоре"
+        class="hidden fixed bottom-24 right-4 z-40 w-10 h-10 border border-gold text-gold bg-ink hover:bg-ink-soft active:scale-90 flex items-center justify-center transition">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <polyline points="18 15 12 9 6 15"/>
+        </svg>
+    </button>
+
+    <!-- TOAST -->
+    <div id="toast" class="hidden fixed top-6 left-1/2 -translate-x-1/2 z-[70] bg-ink border border-gold px-5 py-3 font-roman text-xs tracking-[0.3em] uppercase text-gold whitespace-nowrap">
+        Копирано ✓
     </div>
 
     <!-- BOTTOM AI BUTTON -->
@@ -1177,6 +1197,35 @@
         }
 
         function closeStats() { document.getElementById('stats-modal').classList.add('hidden'); }
+
+        // === SHARE ===
+        async function shareApp() {
+            const url  = window.location.href;
+            const data = { title: 'MixMaster · Cocktail Atelier', text: '365 уникални коктейла 🍸', url };
+            if (navigator.share) {
+                try { await navigator.share(data); return; } catch (e) {}
+            }
+            try {
+                await navigator.clipboard.writeText(url);
+                showToast('Линкът е копиран ✓');
+            } catch (e) {
+                showToast('Копирай: ' + url);
+            }
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.remove('hidden');
+            setTimeout(() => t.classList.add('hidden'), 2500);
+        }
+
+        // === BACK TO TOP ===
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('back-to-top');
+            if (window.scrollY > 400) btn.classList.remove('hidden');
+            else btn.classList.add('hidden');
+        }, { passive: true });
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') { closeAISheet(); closeStats(); closeScan(); }
