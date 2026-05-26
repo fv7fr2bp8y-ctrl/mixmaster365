@@ -485,7 +485,7 @@
                             Да, навършил/а съм
                         </button>
                         <button onclick="ageVerify(false)" class="w-full border border-gold-dim text-cream-dim py-3 font-roman text-xs tracking-[0.25em] uppercase hover:border-gold hover:text-cream transition">
-                            Не
+                            Не — покажи безалкохолни
                         </button>
                     </div>
                 </div>
@@ -493,12 +493,6 @@
             </div>
         </div>
 
-        <!-- BLOCKED SCREEN -->
-        <div id="age-blocked" class="hidden fixed inset-0 z-[60] bg-ink flex flex-col items-center justify-center p-8 text-center">
-            <div class="text-gold text-4xl mb-6 opacity-40">✦</div>
-            <h2 class="font-display text-2xl text-gold tracking-[0.2em] mb-4">ДОСТЪПЪТ Е ОГРАНИЧЕН</h2>
-            <p class="font-body italic text-cream-dim max-w-xs">За да посетите MixMaster Atelier, трябва да сте навършили 18 години.</p>
-        </div>
 
         <div id="loader" class="fixed inset-0 z-50 bg-ink flex flex-col items-center justify-center p-8 hidden">
             <div class="flex items-center gap-4 mb-6">
@@ -636,15 +630,25 @@
 
     <script>
         // === AGE GATE ===
+        let underAge = false;
+
         function ageVerify(isAdult) {
+            document.getElementById('age-gate').classList.add('hidden');
+            document.getElementById('loader').classList.remove('hidden');
             if (isAdult) {
                 try { localStorage.setItem('mixmaster-age-ok', '1'); } catch(e) {}
-                document.getElementById('age-gate').classList.add('hidden');
-                document.getElementById('loader').classList.remove('hidden');
                 init();
             } else {
-                document.getElementById('age-gate').classList.add('hidden');
-                document.getElementById('age-blocked').classList.remove('hidden');
+                // Under 18 — load only mocktails, hide cocktails tab
+                underAge = true;
+                const tabC = document.getElementById('tab-cocktails');
+                tabC.style.display = 'none';
+                // Pre-select mocktails tab
+                const tabM = document.getElementById('tab-mocktails');
+                tabM.style.background = 'var(--gold)'; tabM.style.color = 'var(--ink)';
+                tabC.style.background = 'transparent'; tabC.style.color = 'var(--cream-dim)';
+                currentMode = 'mocktails';
+                init();
             }
         }
 
