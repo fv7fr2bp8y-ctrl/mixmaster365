@@ -664,7 +664,7 @@
 
         const apiUrl         = "https://script.google.com/macros/s/AKfycbyJHL9yaG_eXWg5LyRxhbQtLWjE3z7vwoDF7GZ5ssG9oASczQFhCLfL-4_0W0RhTCKVlA/exec";
         const mocktailsUrl   = "https://script.google.com/macros/s/AKfycbzpOuOoqZeaS6UlweobSXH3-7pXcr-dyqU1iuaX5f4qp_hhxMhBeXu_5zekdYRDxoXmFw/exec";
-        const geminiKey      = "AIzaSyAdyT_cZxDK0iuq_JdKCHrIr2FVSR5c-9Q";
+        const geminiKey      = "AIzaSyB5PIZ1eDVvVUHieEtmMqPBlKYEn7jHPMg";
 
         // === STATE ===
         let allCocktails  = [];
@@ -823,26 +823,35 @@
         // === INIT ===
         async function init() {
             try {
-                // 1. Load cocktails first — critical path (same as v3)
-                const res = await fetch(apiUrl);
-                const data = await res.json();
-                allCocktails = Array.isArray(data) ? data : [];
-                allCocktails.forEach((c, i) => { if (c) c._idx = i; });
+                if (underAge) {
+                    // Under 18 — load mocktails first, skip cocktails
+                    const res = await fetch(mocktailsUrl);
+                    const data = await res.json();
+                    allMocktails = Array.isArray(data) ? data : [];
+                    allMocktails.forEach((c, i) => { if (c) c._idx = i; });
+                } else {
+                    // Adult — load cocktails first (critical path)
+                    const res = await fetch(apiUrl);
+                    const data = await res.json();
+                    allCocktails = Array.isArray(data) ? data : [];
+                    allCocktails.forEach((c, i) => { if (c) c._idx = i; });
+
+                    // Load mocktails silently in background
+                    fetch(mocktailsUrl)
+                        .then(r => r.json())
+                        .then(d => {
+                            if (!Array.isArray(d)) return;
+                            allMocktails = d;
+                            allMocktails.forEach((c, i) => { if (c) c._idx = i; });
+                        })
+                        .catch(() => {});
+                }
 
                 renderFilters();
                 render();
                 renderCOTD();
                 document.getElementById('loader').classList.add('hidden');
 
-                // 2. Load mocktails silently in background — never blocks
-                fetch(mocktailsUrl)
-                    .then(r => r.json())
-                    .then(d => {
-                        if (!Array.isArray(d)) return;
-                        allMocktails = d;
-                        allMocktails.forEach((c, i) => { if (c) c._idx = i; });
-                    })
-                    .catch(() => {});
             } catch (e) {
                 document.getElementById('loader-text').innerHTML = "<span class='text-red-400'>Връзката прекъсна</span>";
             }
