@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "mixmaster",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "cd '/Users/spasspasov/Library/CloudStorage/OneDrive-Personal/App Projects/Cocktail App' && python3 -m http.server 7654"],
+      "port": 7654
+    }
+  ]
+}

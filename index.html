@@ -268,8 +268,8 @@
                 <circle class="gold-drop" cx="50" cy="20" r="2.5" fill="#e2be5a" />
             </svg>
             <h1 class="loader-title">MixMaster</h1>
-            <p class="loader-subtitle">Ателие за вкусове</p>
-            <div class="loader-status">Подготвяне на бара...</div>
+            <p class="loader-subtitle" data-i18n="intro_subtitle">Ателие за вкусове</p>
+            <div class="loader-status" data-i18n="intro_status">Подготвяне на бара...</div>
         </div>
     </div>
 
@@ -362,11 +362,319 @@
         }, 3500);
     </script>
 
+    <!-- ============ I18N + UNITS CORE ============ -->
+    <script>
+        const LANGS = [
+            { code: 'bg', name: 'Български', flag: '🇧🇬' },
+            { code: 'en', name: 'English',   flag: '🇬🇧' },
+            { code: 'de', name: 'Deutsch',   flag: '🇩🇪' },
+            { code: 'es', name: 'Español',   flag: '🇪🇸' },
+            { code: 'ru', name: 'Русский',   flag: '🇷🇺' },
+        ];
+
+        const I18N = {
+            bg: {
+                tab_cocktails:'Коктейли', tab_mocktails:'Безалкохолни',
+                cotd_title:'Коктейл на Деня', cotd_see:'Виж рецептата',
+                search_ph:'Търсене по име или съставка',
+                fav_selected:'Избрани', fav_all:'Всички',
+                age_question:'Навършили ли сте 18 години?', age_yes:'Да, навършил/а съм',
+                age_no:'Не — покажи безалкохолни',
+                age_disclaimer:'Този сайт съдържа алкохолно съдържание. Достъпът е разрешен само за пълнолетни.',
+                loader_text:'Подготвяне на бара', intro_subtitle:'Ателие за вкусове', intro_status:'Подготвяне на бара...',
+                scan_title:'АНАЛИЗ', scan_subtitle:'Разпознати бутилки', scan_loading:'Анализирам снимката...',
+                scan_detected:'Разпознати спиртове', scan_none:'Не разпознах алкохол на снимката. Опитай с по-ясна снимка.',
+                scan_suggestions:'Предложения', close:'Затвори',
+                ai_button:'Препоръка на бармана', ai_title:'ПРЕПОРЪКА', ai_subtitle:'Какво да приготвим?',
+                ai_scan_title:'Снимай бутилките', ai_scan_desc:'AI предлага коктейл от наличното',
+                ai_random_title:'Изненада', ai_random_desc:'Случаен коктейл от селекцията',
+                ai_fav_show_all:'Покажи всички', ai_fav_title:'Избрани',
+                ai_fav_desc_off:'Изключи филтъра', ai_fav_desc_on:'Покажи запазените',
+                ai_stats_title:'Анализ на ателието', ai_stats_desc:'Статистика за колекцията',
+                stats_title:'АТЕЛИЕ', stats_subtitle:'Анализ на колекцията', stats_cocktails:'Коктейла',
+                stats_favorites:'Избрани', stats_distribution:'Разпределение', stats_rec_badge:'Препоръка',
+                stats_time_morning:'нещо освежаващо за бранч', stats_time_afternoon:'нещо леко и плодово',
+                stats_time_evening:'класика за вечер', stats_time_late:'нещо силно за късен час',
+                stats_rec_line1:'Сега, около {hour}:00 ч., е подходящо за {rec}.',
+                stats_rec_line2:'Най-разнообразната ви категория е {base} с {count} опции.',
+                count_word_one:'коктейл', count_word_many:'коктейла',
+                empty_fav:'Все още нямате избрани.', empty_fav_hint:'— ОТБЕЛЕЖЕТЕ С ◇ —',
+                empty_search:'Няма съвпадение с «{q}»', empty_selection:'Тази селекция е празна.',
+                load_more:'Зареди още', alert_empty:'Селекцията е празна. Изчистете филтрите.',
+                error_connection:'Връзката прекъсна',
+                filter_all:'Всички', filter_vodka:'Водка', filter_gin:'Джин', filter_rum:'Ром',
+                filter_tequila:'Текила', filter_whisky:'Уиски',
+                filter_juice:'Плодов сок', filter_citrus:'Цитрусов сок', filter_soda:'Газирана вода',
+                filter_tea:'Чай', filter_coconut:'Кокосова вода', filter_kombucha:'Комбуча', filter_lemonade:'Лимонада',
+                settings_title:'ЕЗИК', settings_subtitle:'Език и мерни единици', settings_units:'Мерни единици',
+                share_text:'365 уникални коктейла 🍸', toast_link_copied:'Линкът е копиран ✓',
+                aria_share:'Сподели', aria_top:'Нагоре', aria_settings:'Език',
+                months:['Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември'],
+            },
+            en: {
+                tab_cocktails:'Cocktails', tab_mocktails:'Mocktails',
+                cotd_title:'Cocktail of the Day', cotd_see:'View recipe',
+                search_ph:'Search by name or ingredient',
+                fav_selected:'Favorites', fav_all:'All',
+                age_question:'Are you 18 or older?', age_yes:'Yes, I am',
+                age_no:'No — show mocktails',
+                age_disclaimer:'This site contains alcohol content. Access is for adults only.',
+                loader_text:'Preparing the bar', intro_subtitle:'Atelier of flavors', intro_status:'Preparing the bar...',
+                scan_title:'ANALYSIS', scan_subtitle:'Detected bottles', scan_loading:'Analyzing the photo...',
+                scan_detected:'Detected spirits', scan_none:'No alcohol detected. Try a clearer photo.',
+                scan_suggestions:'Suggestions', close:'Close',
+                ai_button:"Bartender's pick", ai_title:'SUGGESTION', ai_subtitle:'What shall we make?',
+                ai_scan_title:'Scan the bottles', ai_scan_desc:'AI suggests a cocktail from what you have',
+                ai_random_title:'Surprise me', ai_random_desc:'A random cocktail from the selection',
+                ai_fav_show_all:'Show all', ai_fav_title:'Favorites',
+                ai_fav_desc_off:'Turn off the filter', ai_fav_desc_on:'Show your saved ones',
+                ai_stats_title:'Atelier analysis', ai_stats_desc:'Collection statistics',
+                stats_title:'ATELIER', stats_subtitle:'Collection analysis', stats_cocktails:'Cocktails',
+                stats_favorites:'Favorites', stats_distribution:'Distribution', stats_rec_badge:'Recommendation',
+                stats_time_morning:'something refreshing for brunch', stats_time_afternoon:'something light and fruity',
+                stats_time_evening:'an evening classic', stats_time_late:'something strong for late hours',
+                stats_rec_line1:"Right now, around {hour}:00, it's a good time for {rec}.",
+                stats_rec_line2:'Your most diverse category is {base} with {count} options.',
+                count_word_one:'cocktail', count_word_many:'cocktails',
+                empty_fav:'You have no favorites yet.', empty_fav_hint:'— MARK WITH ◇ —',
+                empty_search:'No match for «{q}»', empty_selection:'This selection is empty.',
+                load_more:'Load more', alert_empty:'Selection is empty. Clear the filters.',
+                error_connection:'Connection lost',
+                filter_all:'All', filter_vodka:'Vodka', filter_gin:'Gin', filter_rum:'Rum',
+                filter_tequila:'Tequila', filter_whisky:'Whisky',
+                filter_juice:'Fruit juice', filter_citrus:'Citrus juice', filter_soda:'Soda water',
+                filter_tea:'Tea', filter_coconut:'Coconut water', filter_kombucha:'Kombucha', filter_lemonade:'Lemonade',
+                settings_title:'LANGUAGE', settings_subtitle:'Language & units', settings_units:'Measurement units',
+                share_text:'365 unique cocktails 🍸', toast_link_copied:'Link copied ✓',
+                aria_share:'Share', aria_top:'Top', aria_settings:'Language',
+                months:['January','February','March','April','May','June','July','August','September','October','November','December'],
+            },
+            de: {
+                tab_cocktails:'Cocktails', tab_mocktails:'Alkoholfrei',
+                cotd_title:'Cocktail des Tages', cotd_see:'Rezept ansehen',
+                search_ph:'Suche nach Name oder Zutat',
+                fav_selected:'Favoriten', fav_all:'Alle',
+                age_question:'Bist du 18 oder älter?', age_yes:'Ja, bin ich',
+                age_no:'Nein — Alkoholfreies zeigen',
+                age_disclaimer:'Diese Seite enthält Alkoholinhalte. Zugang nur für Erwachsene.',
+                loader_text:'Bar wird vorbereitet', intro_subtitle:'Atelier der Aromen', intro_status:'Bar wird vorbereitet...',
+                scan_title:'ANALYSE', scan_subtitle:'Erkannte Flaschen', scan_loading:'Foto wird analysiert...',
+                scan_detected:'Erkannte Spirituosen', scan_none:'Kein Alkohol erkannt. Versuche ein klareres Foto.',
+                scan_suggestions:'Vorschläge', close:'Schließen',
+                ai_button:'Empfehlung des Barkeepers', ai_title:'EMPFEHLUNG', ai_subtitle:'Was sollen wir machen?',
+                ai_scan_title:'Flaschen scannen', ai_scan_desc:'KI schlägt einen Cocktail vor',
+                ai_random_title:'Überrasch mich', ai_random_desc:'Zufälliger Cocktail aus der Auswahl',
+                ai_fav_show_all:'Alle zeigen', ai_fav_title:'Favoriten',
+                ai_fav_desc_off:'Filter ausschalten', ai_fav_desc_on:'Gespeicherte zeigen',
+                ai_stats_title:'Atelier-Analyse', ai_stats_desc:'Sammlungsstatistik',
+                stats_title:'ATELIER', stats_subtitle:'Sammlungsanalyse', stats_cocktails:'Cocktails',
+                stats_favorites:'Favoriten', stats_distribution:'Verteilung', stats_rec_badge:'Empfehlung',
+                stats_time_morning:'etwas Erfrischendes zum Brunch', stats_time_afternoon:'etwas Leichtes und Fruchtiges',
+                stats_time_evening:'ein Abendklassiker', stats_time_late:'etwas Starkes für späte Stunden',
+                stats_rec_line1:'Jetzt, gegen {hour}:00 Uhr, passt {rec}.',
+                stats_rec_line2:'Deine vielfältigste Kategorie ist {base} mit {count} Optionen.',
+                count_word_one:'Cocktail', count_word_many:'Cocktails',
+                empty_fav:'Noch keine Favoriten.', empty_fav_hint:'— MIT ◇ MARKIEREN —',
+                empty_search:'Kein Treffer für «{q}»', empty_selection:'Diese Auswahl ist leer.',
+                load_more:'Mehr laden', alert_empty:'Auswahl ist leer. Filter zurücksetzen.',
+                error_connection:'Verbindung unterbrochen',
+                filter_all:'Alle', filter_vodka:'Wodka', filter_gin:'Gin', filter_rum:'Rum',
+                filter_tequila:'Tequila', filter_whisky:'Whisky',
+                filter_juice:'Fruchtsaft', filter_citrus:'Zitrussaft', filter_soda:'Sodawasser',
+                filter_tea:'Tee', filter_coconut:'Kokoswasser', filter_kombucha:'Kombucha', filter_lemonade:'Limonade',
+                settings_title:'SPRACHE', settings_subtitle:'Sprache & Einheiten', settings_units:'Maßeinheiten',
+                share_text:'365 einzigartige Cocktails 🍸', toast_link_copied:'Link kopiert ✓',
+                aria_share:'Teilen', aria_top:'Nach oben', aria_settings:'Sprache',
+                months:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
+            },
+            es: {
+                tab_cocktails:'Cócteles', tab_mocktails:'Sin alcohol',
+                cotd_title:'Cóctel del día', cotd_see:'Ver receta',
+                search_ph:'Buscar por nombre o ingrediente',
+                fav_selected:'Favoritos', fav_all:'Todos',
+                age_question:'¿Tienes 18 años o más?', age_yes:'Sí, los tengo',
+                age_no:'No — ver sin alcohol',
+                age_disclaimer:'Este sitio contiene contenido con alcohol. Acceso solo para adultos.',
+                loader_text:'Preparando la barra', intro_subtitle:'Taller de sabores', intro_status:'Preparando la barra...',
+                scan_title:'ANÁLISIS', scan_subtitle:'Botellas detectadas', scan_loading:'Analizando la foto...',
+                scan_detected:'Licores detectados', scan_none:'No se detectó alcohol. Prueba con una foto más clara.',
+                scan_suggestions:'Sugerencias', close:'Cerrar',
+                ai_button:'Recomendación del barman', ai_title:'SUGERENCIA', ai_subtitle:'¿Qué preparamos?',
+                ai_scan_title:'Escanea las botellas', ai_scan_desc:'La IA sugiere un cóctel con lo que tienes',
+                ai_random_title:'Sorpréndeme', ai_random_desc:'Un cóctel al azar de la selección',
+                ai_fav_show_all:'Mostrar todos', ai_fav_title:'Favoritos',
+                ai_fav_desc_off:'Quitar el filtro', ai_fav_desc_on:'Ver los guardados',
+                ai_stats_title:'Análisis del taller', ai_stats_desc:'Estadísticas de la colección',
+                stats_title:'TALLER', stats_subtitle:'Análisis de la colección', stats_cocktails:'Cócteles',
+                stats_favorites:'Favoritos', stats_distribution:'Distribución', stats_rec_badge:'Recomendación',
+                stats_time_morning:'algo refrescante para el brunch', stats_time_afternoon:'algo ligero y afrutado',
+                stats_time_evening:'un clásico de noche', stats_time_late:'algo fuerte para la noche',
+                stats_rec_line1:'Ahora, sobre las {hour}:00, es buen momento para {rec}.',
+                stats_rec_line2:'Tu categoría más variada es {base} con {count} opciones.',
+                count_word_one:'cóctel', count_word_many:'cócteles',
+                empty_fav:'Aún no tienes favoritos.', empty_fav_hint:'— MARCA CON ◇ —',
+                empty_search:'Sin coincidencias para «{q}»', empty_selection:'Esta selección está vacía.',
+                load_more:'Cargar más', alert_empty:'La selección está vacía. Borra los filtros.',
+                error_connection:'Conexión perdida',
+                filter_all:'Todos', filter_vodka:'Vodka', filter_gin:'Ginebra', filter_rum:'Ron',
+                filter_tequila:'Tequila', filter_whisky:'Whisky',
+                filter_juice:'Zumo de fruta', filter_citrus:'Zumo cítrico', filter_soda:'Agua con gas',
+                filter_tea:'Té', filter_coconut:'Agua de coco', filter_kombucha:'Kombucha', filter_lemonade:'Limonada',
+                settings_title:'IDIOMA', settings_subtitle:'Idioma y unidades', settings_units:'Unidades de medida',
+                share_text:'365 cócteles únicos 🍸', toast_link_copied:'Enlace copiado ✓',
+                aria_share:'Compartir', aria_top:'Arriba', aria_settings:'Idioma',
+                months:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+            },
+            ru: {
+                tab_cocktails:'Коктейли', tab_mocktails:'Безалкогольные',
+                cotd_title:'Коктейль дня', cotd_see:'Смотреть рецепт',
+                search_ph:'Поиск по названию или ингредиенту',
+                fav_selected:'Избранное', fav_all:'Все',
+                age_question:'Вам есть 18 лет?', age_yes:'Да, есть',
+                age_no:'Нет — показать безалкогольные',
+                age_disclaimer:'Сайт содержит информацию об алкоголе. Доступ только для совершеннолетних.',
+                loader_text:'Готовим бар', intro_subtitle:'Ателье вкусов', intro_status:'Готовим бар...',
+                scan_title:'АНАЛИЗ', scan_subtitle:'Распознанные бутылки', scan_loading:'Анализирую фото...',
+                scan_detected:'Распознанные напитки', scan_none:'Алкоголь не распознан. Попробуйте более чёткое фото.',
+                scan_suggestions:'Предложения', close:'Закрыть',
+                ai_button:'Совет бармена', ai_title:'ПОДБОР', ai_subtitle:'Что приготовим?',
+                ai_scan_title:'Сфотографируй бутылки', ai_scan_desc:'ИИ предложит коктейль из наличного',
+                ai_random_title:'Сюрприз', ai_random_desc:'Случайный коктейль из подборки',
+                ai_fav_show_all:'Показать все', ai_fav_title:'Избранное',
+                ai_fav_desc_off:'Выключить фильтр', ai_fav_desc_on:'Показать сохранённые',
+                ai_stats_title:'Анализ ателье', ai_stats_desc:'Статистика коллекции',
+                stats_title:'АТЕЛЬЕ', stats_subtitle:'Анализ коллекции', stats_cocktails:'Коктейли',
+                stats_favorites:'Избранное', stats_distribution:'Распределение', stats_rec_badge:'Рекомендация',
+                stats_time_morning:'что-то освежающее к бранчу', stats_time_afternoon:'что-то лёгкое и фруктовое',
+                stats_time_evening:'классика на вечер', stats_time_late:'что-то крепкое на поздний час',
+                stats_rec_line1:'Сейчас, около {hour}:00, подходит {rec}.',
+                stats_rec_line2:'Самая разнообразная категория — {base}, {count} вариантов.',
+                count_word_one:'коктейль', count_word_many:'коктейлей',
+                empty_fav:'Пока нет избранного.', empty_fav_hint:'— ОТМЕТЬТЕ ◇ —',
+                empty_search:'Нет совпадений с «{q}»', empty_selection:'Этот раздел пуст.',
+                load_more:'Показать ещё', alert_empty:'Раздел пуст. Сбросьте фильтры.',
+                error_connection:'Соединение прервано',
+                filter_all:'Все', filter_vodka:'Водка', filter_gin:'Джин', filter_rum:'Ром',
+                filter_tequila:'Текила', filter_whisky:'Виски',
+                filter_juice:'Фруктовый сок', filter_citrus:'Цитрусовый сок', filter_soda:'Газированная вода',
+                filter_tea:'Чай', filter_coconut:'Кокосовая вода', filter_kombucha:'Комбуча', filter_lemonade:'Лимонад',
+                settings_title:'ЯЗЫК', settings_subtitle:'Язык и единицы', settings_units:'Единицы измерения',
+                share_text:'365 уникальных коктейлей 🍸', toast_link_copied:'Ссылка скопирована ✓',
+                aria_share:'Поделиться', aria_top:'Наверх', aria_settings:'Язык',
+                months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+            },
+        };
+
+        // --- State ---
+        let LANG = 'bg';
+        let UNIT = 'ml';
+        (function initPrefs(){
+            try {
+                const sl = localStorage.getItem('mixmaster-lang');
+                if (sl && I18N[sl]) LANG = sl;
+                else {
+                    const nav = (navigator.language || 'bg').slice(0,2).toLowerCase();
+                    if (I18N[nav]) LANG = nav;
+                }
+                const su = localStorage.getItem('mixmaster-unit');
+                if (su === 'oz' || su === 'ml') UNIT = su;
+            } catch(e) {}
+            document.documentElement.lang = LANG;
+        })();
+
+        function t(key, vars) {
+            let s = (I18N[LANG] && I18N[LANG][key]) || (I18N.bg[key]) || key;
+            if (vars) for (const k in vars) s = s.replace('{'+k+'}', vars[k]);
+            return s;
+        }
+
+        // --- Units (ml <-> oz) ---
+        function mlToOz(ml) {
+            const oz = Math.round((ml/29.5735) * 4) / 4;
+            return oz.toString();
+        }
+        function convertUnits(text) {
+            if (UNIT !== 'oz' || !text) return text;
+            return String(text).replace(/(\d+(?:[.,]\d+)?)\s*(мл|ml)(?=[\s.,;:)]|$)/gi, (m, n) => {
+                const ml = parseFloat(n.replace(',', '.'));
+                if (isNaN(ml)) return m;
+                return mlToOz(ml) + ' oz';
+            });
+        }
+
+        // --- Apply static translations to DOM ---
+        function applyStaticI18n() {
+            document.documentElement.lang = LANG;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                el.textContent = t(el.getAttribute('data-i18n'));
+            });
+            document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+                el.setAttribute('placeholder', t(el.getAttribute('data-i18n-ph')));
+            });
+            document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+                el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria')));
+            });
+        }
+
+        // --- Settings sheet (language + units) ---
+        function openSettings() {
+            const langGrid = LANGS.map(l => `
+                <button onclick="setLang('${l.code}')" class="border ${l.code===LANG?'border-gold text-gold-bright bg-ink-soft':'border-gold-dim text-cream-dim'} hover:border-gold hover:text-gold active:scale-[0.98] transition p-3 flex items-center gap-3">
+                    <span class="text-2xl">${l.flag}</span>
+                    <span class="font-roman text-sm tracking-[0.1em]">${l.name}</span>
+                </button>`).join('');
+            const unitBtn = (u, label) => `
+                <button onclick="setUnit('${u}')" class="flex-1 py-3 font-roman text-xs tracking-[0.3em] uppercase transition border ${u===UNIT?'border-gold bg-gold text-ink':'border-gold-dim text-cream-dim hover:text-gold hover:border-gold'}">${label}</button>`;
+            document.getElementById('settings-content').innerHTML = `
+                <div class="grid grid-cols-1 gap-2.5">${langGrid}</div>
+                <div class="mt-7">
+                    <div class="deco-divider mb-4">
+                        <span class="font-roman text-gold text-[0.6rem] tracking-[0.4em] uppercase whitespace-nowrap">${t('settings_units')}</span>
+                    </div>
+                    <div class="flex gap-2">
+                        ${unitBtn('ml','ml')}
+                        ${unitBtn('oz','oz')}
+                    </div>
+                </div>`;
+            document.getElementById('settings-modal').classList.remove('hidden');
+        }
+        function closeSettings(){ document.getElementById('settings-modal').classList.add('hidden'); }
+
+        function refreshDynamic() {
+            if (typeof renderFilters === 'function') renderFilters();
+            if (typeof render === 'function') render(false);
+            if (typeof renderCOTD === 'function') renderCOTD();
+            if (typeof updateFavBar === 'function') updateFavBar();
+        }
+        function setLang(code) {
+            if (!I18N[code]) return;
+            LANG = code;
+            try { localStorage.setItem('mixmaster-lang', code); } catch(e){}
+            applyStaticI18n();
+            refreshDynamic();
+            openSettings(); // refresh highlight
+        }
+        function setUnit(u) {
+            UNIT = u;
+            try { localStorage.setItem('mixmaster-unit', u); } catch(e){}
+            refreshDynamic();
+            openSettings();
+        }
+
+        document.addEventListener('DOMContentLoaded', applyStaticI18n);
+    </script>
+
     <div class="page-frame max-w-md mx-auto min-h-screen px-5 pb-44 relative" style="z-index: 2;">
 
         <!-- HEADER -->
         <header class="pt-10 pb-6 text-center relative">
-            <button onclick="shareApp()" aria-label="Сподели"
+            <button onclick="openSettings()" data-i18n-aria="aria_settings" aria-label="Език"
+                class="absolute left-0 top-10 w-9 h-9 border border-gold-dim text-gold-dim hover:text-gold hover:border-gold flex items-center justify-center transition active:scale-90">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                    <circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18"/>
+                </svg>
+            </button>
+            <button onclick="shareApp()" data-i18n-aria="aria_share" aria-label="Сподели"
                 class="absolute right-0 top-10 w-9 h-9 border border-gold-dim text-gold-dim hover:text-gold hover:border-gold flex items-center justify-center transition active:scale-90">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
@@ -388,19 +696,19 @@
             <button id="tab-cocktails" onclick="setMode('cocktails')"
                 style="background:var(--gold);color:var(--ink);"
                 class="flex-1 py-3 font-roman text-xs tracking-[0.3em] uppercase transition flex items-center justify-center gap-2">
-                <span>🍸</span><span>Коктейли</span>
+                <span>🍸</span><span data-i18n="tab_cocktails">Коктейли</span>
             </button>
             <button id="tab-mocktails" onclick="setMode('mocktails')"
                 style="background:transparent;color:var(--cream-dim);"
                 class="flex-1 py-3 font-roman text-xs tracking-[0.3em] uppercase transition flex items-center justify-center gap-2">
-                <span>🍹</span><span>Безалкохолни</span>
+                <span>🍹</span><span data-i18n="tab_mocktails">Безалкохолни</span>
             </button>
         </div>
 
         <!-- COCKTAIL OF THE DAY -->
         <section id="cotd-section" class="hidden mb-10">
             <div class="deco-divider mb-5">
-                <span class="font-roman text-gold text-[0.6rem] tracking-[0.45em] uppercase whitespace-nowrap">✦ Коктейл на Деня ✦</span>
+                <span class="font-roman text-gold text-[0.6rem] tracking-[0.45em] uppercase whitespace-nowrap">✦ <span data-i18n="cotd_title">Коктейл на Деня</span> ✦</span>
             </div>
             <div id="cotd-card" class="deco-card relative overflow-hidden cursor-pointer active:scale-[0.99] transition-transform" style="height:300px" onclick="goToCOTD()">
                 <div class="corners"></div>
@@ -424,7 +732,7 @@
                     <div id="cotd-base" class="font-roman text-gold-dim text-[0.6rem] tracking-[0.45em] uppercase mb-2"></div>
                     <h2 id="cotd-name" class="font-display text-[2rem] leading-tight text-cream tracking-[0.04em] mb-4"></h2>
                     <div class="flex items-center gap-2 text-gold font-roman text-xs tracking-[0.3em] uppercase">
-                        <span>Виж рецептата</span>
+                        <span data-i18n="cotd_see">Виж рецептата</span>
                         <span>›</span>
                     </div>
                 </div>
@@ -439,6 +747,7 @@
                     id="search-input"
                     oninput="onSearch(this.value)"
                     placeholder="Търсене по име или съставка"
+                    data-i18n-ph="search_ph"
                     class="w-full bg-transparent text-cream pl-12 pr-12 py-4 outline-none focus:bg-ink-soft transition"
                 />
                 <span id="search-icon" class="absolute left-4 top-1/2 -translate-y-1/2 text-gold pointer-events-none">
@@ -478,18 +787,17 @@
                     <div class="absolute bottom-3 left-3 w-3 h-3 border-b border-l border-gold"></div>
                     <div class="absolute bottom-3 right-3 w-3 h-3 border-b border-r border-gold"></div>
                     <div class="text-gold text-5xl mb-5 font-display">18</div>
-                    <p class="font-roman text-cream text-sm tracking-[0.15em] uppercase mb-2">Навършили ли сте</p>
-                    <p class="font-roman text-cream text-sm tracking-[0.15em] uppercase mb-7">18 години?</p>
+                    <p data-i18n="age_question" class="font-roman text-cream text-sm tracking-[0.15em] uppercase mb-7">Навършили ли сте 18 години?</p>
                     <div class="space-y-3">
-                        <button onclick="ageVerify(true)" class="btn-gold w-full py-3 font-roman text-sm tracking-[0.3em] uppercase">
+                        <button onclick="ageVerify(true)" data-i18n="age_yes" class="btn-gold w-full py-3 font-roman text-sm tracking-[0.3em] uppercase">
                             Да, навършил/а съм
                         </button>
-                        <button onclick="ageVerify(false)" class="w-full border border-gold-dim text-cream-dim py-3 font-roman text-xs tracking-[0.25em] uppercase hover:border-gold hover:text-cream transition">
+                        <button onclick="ageVerify(false)" data-i18n="age_no" class="w-full border border-gold-dim text-cream-dim py-3 font-roman text-xs tracking-[0.25em] uppercase hover:border-gold hover:text-cream transition">
                             Не — покажи безалкохолни
                         </button>
                     </div>
                 </div>
-                <p class="font-body italic text-cream-dim/50 text-xs mt-6">Този сайт съдържа алкохолно съдържание.<br>Достъпът е разрешен само за пълнолетни.</p>
+                <p data-i18n="age_disclaimer" class="font-body italic text-cream-dim/50 text-xs mt-6">Този сайт съдържа алкохолно съдържание. Достъпът е разрешен само за пълнолетни.</p>
             </div>
         </div>
 
@@ -504,7 +812,7 @@
                 <div class="absolute inset-0 border border-gold-dim deco-spin" style="clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);"></div>
                 <div class="absolute inset-2 border border-gold deco-spin" style="animation-direction: reverse; animation-duration: 3s;"></div>
             </div>
-            <p id="loader-text" class="font-roman text-xs tracking-[0.4em] uppercase text-cream-dim">Подготвяне на бара</p>
+            <p id="loader-text" data-i18n="loader_text" class="font-roman text-xs tracking-[0.4em] uppercase text-cream-dim">Подготвяне на бара</p>
         </div>
 
         <!-- COCKTAIL LIST -->
@@ -527,8 +835,8 @@
                 <div class="deco-divider mx-auto max-w-[100px] mb-5">
                     <span class="text-gold text-sm">◆</span>
                 </div>
-                <h2 class="font-display text-3xl text-gold tracking-[0.15em] text-center mb-1">АНАЛИЗ</h2>
-                <p class="font-body italic text-cream-dim text-sm text-center mb-6">— Разпознати бутилки —</p>
+                <h2 data-i18n="scan_title" class="font-display text-3xl text-gold tracking-[0.15em] text-center mb-1">АНАЛИЗ</h2>
+                <p class="font-body italic text-cream-dim text-sm text-center mb-6">— <span data-i18n="scan_subtitle">Разпознати бутилки</span> —</p>
 
                 <!-- Preview image -->
                 <div id="scan-preview-wrap" class="hidden mb-6">
@@ -542,13 +850,13 @@
                     <div class="relative w-10 h-10 mx-auto mb-4">
                         <div class="absolute inset-0 border border-gold-dim deco-spin" style="clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);"></div>
                     </div>
-                    <p class="font-roman text-xs tracking-[0.4em] uppercase text-cream-dim">Анализирам снимката...</p>
+                    <p data-i18n="scan_loading" class="font-roman text-xs tracking-[0.4em] uppercase text-cream-dim">Анализирам снимката...</p>
                 </div>
 
                 <!-- Detected spirits -->
                 <div id="scan-spirits" class="hidden mb-6">
                     <div class="deco-divider mb-4">
-                        <span class="font-roman text-gold text-[0.6rem] tracking-[0.4em] uppercase whitespace-nowrap">Разпознати спиртове</span>
+                        <span data-i18n="scan_detected" class="font-roman text-gold text-[0.6rem] tracking-[0.4em] uppercase whitespace-nowrap">Разпознати спиртове</span>
                     </div>
                     <div id="scan-spirits-list" class="flex flex-wrap gap-2 justify-center"></div>
                 </div>
@@ -558,10 +866,10 @@
 
                 <!-- No match -->
                 <div id="scan-none" class="hidden text-center py-4">
-                    <p class="font-body italic text-cream-dim">Не разпознах алкохол на снимката.<br>Опитай с по-ясна снимка.</p>
+                    <p data-i18n="scan_none" class="font-body italic text-cream-dim">Не разпознах алкохол на снимката. Опитай с по-ясна снимка.</p>
                 </div>
 
-                <button onclick="closeScan()" class="w-full mt-6 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
+                <button onclick="closeScan()" data-i18n="close" class="w-full mt-6 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
                     Затвори
                 </button>
             </div>
@@ -569,7 +877,7 @@
     </div>
 
     <!-- BACK TO TOP -->
-    <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Нагоре"
+    <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" data-i18n-aria="aria_top" aria-label="Нагоре"
         class="hidden fixed bottom-24 right-4 z-40 w-10 h-10 border border-gold text-gold bg-ink hover:bg-ink-soft active:scale-90 flex items-center justify-center transition">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <polyline points="18 15 12 9 6 15"/>
@@ -586,7 +894,7 @@
         <div class="max-w-md mx-auto">
             <button onclick="openAISheet()" class="btn-gold w-full py-4 px-6 flex items-center justify-center gap-3 text-sm uppercase active:scale-[0.98] transition relative">
                 <span>✦</span>
-                <span>Препоръка на бармана</span>
+                <span data-i18n="ai_button">Препоръка на бармана</span>
                 <span>✦</span>
             </button>
         </div>
@@ -600,10 +908,10 @@
                 <div class="deco-divider mx-auto max-w-[100px] mb-5">
                     <span class="text-gold text-sm">◆</span>
                 </div>
-                <h2 class="font-display text-3xl text-gold tracking-[0.15em] text-center mb-1">ПРЕПОРЪКА</h2>
-                <p class="font-body italic text-cream-dim text-sm text-center mb-7">— Какво да приготвим? —</p>
+                <h2 data-i18n="ai_title" class="font-display text-3xl text-gold tracking-[0.15em] text-center mb-1">ПРЕПОРЪКА</h2>
+                <p class="font-body italic text-cream-dim text-sm text-center mb-7">— <span data-i18n="ai_subtitle">Какво да приготвим?</span> —</p>
                 <div class="space-y-3" id="ai-actions"></div>
-                <button onclick="closeAISheet()" class="w-full mt-5 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
+                <button onclick="closeAISheet()" data-i18n="close" class="w-full mt-5 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
                     Затвори
                 </button>
             </div>
@@ -618,10 +926,28 @@
                 <div class="deco-divider mx-auto max-w-[100px] mb-5">
                     <span class="text-gold text-sm">◆</span>
                 </div>
-                <h2 class="font-display text-3xl text-gold tracking-[0.15em] text-center mb-1">АТЕЛИЕ</h2>
-                <p class="font-body italic text-cream-dim text-sm text-center mb-7">— Анализ на колекцията —</p>
+                <h2 data-i18n="stats_title" class="font-display text-3xl text-gold tracking-[0.15em] text-center mb-1">АТЕЛИЕ</h2>
+                <p class="font-body italic text-cream-dim text-sm text-center mb-7">— <span data-i18n="stats_subtitle">Анализ на колекцията</span> —</p>
                 <div id="stats-content" class="space-y-5"></div>
-                <button onclick="closeStats()" class="w-full mt-6 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
+                <button onclick="closeStats()" data-i18n="close" class="w-full mt-6 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
+                    Затвори
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SETTINGS MODAL (language + units) -->
+    <div id="settings-modal" class="fixed inset-0 z-50 hidden">
+        <div onclick="closeSettings()" class="sheet-overlay absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        <div class="sheet-panel absolute bottom-0 left-0 right-0 max-w-md mx-auto max-h-[88vh] overflow-y-auto no-scrollbar">
+            <div class="bg-ink border-t border-gold p-6 pb-10 safe-bottom">
+                <div class="deco-divider mx-auto max-w-[100px] mb-5">
+                    <span class="text-gold text-sm">◆</span>
+                </div>
+                <h2 data-i18n="settings_title" class="font-display text-3xl text-gold tracking-[0.15em] text-center mb-1">ЕЗИК</h2>
+                <p class="font-body italic text-cream-dim text-sm text-center mb-7">— <span data-i18n="settings_subtitle">Език и мерни единици</span> —</p>
+                <div id="settings-content" class="space-y-2"></div>
+                <button onclick="closeSettings()" data-i18n="close" class="w-full mt-6 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
                     Затвори
                 </button>
             </div>
@@ -675,28 +1001,28 @@
         let currentPage   = 1;
 
         const MOCKTAIL_FILTERS = [
-            { label: 'Всички',            match: null },
-            { label: 'Плодов сок',        match: ['плодов сок'] },
-            { label: 'Цитрусов сок',      match: ['цитрусов сок'] },
-            { label: 'Газирана вода',      match: ['газирана вода'] },
-            { label: 'Чай',               match: ['чай'] },
-            { label: 'Кокосова вода',      match: ['кокосова вода'] },
-            { label: 'Комбуча',            match: ['комбуча'] },
-            { label: 'Лимонада',           match: ['лимонада'] },
+            { key: 'filter_all',      match: null },
+            { key: 'filter_juice',    match: ['плодов сок'] },
+            { key: 'filter_citrus',   match: ['цитрусов сок'] },
+            { key: 'filter_soda',     match: ['газирана вода'] },
+            { key: 'filter_tea',      match: ['чай'] },
+            { key: 'filter_coconut',  match: ['кокосова вода'] },
+            { key: 'filter_kombucha', match: ['комбуча'] },
+            { key: 'filter_lemonade', match: ['лимонада'] },
         ];
-        let currentFilter = 'Всички';
+        let currentFilter = 'filter_all';
         let searchQuery = '';
         let showFavoritesOnly = false;
         let favorites = [];
         try { favorites = JSON.parse(localStorage.getItem('mixmaster-favorites') || '[]'); } catch (e) { favorites = []; }
 
         const FILTERS = [
-            { label: 'Всички', match: null },
-            { label: 'Водка', match: ['водка', 'vodka'] },
-            { label: 'Джин', match: ['джин', 'gin'] },
-            { label: 'Ром', match: ['ром', 'rum'] },
-            { label: 'Текила', match: ['текила', 'tequila'] },
-            { label: 'Уиски', match: ['уиски', 'whisky', 'whiskey', 'bourbon'] },
+            { key: 'filter_all',     match: null },
+            { key: 'filter_vodka',   match: ['водка', 'vodka'] },
+            { key: 'filter_gin',     match: ['джин', 'gin'] },
+            { key: 'filter_rum',     match: ['ром', 'rum'] },
+            { key: 'filter_tequila', match: ['текила', 'tequila'] },
+            { key: 'filter_whisky',  match: ['уиски', 'whisky', 'whiskey', 'bourbon'] },
         ];
 
         // === HELPERS ===
@@ -737,7 +1063,7 @@
                 result = result.filter(c => favorites.includes(c.name));
             }
 
-            const filterObj = FILTERS.find(f => f.label === currentFilter);
+            const filterObj = activeFilters().find(f => f.key === currentFilter);
             if (filterObj && filterObj.match) {
                 result = result.filter(c => matchesBase(c, filterObj));
             }
@@ -756,7 +1082,7 @@
         // === MODE SWITCH ===
         function setMode(mode) {
             currentMode = mode;
-            currentFilter = 'Всички';
+            currentFilter = 'filter_all';
             searchQuery = '';
             showFavoritesOnly = false;
             document.getElementById('search-input').value = '';
@@ -789,7 +1115,7 @@
             const seed  = today.getFullYear() * 1000 + today.getMonth() * 50 + today.getDate();
             cotdCocktail = pool[seed % pool.length];
 
-            const months = ['Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември'];
+            const months = I18N[LANG].months;
 
             document.getElementById('cotd-img').src   = getDriveImg(cotdCocktail.image);
             document.getElementById('cotd-name').textContent  = cotdCocktail.name;
@@ -803,7 +1129,7 @@
 
         function goToCOTD() {
             if (!cotdCocktail) return;
-            currentFilter  = 'Всички';
+            currentFilter  = 'filter_all';
             searchQuery    = '';
             showFavoritesOnly = false;
             document.getElementById('search-input').value = '';
@@ -853,7 +1179,7 @@
                 document.getElementById('loader').classList.add('hidden');
 
             } catch (e) {
-                document.getElementById('loader-text').innerHTML = "<span class='text-red-400'>Връзката прекъсна</span>";
+                document.getElementById('loader-text').innerHTML = `<span class='text-red-400'>${t('error_connection')}</span>`;
             }
         }
 
@@ -866,9 +1192,9 @@
                     ? list.filter(c => c && c.name && matchesBase(c, f)).length
                     : list.filter(c => c && c.name).length;
                 if (count === 0 && f.match) return '';
-                const isActive = currentFilter === f.label;
-                return `<button onclick="filterBy('${escapeHtml(f.label)}')" class="${isActive ? 'filter-active' : ''} group relative flex flex-col items-center gap-1 py-1 text-cream-dim hover:text-gold transition whitespace-nowrap">
-                    <span class="font-roman text-sm tracking-[0.2em] uppercase">${escapeHtml(f.label)}</span>
+                const isActive = currentFilter === f.key;
+                return `<button onclick="filterBy('${f.key}')" class="${isActive ? 'filter-active' : ''} group relative flex flex-col items-center gap-1 py-1 text-cream-dim hover:text-gold transition whitespace-nowrap">
+                    <span class="font-roman text-sm tracking-[0.2em] uppercase">${escapeHtml(t(f.key))}</span>
                     <span class="text-[0.65rem] opacity-60">${toRoman(count)}</span>
                     <span class="filter-underline absolute bottom-0 left-0 right-0 h-px bg-gold"></span>
                 </button>`;
@@ -883,11 +1209,11 @@
             if (showFavoritesOnly) {
                 btn.classList.add('!text-gold-bright');
                 icon.textContent = '◆';
-                label.textContent = 'Всички';
+                label.textContent = t('fav_all');
             } else {
                 btn.classList.remove('!text-gold-bright');
                 icon.textContent = '◇';
-                label.textContent = 'Избрани';
+                label.textContent = t('fav_selected');
             }
         }
 
@@ -946,7 +1272,7 @@
                                 ${String(d.ingredients).split(',').map(ing => ing.trim()).filter(Boolean).map(ing => `
                                 <li class="flex items-baseline gap-3">
                                     <span class="text-gold text-[0.5rem] shrink-0 mt-1">◆</span>
-                                    <span class="font-roman text-cream-dim text-sm tracking-[0.08em]">${escapeHtml(ing)}</span>
+                                    <span class="font-roman text-cream-dim text-sm tracking-[0.08em]">${escapeHtml(convertUnits(ing))}</span>
                                 </li>`).join('')}
                             </ul>
                         </div>` : ''}
@@ -954,7 +1280,7 @@
                         <!-- Recipe -->
                         <div class="px-8 pb-9 pt-2 border-t border-gold-dim/30">
                             <div class="recipe-content text-cream/80 text-sm text-center pt-4">
-                                ${d.recipe || ''}
+                                ${convertUnits(d.recipe || '')}
                             </div>
                         </div>
                     </article>
@@ -966,7 +1292,7 @@
             const container = document.getElementById('cocktail-list');
             const countEl = document.getElementById('result-count');
 
-            const word = data.length === 1 ? 'коктейл' : 'коктейла';
+            const word = data.length === 1 ? t('count_word_one') : t('count_word_many');
             countEl.textContent = `${toRoman(data.length) || '–'} · ${word}`;
             updateFavBar();
 
@@ -975,11 +1301,11 @@
             if (data.length === 0) {
                 let msg;
                 if (showFavoritesOnly && favorites.length === 0) {
-                    msg = 'Все още нямате избрани.<br><span class="font-roman text-xs tracking-widest text-cream-dim/70 mt-3 inline-block">— ОТБЕЛЕЖЕТЕ С ◇ —</span>';
+                    msg = `${t('empty_fav')}<br><span class="font-roman text-xs tracking-widest text-cream-dim/70 mt-3 inline-block">${t('empty_fav_hint')}</span>`;
                 } else if (searchQuery) {
-                    msg = `Няма съвпадение с <span class="text-gold italic">«${escapeHtml(searchQuery)}»</span>`;
+                    msg = t('empty_search', { q: `<span class="text-gold italic">${escapeHtml(searchQuery)}</span>` });
                 } else {
-                    msg = 'Тази селекция е празна.';
+                    msg = t('empty_selection');
                 }
                 container.innerHTML = `
                     <div class="text-center py-20">
@@ -996,7 +1322,7 @@
                 (hasMore ? `
                 <div class="text-center py-8">
                     <button onclick="loadMore()" class="border border-gold-dim text-cream-dim hover:text-gold hover:border-gold font-roman text-xs tracking-[0.3em] uppercase py-3 px-8 transition">
-                        Зареди още · ${toRoman(data.length - page.length)}
+                        ${t('load_more')} · ${toRoman(data.length - page.length)}
                     </button>
                 </div>` : '');
         }
@@ -1154,7 +1480,7 @@
             const resultsEl = document.getElementById('scan-results');
             resultsEl.innerHTML = `
                 <div class="deco-divider mb-4">
-                    <span class="font-roman text-gold text-[0.6rem] tracking-[0.4em] uppercase whitespace-nowrap">Предложения · ${toRoman(picks.length)}</span>
+                    <span class="font-roman text-gold text-[0.6rem] tracking-[0.4em] uppercase whitespace-nowrap">${t('scan_suggestions')} · ${toRoman(picks.length)}</span>
                 </div>
                 ${picks.map(c => `
                 <button onclick="closeScan(); highlightCocktail(allCocktails.find(x=>x&&x.name==='${escapeHtml(c.name).replace(/'/g,"\\'")}'))"
@@ -1176,10 +1502,10 @@
         // === AI ACTION SHEET ===
         function openAISheet() {
             const actions = [
-                { icon: '📷', title: 'Снимай бутилките', desc: 'AI предлага коктейл от наличното', action: 'openScanner()' },
-                { icon: '✦', title: 'Изненада', desc: 'Случаен коктейл от селекцията', action: 'pickRandom()' },
-                { icon: showFavoritesOnly ? '◇' : '◆', title: showFavoritesOnly ? 'Покажи всички' : `Избрани · ${toRoman(favorites.length) || '–'}`, desc: showFavoritesOnly ? 'Изключи филтъра' : 'Покажи запазените', action: 'fromSheetFavorites()' },
-                { icon: '❦', title: 'Анализ на ателието', desc: 'Статистика за колекцията', action: 'showStats()' },
+                { icon: '📷', title: t('ai_scan_title'), desc: t('ai_scan_desc'), action: 'openScanner()' },
+                { icon: '✦', title: t('ai_random_title'), desc: t('ai_random_desc'), action: 'pickRandom()' },
+                { icon: showFavoritesOnly ? '◇' : '◆', title: showFavoritesOnly ? t('ai_fav_show_all') : `${t('ai_fav_title')} · ${toRoman(favorites.length) || '–'}`, desc: showFavoritesOnly ? t('ai_fav_desc_off') : t('ai_fav_desc_on'), action: 'fromSheetFavorites()' },
+                { icon: '❦', title: t('ai_stats_title'), desc: t('ai_stats_desc'), action: 'showStats()' },
             ];
 
             document.getElementById('ai-actions').innerHTML = actions.map(a => `
@@ -1201,7 +1527,7 @@
         function pickRandom() {
             closeAISheet();
             const pool = getFiltered();
-            if (pool.length === 0) { alert('Селекцията е празна. Изчистете филтрите.'); return; }
+            if (pool.length === 0) { alert(t('alert_empty')); return; }
             const pick = pool[Math.floor(Math.random() * pool.length)];
             highlightCocktail(pick);
         }
@@ -1214,7 +1540,7 @@
             const seed = today.getFullYear() * 1000 + today.getMonth() * 50 + today.getDate();
             const pick = pool[seed % pool.length];
 
-            currentFilter = 'Всички';
+            currentFilter = 'filter_all';
             searchQuery = '';
             showFavoritesOnly = false;
             document.getElementById('search-input').value = '';
@@ -1258,28 +1584,28 @@
 
             const hour = new Date().getHours();
             let timeRec;
-            if (hour < 12) timeRec = 'нещо освежаващо за бранч';
-            else if (hour < 17) timeRec = 'нещо леко и плодово';
-            else if (hour < 22) timeRec = 'класика за вечер';
-            else timeRec = 'нещо силно за късен час';
+            if (hour < 12) timeRec = t('stats_time_morning');
+            else if (hour < 17) timeRec = t('stats_time_afternoon');
+            else if (hour < 22) timeRec = t('stats_time_evening');
+            else timeRec = t('stats_time_late');
 
             const html = `
                 <!-- Two big numbers -->
                 <div class="grid grid-cols-2 gap-4">
                     <div class="border border-gold-dim p-5 text-center">
                         <div class="font-display text-5xl text-gold-bright leading-none mb-2">${toRoman(total)}</div>
-                        <div class="font-roman text-cream-dim text-[0.65rem] tracking-[0.4em] uppercase">Коктейла</div>
+                        <div class="font-roman text-cream-dim text-[0.65rem] tracking-[0.4em] uppercase">${t('stats_cocktails')}</div>
                     </div>
                     <div class="border border-gold-dim p-5 text-center">
                         <div class="font-display text-5xl text-gold-bright leading-none mb-2">${toRoman(favorites.length) || '–'}</div>
-                        <div class="font-roman text-cream-dim text-[0.65rem] tracking-[0.4em] uppercase">Избрани</div>
+                        <div class="font-roman text-cream-dim text-[0.65rem] tracking-[0.4em] uppercase">${t('stats_favorites')}</div>
                     </div>
                 </div>
 
                 <!-- Distribution -->
                 <div class="border border-gold-dim p-5">
                     <div class="deco-divider mb-5">
-                        <span class="font-roman text-gold text-[0.65rem] tracking-[0.4em] uppercase whitespace-nowrap">Разпределение</span>
+                        <span class="font-roman text-gold text-[0.65rem] tracking-[0.4em] uppercase whitespace-nowrap">${t('stats_distribution')}</span>
                     </div>
                     ${sortedBases.slice(0, 8).map(([base, count]) => {
                         const pct = total ? Math.round(count / total * 100) : 0;
@@ -1299,12 +1625,12 @@
 
                 <!-- Recommendation block -->
                 <div class="border border-gold relative p-6">
-                    <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-ink px-3 font-roman text-gold text-[0.6rem] tracking-[0.5em] uppercase">Препоръка</span>
+                    <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-ink px-3 font-roman text-gold text-[0.6rem] tracking-[0.5em] uppercase">${t('stats_rec_badge')}</span>
                     <p class="font-body italic text-cream text-base leading-relaxed text-center">
-                        Сега, около <span class="text-gold-bright">${hour}:00 ч.</span>, е подходящо за <span class="text-gold-bright">${timeRec}</span>.
+                        ${t('stats_rec_line1', { hour: `<span class="text-gold-bright">${hour}</span>`, rec: `<span class="text-gold-bright">${timeRec}</span>` })}
                     </p>
                     <p class="font-body italic text-cream-dim text-sm leading-relaxed text-center mt-3">
-                        Най-разнообразната ви категория е <span class="text-gold not-italic font-roman tracking-[0.1em] uppercase">${escapeHtml(topBase[0])}</span> с <span class="text-gold-bright">${toRoman(topBase[1])}</span> опции.
+                        ${t('stats_rec_line2', { base: `<span class="text-gold not-italic font-roman tracking-[0.1em] uppercase">${escapeHtml(topBase[0])}</span>`, count: `<span class="text-gold-bright">${toRoman(topBase[1])}</span>` })}
                     </p>
                 </div>
             `;
@@ -1318,15 +1644,15 @@
         // === SHARE ===
         async function shareApp() {
             const url  = window.location.href;
-            const data = { title: 'MixMaster · Cocktail Atelier', text: '365 уникални коктейла 🍸', url };
+            const data = { title: 'MixMaster · Cocktail Atelier', text: t('share_text'), url };
             if (navigator.share) {
                 try { await navigator.share(data); return; } catch (e) {}
             }
             try {
                 await navigator.clipboard.writeText(url);
-                showToast('Линкът е копиран ✓');
+                showToast(t('toast_link_copied'));
             } catch (e) {
-                showToast('Копирай: ' + url);
+                showToast(url);
             }
         }
 
@@ -1345,7 +1671,7 @@
         }, { passive: true });
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') { closeAISheet(); closeStats(); closeScan(); }
+            if (e.key === 'Escape') { closeAISheet(); closeStats(); closeScan(); closeSettings(); }
         });
 
         // Init only if age already verified (new users go through age gate first)
