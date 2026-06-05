@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mixmaster-v1';
+const CACHE_NAME = 'mixmaster-v4';
 const STATIC_ASSETS = [
   '/',
   '/index.html',

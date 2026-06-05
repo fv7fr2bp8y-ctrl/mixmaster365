@@ -1050,6 +1050,16 @@
         function activeList()    { return currentMode === 'mocktails' ? allMocktails : allCocktails; }
         function activeFilters() { return currentMode === 'mocktails' ? MOCKTAIL_FILTERS : FILTERS; }
 
+        // Localized field accessor — falls back to original Bulgarian
+        function loc(item, field) {
+            if (!item) return '';
+            if (LANG !== 'bg') {
+                const v = item[field + '_' + LANG];
+                if (v != null && String(v).trim()) return v;
+            }
+            return item[field] != null ? item[field] : '';
+        }
+
         function matchesBase(cocktail, filter) {
             if (!filter || !filter.match) return true;
             const b = (cocktail.base || '').toLowerCase();
@@ -1073,7 +1083,10 @@
                 result = result.filter(c =>
                     (c.name || '').toLowerCase().includes(q) ||
                     (c.recipe || '').toLowerCase().includes(q) ||
-                    (c.base || '').toLowerCase().includes(q)
+                    (c.base || '').toLowerCase().includes(q) ||
+                    String(loc(c,'name')).toLowerCase().includes(q) ||
+                    String(loc(c,'ingredients')).toLowerCase().includes(q) ||
+                    String(loc(c,'base')).toLowerCase().includes(q)
                 );
             }
             return result;
@@ -1118,8 +1131,8 @@
             const months = I18N[LANG].months;
 
             document.getElementById('cotd-img').src   = getDriveImg(cotdCocktail.image);
-            document.getElementById('cotd-name').textContent  = cotdCocktail.name;
-            document.getElementById('cotd-base').textContent  = cotdCocktail.base ? '— ' + cotdCocktail.base + ' —' : '';
+            document.getElementById('cotd-name').textContent  = loc(cotdCocktail,'name');
+            document.getElementById('cotd-base').textContent  = cotdCocktail.base ? '— ' + loc(cotdCocktail,'base') + ' —' : '';
             document.getElementById('cotd-icon').textContent  = cotdCocktail.icon || '🍸';
             document.getElementById('cotd-day').textContent   = today.getDate();
             document.getElementById('cotd-month').textContent = months[today.getMonth()];
@@ -1258,8 +1271,8 @@
 
                         <!-- Title block -->
                         <div class="px-8 pb-4 text-center">
-                            ${d.base ? `<div class="font-roman text-gold-dim text-[0.65rem] tracking-[0.45em] uppercase mb-3">— ${escapeHtml(d.base)} —</div>` : ''}
-                            <h2 class="font-display text-[1.85rem] leading-tight text-cream tracking-[0.05em] mb-3">${escapeHtml(d.name)}</h2>
+                            ${d.base ? `<div class="font-roman text-gold-dim text-[0.65rem] tracking-[0.45em] uppercase mb-3">— ${escapeHtml(loc(d,'base'))} —</div>` : ''}
+                            <h2 class="font-display text-[1.85rem] leading-tight text-cream tracking-[0.05em] mb-3">${escapeHtml(loc(d,'name'))}</h2>
                             <div class="deco-divider max-w-[140px] mx-auto">
                                 <span class="text-gold text-xs">◆</span>
                             </div>
@@ -1269,7 +1282,7 @@
                         ${d.ingredients ? `
                         <div class="px-8 pb-5 pt-2">
                             <ul class="space-y-1.5">
-                                ${String(d.ingredients).split(',').map(ing => ing.trim()).filter(Boolean).map(ing => `
+                                ${String(loc(d,'ingredients')).split(',').map(ing => ing.trim()).filter(Boolean).map(ing => `
                                 <li class="flex items-baseline gap-3">
                                     <span class="text-gold text-[0.5rem] shrink-0 mt-1">◆</span>
                                     <span class="font-roman text-cream-dim text-sm tracking-[0.08em]">${escapeHtml(convertUnits(ing))}</span>
@@ -1280,7 +1293,7 @@
                         <!-- Recipe -->
                         <div class="px-8 pb-9 pt-2 border-t border-gold-dim/30">
                             <div class="recipe-content text-cream/80 text-sm text-center pt-4">
-                                ${convertUnits(d.recipe || '')}
+                                ${convertUnits(loc(d,'recipe') || '')}
                             </div>
                         </div>
                     </article>
@@ -1487,8 +1500,8 @@
                         class="w-full border border-gold-dim hover:border-gold hover:bg-ink-soft active:scale-[0.99] transition p-4 flex items-center gap-4 text-left group">
                     <span class="text-2xl w-8 text-center">${escapeHtml(c.icon || '🍸')}</span>
                     <div class="flex-1 min-w-0">
-                        <div class="font-roman text-cream tracking-[0.1em] uppercase text-sm group-hover:text-gold-bright transition truncate">${escapeHtml(c.name)}</div>
-                        <div class="font-body italic text-xs text-cream-dim">${escapeHtml(c.base || '')}</div>
+                        <div class="font-roman text-cream tracking-[0.1em] uppercase text-sm group-hover:text-gold-bright transition truncate">${escapeHtml(loc(c,'name'))}</div>
+                        <div class="font-body italic text-xs text-cream-dim">${escapeHtml(loc(c,'base') || '')}</div>
                     </div>
                     <span class="text-gold-dim group-hover:text-gold transition shrink-0">›</span>
                 </button>`).join('')}`;
@@ -1575,9 +1588,11 @@
             const total = valid.length;
 
             const baseStats = {};
+            const baseLabel = {};
             valid.forEach(c => {
                 const b = (c.base || 'Други').trim();
                 baseStats[b] = (baseStats[b] || 0) + 1;
+                if (!baseLabel[b]) baseLabel[b] = loc(c, 'base') || b;
             });
             const sortedBases = Object.entries(baseStats).sort((a, b) => b[1] - a[1]);
             const topBase = sortedBases[0] || ['—', 0];
@@ -1612,7 +1627,7 @@
                         return `
                             <div class="mb-4 last:mb-0">
                                 <div class="flex justify-between items-baseline mb-1.5">
-                                    <span class="font-roman text-cream text-sm tracking-[0.1em] uppercase">${escapeHtml(base)}</span>
+                                    <span class="font-roman text-cream text-sm tracking-[0.1em] uppercase">${escapeHtml(baseLabel[base] || base)}</span>
                                     <span class="font-body italic text-cream-dim text-xs">${toRoman(count)} · ${pct}%</span>
                                 </div>
                                 <div class="h-px bg-gold-dim/40 relative overflow-hidden">
@@ -1630,7 +1645,7 @@
                         ${t('stats_rec_line1', { hour: `<span class="text-gold-bright">${hour}</span>`, rec: `<span class="text-gold-bright">${timeRec}</span>` })}
                     </p>
                     <p class="font-body italic text-cream-dim text-sm leading-relaxed text-center mt-3">
-                        ${t('stats_rec_line2', { base: `<span class="text-gold not-italic font-roman tracking-[0.1em] uppercase">${escapeHtml(topBase[0])}</span>`, count: `<span class="text-gold-bright">${toRoman(topBase[1])}</span>` })}
+                        ${t('stats_rec_line2', { base: `<span class="text-gold not-italic font-roman tracking-[0.1em] uppercase">${escapeHtml(baseLabel[topBase[0]] || topBase[0])}</span>`, count: `<span class="text-gold-bright">${toRoman(topBase[1])}</span>` })}
                     </p>
                 </div>
             `;
