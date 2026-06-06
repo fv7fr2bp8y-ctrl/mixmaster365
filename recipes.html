@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Рецепти">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Рецепти · Atelier</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Forum&family=Poiret+One&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: '#0a0908',
+                        'ink-soft': '#161311',
+                        gold: {
+                            DEFAULT: '#c9a961',
+                            bright: '#e8c987',
+                            dim: '#7a6535',
+                            faint: 'rgba(201,169,97,0.15)'
+                        },
+                        cream: {
+                            DEFAULT: '#f0e4cf',
+                            dim: '#b9a98a',
+                            faint: 'rgba(240,228,207,0.5)'
+                        },
+                    },
+                    fontFamily: {
+                        display: ['"Poiret One"', 'serif'],
+                        roman: ['Forum', 'serif'],
+                        body: ['"Cormorant Garamond"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --gold: #c9a961;
+            --gold-bright: #e8c987;
+            --gold-dim: #7a6535;
+            --cream: #f0e4cf;
+            --cream-dim: #b9a98a;
+            --ink: #0a0908;
+            --ink-soft: #161311;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background-color: var(--ink);
+            color: var(--cream);
+            margin: 0;
+            background-image:
+                radial-gradient(ellipse at top, rgba(201,169,97,0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom, rgba(74,14,14,0.08) 0%, transparent 60%);
+            background-attachment: fixed;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.025;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        input { font-size: 16px; font-family: 'Cormorant Garamond', serif; }
+        ::placeholder { color: var(--cream-dim); opacity: 0.6; font-style: italic; }
+
+        .hidden { display: none !important; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+
+        .deco-divider {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--gold);
+        }
+        .deco-divider::before, .deco-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
+        }
+
+        .deco-card {
+            position: relative;
+            background: var(--ink-soft);
+            border: 1px solid var(--gold-dim);
+        }
+        .deco-card::before, .deco-card::after,
+        .deco-card > .corners::before, .deco-card > .corners::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border: 1.5px solid var(--gold);
+            pointer-events: none;
+            z-index: 2;
+        }
+        .deco-card::before { top: 5px; left: 5px; border-right: none; border-bottom: none; }
+        .deco-card::after  { top: 5px; right: 5px; border-left: none; border-bottom: none; }
+        .deco-card > .corners::before { bottom: 5px; left: 5px; border-right: none; border-top: none; }
+        .deco-card > .corners::after  { bottom: 5px; right: 5px; border-left: none; border-top: none; }
+
+        .filter-active { color: var(--gold-bright) !important; background: rgba(201,169,97,0.12) !important; border-color: var(--gold) !important; }
+
+        .btn-gold {
+            background: linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 50%, var(--gold-dim) 100%);
+            color: var(--ink);
+            font-family: 'Forum', serif;
+            letter-spacing: 0.25em;
+            border: 1px solid var(--gold);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -1px 0 rgba(0,0,0,0.2), 0 4px 20px rgba(201,169,97,0.2);
+        }
+        .btn-gold:active { transform: translateY(1px); }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        .recipe-card { animation: fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) backwards; }
+
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+        .sheet-overlay { animation: fadeIn 0.25s ease-out; }
+        .sheet-panel   { animation: slideUp 0.4s cubic-bezier(0.32,0.72,0,1); }
+
+        .page-frame { position: relative; }
+        .page-frame::before {
+            content: '';
+            position: absolute;
+            top: 1.5rem; bottom: 1.5rem;
+            left: 0.25rem; right: 0.25rem;
+            border-left: 1px solid var(--gold-dim);
+            border-right: 1px solid var(--gold-dim);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .safe-bottom { padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); }
+
+        .fav-btn { transition: color 0.2s, transform 0.2s; }
+        .fav-btn.active { color: var(--gold-bright); }
+
+        .diff-easy   { color: #6ee7b7; border-color: #6ee7b7; }
+        .diff-medium { color: var(--gold-bright); border-color: var(--gold); }
+        .diff-hard   { color: #f87171; border-color: #f87171; }
+
+        #modal-body::-webkit-scrollbar { width: 4px; }
+        #modal-body::-webkit-scrollbar-track { background: var(--ink-soft); }
+        #modal-body::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+
+        .step-num {
+            min-width: 1.6rem; height: 1.6rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Forum', serif;
+            font-size: 0.75rem;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="text-cream">
+
+<div class="page-frame max-w-md mx-auto min-h-screen px-5 pb-32 relative" style="z-index:2;">
+
+    <!-- HEADER -->
+    <header class="pt-10 pb-6 text-center relative">
+        <a href="index.html"
+           class="absolute left-0 top-10 w-9 h-9 border border-gold-dim text-gold-dim hover:text-gold hover:border-gold flex items-center justify-center transition active:scale-90"
+           aria-label="Коктейли">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+        </a>
+        <div class="flex items-center justify-center gap-4 mb-2">
+            <span class="text-gold text-xl">◆</span>
+            <h1 class="font-display text-[2.4rem] leading-none text-gold tracking-[0.25em] pl-[0.25em]">РЕЦЕПТИ</h1>
+            <span class="text-gold text-xl">◆</span>
+        </div>
+        <div class="deco-divider mx-auto max-w-[260px]">
+            <span class="font-roman text-cream-dim text-[0.6rem] tracking-[0.4em] uppercase whitespace-nowrap">Кухня · Atelier</span>
+        </div>
+    </header>
+
+    <!-- SEARCH -->
+    <div class="relative mb-5">
+        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gold-dim pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/>
+        </svg>
+        <input id="search" type="search" placeholder="Търси рецепта…"
+               class="w-full bg-ink-soft border border-gold-dim pl-10 pr-4 py-3 text-cream focus:outline-none focus:border-gold transition"
+               oninput="renderCards()">
+    </div>
+
+    <!-- CATEGORY FILTERS -->
+    <div class="mb-3">
+        <div class="deco-divider mb-3">
+            <span class="font-roman text-gold text-[0.55rem] tracking-[0.4em] uppercase whitespace-nowrap">✦ Категория ✦</span>
+        </div>
+        <div id="cat-filters" class="flex gap-2 overflow-x-auto no-scrollbar pb-1"></div>
+    </div>
+
+    <!-- DIFFICULTY FILTERS -->
+    <div class="mb-6">
+        <div class="deco-divider mb-3">
+            <span class="font-roman text-gold text-[0.55rem] tracking-[0.4em] uppercase whitespace-nowrap">✦ Трудност ✦</span>
+        </div>
+        <div id="diff-filters" class="flex gap-2 overflow-x-auto no-scrollbar pb-1"></div>
+    </div>
+
+    <!-- STATS ROW -->
+    <div class="flex justify-between items-center mb-4 px-1">
+        <span id="count-label" class="font-roman text-cream-dim text-xs tracking-widest"></span>
+        <button onclick="toggleFavsOnly()" id="favs-btn"
+                class="font-roman text-xs tracking-widest text-cream-dim hover:text-gold transition flex items-center gap-1">
+            <span id="favs-heart">♡</span><span>Любими</span>
+        </button>
+    </div>
+
+    <!-- CARDS GRID -->
+    <div id="cards-grid" class="grid grid-cols-2 gap-3"></div>
+
+    <!-- EMPTY STATE -->
+    <div id="empty-state" class="hidden text-center py-20">
+        <div class="text-4xl mb-4">🍽</div>
+        <p class="font-roman text-cream-dim text-sm tracking-widest">Няма намерени рецепти</p>
+    </div>
+
+</div>
+
+<!-- BACK TO TOP -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+        class="hidden fixed bottom-8 right-5 w-10 h-10 btn-gold flex items-center justify-center z-50"
+        aria-label="Нагоре">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+</button>
+
+<!-- RECIPE MODAL -->
+<div id="modal" class="fixed inset-0 z-50 hidden">
+    <div class="sheet-overlay absolute inset-0 bg-ink/80 backdrop-blur-sm" onclick="closeModal()"></div>
+    <div class="sheet-panel absolute bottom-0 left-0 right-0 max-w-md mx-auto bg-ink-soft border-t border-l border-r border-gold-dim" style="max-height:92vh;">
+
+        <div class="flex justify-center pt-3 pb-1">
+            <div class="w-10 h-1 rounded-full bg-gold-dim opacity-50"></div>
+        </div>
+
+        <div id="modal-img-wrap" class="relative overflow-hidden" style="height:200px;">
+            <img id="modal-img" src="" alt="" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-ink-soft via-ink-soft/30 to-transparent"></div>
+            <button onclick="closeModal()"
+                    class="absolute top-3 right-3 w-8 h-8 bg-ink/70 border border-gold-dim text-cream-dim hover:text-gold flex items-center justify-center transition">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+            <button id="modal-fav" onclick="toggleFav(currentRecipeId, this)"
+                    class="fav-btn absolute top-3 left-3 w-8 h-8 bg-ink/70 border border-gold-dim text-cream-dim hover:text-gold flex items-center justify-center transition text-base">
+                ♡
+            </button>
+        </div>
+
+        <div id="modal-body" class="overflow-y-auto" style="max-height: calc(92vh - 220px);">
+            <div class="px-5 py-5 safe-bottom">
+                <h2 id="modal-title" class="font-roman text-gold text-xl leading-tight mb-1"></h2>
+                <div id="modal-category" class="font-roman text-cream-dim text-xs tracking-[0.3em] uppercase mb-4"></div>
+                <div id="modal-meta" class="flex flex-wrap gap-4 mb-5 text-sm font-body italic text-cream-dim"></div>
+                <p id="modal-desc" class="font-body text-cream-dim italic text-sm leading-relaxed mb-5"></p>
+
+                <div class="deco-divider mb-4">
+                    <span class="font-roman text-gold text-[0.55rem] tracking-[0.4em] uppercase whitespace-nowrap">✦ Продукти ✦</span>
+                </div>
+                <ul id="modal-ingredients" class="mb-6 space-y-2"></ul>
+
+                <div class="deco-divider mb-4">
+                    <span class="font-roman text-gold text-[0.55rem] tracking-[0.4em] uppercase whitespace-nowrap">✦ Приготвяне ✦</span>
+                </div>
+                <ol id="modal-steps" class="space-y-4 mb-4"></ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const ALL_RECIPES = [{"id": "r1", "title": "Ризото с гъби (без лук)", "category": "Основно ястие", "difficulty": "Средно", "time": 35, "servings": 2, "description": "Дълбоко ароматно ризото – ключът е да изпечеш гъбите правилно, без да ги задушиш.", "ingredients": ["200 г ориз арборио или карнароли", "250–300 г гъби (печурки, шийтаке, манатарки)", "800 мл горещ зеленчуков бульон", "50 мл бяло вино", "1 с.л. зехтин", "1–2 с.л. масло", "30–40 г пармезан", "1 малка скилидка чесън", "черен пипер", "мащерка или магданоз"], "steps": ["Нарежи гъбите на филии. Загрей тиган на силен огън, добави малко зехтин.", "Сложи гъбите на един слой. Не ги пипай 2–3 мин, после разбъркай и готви до златисто. Ако ползваш чесън – добави го накрая за 20 сек. Извади гъбите настрана.", "В същия съд сложи малко зехтин. Добави ориза и бъркай 1 мин. Налей виното и остави да се изпари.", "Добавяй горещ бульон по малко, бъркай често. Готви 16–18 мин.", "Когато оризът е почти готов, върни гъбите. Добави маслото, пармезана и черен пипер. Разбъркай енергично. Почини 2 мин преди сервиране."], "image": "https://drive.google.com/thumbnail?id=1eTfFTycVggKIuWBaUDFqMbYJ_5Zb0vof&sz=w800", "createdAt": "2025-01-01T10:00:00.000Z"}, {"id": "r2", "title": "Лек рамен с октопод", "category": "Супа", "difficulty": "Средно", "time": 30, "servings": 2, "description": "Морски рамен с лек даши бульон и запечен октопод. Чист, балансиран вкус – не тежък.", "ingredients": ["1 л вода", "1 ч.л. даши (или зеленчуков бульон)", "1 с.л. соев сос", "1 ч.л. мисо (по желание)", "резен джинджифил", "варен октопод (пипало)", "рамен нудли", "зелен лук", "нори", "пак чой", "варено яйце (6–7 мин)", "малко сусамово олио"], "steps": ["Загрей водата. Добави даши и джинджифила. Добави соев сос. Ако ползваш мисо – разтвори го отделно и добави без да кипва.", "Нарежи варения октопод на парчета. Запечи на силен огън с малко зехтин 2–3 мин. Капка лимон накрая. Не го вари в бульона.", "Свари рамен нудлите отделно. Не ги преварявай.", "Сложи нудлите в купата, залей с горещия бульон. Отгоре – октопод, зелен лук, нори, пак чой, яйце. Капни малко сусамово олио."], "image": "https://drive.google.com/thumbnail?id=1p08vIb32wak-6i-pAkO8x2Rs7qVOp11A&sz=w800", "createdAt": "2025-01-01T10:01:00.000Z"}, {"id": "r3", "title": "Клариас (сом) със скариди", "category": "Основно ястие", "difficulty": "Лесно", "time": 20, "servings": 2, "description": "Хрупкав сом филе и скариди в лепкав соев-лимонов сос. На ниво ресторант за 20 мин.", "ingredients": ["клариас (сом) филе", "скариди", "1 с.л. соев сос", "малко лимонов сок", "малко мед", "сусамово олио", "сол, черен пипер", "нишесте (по желание – за хрупкавост)"], "steps": ["Подсуши рибата, нарежи на парчета. Овкуси със сол, черен пипер и малко соев сос. По желание поръси леко с нишесте.", "В тиган на силен огън – малко мазнина. Запечи рибата 3–4 мин на страна до златисто. Извади.", "В същия тиган – скаридите. Печи 1–2 мин. Извади.", "Сос: соев сос + лимон + мед + сусамово олио в тигана. Готви 1–2 мин да се сгъсти.", "Върни рибата и скаридите, разбъркай внимателно и сервирай."], "image": "https://drive.google.com/thumbnail?id=1Qr03k3e6W-S_4lxp80_0Kg1cp_PFbL-p&sz=w800", "createdAt": "2025-01-01T10:02:00.000Z"}, {"id": "r4", "title": "Паста с тиквички и скариди", "category": "Основно ястие", "difficulty": "Лесно", "time": 20, "servings": 4, "description": "Лека паста с пресни тиквички и скариди, завършена с лимонова кора.", "ingredients": ["400 г паста", "400–500 г скариди", "2 средни тиквички", "3–4 с.л. зехтин", "40–50 г масло", "кора от 1 лимон", "малко лимонов сок", "сол, черен пипер", "магданоз (по желание)"], "steps": ["Свари пастата al dente. Запази 1 чаша вода от пастата.", "Нарежи тиквичките на кубчета. В тиган – зехтин, тиквичките, щипка сол. Печи 5–7 мин на силен огън до леко запичане. Извади.", "В същия тиган – малко масло, скаридите. Печи 1 мин от едната страна + 30–40 сек от другата. Извади.", "В тигана – ½ чаша вода от пастата и маслото. Добави пастата и разбъркай силно до лек сос.", "Върни тиквичките и скаридите. Добави лимонова кора, лимонов сок, черен пипер, магданоз. Разбъркай внимателно."], "image": "https://drive.google.com/thumbnail?id=1EmLd9L-Xn_q0dmvQeomnF2j-GQjl5VYg&sz=w800", "createdAt": "2025-01-01T10:03:00.000Z"}, {"id": "r5", "title": "Гурме бургер", "category": "Основно ястие", "difficulty": "Лесно", "time": 15, "servings": 2, "description": "Сочен гурме бургер с чедър и айсберг на оребрен тиган.", "ingredients": ["гурме бургер питие", "телешка кайма (200 г/бройка)", "чедър", "айсберг салата", "майонеза"], "steps": ["Оформи питките без да ги натискаш.", "Загрей оребрения тиган до много силен огън.", "Печи 3–4 мин от всяка страна. Не натискай месото.", "Сложи чедъра и затвори капака за 30 сек.", "Сглоби бургера."], "image": "https://drive.google.com/thumbnail?id=1ygIvrRLfBkLwIpQ_RyCgKMjvHC0FnZUF&sz=w800", "createdAt": "2025-01-01T10:04:00.000Z"}, {"id": "r6", "title": "Телешки стек", "category": "Основно ястие", "difficulty": "Средно", "time": 15, "servings": 1, "description": "Телешки стек на оребрен тиган – силен огън и почивка след готвенето.", "ingredients": ["телешки стек", "сол, черен пипер", "масло", "розмарин или мащерка"], "steps": ["Извади месото от хладилника 30 мин предварително.", "Загрей тигана до много силен огън.", "Печи ~3 мин на страна.", "В края добави масло и ароматни треви, поливай месото.", "Остави да почине 5 мин преди рязане."], "image": "https://drive.google.com/thumbnail?id=1WuEb20wMjdkLBW9ytXYZLUBUBoG8YMap&sz=w800", "createdAt": "2025-01-01T10:05:00.000Z"}, {"id": "r7", "title": "Суши ориз", "category": "Основно ястие", "difficulty": "Средно", "time": 30, "servings": 4, "description": "Перфектен суши ориз – базата за нигири и ролки.", "ingredients": ["500 г ориз (суши сорт)", "вода 1:1.1", "3 с.л. оризов оцет", "2 с.л. захар", "1 ч.л. сол"], "steps": ["Измий ориза до бистра вода.", "Свари с вода в съотношение 1:1.1. Не отваряй капака по време на готвене.", "Смеси оцет, захар и сол, загрей леко да се разтворят.", "Прехвърли ориза в купа, добави оцетната смес и разбъркай с венче движения.", "Покрий с влажна кърпа и остави да се охлади до стайна температура."], "image": "https://drive.google.com/thumbnail?id=1Uah8s-LwlQu5KMq_TUkaNBhmaYdnZgds&sz=w800", "createdAt": "2025-01-01T10:06:00.000Z"}, {"id": "r8", "title": "Рамен със скариди и шийтаке", "category": "Супа", "difficulty": "Средно", "time": 25, "servings": 2, "description": "Домашен рамен с умами бульон, скариди и шийтаке. Сусамово олио накрая е задължително.", "ingredients": ["рамен нудли", "скариди", "шийтаке гъби", "соев сос", "мисо", "даши", "зелен лук", "варено яйце", "сусамово олио"], "steps": ["Приготви бульон от даши, соев сос и мисо.", "Запечи шийтаке на тиган до златисто.", "Запечи скаридите отделно – 1–2 мин.", "Свари нудлите отделно.", "Сглоби: нудли, бульон, скариди, гъби, яйце. Капни сусамово олио накрая."], "image": "https://drive.google.com/thumbnail?id=1p08vIb32wak-6i-pAkO8x2Rs7qVOp11A&sz=w800", "createdAt": "2025-01-01T10:07:00.000Z"}, {"id": "r9", "title": "Паста Vongole", "category": "Основно ястие", "difficulty": "Средно", "time": 20, "servings": 2, "description": "Класика – венерки, бяло вино и масло. Водата от пастата прави соса.", "ingredients": ["паста (спагети или лингуине)", "vongole (венерки)", "3–4 скилидки чесън", "50 мл бяло вино", "2 с.л. масло", "зехтин", "магданоз", "чили (по желание)"], "steps": ["Свари пастата al dente. Запази вода от пастата.", "В тиган – зехтин, чесън, чили. Добави vongole и виното. Покрий с капак.", "Готви 2–3 мин до отваряне на черупките. Изхвърли затворените.", "Добави пастата и малко вода от нея. Добави маслото и разбъркай.", "Поръси с магданоз."], "image": "https://drive.google.com/thumbnail?id=16Kv34q_hSYWJZBx18Sy48MgxPIFeaOhx&sz=w800", "createdAt": "2025-01-01T10:08:00.000Z"}, {"id": "r12", "title": "Октопод на еърфрайър", "category": "Основно ястие", "difficulty": "Лесно", "time": 15, "servings": 2, "description": "Предварително варен октопод – изсушен добре и запечен до хрупкавост.", "ingredients": ["варено пипало октопод", "зехтин", "сол", "лимон", "магданоз"], "steps": ["Подсуши добре варения октопод с хартиена кърпа.", "Намажи с малко зехтин.", "Еърфрайър: 200°C / 10–12 мин.", "Сервирай с лимон и магданоз."], "image": "https://drive.google.com/thumbnail?id=1RDHIUBzFizAeKvROBPZPebLXqcXgL7S2&sz=w800", "createdAt": "2025-01-01T10:11:00.000Z"}, {"id": "r13", "title": "Ципура на фурна", "category": "Основно ястие", "difficulty": "Лесно", "time": 30, "servings": 2, "description": "Цяла ципура с лимон и билки – проста и вкусна.", "ingredients": ["цяла ципура", "лимон (нарязан)", "зехтин", "розмарин или мащерка", "сол, черен пипер"], "steps": ["Направи разрези по рибата.", "Напълни коремчето с резени лимон и билки.", "Намажи с зехтин, посоли.", "Фурна: 220°C / 20–25 мин."], "image": "https://drive.google.com/thumbnail?id=1Um9BrDAktJhURSWuKswU7wSsmIuYD--7&sz=w800", "createdAt": "2025-01-01T10:12:00.000Z"}, {"id": "r14", "title": "Edamame", "category": "Предястие", "difficulty": "Лесно", "time": 10, "servings": 2, "description": "Класическо японско предястие – варено или от еърфрайър с морска сол.", "ingredients": ["замразено edamame", "морска сол", "сусамово олио (по желание)"], "steps": ["Вариант 1 – Варене: 4–5 мин в подсолена вряща вода. Отцеди и поръси с морска сол.", "Вариант 2 – Еърфрайър: 190°C / 8–10 мин. Поръси с морска сол.", "По желание – капни малко сусамово олио накрая."], "image": "https://drive.google.com/thumbnail?id=1wXmRxkGpf3bvmxY6uJfLaXVDAIDdYedn&sz=w800", "createdAt": "2025-01-01T10:13:00.000Z"}, {"id": "r15", "title": "Gyoza с скариди", "category": "Предястие", "difficulty": "Лесно", "time": 15, "servings": 2, "description": "Замразени gyoza – запечени в тиган и задушени с пара. Хрупкави отдолу, меки отгоре.", "ingredients": ["замразени gyoza", "малко олио", "3–4 с.л. вода", "за соса: соев сос, оризов оцет, сусамово олио, чили"], "steps": ["Загрей тиган с малко олио.", "Наредете gyoza без да се докосват.", "Запечи 2–3 мин до хрупкава коричка отдолу.", "Налей 3–4 с.л. вода и покрий с капак. Задушавай 5 мин.", "Свали капака и изчакай водата да се изпари.", "Сервирай с соса от соев сос, оцет и сусамово олио."], "image": "https://drive.google.com/thumbnail?id=19cS4IF0GkM4Dz6VdHd4tlCp3yw8Cfs_0&sz=w800", "createdAt": "2025-01-01T10:14:00.000Z"}, {"id": "r16", "title": "Сьомга на фурна", "category": "Основно ястие", "difficulty": "Лесно", "time": 20, "servings": 2, "description": "Сьомга с глазура от соев сос и мед – накрая на грил за карамелизация.", "ingredients": ["сьомга (2 филета)", "2 с.л. соев сос", "1 с.л. мед", "лимонов сок", "сусамово олио", "сусам"], "steps": ["Смеси соев сос, мед и лимонов сок.", "Наредете сьомгата в тава. Намажи с глазурата.", "Фурна: 200°C / 15 мин.", "Последните 2–3 мин – включи гриловата функция.", "Поръси с сусам преди сервиране."], "image": "https://drive.google.com/thumbnail?id=1aPyf_McUT-UoZm3v39vkfm18lIKvVa1g&sz=w800", "createdAt": "2025-01-01T10:15:00.000Z"}, {"id": "r17", "title": "Картофи, скариди и яйце", "category": "Закуска", "difficulty": "Лесно", "time": 20, "servings": 2, "description": "Хрупкави картофи на тиган, скариди и яйца – бърза и засищаща закуска.", "ingredients": ["картофи", "скариди", "2 яйца", "настърган кашкавал или сирене", "сол, черен пипер", "зехтин"], "steps": ["Нарежи картофите на кубчета. Запечи в тиган с малко зехтин до хрупкавост.", "Добави скаридите – 1–2 мин.", "Направи дупки и разбий яйцата. Готви до стягане.", "Поръси с настърган кашкавал и черен пипер."], "image": "https://drive.google.com/thumbnail?id=1OzKs07FEwJdYgR6UhQCLMQP_bYTl71wv&sz=w800", "createdAt": "2025-01-01T10:16:00.000Z"}, {"id": "r18", "title": "Крем супа с бели аспержи", "category": "Супа", "difficulty": "Лесно", "time": 25, "servings": 4, "description": "Деликатна крем супа с бели аспержи. Не преварявай аспержите – губят цвят и вкус.", "ingredients": ["500 г бели аспержи", "1 лук", "2 с.л. масло", "500 мл зеленчуков бульон", "100 мл готварска сметана", "сол, черен пипер, лимонов сок"], "steps": ["Обели аспержите и нарежи на парчета (запази върховете).", "Задуши лука в масло. Добави аспержите (без върховете).", "Добави бульона. Вари ~15 мин до омекване.", "Пасирай до гладка крема. Добави сметаната.", "Сложи върховете и загрей 2–3 мин. Добави лимонов сок, сол и пипер."], "image": "https://drive.google.com/thumbnail?id=1VC0l7FS4JzqxmWjNqP016NoBkwBUMDVH&sz=w800", "createdAt": "2025-01-01T10:17:00.000Z"}, {"id": "r19", "title": "Паста с риба тон", "category": "Основно ястие", "difficulty": "Лесно", "time": 15, "servings": 2, "description": "Бърза паста с консерва риба тон – лимонова кора вместо чесън за свежест.", "ingredients": ["300 г паста", "1 консерва риба тон в олио", "лимонова кора", "лимонов сок", "каперси или маслини (по желание)", "магданоз", "черен пипер"], "steps": ["Свари пастата al dente. Запази малко вода.", "В тиган – олиото от консервата, рибата тон, лимонова кора.", "Загрей леко и добави пастата с малко вода.", "Финал: лимонов сок, магданоз, черен пипер."], "image": "https://drive.google.com/thumbnail?id=1MbQPfu3AZRjb144mN4ypJ3NWwjm3tTV5&sz=w800", "createdAt": "2025-01-01T10:18:00.000Z"}, {"id": "r20", "title": "Стек от целина", "category": "Основно ястие", "difficulty": "Средно", "time": 30, "servings": 2, "description": "Вегетариански стек – коричка от тиган, после фурна. Изненадващо засищащ.", "ingredients": ["1 глава целина (корен)", "зехтин", "масло", "розмарин", "сол, черен пипер"], "steps": ["Нарежи целината на дебели \"стекове\" (1.5–2 см).", "Запечи в тиган с малко зехтин от двете страни – по 3–4 мин.", "Прехвърли в тава. Добави масло и розмарин.", "Фурна: 190°C / ~20 мин до меко вътре."], "image": null, "createdAt": "2025-01-01T10:19:00.000Z"}, {"id": "r21", "title": "Кюфтета от леща", "category": "Основно ястие", "difficulty": "Средно", "time": 35, "servings": 4, "description": "Хрупкави вегетариански кюфтета – първо коричка в тиган, после фурна.", "ingredients": ["400 г варена леща", "2 средни варени картофа", "1 лук", "2 скилидки чесън", "кимион, кориандър, сол, черен пипер", "брашно за повалване", "зехтин"], "steps": ["Смачкай лещата и картофите. Добави ситно нарязан лук, чесън и подправките.", "Оформи кюфтета и поваляй леко в брашно.", "Запечи в тиган с малко зехтин до коричка от двете страни.", "Прехвърли в тава: 190°C / 10–15 мин."], "image": null, "createdAt": "2025-01-01T10:20:00.000Z"}, {"id": "r10", "title": "Трюфелени фетучини", "category": "Основно ястие", "difficulty": "Лесно", "time": 15, "servings": 2, "description": "Прости фетучини с трюфелена паста и масло – без тежък сос, само чист вкус.", "ingredients": ["300 г фетучини", "2–3 с.л. трюфелена паста", "30 г масло", "пармезан", "черен пипер", "вода от пастата"], "steps": ["Свари фетучините al dente. Запази вода от пастата.", "В тиган – масло и трюфелена паста на слаб огън.", "Добави пастата и малко вода от нея. Разбъркай.", "Настържи пармезан отгоре, добави черен пипер."], "image": null, "createdAt": "2025-01-01T10:09:00.000Z"}, {"id": "r11", "title": "Chili con carne", "category": "Основно ястие", "difficulty": "Средно", "time": 50, "servings": 4, "description": "Класически чили – ключът е силно запечена кайма за дълбок вкус.", "ingredients": ["500 г телешка кайма", "1 кутия червен боб", "1 кутия натрошени домати", "2 лука", "3 скилидки чесън", "кимион, чили, пушен паприк, сол", "зехтин"], "steps": ["На силен огън запечи каймата без да я разбъркваш – изчакай да се зачерви добре от едната страна.", "Добави лука и чесъна, запържи.", "Добави подправките, доматите и боба.", "Намали котлона и вари ~40 мин."], "image": "https://drive.google.com/thumbnail?id=1iRrvdUs99jCPBGwhccYlqqtbJbpeHv41&sz=w800", "createdAt": "2025-01-01T10:10:00.000Z"}, {"id": "r22", "title": "Паста с тиквички и скариди", "category": "Основно ястие", "difficulty": "Средно", "time": 30, "servings": 4, "description": "Лека, лъскава паста с карамелизирани тиквички и бързо запечени скариди — ключът е соса от масло и вода от пастата.", "ingredients": ["400 г паста", "400–500 г скариди", "2 тиквички", "масло", "зехтин", "лимонова кора", "малко лимонов сок", "черен пипер", "пармезан (по желание)"], "steps": ["Тиквички: На силен огън, запечи ги до леко загаряне — не да станат варени. Извади настрана.", "Скариди: Много кратко — 1 мин + 30 сек. Извади ги веднага.", "Сос: В същия тиган добави масло и малко вода от варенето на пастата. Разбий леко до хомогенен сос.", "Сложи пастата, тиквичките и скаридите. Разбъркай внимателно.", "Финал: лимонова кора, черен пипер, малко зехтин. За визия — 1–2 цели скариди отгоре, малко сусам."], "image": null, "createdAt": "2025-01-01T10:21:00.000Z"}, {"id": "r23", "title": "Edamame със сусам и люто сусамово олио", "category": "Предястие", "difficulty": "Лесно", "time": 10, "servings": 2, "description": "Вареното едамаме се превръща в нещо специално с няколко капки Kadoya hot sesame oil, соев сос и сусам.", "ingredients": ["едамаме (замразено)", "соев сос", "сусам", "Kadoya hot sesame oil (люто сусамово олио)"], "steps": ["Свари едамамето според инструкциите на опаковката.", "Отцеди добре.", "Добави соев сос, поръси сусам и няколко капки Kadoya hot sesame oil.", "Сервирай в отделна купа за споделяне."], "image": "https://drive.google.com/thumbnail?id=1fTararHOb9Dadpyh_19KMwKgeNQHOu_Y&sz=w800", "createdAt": "2025-01-01T10:22:00.000Z"}, {"id": "r24", "title": "Паста с круша и горгонзола", "category": "Основно ястие", "difficulty": "Лесно", "time": 25, "servings": 2, "description": "Кремообразна паста с карамелизирана круша и топяща се горгонзола. Не соли — горгонзолата е достатъчно солена.", "ingredients": ["200 г паста (талиатели, фетучини или пене)", "120–150 г горгонзола", "1 круша", "1 с.л. масло", "50–80 мл сметана или вода от пастата", "черен пипер", "орехи (по желание)"], "steps": ["Свари пастата al dente. Запази ½ чаша вода от пастата.", "Нарежи крушата на тънки резени или кубчета.", "В тиган разтопи маслото и запечи крушата 2–3 мин — само да омекне леко.", "Намали огъня. Добави горгонзолата и малко сметана или вода от пастата.", "Разбъркай до кремообразен сос.", "Добави пастата. Ако е гъсто — добави още малко вода от пастата.", "Финал: черен пипер и запечени орехи."], "image": "https://drive.google.com/thumbnail?id=1Y-DqHoC4T3smO7_LTRnBu1PqMFe92q10&sz=w800", "createdAt": "2025-01-01T10:23:00.000Z"}, {"id": "r25", "title": "Дъгова пъстърва на фурна", "category": "Основно ястие", "difficulty": "Лесно", "time": 20, "servings": 2, "description": "Чист вкус – зехтин, лимон, нищо повече. Пъстървата не се нуждае от сусамово олио. С масло вместо зехтин е още по-добре, особено с аспержи.", "ingredients": ["дъгова пъстърва (филета)", "сол, черен пипер", "зехтин", "лимонова кора"], "steps": ["Намажи филетата с зехтин. Посоли, поръси с черен пипер и настъргана лимонова кора.", "Фурна: 200°C / 12–15 мин.", "Веднага след изваждане: капни лимонов сок и още малко зехтин.", "Вариант с масло: замени зехтина с масло – по-богато, особено с аспержи.", "Японски вариант: намажи с 1 с.л. соев сос + 1 ч.л. мед + малко настърган джинджифил, после печи."], "image": null, "createdAt": "2025-01-01T10:24:00.000Z"}];
+
+let currentCat  = 'Всички';
+let currentDiff = 'Всички';
+let favsOnly    = false;
+let currentRecipeId = null;
+
+function getFavs() { try { return JSON.parse(localStorage.getItem('recipe_favs')||'[]'); } catch{ return []; } }
+function saveFavs(a) { localStorage.setItem('recipe_favs', JSON.stringify(a)); }
+function isFav(id) { return getFavs().includes(id); }
+
+function toggleFav(id, btn) {
+    const favs = getFavs();
+    const idx = favs.indexOf(id);
+    if (idx === -1) favs.push(id); else favs.splice(idx, 1);
+    saveFavs(favs);
+    updateFavBtn(btn, id);
+    document.querySelectorAll('[data-fav-id="'+id+'"]').forEach(b => updateFavBtn(b, id));
+    if (favsOnly) renderCards();
+}
+
+function updateFavBtn(btn, id) {
+    if (!btn) return;
+    const f = isFav(id);
+    btn.classList.toggle('active', f);
+    btn.textContent = f ? '♥' : '♡';
+}
+
+function toggleFavsOnly() {
+    favsOnly = !favsOnly;
+    document.getElementById('favs-btn').classList.toggle('text-gold', favsOnly);
+    document.getElementById('favs-heart').textContent = favsOnly ? '♥' : '♡';
+    renderCards();
+}
+
+function diffClass(d) {
+    if (!d) return '';
+    const l = d.toLowerCase();
+    if (l.includes('лесно')) return 'diff-easy';
+    if (l.includes('средно')) return 'diff-medium';
+    return 'diff-hard';
+}
+
+function renderFilters() {
+    const cats  = ['Всички', ...new Set(ALL_RECIPES.map(r => r.category).filter(Boolean))];
+    const diffs = ['Всички', ...new Set(ALL_RECIPES.map(r => r.difficulty).filter(Boolean))];
+
+    document.getElementById('cat-filters').innerHTML = cats.map(c =>
+        `<button onclick="setCat('${c.replace(/'/g,"\\'")}')"
+            class="flex-shrink-0 px-3 py-1.5 border border-gold-dim font-roman text-[0.6rem] tracking-[0.3em] uppercase transition whitespace-nowrap ${c===currentCat?'filter-active':'text-cream-dim hover:text-cream'}">
+            ${c}</button>`).join('');
+
+    document.getElementById('diff-filters').innerHTML = diffs.map(d =>
+        `<button onclick="setDiff('${d.replace(/'/g,"\\'")}')"
+            class="flex-shrink-0 px-3 py-1.5 border border-gold-dim font-roman text-[0.6rem] tracking-[0.3em] uppercase transition whitespace-nowrap ${d===currentDiff?'filter-active':'text-cream-dim hover:text-cream'}">
+            ${d}</button>`).join('');
+}
+
+function setCat(c)  { currentCat = c;  renderFilters(); renderCards(); }
+function setDiff(d) { currentDiff = d; renderFilters(); renderCards(); }
+
+function getFiltered() {
+    const q = (document.getElementById('search')?.value || '').toLowerCase().trim();
+    return ALL_RECIPES.filter(r => {
+        if (currentCat !== 'Всички' && r.category !== currentCat) return false;
+        if (currentDiff !== 'Всички' && r.difficulty !== currentDiff) return false;
+        if (favsOnly && !isFav(r.id)) return false;
+        if (q && !((r.title||'').toLowerCase().includes(q) ||
+                   (r.description||'').toLowerCase().includes(q) ||
+                   (r.category||'').toLowerCase().includes(q))) return false;
+        return true;
+    });
+}
+
+function renderCards() {
+    const filtered = getFiltered();
+    const grid  = document.getElementById('cards-grid');
+    const empty = document.getElementById('empty-state');
+    document.getElementById('count-label').textContent = filtered.length + ' рецепт' + (filtered.length===1?'а':'и');
+
+    if (!filtered.length) { grid.innerHTML = ''; empty.classList.remove('hidden'); return; }
+    empty.classList.add('hidden');
+
+    grid.innerHTML = filtered.map((r, i) => {
+        const fav = isFav(r.id);
+        const dc  = diffClass(r.difficulty);
+        return `
+        <div class="recipe-card deco-card overflow-hidden cursor-pointer active:scale-[0.98] transition-transform"
+             style="animation-delay:${i*0.05}s" onclick="openModal('${r.id}')">
+            <div class="corners"></div>
+            <div class="relative overflow-hidden" style="height:110px;">
+                ${r.image
+                    ? `<img src="${r.image}" alt="" class="w-full h-full object-cover" loading="lazy"
+                           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+                    : ''}
+                <div class="w-full h-full flex items-center justify-center bg-ink-soft text-4xl" ${r.image?'style="display:none"':''}>🍽</div>
+                <div class="absolute inset-0 bg-gradient-to-t from-ink-soft/80 to-transparent"></div>
+                <button data-fav-id="${r.id}" onclick="event.stopPropagation();toggleFav('${r.id}',this)"
+                        class="fav-btn ${fav?'active':''} absolute top-2 right-2 w-6 h-6 bg-ink/60 border border-gold-dim flex items-center justify-center text-xs transition">
+                    ${fav?'♥':'♡'}
+                </button>
+            </div>
+            <div class="p-3">
+                <h3 class="font-roman text-cream text-[0.8rem] leading-tight mb-1 line-clamp-2">${r.title}</h3>
+                <div class="flex items-center justify-between gap-1 mt-2">
+                    <span class="font-roman text-[0.55rem] tracking-widest text-cream-dim truncate">${r.category||''}</span>
+                    ${r.time ? `<span class="text-gold-dim text-[0.6rem] font-roman whitespace-nowrap">${r.time}м</span>` : ''}
+                </div>
+                ${r.difficulty ? `<div class="mt-1"><span class="border px-1.5 py-0.5 text-[0.5rem] font-roman tracking-widest uppercase ${dc}">${r.difficulty}</span></div>` : ''}
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function openModal(id) {
+    const r = ALL_RECIPES.find(x => x.id === id);
+    if (!r) return;
+    currentRecipeId = id;
+
+    document.getElementById('modal-title').textContent    = r.title || '';
+    document.getElementById('modal-category').textContent = r.category || '';
+    document.getElementById('modal-desc').textContent     = r.description || '';
+
+    const imgWrap = document.getElementById('modal-img-wrap');
+    const img     = document.getElementById('modal-img');
+    if (r.image) {
+        imgWrap.style.display = '';
+        img.src = r.image; img.alt = r.title;
+        img.onerror = () => { imgWrap.style.display = 'none'; };
+    } else {
+        imgWrap.style.display = 'none';
+    }
+
+    const meta = [];
+    if (r.time)      meta.push(`<span>⏱ ${r.time} мин.</span>`);
+    if (r.servings)  meta.push(`<span>🍽 ${r.servings} порц.</span>`);
+    if (r.difficulty) {
+        meta.push(`<span class="${diffClass(r.difficulty)}">${r.difficulty}</span>`);
+    }
+    document.getElementById('modal-meta').innerHTML = meta.join('<span class="text-gold-dim mx-1">·</span>');
+
+    document.getElementById('modal-ingredients').innerHTML =
+        (r.ingredients||[]).map(ing =>
+            `<li class="flex items-start gap-2 text-sm font-body">
+                <span class="text-gold mt-1 flex-shrink-0">◆</span>
+                <span class="text-cream">${ing}</span>
+            </li>`).join('');
+
+    document.getElementById('modal-steps').innerHTML =
+        (r.steps||[]).map((step, i) =>
+            `<li class="flex items-start gap-3 text-sm font-body">
+                <div class="step-num">${i+1}</div>
+                <p class="text-cream leading-relaxed pt-0.5">${step}</p>
+            </li>`).join('');
+
+    updateFavBtn(document.getElementById('modal-fav'), id);
+    document.getElementById('modal-body').scrollTop = 0;
+    document.getElementById('modal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    document.getElementById('modal').classList.add('hidden');
+    document.body.style.overflow = '';
+    currentRecipeId = null;
+}
+
+window.addEventListener('scroll', () => {
+    const btn = document.getElementById('back-top');
+    btn.classList.toggle('hidden', window.scrollY <= 300);
+});
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+renderFilters();
+renderCards();
+</script>
+</body>
+</html>
