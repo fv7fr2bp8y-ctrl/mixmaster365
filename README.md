@@ -1,0 +1,112 @@
+# MixMaster · Atelier 🍸
+
+Art-Deco каталог с **365 коктейла + 365 безалкохолни** напитки. PWA, 5 езика, AI скенер за бутилки, ml/oz, Cocktail of the Day.
+
+**Live:** https://mixmaster365.eu · **Repo:** `fv7fr2bp8y-ctrl/mixmaster365` (branch `main`)
+
+---
+
+## 🗂 Структура на репото
+
+| Файл | Какво е |
+|---|---|
+| `index.html` | Цялото приложение (single-file). Това е, което GitHub Pages сервира. |
+| `MixMaster365-Deco v0.4.html` | Огледало на index.html (текуща версия). |
+| `manifest.json` | PWA манифест. |
+| `sw.js` | Service worker (офлайн кеш). Вдигай `CACHE_NAME` при ъпдейт. |
+| `icon-192.png` / `icon-512.png` | PWA икони. |
+| `privacy.html` | Политика за поверителност (двуезична) — за Google Play. |
+| `CNAME` | `mixmaster365.eu` (custom domain). |
+| `scripts/*.gs` | Google Apps Script помощници (виж по-долу). |
+
+---
+
+## 🔑 API ключ (Gemini)
+
+Скриптовете в `scripts/` имат `PASTE_YOUR_GEMINI_KEY_HERE`. Вземи ключ от
+[aistudio.google.com/apikey](https://aistudio.google.com/apikey) и го постави преди пускане.
+**Не качвай ключа в публичния repo.**
+
+Ключът за уеб приложението (бутилков скенер) е в `index.html` като `geminiKey` (`AIza...`) — този може да е публичен.
+
+---
+
+## 📊 Данни (Google Sheets)
+
+Една таблица, два таба (tab):
+- **Spreadsheet ID:** `1GNVZxY3X6k3iDRWLu8CAL2sNM0I2GcI5FiWLXZYQ1hk`
+- **Коктейли:** `gid=2075268599`
+- **Безалкохолни:** `gid=116292126`
+
+Колони: `id, name, base, icon, image, ingredients, recipe` + по 4 преводни колони на език
+(`name_en, base_en, ingredients_en, recipe_en, … _de, _es, _ru`) = 23 колони общо.
+
+**Универсален endpoint** (връща всички колони като JSON):
+```
+https://script.google.com/macros/s/AKfycbwo8yV8kY20USsHptW_Mvd8wNXI_jBoOLtq6UI58ys7O9SgxxbAnMAeDrrWaEwriMS2/exec?gid=<GID>
+```
+Кодът му е `scripts/doGet_universal.gs`. В `index.html`: `apiUrl` = коктейли, `mocktailsUrl` = безалкохолни.
+
+Бърза проверка на прогреса:
+```bash
+curl -sL "https://docs.google.com/spreadsheets/d/1GNVZxY3X6k3iDRWLu8CAL2sNM0I2GcI5FiWLXZYQ1hk/export?format=csv&gid=116292126" | \
+python3 -c "import csv,sys; r=list(csv.reader(sys.stdin)); h=r[0]; ni=h.index('name_en'); ii=h.index('image'); \
+print('преводи', sum(1 for x in r[1:] if len(x)>ni and x[ni].strip()),'/365'); \
+print('снимки', sum(1 for x in r[1:] if len(x)>ii and x[ii].strip().startswith('http')),'/365')"
+```
+
+---
+
+## ⚙️ Apps Script помощници (`scripts/`)
+
+Всеки е **авто-режим**: пускаш `startAuto()` веднъж → таймер го върти сам до край → спира се сам.
+`stopAuto()` спира таймера. Виж напредък с `checkProgress()` / `checkTranslationProgress()`.
+
+| Скрипт | Функция | Бележки |
+|---|---|---|
+| `translate_recipes.gs` | превежда BG → EN/DE/ES/RU | Постави ключ. Смени `SHEET_GID` за другия таб. |
+| `generate_images.gs` | генерира снимки (Gemini image) | Записва в Google Drive, линк в колона E. |
+| `doGet_universal.gs` | endpoint-ът | Deploy → Web app → Anyone. |
+
+**Важно:** всеки скрипт = **отделен Apps Script проект** (иначе `const API_KEY` се дублира → грешка).
+6-минутният лимит е нормален — таймерът продължава автоматично.
+
+---
+
+## ✅ Статус (към 7 юни 2026)
+
+| | Коктейли | Безалкохолни |
+|---|---|---|
+| Снимки | 365/365 ✅ | ~127/365 ⏳ (таймер върви) |
+| Преводи (×4 ез.) | 365/365 ✅ | 365/365 ✅ |
+
+Готово също: домейн + HTTPS, PWA (manifest/SW/икони), privacy policy, 5 езика, ml⇄oz, Cocktail of the Day, споделяне, age gate (под 18 → само безалкохолни), бутилков скенер.
+
+---
+
+## 🚀 Остава до Google Play
+
+1. **Довърши снимките на безалкохолните** → `generate_images.gs` `startAuto()` до 365/365, после `stopAuto()`.
+2. **TWA билд:** [pwabuilder.com](https://pwabuilder.com) → въведи `https://mixmaster365.eu` → Package → Android → свали `.aab`.
+3. **assetlinks.json:** PWABuilder дава SHA-256 пръстов отпечатък → създай
+   `/.well-known/assetlinks.json` в репото с него (Digital Asset Links верификация).
+4. **Play Console** ($25 еднократно): обява, скрийншоти, икона, content rating
+   (алкохол → 18+), privacy policy URL = `https://mixmaster365.eu/privacy.html`, качи `.aab`.
+
+---
+
+## 🛠 Как да редактирам приложението
+
+`index.html` е всичко. След промяна:
+```bash
+cp index.html "MixMaster365-Deco v0.4.html"   # синхронизирай огледалото
+# вдигни CACHE_NAME в sw.js (mixmaster-vN+1), за да получат хората новото
+git add -A && git commit -m "..." && git push origin main
+```
+GitHub Pages се ъпдейтва за ~1 мин. Хард рефреш: **Cmd+Shift+R**.
+
+### Архитектура накратко
+- **i18n:** обект `I18N` + `t(key)` + `data-i18n` атрибути. Език в `localStorage['mixmaster-lang']`.
+- **Преводи на съдържание:** `loc(item, field)` връща `item.<field>_<lang>` или пада на български.
+- **Единици:** `convertUnits(text)` (мл/ml → oz). Избор в `localStorage['mixmaster-unit']`.
+- **Логиката** (филтри, любими, COTD) винаги ползва оригиналните български полета.
