@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "eu.mixmaster365.app",
+      "sha256_cert_fingerprints": [
+        "A5:96:34:56:E6:0D:BD:59:6A:0C:EE:7D:96:C2:DD:95:CD:C4:29:78:4A:4A:19:2A:59:6F:28:50:5D:C5:2D:B5"
+      ]
+    }
+  }
+]
