@@ -91,6 +91,26 @@ print('снимки', sum(1 for x in r[1:] if len(x)>ii and x[ii].strip().starts
 - Код: `isLocked()`, `openPaywall()`, `buyPremium()`/`restorePremium()` (Google Play Billing през Digital Goods API). Флаг в `localStorage['mixmaster-premium']`.
 - SKU: **`premium_unlock`**. Цена-етикет в `PRICE_LABEL` (`index.html`); реалната цена идва от Play.
 
+## ⏳ ТЕКУЩ БЛОКЕР (Play publishing)
+
+Play приложението е създадено с package **`eu.mixmaster365.app`**, но PWABuilder билдът
+излиза с **`eu.mixmaster365.twa`** → Play отказва. При повторно сваляне PWABuilder върна
+**кеширан** стар билд (1913867 байта, идентичен) дори след смяна на Package ID.
+
+**Решение — генерирай ПРЕСЕН билд:**
+- PWABuilder → hard refresh → `https://mixmaster365.eu` → Android
+- **Package ID: `eu.mixmaster365.app`** (задължително)
+- Signing key: **Use mine** → `signing.keystore` + alias/пароли от `signing-key-info.txt`
+  (в `~/Downloads/MixMaster - Google Play package/`)
+- Изчакай да СТРОИ → свали. Провери package ПРЕДИ качване:
+  ```bash
+  unzip -p NEW.aab base/manifest/AndroidManifest.xml | strings | grep -c '\.twa\.DYNAMIC'
+  # 0 = правилно (.app);  >0 = пак е .twa (грешен/кеширан)
+  ```
+- Ако пак кешира → построй локално: `npx @bubblewrap/cli init --manifest https://mixmaster365.eu/manifest.json`
+- След правилния .aab: качи → App integrity → копирай **App signing SHA-256** →
+  добави го в `.well-known/assetlinks.json` (към съществуващия) → публикувай.
+
 ## 🚀 Остава до Google Play
 
 1. ✅ Снимки + преводи (365/365 за двете) — **готово**.
