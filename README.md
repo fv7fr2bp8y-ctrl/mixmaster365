@@ -87,7 +87,7 @@ print('снимки', sum(1 for x in r[1:] if len(x)>ii and x[ii].strip().starts
 ## 💰 Монетизация — Freemium (внедрено ✅)
 
 - **Безплатно:** всички 365 безалкохолни + първите 20 коктейла (пълна рецепта) + преглед на всички коктейли (снимка/име/база).
-- **Премиум (€4.99 еднократно):** рецептите на коктейли 21–365 + AI скенер за бутилки.
+- **Премиум (€3.99 еднократно):** рецептите на коктейли 21–365 + AI скенер за бутилки.
 - Код: `isLocked()`, `openPaywall()`, `buyPremium()`/`restorePremium()` (Google Play Billing през Digital Goods API). Флаг в `localStorage['mixmaster-premium']`.
 - SKU: **`premium_unlock`**. Цена-етикет в `PRICE_LABEL` (`index.html`); реалната цена идва от Play.
 
@@ -95,7 +95,7 @@ print('снимки', sum(1 for x in r[1:] if len(x)>ii and x[ii].strip().starts
 
 1. ✅ Снимки + преводи (365/365 за двете) — **готово**.
 2. ✅ Freemium заключване — **готово**.
-3. **Play Console** ($25) → създай **managed product** с ID `premium_unlock`, цена €4.99.
+3. **Play Console** ($25) → създай **managed product** с ID `premium_unlock`, цена €3.99.
 4. **TWA билд:** [pwabuilder.com](https://pwabuilder.com) → `https://mixmaster365.eu` → Android →
    **включи Google Play Billing** в опциите → свали `.aab`.
 5. **assetlinks.json:** PWABuilder дава SHA-256 → създай `/.well-known/assetlinks.json` в репото.

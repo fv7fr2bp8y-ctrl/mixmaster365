@@ -615,7 +615,7 @@
         // --- Premium (freemium gating) ---
         const FREE_COCKTAILS = 20;          // first N cocktail ids are free
         const PREMIUM_SKU    = 'premium_unlock';
-        const PRICE_LABEL    = '€4.99';
+        const PRICE_LABEL    = '€3.99';
         let isPremium = false;
         try { isPremium = localStorage.getItem('mixmaster-premium') === '1'; } catch(e) {}
 
@@ -738,7 +738,7 @@
             if (!('getDigitalGoodsService' in window)) { showToast(t('premium_app_only')); return; }
             try {
                 const svc = await window.getDigitalGoodsService('https://play.google.com/billing');
-                let amount = { currency: 'EUR', value: '4.99' };
+                let amount = { currency: 'EUR', value: '3.99' };
                 try {
                     const details = await svc.getDetails([PREMIUM_SKU]);
                     if (details && details[0] && details[0].price) amount = details[0].price;
@@ -1086,7 +1086,7 @@
                 <h2 data-i18n="paywall_title" class="font-display text-3xl text-gold tracking-[0.15em] text-center mb-1">ПРЕМИУМ</h2>
                 <p class="font-body italic text-cream-dim text-sm text-center mb-6">— <span data-i18n="paywall_subtitle">Отключи цялото ателие</span> —</p>
                 <div id="paywall-content" class="border border-gold-dim p-5 mb-6"></div>
-                <button id="paywall-cta" onclick="buyPremium()" class="btn-gold w-full py-4 font-roman text-sm tracking-[0.2em] uppercase">Отключи · €4.99</button>
+                <button id="paywall-cta" onclick="buyPremium()" class="btn-gold w-full py-4 font-roman text-sm tracking-[0.2em] uppercase">Отключи · €3.99</button>
                 <button id="paywall-restore" onclick="restorePremium()" class="w-full mt-3 text-cream-dim hover:text-gold py-2 font-roman text-[0.7rem] tracking-[0.25em] uppercase transition">Възстанови покупка</button>
                 <button onclick="closePaywall()" data-i18n="close" class="w-full mt-2 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
                     Затвори
