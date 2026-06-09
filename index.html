@@ -409,6 +409,12 @@
                 settings_title:'ЕЗИК', settings_subtitle:'Език и мерни единици', settings_units:'Мерни единици',
                 share_text:'365 уникални коктейла 🍸', toast_link_copied:'Линкът е копиран ✓',
                 aria_share:'Сподели', aria_top:'Нагоре', aria_settings:'Език',
+                paywall_title:'ПРЕМИУМ', paywall_subtitle:'Отключи цялото ателие',
+                paywall_b1:'Всички 365 рецепти за коктейли', paywall_b2:'AI скенер за бутилки', paywall_b3:'Безплатни ъпдейти завинаги',
+                paywall_cta:'Отключи', paywall_restore:'Възстанови покупка',
+                locked_title:'Премиум рецепта', unlock_btn:'Отключи всички рецепти',
+                premium_app_only:'Достъпно в Android приложението', premium_unlocked:'Премиум отключен ✓',
+                settings_unlock:'Отключи Премиум', settings_premium_on:'Премиум ✓',
                 months:['Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември'],
             },
             en: {
@@ -447,6 +453,12 @@
                 settings_title:'LANGUAGE', settings_subtitle:'Language & units', settings_units:'Measurement units',
                 share_text:'365 unique cocktails 🍸', toast_link_copied:'Link copied ✓',
                 aria_share:'Share', aria_top:'Top', aria_settings:'Language',
+                paywall_title:'PREMIUM', paywall_subtitle:'Unlock the full atelier',
+                paywall_b1:'All 365 cocktail recipes', paywall_b2:'AI bottle scanner', paywall_b3:'Free updates forever',
+                paywall_cta:'Unlock', paywall_restore:'Restore purchase',
+                locked_title:'Premium recipe', unlock_btn:'Unlock all recipes',
+                premium_app_only:'Available in the Android app', premium_unlocked:'Premium unlocked ✓',
+                settings_unlock:'Unlock Premium', settings_premium_on:'Premium ✓',
                 months:['January','February','March','April','May','June','July','August','September','October','November','December'],
             },
             de: {
@@ -485,6 +497,12 @@
                 settings_title:'SPRACHE', settings_subtitle:'Sprache & Einheiten', settings_units:'Maßeinheiten',
                 share_text:'365 einzigartige Cocktails 🍸', toast_link_copied:'Link kopiert ✓',
                 aria_share:'Teilen', aria_top:'Nach oben', aria_settings:'Sprache',
+                paywall_title:'PREMIUM', paywall_subtitle:'Schalte das ganze Atelier frei',
+                paywall_b1:'Alle 365 Cocktail-Rezepte', paywall_b2:'KI-Flaschenscanner', paywall_b3:'Kostenlose Updates für immer',
+                paywall_cta:'Freischalten', paywall_restore:'Kauf wiederherstellen',
+                locked_title:'Premium-Rezept', unlock_btn:'Alle Rezepte freischalten',
+                premium_app_only:'In der Android-App verfügbar', premium_unlocked:'Premium freigeschaltet ✓',
+                settings_unlock:'Premium freischalten', settings_premium_on:'Premium ✓',
                 months:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
             },
             es: {
@@ -523,6 +541,12 @@
                 settings_title:'IDIOMA', settings_subtitle:'Idioma y unidades', settings_units:'Unidades de medida',
                 share_text:'365 cócteles únicos 🍸', toast_link_copied:'Enlace copiado ✓',
                 aria_share:'Compartir', aria_top:'Arriba', aria_settings:'Idioma',
+                paywall_title:'PREMIUM', paywall_subtitle:'Desbloquea todo el taller',
+                paywall_b1:'Las 365 recetas de cócteles', paywall_b2:'Escáner de botellas con IA', paywall_b3:'Actualizaciones gratis para siempre',
+                paywall_cta:'Desbloquear', paywall_restore:'Restaurar compra',
+                locked_title:'Receta premium', unlock_btn:'Desbloquear todas las recetas',
+                premium_app_only:'Disponible en la app de Android', premium_unlocked:'Premium desbloqueado ✓',
+                settings_unlock:'Desbloquear Premium', settings_premium_on:'Premium ✓',
                 months:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
             },
             ru: {
@@ -561,6 +585,12 @@
                 settings_title:'ЯЗЫК', settings_subtitle:'Язык и единицы', settings_units:'Единицы измерения',
                 share_text:'365 уникальных коктейлей 🍸', toast_link_copied:'Ссылка скопирована ✓',
                 aria_share:'Поделиться', aria_top:'Наверх', aria_settings:'Язык',
+                paywall_title:'ПРЕМИУМ', paywall_subtitle:'Откройте всё ателье',
+                paywall_b1:'Все 365 рецептов коктейлей', paywall_b2:'AI-сканер бутылок', paywall_b3:'Бесплатные обновления навсегда',
+                paywall_cta:'Открыть', paywall_restore:'Восстановить покупку',
+                locked_title:'Премиум-рецепт', unlock_btn:'Открыть все рецепты',
+                premium_app_only:'Доступно в приложении Android', premium_unlocked:'Премиум открыт ✓',
+                settings_unlock:'Открыть Премиум', settings_premium_on:'Премиум ✓',
                 months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
             },
         };
@@ -581,6 +611,26 @@
             } catch(e) {}
             document.documentElement.lang = LANG;
         })();
+
+        // --- Premium (freemium gating) ---
+        const FREE_COCKTAILS = 20;          // first N cocktail ids are free
+        const PREMIUM_SKU    = 'premium_unlock';
+        const PRICE_LABEL    = '€4.99';
+        let isPremium = false;
+        try { isPremium = localStorage.getItem('mixmaster-premium') === '1'; } catch(e) {}
+
+        function isLocked(item) {
+            // Mocktails always free; cocktails beyond the free sample need premium
+            return currentMode === 'cocktails' && !isPremium && Number(item && item.id) > FREE_COCKTAILS;
+        }
+        function setPremium(v) {
+            isPremium = !!v;
+            try { localStorage.setItem('mixmaster-premium', v ? '1' : '0'); } catch(e){}
+            if (v) showToast(t('premium_unlocked'));
+            refreshDynamic();
+            const sm = document.getElementById('settings-modal');
+            if (sm && !sm.classList.contains('hidden')) openSettings();
+        }
 
         function t(key, vars) {
             let s = (I18N[LANG] && I18N[LANG][key]) || (I18N.bg[key]) || key;
@@ -635,6 +685,11 @@
                         ${unitBtn('ml','ml')}
                         ${unitBtn('oz','oz')}
                     </div>
+                </div>
+                <div class="mt-7">
+                    ${ isPremium
+                        ? `<div class="border border-gold text-gold-bright py-3 text-center font-roman text-xs tracking-[0.3em] uppercase">✦ ${escapeHtml(t('settings_premium_on'))} ✦</div>`
+                        : `<button onclick="closeSettings(); openPaywall()" class="btn-gold w-full py-3 font-roman text-xs tracking-[0.2em] uppercase">✦ ${escapeHtml(t('settings_unlock'))} · ${PRICE_LABEL} ✦</button>` }
                 </div>`;
             document.getElementById('settings-modal').classList.remove('hidden');
         }
@@ -661,7 +716,74 @@
             openSettings();
         }
 
-        document.addEventListener('DOMContentLoaded', applyStaticI18n);
+        // --- Paywall ---
+        function openPaywall() {
+            closeAISheet && closeAISheet();
+            closeSettings && closeSettings();
+            const benefit = (txt) => `
+                <div class="flex items-center gap-3 py-1.5">
+                    <span class="text-gold text-sm">◆</span>
+                    <span class="font-roman text-cream text-sm tracking-[0.06em]">${txt}</span>
+                </div>`;
+            document.getElementById('paywall-content').innerHTML =
+                benefit(t('paywall_b1')) + benefit(t('paywall_b2')) + benefit(t('paywall_b3'));
+            document.getElementById('paywall-cta').textContent = t('paywall_cta') + ' · ' + PRICE_LABEL;
+            document.getElementById('paywall-restore').textContent = t('paywall_restore');
+            document.getElementById('paywall-modal').classList.remove('hidden');
+        }
+        function closePaywall(){ document.getElementById('paywall-modal').classList.add('hidden'); }
+
+        async function buyPremium() {
+            // Google Play Billing via Digital Goods API (works inside the TWA / Android app)
+            if (!('getDigitalGoodsService' in window)) { showToast(t('premium_app_only')); return; }
+            try {
+                const svc = await window.getDigitalGoodsService('https://play.google.com/billing');
+                let amount = { currency: 'EUR', value: '4.99' };
+                try {
+                    const details = await svc.getDetails([PREMIUM_SKU]);
+                    if (details && details[0] && details[0].price) amount = details[0].price;
+                } catch(e) {}
+                const pr = new PaymentRequest(
+                    [{ supportedMethods: 'https://play.google.com/billing', data: { sku: PREMIUM_SKU } }],
+                    { total: { label: 'MixMaster Premium', amount } }
+                );
+                const resp = await pr.show();
+                const token = resp.details && resp.details.token;
+                try { if (svc.acknowledge) await svc.acknowledge(token, 'onetime'); } catch(e) {}
+                await resp.complete('success');
+                closePaywall();
+                setPremium(true);
+            } catch (e) {
+                showToast(t('premium_app_only'));
+            }
+        }
+
+        async function restorePremium() {
+            if (!('getDigitalGoodsService' in window)) { showToast(t('premium_app_only')); return; }
+            try {
+                const svc = await window.getDigitalGoodsService('https://play.google.com/billing');
+                const purchases = await svc.listPurchases();
+                if (purchases && purchases.some(p => p.itemId === PREMIUM_SKU)) {
+                    closePaywall();
+                    setPremium(true);
+                } else {
+                    showToast(t('premium_app_only'));
+                }
+            } catch (e) { showToast(t('premium_app_only')); }
+        }
+
+        // On launch inside the app, silently restore entitlement
+        async function checkPremiumEntitlement() {
+            if (isPremium) return;
+            if (!('getDigitalGoodsService' in window)) return;
+            try {
+                const svc = await window.getDigitalGoodsService('https://play.google.com/billing');
+                const purchases = await svc.listPurchases();
+                if (purchases && purchases.some(p => p.itemId === PREMIUM_SKU)) setPremium(true);
+            } catch (e) {}
+        }
+
+        document.addEventListener('DOMContentLoaded', () => { applyStaticI18n(); checkPremiumEntitlement(); });
     </script>
 
     <div class="page-frame max-w-md mx-auto min-h-screen px-5 pb-44 relative" style="z-index: 2;">
@@ -946,6 +1068,27 @@
                 <p class="font-body italic text-cream-dim text-sm text-center mb-7">— <span data-i18n="settings_subtitle">Език и мерни единици</span> —</p>
                 <div id="settings-content" class="space-y-2"></div>
                 <button onclick="closeSettings()" data-i18n="close" class="w-full mt-6 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
+                    Затвори
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAYWALL MODAL -->
+    <div id="paywall-modal" class="fixed inset-0 z-[55] hidden">
+        <div onclick="closePaywall()" class="sheet-overlay absolute inset-0 bg-black/85 backdrop-blur-sm"></div>
+        <div class="sheet-panel absolute bottom-0 left-0 right-0 max-w-md mx-auto">
+            <div class="bg-ink border-t border-gold p-6 pb-10 safe-bottom">
+                <div class="deco-divider mx-auto max-w-[100px] mb-5">
+                    <span class="text-gold text-sm">◆</span>
+                </div>
+                <div class="text-gold text-4xl text-center mb-2">✦</div>
+                <h2 data-i18n="paywall_title" class="font-display text-3xl text-gold tracking-[0.15em] text-center mb-1">ПРЕМИУМ</h2>
+                <p class="font-body italic text-cream-dim text-sm text-center mb-6">— <span data-i18n="paywall_subtitle">Отключи цялото ателие</span> —</p>
+                <div id="paywall-content" class="border border-gold-dim p-5 mb-6"></div>
+                <button id="paywall-cta" onclick="buyPremium()" class="btn-gold w-full py-4 font-roman text-sm tracking-[0.2em] uppercase">Отключи · €4.99</button>
+                <button id="paywall-restore" onclick="restorePremium()" class="w-full mt-3 text-cream-dim hover:text-gold py-2 font-roman text-[0.7rem] tracking-[0.25em] uppercase transition">Възстанови покупка</button>
+                <button onclick="closePaywall()" data-i18n="close" class="w-full mt-2 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
                     Затвори
                 </button>
             </div>
@@ -1277,6 +1420,15 @@
                             </div>
                         </div>
 
+                        ${ isLocked(d) ? `
+                        <!-- Locked (premium) -->
+                        <div class="px-8 pb-9 pt-6 border-t border-gold-dim/30 text-center">
+                            <div class="text-gold text-3xl mb-3 opacity-80">🔒</div>
+                            <div class="font-roman text-gold text-xs tracking-[0.3em] uppercase mb-5">${escapeHtml(t('locked_title'))}</div>
+                            <button onclick="openPaywall()" class="btn-gold w-full py-3 font-roman text-xs tracking-[0.2em] uppercase">
+                                ${escapeHtml(t('unlock_btn'))} · ${PRICE_LABEL}
+                            </button>
+                        </div>` : `
                         <!-- Ingredients -->
                         ${d.ingredients ? `
                         <div class="px-8 pb-5 pt-2">
@@ -1294,7 +1446,7 @@
                             <div class="recipe-content text-cream/80 text-sm text-center pt-4">
                                 ${convertUnits(loc(d,'recipe') || '')}
                             </div>
-                        </div>
+                        </div>` }
                     </article>
                 `;
         }
@@ -1398,6 +1550,7 @@
         // === BOTTLE SCANNER ===
         function openScanner() {
             closeAISheet();
+            if (!isPremium) { openPaywall(); return; }
             document.getElementById('camera-input').click();
         }
 
@@ -1514,7 +1667,7 @@
         // === AI ACTION SHEET ===
         function openAISheet() {
             const actions = [
-                { icon: '📷', title: t('ai_scan_title'), desc: t('ai_scan_desc'), action: 'openScanner()' },
+                { icon: isPremium ? '📷' : '🔒', title: t('ai_scan_title'), desc: t('ai_scan_desc'), action: 'openScanner()' },
                 { icon: '✦', title: t('ai_random_title'), desc: t('ai_random_desc'), action: 'pickRandom()' },
                 { icon: showFavoritesOnly ? '◇' : '◆', title: showFavoritesOnly ? t('ai_fav_show_all') : `${t('ai_fav_title')} · ${toRoman(favorites.length) || '–'}`, desc: showFavoritesOnly ? t('ai_fav_desc_off') : t('ai_fav_desc_on'), action: 'fromSheetFavorites()' },
                 { icon: '❦', title: t('ai_stats_title'), desc: t('ai_stats_desc'), action: 'showStats()' },
@@ -1685,7 +1838,7 @@
         }, { passive: true });
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') { closeAISheet(); closeStats(); closeScan(); closeSettings(); }
+            if (e.key === 'Escape') { closeAISheet(); closeStats(); closeScan(); closeSettings(); closePaywall(); }
         });
 
         // Init only if age already verified (new users go through age gate first)
