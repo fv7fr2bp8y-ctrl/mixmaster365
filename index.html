@@ -729,9 +729,23 @@
                 benefit(t('paywall_b1')) + benefit(t('paywall_b2')) + benefit(t('paywall_b3'));
             document.getElementById('paywall-cta').textContent = t('paywall_cta') + ' · ' + PRICE_LABEL;
             document.getElementById('paywall-restore').textContent = t('paywall_restore');
+            // In the Android app → show buy/restore; on the web → show Google Play badge instead
+            const inApp = isTWA();
+            document.getElementById('paywall-cta').classList.toggle('hidden', !inApp);
+            document.getElementById('paywall-restore').classList.toggle('hidden', !inApp);
+            document.getElementById('paywall-play').classList.toggle('hidden', inApp);
             document.getElementById('paywall-modal').classList.remove('hidden');
         }
         function closePaywall(){ document.getElementById('paywall-modal').classList.add('hidden'); }
+
+        // True when running inside the installed Android app (TWA), false on the web
+        function isTWA() {
+            try {
+                return ('getDigitalGoodsService' in window) ||
+                       document.referrer.startsWith('android-app://') ||
+                       new URLSearchParams(location.search).get('app') === '1';
+            } catch(e) { return false; }
+        }
 
         async function buyPremium() {
             // Google Play Billing via Digital Goods API (works inside the TWA / Android app)
@@ -783,7 +797,11 @@
             } catch (e) {}
         }
 
-        document.addEventListener('DOMContentLoaded', () => { applyStaticI18n(); checkPremiumEntitlement(); });
+        document.addEventListener('DOMContentLoaded', () => {
+            applyStaticI18n(); checkPremiumEntitlement();
+            // Show "Get it on Google Play" badge only on the web (not inside the app)
+            if (!isTWA()) { var b=document.getElementById('play-badge'); if(b) b.classList.remove('hidden'); }
+        });
     </script>
 
     <div class="page-frame max-w-md mx-auto min-h-screen px-5 pb-44 relative" style="z-index: 2;">
@@ -938,6 +956,14 @@
         <!-- COCKTAIL LIST -->
         <div id="cocktail-list" class="space-y-12 min-h-[40vh]"></div>
 
+        <!-- GET ON GOOGLE PLAY (web only) -->
+        <a id="play-badge" href="https://play.google.com/store/apps/details?id=eu.mixmaster365.app"
+           target="_blank" rel="noopener"
+           class="hidden mt-14 mx-auto w-[200px] block active:scale-95 transition">
+            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                 alt="Get it on Google Play" class="w-full" loading="lazy">
+        </a>
+
         <!-- FOOTER ORNAMENT -->
         <div class="deco-divider mt-16 mb-2 max-w-[200px] mx-auto">
             <span class="text-gold text-xs">❦</span>
@@ -1088,6 +1114,9 @@
                 <div id="paywall-content" class="border border-gold-dim p-5 mb-6"></div>
                 <button id="paywall-cta" onclick="buyPremium()" class="btn-gold w-full py-4 font-roman text-sm tracking-[0.2em] uppercase">Отключи · €3.99</button>
                 <button id="paywall-restore" onclick="restorePremium()" class="w-full mt-3 text-cream-dim hover:text-gold py-2 font-roman text-[0.7rem] tracking-[0.25em] uppercase transition">Възстанови покупка</button>
+                <a id="paywall-play" href="https://play.google.com/store/apps/details?id=eu.mixmaster365.app" target="_blank" rel="noopener" class="hidden w-[200px] mx-auto block active:scale-95 transition">
+                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" class="w-full" loading="lazy">
+                </a>
                 <button onclick="closePaywall()" data-i18n="close" class="w-full mt-2 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
                     Затвори
                 </button>

@@ -4,7 +4,7 @@
     {
       "name": "mixmaster",
       "runtimeExecutable": "bash",
-      "runtimeArgs": ["-c", "cd '/Users/spasspasov/Library/CloudStorage/OneDrive-Personal/App Projects/Cocktail App' && python3 -m http.server 7654"],
+      "runtimeArgs": ["-c", "cd '/Users/spasspasov/Library/CloudStorage/OneDrive-Personal/App Projects/MixMaster365' && python3 -m http.server 7654"],
       "port": 7654
     }
   ]
