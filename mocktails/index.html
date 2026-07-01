@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="MixMaster">
+
+    <link rel="apple-touch-icon" href="/mocktails/icon-192.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>365 Mocktails · Atelier</title>
+
+    <link rel="icon" href="/mocktails/icon-192.png" />
+    <link rel="manifest" href="/mocktails/manifest.json">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Forum&family=Poiret+One&family=Cinzel:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: '#0a0908',
+                        'ink-soft': '#161311',
+                        gold: {
+                            DEFAULT: '#c9a961',
+                            bright: '#e8c987',
+                            dim: '#7a6535',
+                            faint: 'rgba(201, 169, 97, 0.15)'
+                        },
+                        cream: {
+                            DEFAULT: '#f0e4cf',
+                            dim: '#b9a98a',
+                            faint: 'rgba(240, 228, 207, 0.5)'
+                        },
+                    },
+                    fontFamily: {
+                        display: ['"Poiret One"', 'serif'],
+                        roman: ['Forum', 'serif'],
+                        body: ['"Cormorant Garamond"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --gold: #c9a961;
+            --gold-bright: #e8c987;
+            --gold-dim: #7a6535;
+            --cream: #f0e4cf;
+            --cream-dim: #b9a98a;
+            --ink: #0a0908;
+            --ink-soft: #161311;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background-color: var(--ink);
+            color: var(--cream);
+            margin: 0;
+            /* Subtle radial vignette for depth */
+            background-image:
+                radial-gradient(ellipse at top, rgba(201, 169, 97, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom, rgba(74, 14, 14, 0.08) 0%, transparent 60%);
+            background-attachment: fixed;
+        }
+
+        /* Subtle paper-grain noise overlay, super faint */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.025;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        input { font-size: 16px; font-family: 'Cormorant Garamond', serif; }
+        ::placeholder { color: var(--cream-dim); opacity: 0.6; font-style: italic; }
+
+        .hidden { display: none !important; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+
+        /* === Deco ornaments === */
+        .deco-divider {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--gold);
+        }
+        .deco-divider::before, .deco-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
+        }
+
+        /* Card frame with deco corners */
+        .deco-card {
+            position: relative;
+            background: var(--ink-soft);
+            border: 1px solid var(--gold-dim);
+        }
+        .deco-card::before, .deco-card::after,
+        .deco-card > .corners::before, .deco-card > .corners::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border: 1.5px solid var(--gold);
+            pointer-events: none;
+            z-index: 2;
+        }
+        .deco-card::before { top: 6px; left: 6px; border-right: none; border-bottom: none; }
+        .deco-card::after { top: 6px; right: 6px; border-left: none; border-bottom: none; }
+        .deco-card > .corners::before { bottom: 6px; left: 6px; border-right: none; border-top: none; }
+        .deco-card > .corners::after { bottom: 6px; right: 6px; border-left: none; border-top: none; }
+
+        /* Image gold frame */
+        .image-frame {
+            position: relative;
+            border: 1px solid var(--gold);
+            outline: 1px solid var(--gold-dim);
+            outline-offset: 4px;
+        }
+
+        /* Active filter underline */
+        .filter-active {
+            color: var(--gold-bright) !important;
+        }
+        .filter-active .filter-underline {
+            transform: scaleX(1) !important;
+            opacity: 1 !important;
+        }
+        .filter-underline {
+            transform: scaleX(0);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Roman numeral medallion */
+        .numeral-medallion {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-family: 'Forum', serif;
+        }
+
+        /* Sunburst rays behind cocktail icon */
+        .sunburst {
+            position: absolute;
+            inset: 0;
+            opacity: 0.25;
+            background:
+                conic-gradient(from 0deg,
+                    transparent 0deg, var(--gold) 1deg, transparent 2deg,
+                    transparent 14deg, var(--gold) 15deg, transparent 16deg,
+                    transparent 28deg, var(--gold) 29deg, transparent 30deg,
+                    transparent 44deg, var(--gold) 45deg, transparent 46deg,
+                    transparent 58deg, var(--gold) 59deg, transparent 60deg,
+                    transparent 74deg, var(--gold) 75deg, transparent 76deg,
+                    transparent 88deg, var(--gold) 89deg, transparent 90deg,
+                    transparent 104deg, var(--gold) 105deg, transparent 106deg,
+                    transparent 118deg, var(--gold) 119deg, transparent 120deg,
+                    transparent 134deg, var(--gold) 135deg, transparent 136deg,
+                    transparent 148deg, var(--gold) 149deg, transparent 150deg,
+                    transparent 164deg, var(--gold) 165deg, transparent 166deg,
+                    transparent 178deg, var(--gold) 179deg, transparent 180deg,
+                    transparent 194deg, var(--gold) 195deg, transparent 196deg,
+                    transparent 208deg, var(--gold) 209deg, transparent 210deg,
+                    transparent 224deg, var(--gold) 225deg, transparent 226deg,
+                    transparent 238deg, var(--gold) 239deg, transparent 240deg,
+                    transparent 254deg, var(--gold) 255deg, transparent 256deg,
+                    transparent 268deg, var(--gold) 269deg, transparent 270deg,
+                    transparent 284deg, var(--gold) 285deg, transparent 286deg,
+                    transparent 298deg, var(--gold) 299deg, transparent 300deg,
+                    transparent 314deg, var(--gold) 315deg, transparent 316deg,
+                    transparent 328deg, var(--gold) 329deg, transparent 330deg,
+                    transparent 344deg, var(--gold) 345deg, transparent 346deg);
+            -webkit-mask: radial-gradient(circle, transparent 30%, black 35%, black 90%, transparent 100%);
+                    mask: radial-gradient(circle, transparent 30%, black 35%, black 90%, transparent 100%);
+            border-radius: 50%;
+        }
+
+        /* Gold button */
+        .btn-gold {
+            background: linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 50%, var(--gold-dim) 100%);
+            color: var(--ink);
+            font-family: 'Forum', serif;
+            letter-spacing: 0.25em;
+            border: 1px solid var(--gold);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+                0 4px 20px rgba(201, 169, 97, 0.2);
+        }
+        .btn-gold:active { transform: translateY(1px); }
+
+        /* Animations */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        .cocktail-card { animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards; }
+
+        @keyframes goldPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(232, 201, 135, 0.6), inset 0 0 0 1px var(--gold); }
+            50% { box-shadow: 0 0 0 18px rgba(232, 201, 135, 0), inset 0 0 0 2px var(--gold-bright); }
+        }
+        .highlight { animation: goldPulse 1.6s ease-out 2; }
+
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .sheet-overlay { animation: fadeIn 0.25s ease-out; }
+        .sheet-panel { animation: slideUp 0.4s cubic-bezier(0.32, 0.72, 0, 1); }
+
+        @keyframes diamondPop {
+            0%, 100% { transform: scale(1) rotate(0); }
+            45% { transform: scale(1.4) rotate(45deg); }
+        }
+        .star-pop { animation: diamondPop 0.45s ease-out; }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .deco-spin { animation: spin 2s linear infinite; }
+
+        /* Recipe content (rendered HTML from sheets) */
+        .recipe-content { font-family: 'Cormorant Garamond', serif; font-style: italic; line-height: 1.7; }
+        .recipe-content a { color: var(--gold-bright); text-decoration: underline; text-decoration-color: var(--gold-dim); }
+        .recipe-content strong, .recipe-content b { color: var(--cream); font-weight: 600; font-style: normal; }
+        .recipe-content p { margin: 0.4em 0; }
+        .recipe-content ul, .recipe-content ol { padding-left: 1.2em; margin: 0.4em 0; }
+
+        /* Safe area for iPhone notch / home bar */
+        .safe-bottom { padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); }
+
+        /* Page edge frame (subtle gold rule on each side) */
+        .page-frame {
+            position: relative;
+        }
+        .page-frame::before {
+            content: '';
+            position: absolute;
+            top: 1.5rem;
+            bottom: 1.5rem;
+            left: 0.25rem;
+            right: 0.25rem;
+            border-left: 1px solid var(--gold-dim);
+            border-right: 1px solid var(--gold-dim);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="text-cream">
+
+    <!-- INTRO BAR LOADER -->
+    <div id="bar-loader">
+        <div class="loader-content">
+            <svg class="shaker-svg" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+                <path class="shaker-outline" d="M35,25 L65,25 L62,38 L68,43 L68,55 L74,65 L64,130 L36,130 L26,65 L32,55 L32,43 L38,38 Z" fill="none" stroke="#e2be5a" stroke-width="1.2" stroke-linecap="round" />
+                <circle class="gold-drop" cx="50" cy="20" r="2.5" fill="#e2be5a" />
+            </svg>
+            <h1 class="loader-title">Mocktails</h1>
+            <p class="loader-subtitle" data-i18n="intro_subtitle">Ателие за вкусове</p>
+            <div class="loader-status" data-i18n="intro_status">Подготвяне на бара...</div>
+        </div>
+    </div>
+
+    <style>
+        #bar-loader {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: #0c0b09;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.8s;
+        }
+        .loader-content {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .shaker-svg {
+            width: 90px;
+            height: 130px;
+            margin-bottom: 20px;
+        }
+        .shaker-outline {
+            stroke-dasharray: 450;
+            stroke-dashoffset: 450;
+            animation: drawLine 2.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        .gold-drop {
+            animation: dropFall 2.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) infinite;
+        }
+        .loader-title {
+            color: #e2be5a;
+            font-size: 26px;
+            font-weight: 400;
+            letter-spacing: 10px;
+            margin: 15px 0 8px 0;
+            text-transform: uppercase;
+            font-family: 'Cinzel', serif;
+            opacity: 0;
+            animation: fadeInElement 1.8s ease 1s forwards;
+        }
+        .loader-subtitle {
+            color: #9c8a70;
+            font-size: 10px;
+            letter-spacing: 6px;
+            margin: 0 0 25px 0;
+            text-transform: uppercase;
+            font-family: 'Cinzel', serif;
+            opacity: 0;
+            animation: fadeInElement 1.8s ease 1.6s forwards;
+        }
+        .loader-status {
+            color: #70614c;
+            font-size: 12px;
+            font-style: italic;
+            letter-spacing: 3px;
+            font-family: 'Cinzel', serif;
+            opacity: 0;
+            animation: fadeInElement 1.5s ease 2.2s forwards;
+        }
+        @keyframes drawLine {
+            to { stroke-dashoffset: 0; }
+        }
+        @keyframes dropFall {
+            0%         { cy: 15; opacity: 0; }
+            15%        { opacity: 1; }
+            70%        { cy: 115; opacity: 1; }
+            80%, 100%  { cy: 115; opacity: 0; }
+        }
+        @keyframes fadeInElement {
+            to { opacity: 1; }
+        }
+        #bar-loader.loaded {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+    </style>
+
+    <script>
+        // Hide loader after 3.5s, then remove from DOM
+        setTimeout(function() {
+            const loader = document.getElementById('bar-loader');
+            loader.classList.add('loaded');
+            setTimeout(() => loader.remove(), 900);
+        }, 3500);
+    </script>
+
+    <!-- ============ I18N + UNITS CORE ============ -->
+    <script>
+        const LANGS = [
+            { code: 'en', name: 'English',   flag: '🇬🇧' },
+            { code: 'de', name: 'Deutsch',   flag: '🇩🇪' },
+            { code: 'es', name: 'Español',   flag: '🇪🇸' },
+            { code: 'ru', name: 'Русский',   flag: '🇷🇺' },
+            { code: 'bg', name: 'Български', flag: '🇧🇬' },
+        ];
+
+        const I18N = {
+            bg: {
+                tab_cocktails:'Коктейли', tab_mocktails:'Безалкохолни',
+                cotd_title:'Безалкохолен на деня', cotd_see:'Виж рецептата',
+                search_ph:'Търсене по име или съставка',
+                fav_selected:'Избрани', fav_all:'Всички',
+                age_question:'Навършили ли сте 18 години?', age_yes:'Да, навършил/а съм',
+                age_no:'Не — покажи безалкохолни',
+                age_disclaimer:'Този сайт съдържа алкохолно съдържание. Достъпът е разрешен само за пълнолетни.',
+                loader_text:'Подготвяне на бара', intro_subtitle:'Ателие за вкусове', intro_status:'Подготвяне на бара...',
+                scan_title:'АНАЛИЗ', scan_subtitle:'Разпознати бутилки', scan_loading:'Анализирам снимката...',
+                scan_detected:'Разпознати спиртове', scan_none:'Не разпознах алкохол на снимката. Опитай с по-ясна снимка.',
+                scan_suggestions:'Предложения', close:'Затвори',
+                ai_button:'Препоръка на бармана', ai_title:'ПРЕПОРЪКА', ai_subtitle:'Какво да приготвим?',
+                ai_scan_title:'Снимай бутилките', ai_scan_desc:'AI предлага коктейл от наличното',
+                ai_random_title:'Изненада', ai_random_desc:'Случаен коктейл от селекцията',
+                ai_fav_show_all:'Покажи всички', ai_fav_title:'Избрани',
+                ai_fav_desc_off:'Изключи филтъра', ai_fav_desc_on:'Покажи запазените',
+                ai_stats_title:'Анализ на ателието', ai_stats_desc:'Статистика за колекцията',
+                stats_title:'АТЕЛИЕ', stats_subtitle:'Анализ на колекцията', stats_cocktails:'Коктейла',
+                stats_favorites:'Избрани', stats_distribution:'Разпределение', stats_rec_badge:'Препоръка',
+                stats_time_morning:'нещо освежаващо за бранч', stats_time_afternoon:'нещо леко и плодово',
+                stats_time_evening:'класика за вечер', stats_time_late:'нещо силно за късен час',
+                stats_rec_line1:'Сега, около {hour}:00 ч., е подходящо за {rec}.',
+                stats_rec_line2:'Най-разнообразната ви категория е {base} с {count} опции.',
+                count_word_one:'коктейл', count_word_many:'коктейла',
+                empty_fav:'Все още нямате избрани.', empty_fav_hint:'— ОТБЕЛЕЖЕТЕ С ◇ —',
+                empty_search:'Няма съвпадение с «{q}»', empty_selection:'Тази селекция е празна.',
+                load_more:'Зареди още', alert_empty:'Селекцията е празна. Изчистете филтрите.',
+                error_connection:'Връзката прекъсна',
+                filter_all:'Всички', filter_vodka:'Водка', filter_gin:'Джин', filter_rum:'Ром',
+                filter_tequila:'Текила', filter_whisky:'Уиски',
+                filter_juice:'Плодов сок', filter_citrus:'Цитрусов сок', filter_soda:'Газирана вода',
+                filter_tea:'Чай', filter_coconut:'Кокосова вода', filter_kombucha:'Комбуча', filter_lemonade:'Лимонада',
+                settings_title:'ЕЗИК', settings_subtitle:'Език и мерни единици', settings_units:'Мерни единици',
+                share_text:'365 уникални коктейла 🍸', toast_link_copied:'Линкът е копиран ✓',
+                aria_share:'Сподели', aria_top:'Нагоре', aria_settings:'Език',
+                paywall_title:'ПРЕМИУМ', paywall_subtitle:'Отключи цялото ателие',
+                paywall_b1:'Всички 365 рецепти за коктейли', paywall_b2:'AI скенер за бутилки', paywall_b3:'Безплатни ъпдейти завинаги',
+                paywall_cta:'Отключи', paywall_restore:'Възстанови покупка',
+                locked_title:'Премиум рецепта', unlock_btn:'Отключи всички рецепти',
+                premium_app_only:'Достъпно в Android приложението', premium_unlocked:'Премиум отключен ✓',
+                settings_unlock:'Отключи Премиум', settings_premium_on:'Премиум ✓',
+                months:['Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември'],
+            },
+            en: {
+                tab_cocktails:'Cocktails', tab_mocktails:'Mocktails',
+                cotd_title:'Mocktail of the Day', cotd_see:'View recipe',
+                search_ph:'Search by name or ingredient',
+                fav_selected:'Favorites', fav_all:'All',
+                age_question:'Are you 18 or older?', age_yes:'Yes, I am',
+                age_no:'No — show mocktails',
+                age_disclaimer:'This site contains alcohol content. Access is for adults only.',
+                loader_text:'Preparing the bar', intro_subtitle:'Atelier of flavors', intro_status:'Preparing the bar...',
+                scan_title:'ANALYSIS', scan_subtitle:'Detected bottles', scan_loading:'Analyzing the photo...',
+                scan_detected:'Detected spirits', scan_none:'No alcohol detected. Try a clearer photo.',
+                scan_suggestions:'Suggestions', close:'Close',
+                ai_button:"Bartender's pick", ai_title:'SUGGESTION', ai_subtitle:'What shall we make?',
+                ai_scan_title:'Scan the bottles', ai_scan_desc:'AI suggests a cocktail from what you have',
+                ai_random_title:'Surprise me', ai_random_desc:'A random cocktail from the selection',
+                ai_fav_show_all:'Show all', ai_fav_title:'Favorites',
+                ai_fav_desc_off:'Turn off the filter', ai_fav_desc_on:'Show your saved ones',
+                ai_stats_title:'Atelier analysis', ai_stats_desc:'Collection statistics',
+                stats_title:'ATELIER', stats_subtitle:'Collection analysis', stats_cocktails:'Mocktails',
+                stats_favorites:'Favorites', stats_distribution:'Distribution', stats_rec_badge:'Recommendation',
+                stats_time_morning:'something refreshing for brunch', stats_time_afternoon:'something light and fruity',
+                stats_time_evening:'an evening classic', stats_time_late:'something strong for late hours',
+                stats_rec_line1:"Right now, around {hour}:00, it's a good time for {rec}.",
+                stats_rec_line2:'Your most diverse category is {base} with {count} options.',
+                count_word_one:'mocktail', count_word_many:'mocktails',
+                empty_fav:'You have no favorites yet.', empty_fav_hint:'— MARK WITH ◇ —',
+                empty_search:'No match for «{q}»', empty_selection:'This selection is empty.',
+                load_more:'Load more', alert_empty:'Selection is empty. Clear the filters.',
+                error_connection:'Connection lost',
+                filter_all:'All', filter_vodka:'Vodka', filter_gin:'Gin', filter_rum:'Rum',
+                filter_tequila:'Tequila', filter_whisky:'Whisky',
+                filter_juice:'Fruit juice', filter_citrus:'Citrus juice', filter_soda:'Soda water',
+                filter_tea:'Tea', filter_coconut:'Coconut water', filter_kombucha:'Kombucha', filter_lemonade:'Lemonade',
+                settings_title:'LANGUAGE', settings_subtitle:'Language & units', settings_units:'Measurement units',
+                share_text:'365 unique cocktails 🍸', toast_link_copied:'Link copied ✓',
+                aria_share:'Share', aria_top:'Top', aria_settings:'Language',
+                paywall_title:'PREMIUM', paywall_subtitle:'Unlock the full atelier',
+                paywall_b1:'All 365 cocktail recipes', paywall_b2:'AI bottle scanner', paywall_b3:'Free updates forever',
+                paywall_cta:'Unlock', paywall_restore:'Restore purchase',
+                locked_title:'Premium recipe', unlock_btn:'Unlock all recipes',
+                premium_app_only:'Available in the Android app', premium_unlocked:'Premium unlocked ✓',
+                settings_unlock:'Unlock Premium', settings_premium_on:'Premium ✓',
+                months:['January','February','March','April','May','June','July','August','September','October','November','December'],
+            },
+            de: {
+                tab_cocktails:'Cocktails', tab_mocktails:'Alkoholfrei',
+                cotd_title:'Mocktail des Tages', cotd_see:'Rezept ansehen',
+                search_ph:'Suche nach Name oder Zutat',
+                fav_selected:'Favoriten', fav_all:'Alle',
+                age_question:'Bist du 18 oder älter?', age_yes:'Ja, bin ich',
+                age_no:'Nein — Alkoholfreies zeigen',
+                age_disclaimer:'Diese Seite enthält Alkoholinhalte. Zugang nur für Erwachsene.',
+                loader_text:'Bar wird vorbereitet', intro_subtitle:'Atelier der Aromen', intro_status:'Bar wird vorbereitet...',
+                scan_title:'ANALYSE', scan_subtitle:'Erkannte Flaschen', scan_loading:'Foto wird analysiert...',
+                scan_detected:'Erkannte Spirituosen', scan_none:'Kein Alkohol erkannt. Versuche ein klareres Foto.',
+                scan_suggestions:'Vorschläge', close:'Schließen',
+                ai_button:'Empfehlung des Barkeepers', ai_title:'EMPFEHLUNG', ai_subtitle:'Was sollen wir machen?',
+                ai_scan_title:'Flaschen scannen', ai_scan_desc:'KI schlägt einen Cocktail vor',
+                ai_random_title:'Überrasch mich', ai_random_desc:'Zufälliger Cocktail aus der Auswahl',
+                ai_fav_show_all:'Alle zeigen', ai_fav_title:'Favoriten',
+                ai_fav_desc_off:'Filter ausschalten', ai_fav_desc_on:'Gespeicherte zeigen',
+                ai_stats_title:'Atelier-Analyse', ai_stats_desc:'Sammlungsstatistik',
+                stats_title:'ATELIER', stats_subtitle:'Sammlungsanalyse', stats_cocktails:'Mocktails',
+                stats_favorites:'Favoriten', stats_distribution:'Verteilung', stats_rec_badge:'Empfehlung',
+                stats_time_morning:'etwas Erfrischendes zum Brunch', stats_time_afternoon:'etwas Leichtes und Fruchtiges',
+                stats_time_evening:'ein Abendklassiker', stats_time_late:'etwas Starkes für späte Stunden',
+                stats_rec_line1:'Jetzt, gegen {hour}:00 Uhr, passt {rec}.',
+                stats_rec_line2:'Deine vielfältigste Kategorie ist {base} mit {count} Optionen.',
+                count_word_one:'Mocktail', count_word_many:'Mocktails',
+                empty_fav:'Noch keine Favoriten.', empty_fav_hint:'— MIT ◇ MARKIEREN —',
+                empty_search:'Kein Treffer für «{q}»', empty_selection:'Diese Auswahl ist leer.',
+                load_more:'Mehr laden', alert_empty:'Auswahl ist leer. Filter zurücksetzen.',
+                error_connection:'Verbindung unterbrochen',
+                filter_all:'Alle', filter_vodka:'Wodka', filter_gin:'Gin', filter_rum:'Rum',
+                filter_tequila:'Tequila', filter_whisky:'Whisky',
+                filter_juice:'Fruchtsaft', filter_citrus:'Zitrussaft', filter_soda:'Sodawasser',
+                filter_tea:'Tee', filter_coconut:'Kokoswasser', filter_kombucha:'Kombucha', filter_lemonade:'Limonade',
+                settings_title:'SPRACHE', settings_subtitle:'Sprache & Einheiten', settings_units:'Maßeinheiten',
+                share_text:'365 einzigartige Cocktails 🍸', toast_link_copied:'Link kopiert ✓',
+                aria_share:'Teilen', aria_top:'Nach oben', aria_settings:'Sprache',
+                paywall_title:'PREMIUM', paywall_subtitle:'Schalte das ganze Atelier frei',
+                paywall_b1:'Alle 365 Cocktail-Rezepte', paywall_b2:'KI-Flaschenscanner', paywall_b3:'Kostenlose Updates für immer',
+                paywall_cta:'Freischalten', paywall_restore:'Kauf wiederherstellen',
+                locked_title:'Premium-Rezept', unlock_btn:'Alle Rezepte freischalten',
+                premium_app_only:'In der Android-App verfügbar', premium_unlocked:'Premium freigeschaltet ✓',
+                settings_unlock:'Premium freischalten', settings_premium_on:'Premium ✓',
+                months:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
+            },
+            es: {
+                tab_cocktails:'Cócteles', tab_mocktails:'Sin alcohol',
+                cotd_title:'Mocktail del día', cotd_see:'Ver receta',
+                search_ph:'Buscar por nombre o ingrediente',
+                fav_selected:'Favoritos', fav_all:'Todos',
+                age_question:'¿Tienes 18 años o más?', age_yes:'Sí, los tengo',
+                age_no:'No — ver sin alcohol',
+                age_disclaimer:'Este sitio contiene contenido con alcohol. Acceso solo para adultos.',
+                loader_text:'Preparando la barra', intro_subtitle:'Taller de sabores', intro_status:'Preparando la barra...',
+                scan_title:'ANÁLISIS', scan_subtitle:'Botellas detectadas', scan_loading:'Analizando la foto...',
+                scan_detected:'Licores detectados', scan_none:'No se detectó alcohol. Prueba con una foto más clara.',
+                scan_suggestions:'Sugerencias', close:'Cerrar',
+                ai_button:'Recomendación del barman', ai_title:'SUGERENCIA', ai_subtitle:'¿Qué preparamos?',
+                ai_scan_title:'Escanea las botellas', ai_scan_desc:'La IA sugiere un cóctel con lo que tienes',
+                ai_random_title:'Sorpréndeme', ai_random_desc:'Un cóctel al azar de la selección',
+                ai_fav_show_all:'Mostrar todos', ai_fav_title:'Favoritos',
+                ai_fav_desc_off:'Quitar el filtro', ai_fav_desc_on:'Ver los guardados',
+                ai_stats_title:'Análisis del taller', ai_stats_desc:'Estadísticas de la colección',
+                stats_title:'TALLER', stats_subtitle:'Análisis de la colección', stats_cocktails:'Mocktails',
+                stats_favorites:'Favoritos', stats_distribution:'Distribución', stats_rec_badge:'Recomendación',
+                stats_time_morning:'algo refrescante para el brunch', stats_time_afternoon:'algo ligero y afrutado',
+                stats_time_evening:'un clásico de noche', stats_time_late:'algo fuerte para la noche',
+                stats_rec_line1:'Ahora, sobre las {hour}:00, es buen momento para {rec}.',
+                stats_rec_line2:'Tu categoría más variada es {base} con {count} opciones.',
+                count_word_one:'mocktail', count_word_many:'mocktails',
+                empty_fav:'Aún no tienes favoritos.', empty_fav_hint:'— MARCA CON ◇ —',
+                empty_search:'Sin coincidencias para «{q}»', empty_selection:'Esta selección está vacía.',
+                load_more:'Cargar más', alert_empty:'La selección está vacía. Borra los filtros.',
+                error_connection:'Conexión perdida',
+                filter_all:'Todos', filter_vodka:'Vodka', filter_gin:'Ginebra', filter_rum:'Ron',
+                filter_tequila:'Tequila', filter_whisky:'Whisky',
+                filter_juice:'Zumo de fruta', filter_citrus:'Zumo cítrico', filter_soda:'Agua con gas',
+                filter_tea:'Té', filter_coconut:'Agua de coco', filter_kombucha:'Kombucha', filter_lemonade:'Limonada',
+                settings_title:'IDIOMA', settings_subtitle:'Idioma y unidades', settings_units:'Unidades de medida',
+                share_text:'365 cócteles únicos 🍸', toast_link_copied:'Enlace copiado ✓',
+                aria_share:'Compartir', aria_top:'Arriba', aria_settings:'Idioma',
+                paywall_title:'PREMIUM', paywall_subtitle:'Desbloquea todo el taller',
+                paywall_b1:'Las 365 recetas de cócteles', paywall_b2:'Escáner de botellas con IA', paywall_b3:'Actualizaciones gratis para siempre',
+                paywall_cta:'Desbloquear', paywall_restore:'Restaurar compra',
+                locked_title:'Receta premium', unlock_btn:'Desbloquear todas las recetas',
+                premium_app_only:'Disponible en la app de Android', premium_unlocked:'Premium desbloqueado ✓',
+                settings_unlock:'Desbloquear Premium', settings_premium_on:'Premium ✓',
+                months:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+            },
+            ru: {
+                tab_cocktails:'Коктейли', tab_mocktails:'Безалкогольные',
+                cotd_title:'Мокти́л дня', cotd_see:'Смотреть рецепт',
+                search_ph:'Поиск по названию или ингредиенту',
+                fav_selected:'Избранное', fav_all:'Все',
+                age_question:'Вам есть 18 лет?', age_yes:'Да, есть',
+                age_no:'Нет — показать безалкогольные',
+                age_disclaimer:'Сайт содержит информацию об алкоголе. Доступ только для совершеннолетних.',
+                loader_text:'Готовим бар', intro_subtitle:'Ателье вкусов', intro_status:'Готовим бар...',
+                scan_title:'АНАЛИЗ', scan_subtitle:'Распознанные бутылки', scan_loading:'Анализирую фото...',
+                scan_detected:'Распознанные напитки', scan_none:'Алкоголь не распознан. Попробуйте более чёткое фото.',
+                scan_suggestions:'Предложения', close:'Закрыть',
+                ai_button:'Совет бармена', ai_title:'ПОДБОР', ai_subtitle:'Что приготовим?',
+                ai_scan_title:'Сфотографируй бутылки', ai_scan_desc:'ИИ предложит коктейль из наличного',
+                ai_random_title:'Сюрприз', ai_random_desc:'Случайный коктейль из подборки',
+                ai_fav_show_all:'Показать все', ai_fav_title:'Избранное',
+                ai_fav_desc_off:'Выключить фильтр', ai_fav_desc_on:'Показать сохранённые',
+                ai_stats_title:'Анализ ателье', ai_stats_desc:'Статистика коллекции',
+                stats_title:'АТЕЛЬЕ', stats_subtitle:'Анализ коллекции', stats_cocktails:'Коктейли',
+                stats_favorites:'Избранное', stats_distribution:'Распределение', stats_rec_badge:'Рекомендация',
+                stats_time_morning:'что-то освежающее к бранчу', stats_time_afternoon:'что-то лёгкое и фруктовое',
+                stats_time_evening:'классика на вечер', stats_time_late:'что-то крепкое на поздний час',
+                stats_rec_line1:'Сейчас, около {hour}:00, подходит {rec}.',
+                stats_rec_line2:'Самая разнообразная категория — {base}, {count} вариантов.',
+                count_word_one:'коктейль', count_word_many:'коктейлей',
+                empty_fav:'Пока нет избранного.', empty_fav_hint:'— ОТМЕТЬТЕ ◇ —',
+                empty_search:'Нет совпадений с «{q}»', empty_selection:'Этот раздел пуст.',
+                load_more:'Показать ещё', alert_empty:'Раздел пуст. Сбросьте фильтры.',
+                error_connection:'Соединение прервано',
+                filter_all:'Все', filter_vodka:'Водка', filter_gin:'Джин', filter_rum:'Ром',
+                filter_tequila:'Текила', filter_whisky:'Виски',
+                filter_juice:'Фруктовый сок', filter_citrus:'Цитрусовый сок', filter_soda:'Газированная вода',
+                filter_tea:'Чай', filter_coconut:'Кокосовая вода', filter_kombucha:'Комбуча', filter_lemonade:'Лимонад',
+                settings_title:'ЯЗЫК', settings_subtitle:'Язык и единицы', settings_units:'Единицы измерения',
+                share_text:'365 уникальных коктейлей 🍸', toast_link_copied:'Ссылка скопирована ✓',
+                aria_share:'Поделиться', aria_top:'Наверх', aria_settings:'Язык',
+                paywall_title:'ПРЕМИУМ', paywall_subtitle:'Откройте всё ателье',
+                paywall_b1:'Все 365 рецептов коктейлей', paywall_b2:'AI-сканер бутылок', paywall_b3:'Бесплатные обновления навсегда',
+                paywall_cta:'Открыть', paywall_restore:'Восстановить покупку',
+                locked_title:'Премиум-рецепт', unlock_btn:'Открыть все рецепты',
+                premium_app_only:'Доступно в приложении Android', premium_unlocked:'Премиум открыт ✓',
+                settings_unlock:'Открыть Премиум', settings_premium_on:'Премиум ✓',
+                months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+            },
+        };
+
+        // --- State ---
+        let LANG = 'bg';
+        let UNIT = 'ml';
+        (function initPrefs(){
+            try {
+                const sl = localStorage.getItem('mock365-lang');
+                if (sl && I18N[sl]) LANG = sl;
+                else {
+                    const nav = (navigator.language || 'bg').slice(0,2).toLowerCase();
+                    if (I18N[nav]) LANG = nav;
+                }
+                const su = localStorage.getItem('mock365-unit');
+                if (su === 'oz' || su === 'ml') UNIT = su;
+            } catch(e) {}
+            document.documentElement.lang = LANG;
+        })();
+
+        // --- Premium (freemium gating) ---
+        const FREE_COCKTAILS = 30;          // first N cocktail ids are free
+        const PREMIUM_SKU    = 'mocktails_premium';
+        const PRICE_LABEL    = '€2.99';
+        let isPremium = false;
+        try { isPremium = localStorage.getItem('mock365-premium') === '1'; } catch(e) {}
+
+        function isLocked(item) {
+            // Mocktails always free; cocktails beyond the free sample need premium
+            return !isPremium && Number(item && item.id) > FREE_COCKTAILS;
+        }
+        function setPremium(v) {
+            isPremium = !!v;
+            try { localStorage.setItem('mock365-premium', v ? '1' : '0'); } catch(e){}
+            if (v) showToast(t('premium_unlocked'));
+            refreshDynamic();
+            const sm = document.getElementById('settings-modal');
+            if (sm && !sm.classList.contains('hidden')) openSettings();
+        }
+
+        function t(key, vars) {
+            let s = (I18N[LANG] && I18N[LANG][key]) || (I18N.bg[key]) || key;
+            if (vars) for (const k in vars) s = s.replace('{'+k+'}', vars[k]);
+            return s;
+        }
+
+        // --- Units (ml <-> oz) ---
+        function mlToOz(ml) {
+            const oz = Math.round((ml/29.5735) * 4) / 4;
+            return oz.toString();
+        }
+        function convertUnits(text) {
+            if (UNIT !== 'oz' || !text) return text;
+            return String(text).replace(/(\d+(?:[.,]\d+)?)\s*(мл|ml)(?=[\s.,;:)]|$)/gi, (m, n) => {
+                const ml = parseFloat(n.replace(',', '.'));
+                if (isNaN(ml)) return m;
+                return mlToOz(ml) + ' oz';
+            });
+        }
+
+        // --- Apply static translations to DOM ---
+        function applyStaticI18n() {
+            document.documentElement.lang = LANG;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                el.textContent = t(el.getAttribute('data-i18n'));
+            });
+            document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+                el.setAttribute('placeholder', t(el.getAttribute('data-i18n-ph')));
+            });
+            document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+                el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria')));
+            });
+        }
+
+        // --- Settings sheet (language + units) ---
+        function openSettings() {
+            const langGrid = LANGS.map(l => `
+                <button onclick="setLang('${l.code}')" class="border ${l.code===LANG?'border-gold text-gold-bright bg-ink-soft':'border-gold-dim text-cream-dim'} hover:border-gold hover:text-gold active:scale-[0.98] transition p-3 flex items-center gap-3">
+                    <span class="text-2xl">${l.flag}</span>
+                    <span class="font-roman text-sm tracking-[0.1em]">${l.name}</span>
+                </button>`).join('');
+            const unitBtn = (u, label) => `
+                <button onclick="setUnit('${u}')" class="flex-1 py-3 font-roman text-xs tracking-[0.3em] uppercase transition border ${u===UNIT?'border-gold bg-gold text-ink':'border-gold-dim text-cream-dim hover:text-gold hover:border-gold'}">${label}</button>`;
+            document.getElementById('settings-content').innerHTML = `
+                <div class="grid grid-cols-1 gap-2.5">${langGrid}</div>
+                <div class="mt-7">
+                    <div class="deco-divider mb-4">
+                        <span class="font-roman text-gold text-[0.6rem] tracking-[0.4em] uppercase whitespace-nowrap">${t('settings_units')}</span>
+                    </div>
+                    <div class="flex gap-2">
+                        ${unitBtn('ml','ml')}
+                        ${unitBtn('oz','oz')}
+                    </div>
+                </div>
+                <div class="mt-7">
+                    ${ isPremium
+                        ? `<div class="border border-gold text-gold-bright py-3 text-center font-roman text-xs tracking-[0.3em] uppercase">✦ ${escapeHtml(t('settings_premium_on'))} ✦</div>`
+                        : `<button onclick="closeSettings(); openPaywall()" class="btn-gold w-full py-3 font-roman text-xs tracking-[0.2em] uppercase">✦ ${escapeHtml(t('settings_unlock'))} · ${PRICE_LABEL} ✦</button>` }
+                </div>`;
+            document.getElementById('settings-modal').classList.remove('hidden');
+        }
+        function closeSettings(){ document.getElementById('settings-modal').classList.add('hidden'); }
+
+        function refreshDynamic() {
+            if (typeof renderFilters === 'function') renderFilters();
+            if (typeof render === 'function') render(false);
+            if (typeof renderCOTD === 'function') renderCOTD();
+            if (typeof updateFavBar === 'function') updateFavBar();
+        }
+        function setLang(code) {
+            if (!I18N[code]) return;
+            LANG = code;
+            try { localStorage.setItem('mock365-lang', code); } catch(e){}
+            applyStaticI18n();
+            refreshDynamic();
+            openSettings(); // refresh highlight
+        }
+        function setUnit(u) {
+            UNIT = u;
+            try { localStorage.setItem('mock365-unit', u); } catch(e){}
+            refreshDynamic();
+            openSettings();
+        }
+
+        // --- Paywall ---
+        function openPaywall() {
+            closeAISheet && closeAISheet();
+            closeSettings && closeSettings();
+            const benefit = (txt) => `
+                <div class="flex items-center gap-3 py-1.5">
+                    <span class="text-gold text-sm">◆</span>
+                    <span class="font-roman text-cream text-sm tracking-[0.06em]">${txt}</span>
+                </div>`;
+            document.getElementById('paywall-content').innerHTML =
+                benefit(t('paywall_b1')) + benefit(t('paywall_b2')) + benefit(t('paywall_b3'));
+            document.getElementById('paywall-cta').textContent = t('paywall_cta') + ' · ' + PRICE_LABEL;
+            document.getElementById('paywall-restore').textContent = t('paywall_restore');
+            // In the Android app → show buy/restore; on the web → show Google Play badge instead
+            const inApp = isTWA();
+            document.getElementById('paywall-cta').classList.toggle('hidden', !inApp);
+            document.getElementById('paywall-restore').classList.toggle('hidden', !inApp);
+            document.getElementById('paywall-play').classList.toggle('hidden', inApp);
+            document.getElementById('paywall-modal').classList.remove('hidden');
+        }
+        function closePaywall(){ document.getElementById('paywall-modal').classList.add('hidden'); }
+
+        // True when running inside the installed Android app (TWA), false on the web
+        function isTWA() {
+            try {
+                return ('getDigitalGoodsService' in window) ||
+                       document.referrer.startsWith('android-app://') ||
+                       new URLSearchParams(location.search).get('app') === '1';
+            } catch(e) { return false; }
+        }
+
+        async function buyPremium() {
+            // Google Play Billing via Digital Goods API (works inside the TWA / Android app)
+            if (!('getDigitalGoodsService' in window)) { showToast(t('premium_app_only')); return; }
+            try {
+                const svc = await window.getDigitalGoodsService('https://play.google.com/billing');
+                let amount = { currency: 'EUR', value: '3.99' };
+                try {
+                    const details = await svc.getDetails([PREMIUM_SKU]);
+                    if (details && details[0] && details[0].price) amount = details[0].price;
+                } catch(e) {}
+                const pr = new PaymentRequest(
+                    [{ supportedMethods: 'https://play.google.com/billing', data: { sku: PREMIUM_SKU } }],
+                    { total: { label: 'MixMaster Premium', amount } }
+                );
+                const resp = await pr.show();
+                const token = resp.details && resp.details.token;
+                try { if (svc.acknowledge) await svc.acknowledge(token, 'onetime'); } catch(e) {}
+                await resp.complete('success');
+                closePaywall();
+                setPremium(true);
+            } catch (e) {
+                showToast(t('premium_app_only'));
+            }
+        }
+
+        async function restorePremium() {
+            if (!('getDigitalGoodsService' in window)) { showToast(t('premium_app_only')); return; }
+            try {
+                const svc = await window.getDigitalGoodsService('https://play.google.com/billing');
+                const purchases = await svc.listPurchases();
+                if (purchases && purchases.some(p => p.itemId === PREMIUM_SKU)) {
+                    closePaywall();
+                    setPremium(true);
+                } else {
+                    showToast(t('premium_app_only'));
+                }
+            } catch (e) { showToast(t('premium_app_only')); }
+        }
+
+        // On launch inside the app, silently restore entitlement
+        async function checkPremiumEntitlement() {
+            if (isPremium) return;
+            if (!('getDigitalGoodsService' in window)) return;
+            try {
+                const svc = await window.getDigitalGoodsService('https://play.google.com/billing');
+                const purchases = await svc.listPurchases();
+                if (purchases && purchases.some(p => p.itemId === PREMIUM_SKU)) setPremium(true);
+            } catch (e) {}
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            applyStaticI18n(); checkPremiumEntitlement();
+            // Show "Get it on Google Play" badge only on the web (not inside the app)
+            if (!isTWA()) { var b=document.getElementById('play-badge'); if(b) b.classList.remove('hidden'); }
+        });
+    </script>
+
+    <div class="page-frame max-w-md mx-auto min-h-screen px-5 pb-44 relative" style="z-index: 2;">
+
+        <!-- HEADER -->
+        <header class="pt-10 pb-6 text-center relative">
+            <button onclick="openSettings()" data-i18n-aria="aria_settings" aria-label="Език"
+                class="absolute left-0 top-10 w-9 h-9 border border-gold-dim text-gold-dim hover:text-gold hover:border-gold flex items-center justify-center transition active:scale-90">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                    <circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18"/>
+                </svg>
+            </button>
+            <button onclick="shareApp()" data-i18n-aria="aria_share" aria-label="Сподели"
+                class="absolute right-0 top-10 w-9 h-9 border border-gold-dim text-gold-dim hover:text-gold hover:border-gold flex items-center justify-center transition active:scale-90">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                </svg>
+            </button>
+            <div class="flex items-center justify-center mb-3 px-12">
+                <h1 class="font-display text-[2.6rem] leading-none text-gold tracking-[0.25em] pl-[0.25em]">MOCKTAILS</h1>
+            </div>
+            <div class="deco-divider mx-auto max-w-[280px]">
+                <span class="font-roman text-cream-dim text-[0.65rem] tracking-[0.4em] uppercase whitespace-nowrap">Mocktail Atelier · MMXXIV</span>
+            </div>
+        </header>
+
+        <!-- MODE TOGGLE hidden (mocktails only) -->
+        <div class="hidden mb-8 flex border border-gold-dim overflow-hidden">
+            <button id="tab-cocktails" onclick="setMode('cocktails')"
+                style="background:var(--gold);color:var(--ink);"
+                class="flex-1 py-3 font-roman text-xs tracking-[0.3em] uppercase transition flex items-center justify-center gap-2">
+                <span>🍸</span><span data-i18n="tab_cocktails">Коктейли</span>
+            </button>
+            <button id="tab-mocktails" onclick="setMode('mocktails')"
+                style="background:transparent;color:var(--cream-dim);"
+                class="flex-1 py-3 font-roman text-xs tracking-[0.3em] uppercase transition flex items-center justify-center gap-2">
+                <span>🍹</span><span data-i18n="tab_mocktails">Безалкохолни</span>
+            </button>
+        </div>
+
+        <!-- COCKTAIL OF THE DAY -->
+        <section id="cotd-section" class="hidden mb-10">
+            <div class="deco-divider mb-5">
+                <span class="font-roman text-gold text-[0.6rem] tracking-[0.45em] uppercase whitespace-nowrap">✦ <span data-i18n="cotd_title">Коктейл на Деня</span> ✦</span>
+            </div>
+            <div id="cotd-card" class="deco-card relative overflow-hidden cursor-pointer active:scale-[0.99] transition-transform" style="height:300px" onclick="goToCOTD()">
+                <div class="corners"></div>
+                <img id="cotd-img" src="" alt="" class="absolute inset-0 w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-ink/10"></div>
+
+                <!-- Date badge -->
+                <div class="absolute top-4 left-4 border border-gold-dim bg-ink/80 backdrop-blur-sm px-3 py-2 text-center min-w-[44px]">
+                    <div id="cotd-day" class="font-display text-2xl text-gold-bright leading-none"></div>
+                    <div id="cotd-month" class="font-roman text-gold-dim text-[0.55rem] tracking-[0.25em] uppercase mt-0.5"></div>
+                </div>
+
+                <!-- Icon sunburst top-right -->
+                <div class="absolute top-4 right-4 w-14 h-14 flex items-center justify-center opacity-80">
+                    <div class="sunburst"></div>
+                    <span id="cotd-icon" class="text-2xl relative z-10">🍸</span>
+                </div>
+
+                <!-- Content bottom -->
+                <div class="absolute bottom-0 left-0 right-0 p-6">
+                    <div id="cotd-base" class="font-roman text-gold-dim text-[0.6rem] tracking-[0.45em] uppercase mb-2"></div>
+                    <h2 id="cotd-name" class="font-display text-[2rem] leading-tight text-cream tracking-[0.04em] mb-4"></h2>
+                    <div class="flex items-center gap-2 text-gold font-roman text-xs tracking-[0.3em] uppercase">
+                        <span data-i18n="cotd_see">Виж рецептата</span>
+                        <span>›</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEARCH -->
+        <div class="mb-8 relative">
+            <div class="border border-gold-dim relative">
+                <input
+                    type="text"
+                    id="search-input"
+                    oninput="onSearch(this.value)"
+                    placeholder="Търсене по име или съставка"
+                    data-i18n-ph="search_ph"
+                    class="w-full bg-transparent text-cream pl-12 pr-12 py-4 outline-none focus:bg-ink-soft transition"
+                />
+                <span id="search-icon" class="absolute left-4 top-1/2 -translate-y-1/2 text-gold pointer-events-none">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-4.3-4.3"/></svg>
+                </span>
+                <button id="search-clear" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-7 h-7 border border-gold-dim text-gold-dim hover:text-gold hover:border-gold flex items-center justify-center text-xs transition">✕</button>
+            </div>
+        </div>
+
+        <!-- FILTERS (menu sections) -->
+        <nav class="mb-6 overflow-x-auto no-scrollbar">
+            <div class="flex gap-7 px-1 pb-1 min-w-min" id="filters-container"></div>
+        </nav>
+
+        <!-- META BAR: count + favorites toggle -->
+        <div class="mb-8 flex justify-between items-center pt-3 border-t border-gold-dim/50">
+            <span id="result-count" class="font-roman text-cream-dim text-xs tracking-[0.3em] uppercase"></span>
+            <button id="fav-toggle" onclick="toggleFavoritesView()" class="flex items-center gap-2 font-roman text-xs tracking-[0.25em] uppercase text-cream-dim hover:text-gold transition active:scale-95">
+                <span id="fav-icon" class="text-base leading-none">◇</span>
+                <span id="fav-label">Избрани</span>
+                <span id="fav-count" class="opacity-70">·  0</span>
+            </button>
+        </div>
+
+        <!-- LOADER -->
+        <!-- AGE GATE -->
+        <div id="age-gate" class="hidden fixed inset-0 z-[60] bg-ink flex flex-col items-center justify-center p-8 text-center">
+            <div class="max-w-xs w-full">
+                <div class="flex items-center justify-center gap-4 mb-8">
+                    <span class="text-gold text-2xl">◆</span>
+                    <h1 class="font-display text-[2.2rem] leading-none text-gold tracking-[0.25em] pl-[0.25em]">MOCKTAILS</h1>
+                    <span class="text-gold text-2xl">◆</span>
+                </div>
+                <div class="border border-gold-dim p-8 relative">
+                    <div class="absolute top-3 left-3 w-3 h-3 border-t border-l border-gold"></div>
+                    <div class="absolute top-3 right-3 w-3 h-3 border-t border-r border-gold"></div>
+                    <div class="absolute bottom-3 left-3 w-3 h-3 border-b border-l border-gold"></div>
+                    <div class="absolute bottom-3 right-3 w-3 h-3 border-b border-r border-gold"></div>
+                    <div class="text-gold text-5xl mb-5 font-display">18</div>
+                    <p data-i18n="age_question" class="font-roman text-cream text-sm tracking-[0.15em] uppercase mb-7">Навършили ли сте 18 години?</p>
+                    <div class="space-y-3">
+                        <button onclick="ageVerify(true)" data-i18n="age_yes" class="btn-gold w-full py-3 font-roman text-sm tracking-[0.3em] uppercase">
+                            Да, навършил/а съм
+                        </button>
+                        <button onclick="ageVerify(false)" data-i18n="age_no" class="w-full border border-gold-dim text-cream-dim py-3 font-roman text-xs tracking-[0.25em] uppercase hover:border-gold hover:text-cream transition">
+                            Не — покажи безалкохолни
+                        </button>
+                    </div>
+                </div>
+                <p data-i18n="age_disclaimer" class="font-body italic text-cream-dim/50 text-xs mt-6">Този сайт съдържа алкохолно съдържание. Достъпът е разрешен само за пълнолетни.</p>
+            </div>
+        </div>
+
+
+        <div id="loader" class="fixed inset-0 z-50 bg-ink flex flex-col items-center justify-center p-8 hidden">
+            <div class="flex items-center gap-4 mb-6">
+                <span class="text-gold text-3xl">◆</span>
+                <h2 class="font-display text-3xl text-gold tracking-[0.25em]">MOCKTAILS</h2>
+                <span class="text-gold text-3xl">◆</span>
+            </div>
+            <div class="relative w-12 h-12 mb-4">
+                <div class="absolute inset-0 border border-gold-dim deco-spin" style="clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);"></div>
+                <div class="absolute inset-2 border border-gold deco-spin" style="animation-direction: reverse; animation-duration: 3s;"></div>
+            </div>
+            <p id="loader-text" data-i18n="loader_text" class="font-roman text-xs tracking-[0.4em] uppercase text-cream-dim">Подготвяне на бара</p>
+        </div>
+
+        <!-- COCKTAIL LIST -->
+        <div id="cocktail-list" class="space-y-12 min-h-[40vh]"></div>
+
+        <!-- GET ON GOOGLE PLAY (web only) -->
+        <a id="play-badge" href="https://play.google.com/store/apps/details?id=eu.mocktails365.app"
+           target="_blank" rel="noopener"
+           class="hidden mt-14 mx-auto w-[200px] block active:scale-95 transition">
+            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                 alt="Get it on Google Play" class="w-full" loading="lazy">
+        </a>
+
+        <!-- FOOTER ORNAMENT -->
+        <div class="deco-divider mt-16 mb-2 max-w-[200px] mx-auto">
+            <span class="text-gold text-xs">❦</span>
+        </div>
+    </div>
+
+    <!-- Hidden camera input -->
+    <input type="file" id="camera-input" accept="image/*" capture="environment" class="hidden" onchange="handleCameraInput(this)">
+
+    <!-- SCAN RESULTS MODAL -->
+    <div id="scan-modal" class="fixed inset-0 z-50 hidden">
+        <div onclick="closeScan()" class="sheet-overlay absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        <div class="sheet-panel absolute bottom-0 left-0 right-0 max-w-md mx-auto max-h-[90vh] overflow-y-auto no-scrollbar">
+            <div class="bg-ink border-t border-gold p-6 pb-10 safe-bottom">
+                <div class="deco-divider mx-auto max-w-[100px] mb-5">
+                    <span class="text-gold text-sm">◆</span>
+                </div>
+                <h2 data-i18n="scan_title" class="font-display text-3xl text-gold tracking-[0.15em] text-center mb-1">АНАЛИЗ</h2>
+                <p class="font-body italic text-cream-dim text-sm text-center mb-6">— <span data-i18n="scan_subtitle">Разпознати бутилки</span> —</p>
+
+                <!-- Preview image -->
+                <div id="scan-preview-wrap" class="hidden mb-6">
+                    <div class="image-frame overflow-hidden h-40">
+                        <img id="scan-preview" class="w-full h-full object-cover opacity-70">
+                    </div>
+                </div>
+
+                <!-- Status / loading -->
+                <div id="scan-status" class="text-center py-6">
+                    <div class="relative w-10 h-10 mx-auto mb-4">
+                        <div class="absolute inset-0 border border-gold-dim deco-spin" style="clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);"></div>
+                    </div>
+                    <p data-i18n="scan_loading" class="font-roman text-xs tracking-[0.4em] uppercase text-cream-dim">Анализирам снимката...</p>
+                </div>
+
+                <!-- Detected spirits -->
+                <div id="scan-spirits" class="hidden mb-6">
+                    <div class="deco-divider mb-4">
+                        <span data-i18n="scan_detected" class="font-roman text-gold text-[0.6rem] tracking-[0.4em] uppercase whitespace-nowrap">Разпознати спиртове</span>
+                    </div>
+                    <div id="scan-spirits-list" class="flex flex-wrap gap-2 justify-center"></div>
+                </div>
+
+                <!-- Suggested cocktails -->
+                <div id="scan-results" class="hidden space-y-3"></div>
+
+                <!-- No match -->
+                <div id="scan-none" class="hidden text-center py-4">
+                    <p data-i18n="scan_none" class="font-body italic text-cream-dim">Не разпознах алкохол на снимката. Опитай с по-ясна снимка.</p>
+                </div>
+
+                <button onclick="closeScan()" data-i18n="close" class="w-full mt-6 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
+                    Затвори
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BACK TO TOP -->
+    <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" data-i18n-aria="aria_top" aria-label="Нагоре"
+        class="hidden fixed bottom-24 right-4 z-40 w-10 h-10 border border-gold text-gold bg-ink hover:bg-ink-soft active:scale-90 flex items-center justify-center transition">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <polyline points="18 15 12 9 6 15"/>
+        </svg>
+    </button>
+
+    <!-- TOAST -->
+    <div id="toast" class="hidden fixed top-6 left-1/2 -translate-x-1/2 z-[70] bg-ink border border-gold px-5 py-3 font-roman text-xs tracking-[0.3em] uppercase text-gold whitespace-nowrap">
+        Копирано ✓
+    </div>
+
+    <!-- BOTTOM AI BUTTON -->
+    <div class="fixed bottom-0 left-0 right-0 px-5 pt-5 bg-gradient-to-t from-ink via-ink to-ink/0 z-40 safe-bottom">
+        <div class="max-w-md mx-auto">
+            <button onclick="openAISheet()" class="btn-gold w-full py-4 px-6 flex items-center justify-center gap-3 text-sm uppercase active:scale-[0.98] transition relative">
+                <span>✦</span>
+                <span data-i18n="ai_button">Препоръка на бармана</span>
+                <span>✦</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- AI ACTION SHEET -->
+    <div id="ai-sheet" class="fixed inset-0 z-50 hidden">
+        <div onclick="closeAISheet()" class="sheet-overlay absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        <div class="sheet-panel absolute bottom-0 left-0 right-0 max-w-md mx-auto">
+            <div class="bg-ink border-t border-gold p-6 pb-10 safe-bottom">
+                <div class="deco-divider mx-auto max-w-[100px] mb-5">
+                    <span class="text-gold text-sm">◆</span>
+                </div>
+                <h2 data-i18n="ai_title" class="font-display text-3xl text-gold tracking-[0.15em] text-center mb-1">ПРЕПОРЪКА</h2>
+                <p class="font-body italic text-cream-dim text-sm text-center mb-7">— <span data-i18n="ai_subtitle">Какво да приготвим?</span> —</p>
+                <div class="space-y-3" id="ai-actions"></div>
+                <button onclick="closeAISheet()" data-i18n="close" class="w-full mt-5 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
+                    Затвори
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- STATS MODAL -->
+    <div id="stats-modal" class="fixed inset-0 z-50 hidden">
+        <div onclick="closeStats()" class="sheet-overlay absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        <div class="sheet-panel absolute bottom-0 left-0 right-0 max-w-md mx-auto max-h-[88vh] overflow-y-auto no-scrollbar">
+            <div class="bg-ink border-t border-gold p-6 pb-10 safe-bottom">
+                <div class="deco-divider mx-auto max-w-[100px] mb-5">
+                    <span class="text-gold text-sm">◆</span>
+                </div>
+                <h2 data-i18n="stats_title" class="font-display text-3xl text-gold tracking-[0.15em] text-center mb-1">АТЕЛИЕ</h2>
+                <p class="font-body italic text-cream-dim text-sm text-center mb-7">— <span data-i18n="stats_subtitle">Анализ на колекцията</span> —</p>
+                <div id="stats-content" class="space-y-5"></div>
+                <button onclick="closeStats()" data-i18n="close" class="w-full mt-6 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
+                    Затвори
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SETTINGS MODAL (language + units) -->
+    <div id="settings-modal" class="fixed inset-0 z-50 hidden">
+        <div onclick="closeSettings()" class="sheet-overlay absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        <div class="sheet-panel absolute bottom-0 left-0 right-0 max-w-md mx-auto max-h-[88vh] overflow-y-auto no-scrollbar">
+            <div class="bg-ink border-t border-gold p-6 pb-10 safe-bottom">
+                <div class="deco-divider mx-auto max-w-[100px] mb-5">
+                    <span class="text-gold text-sm">◆</span>
+                </div>
+                <h2 data-i18n="settings_title" class="font-display text-3xl text-gold tracking-[0.15em] text-center mb-1">ЕЗИК</h2>
+                <p class="font-body italic text-cream-dim text-sm text-center mb-7">— <span data-i18n="settings_subtitle">Език и мерни единици</span> —</p>
+                <div id="settings-content" class="space-y-2"></div>
+                <button onclick="closeSettings()" data-i18n="close" class="w-full mt-6 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
+                    Затвори
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAYWALL MODAL -->
+    <div id="paywall-modal" class="fixed inset-0 z-[55] hidden">
+        <div onclick="closePaywall()" class="sheet-overlay absolute inset-0 bg-black/85 backdrop-blur-sm"></div>
+        <div class="sheet-panel absolute bottom-0 left-0 right-0 max-w-md mx-auto">
+            <div class="bg-ink border-t border-gold p-6 pb-10 safe-bottom">
+                <div class="deco-divider mx-auto max-w-[100px] mb-5">
+                    <span class="text-gold text-sm">◆</span>
+                </div>
+                <div class="text-gold text-4xl text-center mb-2">✦</div>
+                <h2 data-i18n="paywall_title" class="font-display text-3xl text-gold tracking-[0.15em] text-center mb-1">ПРЕМИУМ</h2>
+                <p class="font-body italic text-cream-dim text-sm text-center mb-6">— <span data-i18n="paywall_subtitle">Отключи цялото ателие</span> —</p>
+                <div id="paywall-content" class="border border-gold-dim p-5 mb-6"></div>
+                <button id="paywall-cta" onclick="buyPremium()" class="btn-gold w-full py-4 font-roman text-sm tracking-[0.2em] uppercase">Отключи · €3.99</button>
+                <button id="paywall-restore" onclick="restorePremium()" class="w-full mt-3 text-cream-dim hover:text-gold py-2 font-roman text-[0.7rem] tracking-[0.25em] uppercase transition">Възстанови покупка</button>
+                <a id="paywall-play" href="https://play.google.com/store/apps/details?id=eu.mocktails365.app" target="_blank" rel="noopener" class="hidden w-[200px] mx-auto block active:scale-95 transition">
+                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" class="w-full" loading="lazy">
+                </a>
+                <button onclick="closePaywall()" data-i18n="close" class="w-full mt-2 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
+                    Затвори
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // === AGE GATE ===
+        let underAge = false;
+
+        function ageVerify(isAdult) {
+            document.getElementById('age-gate').classList.add('hidden');
+            document.getElementById('loader').classList.remove('hidden');
+            if (isAdult) {
+                try { localStorage.setItem('mock365-age-ok', '1'); } catch(e) {}
+                init();
+            } else {
+                // Under 18 — load only mocktails, hide cocktails tab
+                underAge = true;
+                const tabC = document.getElementById('tab-cocktails');
+                tabC.style.display = 'none';
+                // Pre-select mocktails tab
+                const tabM = document.getElementById('tab-mocktails');
+                tabM.style.background = 'var(--gold)'; tabM.style.color = 'var(--ink)';
+                tabC.style.background = 'transparent'; tabC.style.color = 'var(--cream-dim)';
+                currentMode = 'mocktails';
+                init();
+            }
+        }
+
+        // Check if already verified
+        (function() {
+            try {
+                document.getElementById('loader').classList.remove('hidden');
+            } catch(e) {}
+        })();
+
+        const dataBase       = "https://script.google.com/macros/s/AKfycbwo8yV8kY20USsHptW_Mvd8wNXI_jBoOLtq6UI58ys7O9SgxxbAnMAeDrrWaEwriMS2/exec";
+        const apiUrl         = dataBase + "?gid=2075268599"; // cocktails
+        const mocktailsUrl   = dataBase + "?gid=116292126";  // mocktails
+        const geminiKey      = "AIzaSyB5PIZ1eDVvVUHieEtmMqPBlKYEn7jHPMg";
+
+        // === STATE ===
+        let allCocktails  = [];
+        let allMocktails  = [];
+        let cotdCocktail  = null;
+        let currentMode   = 'mocktails'; // 'cocktails' | 'mocktails'
+        const PAGE_SIZE   = 20;
+        let currentPage   = 1;
+
+        const MOCKTAIL_FILTERS = [
+            { key: 'filter_all',      match: null },
+            { key: 'filter_juice',    match: ['плодов сок'] },
+            { key: 'filter_citrus',   match: ['цитрусов сок'] },
+            { key: 'filter_soda',     match: ['газирана вода'] },
+            { key: 'filter_tea',      match: ['чай'] },
+            { key: 'filter_coconut',  match: ['кокосова вода'] },
+            { key: 'filter_kombucha', match: ['комбуча'] },
+            { key: 'filter_lemonade', match: ['лимонада'] },
+        ];
+        let currentFilter = 'filter_all';
+        let searchQuery = '';
+        let showFavoritesOnly = false;
+        let favorites = [];
+        try { favorites = JSON.parse(localStorage.getItem('mock365-favorites') || '[]'); } catch (e) { favorites = []; }
+
+        const FILTERS = [
+            { key: 'filter_all',     match: null },
+            { key: 'filter_vodka',   match: ['водка', 'vodka'] },
+            { key: 'filter_gin',     match: ['джин', 'gin'] },
+            { key: 'filter_rum',     match: ['ром', 'rum'] },
+            { key: 'filter_tequila', match: ['текила', 'tequila'] },
+            { key: 'filter_whisky',  match: ['уиски', 'whisky', 'whiskey', 'bourbon'] },
+        ];
+
+        // === HELPERS ===
+        function getDriveImg(link) {
+            if (!link || !link.includes("drive.google.com")) return link || 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600';
+            try {
+                const id = link.match(/\/d\/(.+?)\//)[1];
+                return `https://lh3.googleusercontent.com/u/0/d/${id}`;
+            } catch (e) { return link; }
+        }
+
+        function escapeHtml(s) {
+            return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        }
+
+        function toRoman(num) {
+            const lookup = [['M',1000],['CM',900],['D',500],['CD',400],['C',100],['XC',90],['L',50],['XL',40],['X',10],['IX',9],['V',5],['IV',4],['I',1]];
+            let result = '';
+            for (const [letter, value] of lookup) {
+                while (num >= value) { result += letter; num -= value; }
+            }
+            return result || 'I';
+        }
+
+        function activeList()    { return currentMode === 'mocktails' ? allMocktails : allCocktails; }
+        function activeFilters() { return currentMode === 'mocktails' ? MOCKTAIL_FILTERS : FILTERS; }
+
+        // Localized field accessor — falls back to original Bulgarian
+        function loc(item, field) {
+            if (!item) return '';
+            if (LANG !== 'bg') {
+                const v = item[field + '_' + LANG];
+                if (v != null && String(v).trim()) return v;
+            }
+            return item[field] != null ? item[field] : '';
+        }
+
+        function matchesBase(cocktail, filter) {
+            if (!filter || !filter.match) return true;
+            const b = (cocktail.base || '').toLowerCase();
+            return filter.match.some(m => b.includes(m));
+        }
+
+        function getFiltered() {
+            let result = activeList().filter(c => c && c.name);
+
+            if (showFavoritesOnly) {
+                result = result.filter(c => favorites.includes(c.name));
+            }
+
+            const filterObj = activeFilters().find(f => f.key === currentFilter);
+            if (filterObj && filterObj.match) {
+                result = result.filter(c => matchesBase(c, filterObj));
+            }
+
+            if (searchQuery) {
+                const q = searchQuery.toLowerCase().trim();
+                result = result.filter(c =>
+                    (c.name || '').toLowerCase().includes(q) ||
+                    (c.recipe || '').toLowerCase().includes(q) ||
+                    (c.base || '').toLowerCase().includes(q) ||
+                    String(loc(c,'name')).toLowerCase().includes(q) ||
+                    String(loc(c,'ingredients')).toLowerCase().includes(q) ||
+                    String(loc(c,'base')).toLowerCase().includes(q)
+                );
+            }
+            return result;
+        }
+
+        // === MODE SWITCH ===
+        function setMode(mode) {
+            currentMode = mode;
+            currentFilter = 'filter_all';
+            searchQuery = '';
+            showFavoritesOnly = false;
+            document.getElementById('search-input').value = '';
+            document.getElementById('search-clear').classList.add('hidden');
+            document.getElementById('search-icon').classList.remove('hidden');
+
+            // Tab styling via inline style (reliable across Tailwind CDN)
+            const tabC = document.getElementById('tab-cocktails');
+            const tabM = document.getElementById('tab-mocktails');
+            if (mode === 'cocktails') {
+                tabC.style.background = 'var(--gold)'; tabC.style.color = 'var(--ink)';
+                tabM.style.background = 'transparent'; tabM.style.color = 'var(--cream-dim)';
+            } else {
+                tabM.style.background = 'var(--gold)'; tabM.style.color = 'var(--ink)';
+                tabC.style.background = 'transparent'; tabC.style.color = 'var(--cream-dim)';
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            renderFilters();
+            render();
+            renderCOTD();
+        }
+
+        // === COCKTAIL OF THE DAY ===
+        function renderCOTD() {
+            const pool = activeList().filter(c => c && c.name);
+            if (!pool.length) return;
+
+            const today = new Date();
+            const seed  = today.getFullYear() * 1000 + today.getMonth() * 50 + today.getDate();
+            cotdCocktail = pool[seed % pool.length];
+
+            const months = I18N[LANG].months;
+
+            document.getElementById('cotd-img').src   = getDriveImg(cotdCocktail.image);
+            document.getElementById('cotd-name').textContent  = loc(cotdCocktail,'name');
+            document.getElementById('cotd-base').textContent  = cotdCocktail.base ? '— ' + loc(cotdCocktail,'base') + ' —' : '';
+            document.getElementById('cotd-icon').textContent  = cotdCocktail.icon || '🍸';
+            document.getElementById('cotd-day').textContent   = today.getDate();
+            document.getElementById('cotd-month').textContent = months[today.getMonth()];
+
+            document.getElementById('cotd-section').classList.remove('hidden');
+        }
+
+        function goToCOTD() {
+            if (!cotdCocktail) return;
+            currentFilter  = 'filter_all';
+            searchQuery    = '';
+            showFavoritesOnly = false;
+            document.getElementById('search-input').value = '';
+            document.getElementById('search-clear').classList.add('hidden');
+            document.getElementById('search-icon').classList.remove('hidden');
+            renderFilters();
+
+            // Render enough pages so the COTD card is visible
+            const data = getFiltered();
+            const idx  = data.findIndex(d => d._idx === cotdCocktail._idx);
+            currentPage = Math.max(1, Math.ceil((idx + 1) / PAGE_SIZE));
+            render(false);
+
+            setTimeout(() => highlightCocktail(cotdCocktail), 150);
+        }
+
+        // === INIT ===
+        async function init() {
+            try {
+                const res = await fetch(mocktailsUrl);
+                const data = await res.json();
+                allMocktails = Array.isArray(data) ? data : [];
+                allMocktails.forEach((c, i) => { if (c) c._idx = i; });
+                renderFilters();
+                render();
+                renderCOTD();
+                document.getElementById('loader').classList.add('hidden');
+            } catch (e) {
+                document.getElementById('loader-text').innerHTML = `<span class='text-red-400'>${t('error_connection')}</span>`;
+            }
+        }
+
+        // === RENDER ===
+        function renderFilters() {
+            const container = document.getElementById('filters-container');
+            const list = activeList();
+            container.innerHTML = activeFilters().map(f => {
+                const count = f.match
+                    ? list.filter(c => c && c.name && matchesBase(c, f)).length
+                    : list.filter(c => c && c.name).length;
+                if (count === 0 && f.match) return '';
+                const isActive = currentFilter === f.key;
+                return `<button onclick="filterBy('${f.key}')" class="${isActive ? 'filter-active' : ''} group relative flex flex-col items-center gap-1 py-1 text-cream-dim hover:text-gold transition whitespace-nowrap">
+                    <span class="font-roman text-sm tracking-[0.2em] uppercase">${escapeHtml(t(f.key))}</span>
+                    <span class="text-[0.65rem] opacity-60">${toRoman(count)}</span>
+                    <span class="filter-underline absolute bottom-0 left-0 right-0 h-px bg-gold"></span>
+                </button>`;
+            }).join('');
+        }
+
+        function updateFavBar() {
+            document.getElementById('fav-count').textContent = `· ${toRoman(favorites.length) || '–'}`;
+            const btn = document.getElementById('fav-toggle');
+            const icon = document.getElementById('fav-icon');
+            const label = document.getElementById('fav-label');
+            if (showFavoritesOnly) {
+                btn.classList.add('!text-gold-bright');
+                icon.textContent = '◆';
+                label.textContent = t('fav_all');
+            } else {
+                btn.classList.remove('!text-gold-bright');
+                icon.textContent = '◇';
+                label.textContent = t('fav_selected');
+            }
+        }
+
+        function renderCard(d, i) {
+            const isFav = favorites.includes(d.name);
+            const cardId = `card-${d._idx}`;
+            const number = i + 1;
+            const delay = Math.min(i * 0.06, 0.4);
+
+            return `
+                    <article class="cocktail-card deco-card" id="${cardId}" style="animation-delay: ${delay}s">
+                        <div class="corners"></div>
+
+                        <!-- Number header -->
+                        <div class="flex items-center justify-center gap-4 pt-7 pb-5 px-8">
+                            <span class="h-px flex-1 bg-gradient-to-r from-transparent via-gold-dim to-gold"></span>
+                            <span class="font-roman text-gold text-xs tracking-[0.3em]">Nº</span>
+                            <span class="font-roman text-gold-bright text-2xl tracking-[0.1em]">${number}</span>
+                            <span class="h-px flex-1 bg-gradient-to-l from-transparent via-gold-dim to-gold"></span>
+                        </div>
+
+                        <!-- Image with gold frame -->
+                        <div class="px-7 pb-6">
+                            <div class="image-frame relative h-56 bg-ink overflow-hidden">
+                                <img src="${getDriveImg(d.image)}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-60"></div>
+
+                                <!-- Sunburst + icon -->
+                                <div class="absolute bottom-3 right-3 w-16 h-16 flex items-center justify-center">
+                                    <div class="sunburst"></div>
+                                    <span class="text-3xl relative z-10">${escapeHtml(d.icon || '🍸')}</span>
+                                </div>
+
+                                <!-- Favorite diamond -->
+                                <button data-cocktail="${escapeHtml(d.name)}" onclick="toggleFavorite(this, event)"
+                                        aria-label="Toggle favorite"
+                                        class="fav-btn absolute top-3 right-3 w-10 h-10 bg-ink/70 backdrop-blur-sm border ${isFav ? 'border-gold-bright text-gold-bright' : 'border-gold-dim text-cream-dim'} flex items-center justify-center text-base hover:border-gold hover:text-gold active:scale-90 transition">
+                                    ${isFav ? '◆' : '◇'}
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Title block -->
+                        <div class="px-8 pb-4 text-center">
+                            ${d.base ? `<div class="font-roman text-gold-dim text-[0.65rem] tracking-[0.45em] uppercase mb-3">— ${escapeHtml(loc(d,'base'))} —</div>` : ''}
+                            <h2 class="font-display text-[1.85rem] leading-tight text-cream tracking-[0.05em] mb-3">${escapeHtml(loc(d,'name'))}</h2>
+                            <div class="deco-divider max-w-[140px] mx-auto">
+                                <span class="text-gold text-xs">◆</span>
+                            </div>
+                        </div>
+
+                        ${ isLocked(d) ? `
+                        <!-- Locked (premium) -->
+                        <div class="px-8 pb-9 pt-6 border-t border-gold-dim/30 text-center">
+                            <div class="text-gold text-3xl mb-3 opacity-80">🔒</div>
+                            <div class="font-roman text-gold text-xs tracking-[0.3em] uppercase mb-5">${escapeHtml(t('locked_title'))}</div>
+                            <button onclick="openPaywall()" class="btn-gold w-full py-3 font-roman text-xs tracking-[0.2em] uppercase">
+                                ${escapeHtml(t('unlock_btn'))} · ${PRICE_LABEL}
+                            </button>
+                        </div>` : `
+                        <!-- Ingredients -->
+                        ${d.ingredients ? `
+                        <div class="px-8 pb-5 pt-2">
+                            <ul class="space-y-1.5">
+                                ${String(loc(d,'ingredients')).split(',').map(ing => ing.trim()).filter(Boolean).map(ing => `
+                                <li class="flex items-baseline gap-3">
+                                    <span class="text-gold text-[0.5rem] shrink-0 mt-1">◆</span>
+                                    <span class="font-roman text-cream-dim text-sm tracking-[0.08em]">${escapeHtml(convertUnits(ing))}</span>
+                                </li>`).join('')}
+                            </ul>
+                        </div>` : ''}
+
+                        <!-- Recipe -->
+                        <div class="px-8 pb-9 pt-2 border-t border-gold-dim/30">
+                            <div class="recipe-content text-cream/80 text-sm text-center pt-4">
+                                ${convertUnits(loc(d,'recipe') || '')}
+                            </div>
+                        </div>` }
+                    </article>
+                `;
+        }
+
+        function render(resetPage = true) {
+            const data = getFiltered();
+            const container = document.getElementById('cocktail-list');
+            const countEl = document.getElementById('result-count');
+
+            const word = data.length === 1 ? t('count_word_one') : t('count_word_many');
+            countEl.textContent = `${toRoman(data.length) || '–'} · ${word}`;
+            updateFavBar();
+
+            if (resetPage) currentPage = 1;
+
+            if (data.length === 0) {
+                let msg;
+                if (showFavoritesOnly && favorites.length === 0) {
+                    msg = `${t('empty_fav')}<br><span class="font-roman text-xs tracking-widest text-cream-dim/70 mt-3 inline-block">${t('empty_fav_hint')}</span>`;
+                } else if (searchQuery) {
+                    msg = t('empty_search', { q: `<span class="text-gold italic">${escapeHtml(searchQuery)}</span>` });
+                } else {
+                    msg = t('empty_selection');
+                }
+                container.innerHTML = `
+                    <div class="text-center py-20">
+                        <div class="text-gold text-4xl mb-6 opacity-30">✦ ◆ ✦</div>
+                        <p class="font-body italic text-cream-dim">${msg}</p>
+                    </div>`;
+                return;
+            }
+
+            const page   = data.slice(0, currentPage * PAGE_SIZE);
+            const hasMore = data.length > page.length;
+
+            container.innerHTML = page.map((d, i) => renderCard(d, i)).join('') +
+                (hasMore ? `
+                <div class="text-center py-8">
+                    <button onclick="loadMore()" class="border border-gold-dim text-cream-dim hover:text-gold hover:border-gold font-roman text-xs tracking-[0.3em] uppercase py-3 px-8 transition">
+                        ${t('load_more')} · ${toRoman(data.length - page.length)}
+                    </button>
+                </div>` : '');
+        }
+
+        function loadMore() {
+            currentPage++;
+            render(false);
+            // Keep scroll position
+        }
+
+        // === SEARCH ===
+        function onSearch(q) {
+            searchQuery = q;
+            document.getElementById('search-clear').classList.toggle('hidden', !q);
+            document.getElementById('search-icon').classList.toggle('hidden', !!q);
+            render();
+        }
+        function clearSearch() {
+            document.getElementById('search-input').value = '';
+            onSearch('');
+        }
+
+        // === FILTERS ===
+        function filterBy(category) {
+            currentFilter = category;
+            renderFilters();
+            render();
+        }
+
+        // === FAVORITES ===
+        function toggleFavorite(btn, event) {
+            event.stopPropagation();
+            event.preventDefault();
+            const name = btn.dataset.cocktail;
+            if (!name) return;
+
+            const wasFav = favorites.includes(name);
+            if (wasFav) {
+                favorites = favorites.filter(f => f !== name);
+            } else {
+                favorites.push(name);
+                btn.classList.add('star-pop');
+                setTimeout(() => btn.classList.remove('star-pop'), 450);
+            }
+            try { localStorage.setItem('mock365-favorites', JSON.stringify(favorites)); } catch (e) {}
+
+            const isFav = !wasFav;
+            btn.innerHTML = isFav ? '◆' : '◇';
+            btn.className = `fav-btn absolute top-3 right-3 w-10 h-10 bg-ink/70 backdrop-blur-sm border ${isFav ? 'border-gold-bright text-gold-bright' : 'border-gold-dim text-cream-dim'} flex items-center justify-center text-base hover:border-gold hover:text-gold active:scale-90 transition`;
+
+            updateFavBar();
+            if (showFavoritesOnly && !isFav) render();
+        }
+
+        function toggleFavoritesView() {
+            showFavoritesOnly = !showFavoritesOnly;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            render();
+        }
+
+        // === BOTTLE SCANNER ===
+        function openScanner() {
+            closeAISheet();
+            if (!isPremium) { openPaywall(); return; }
+            document.getElementById('camera-input').click();
+        }
+
+        function handleCameraInput(input) {
+            if (!input.files || !input.files[0]) return;
+            const file = input.files[0];
+            input.value = '';
+
+            // Show modal with loading state
+            document.getElementById('scan-status').classList.remove('hidden');
+            document.getElementById('scan-spirits').classList.add('hidden');
+            document.getElementById('scan-results').classList.add('hidden');
+            document.getElementById('scan-none').classList.add('hidden');
+            document.getElementById('scan-preview-wrap').classList.remove('hidden');
+            document.getElementById('scan-modal').classList.remove('hidden');
+
+            // Preview image
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                const dataUrl = e.target.result;
+                document.getElementById('scan-preview').src = dataUrl;
+
+                const base64 = dataUrl.split(',')[1];
+                const mime   = file.type || 'image/jpeg';
+                await analyzeBottles(base64, mime);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function analyzeBottles(base64, mime) {
+            try {
+                const resp = await fetch(
+                    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiKey}`,
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{
+                                parts: [
+                                    { inline_data: { mime_type: mime, data: base64 } },
+                                    { text: 'Погледни снимката. Изброй само алкохолните напитки / спиртове, които виждаш на бутилките (напр. водка, джин, ром, текила, уиски, бърбън, мескал, коняк, ликьор и т.н.). Върни САМО JSON масив с имената на български, без обяснения. Пример: ["водка","джин"]. Ако не виждаш алкохол, върни [].' }
+                                ]
+                            }]
+                        })
+                    }
+                );
+
+                const json = await resp.json();
+                const text = json.candidates?.[0]?.content?.parts?.[0]?.text || '[]';
+
+                // Extract JSON array from response
+                const match = text.match(/\[[\s\S]*?\]/);
+                const spirits = match ? JSON.parse(match[0]) : [];
+
+                showScanResults(spirits);
+            } catch (e) {
+                showScanResults([]);
+            }
+        }
+
+        function showScanResults(spirits) {
+            document.getElementById('scan-status').classList.add('hidden');
+
+            if (!spirits.length) {
+                document.getElementById('scan-none').classList.remove('hidden');
+                return;
+            }
+
+            // Show detected spirits as tags
+            const spiritsEl = document.getElementById('scan-spirits');
+            document.getElementById('scan-spirits-list').innerHTML = spirits.map(s =>
+                `<span class="border border-gold-dim text-gold font-roman text-xs tracking-[0.2em] uppercase px-3 py-1">${escapeHtml(s)}</span>`
+            ).join('');
+            spiritsEl.classList.remove('hidden');
+
+            // Match cocktails
+            const spiritsLower = spirits.map(s => s.toLowerCase());
+            const matched = allCocktails.filter(c => {
+                if (!c || !c.name) return false;
+                const base = (c.base || '').toLowerCase();
+                return spiritsLower.some(s => base.includes(s) || s.includes(base.split(' ')[0]));
+            });
+
+            // Shuffle and take up to 5
+            const picks = matched.sort(() => Math.random() - 0.5).slice(0, 5);
+
+            if (!picks.length) {
+                document.getElementById('scan-none').classList.remove('hidden');
+                return;
+            }
+
+            const resultsEl = document.getElementById('scan-results');
+            resultsEl.innerHTML = `
+                <div class="deco-divider mb-4">
+                    <span class="font-roman text-gold text-[0.6rem] tracking-[0.4em] uppercase whitespace-nowrap">${t('scan_suggestions')} · ${toRoman(picks.length)}</span>
+                </div>
+                ${picks.map(c => `
+                <button onclick="closeScan(); highlightCocktail(allCocktails.find(x=>x&&x.name==='${escapeHtml(c.name).replace(/'/g,"\\'")}'))"
+                        class="w-full border border-gold-dim hover:border-gold hover:bg-ink-soft active:scale-[0.99] transition p-4 flex items-center gap-4 text-left group">
+                    <span class="text-2xl w-8 text-center">${escapeHtml(c.icon || '🍸')}</span>
+                    <div class="flex-1 min-w-0">
+                        <div class="font-roman text-cream tracking-[0.1em] uppercase text-sm group-hover:text-gold-bright transition truncate">${escapeHtml(loc(c,'name'))}</div>
+                        <div class="font-body italic text-xs text-cream-dim">${escapeHtml(loc(c,'base') || '')}</div>
+                    </div>
+                    <span class="text-gold-dim group-hover:text-gold transition shrink-0">›</span>
+                </button>`).join('')}`;
+            resultsEl.classList.remove('hidden');
+        }
+
+        function closeScan() {
+            document.getElementById('scan-modal').classList.add('hidden');
+        }
+
+        // === AI ACTION SHEET ===
+        function openAISheet() {
+            const actions = [
+                { icon: '✦', title: t('ai_random_title'), desc: t('ai_random_desc'), action: 'pickRandom()' },
+                { icon: showFavoritesOnly ? '◇' : '◆', title: showFavoritesOnly ? t('ai_fav_show_all') : `${t('ai_fav_title')} · ${toRoman(favorites.length) || '–'}`, desc: showFavoritesOnly ? t('ai_fav_desc_off') : t('ai_fav_desc_on'), action: 'fromSheetFavorites()' },
+                { icon: '❦', title: t('ai_stats_title'), desc: t('ai_stats_desc'), action: 'showStats()' },
+            ];
+
+            document.getElementById('ai-actions').innerHTML = actions.map(a => `
+                <button onclick="${a.action}" class="w-full border border-gold-dim hover:border-gold hover:bg-ink-soft active:scale-[0.99] transition p-4 flex items-center gap-4 text-left group">
+                    <span class="text-2xl text-gold w-8 text-center">${a.icon}</span>
+                    <div class="flex-1 min-w-0">
+                        <div class="font-roman text-cream tracking-[0.15em] uppercase text-sm group-hover:text-gold-bright transition">${escapeHtml(a.title)}</div>
+                        <div class="font-body italic text-xs text-cream-dim truncate">${escapeHtml(a.desc)}</div>
+                    </div>
+                    <span class="text-gold-dim group-hover:text-gold transition">›</span>
+                </button>
+            `).join('');
+
+            document.getElementById('ai-sheet').classList.remove('hidden');
+        }
+
+        function closeAISheet() { document.getElementById('ai-sheet').classList.add('hidden'); }
+
+        function pickRandom() {
+            closeAISheet();
+            const pool = getFiltered();
+            if (pool.length === 0) { alert(t('alert_empty')); return; }
+            const pick = pool[Math.floor(Math.random() * pool.length)];
+            highlightCocktail(pick);
+        }
+
+        function cocktailOfTheDay() {
+            closeAISheet();
+            const pool = allCocktails.filter(c => c && c.name);
+            if (pool.length === 0) return;
+            const today = new Date();
+            const seed = today.getFullYear() * 1000 + today.getMonth() * 50 + today.getDate();
+            const pick = pool[seed % pool.length];
+
+            currentFilter = 'filter_all';
+            searchQuery = '';
+            showFavoritesOnly = false;
+            document.getElementById('search-input').value = '';
+            document.getElementById('search-clear').classList.add('hidden');
+            document.getElementById('search-icon').classList.remove('hidden');
+            renderFilters();
+            render();
+
+            setTimeout(() => highlightCocktail(pick), 200);
+        }
+
+        function fromSheetFavorites() {
+            closeAISheet();
+            toggleFavoritesView();
+        }
+
+        function highlightCocktail(cocktail) {
+            const el = document.getElementById(`card-${cocktail._idx}`);
+            if (el) {
+                el.scrollIntoView({ behavior: 'instant', block: 'center' });
+                setTimeout(() => {
+                    el.classList.add('highlight');
+                    setTimeout(() => el.classList.remove('highlight'), 3500);
+                }, 450);
+            }
+        }
+
+        // === STATS ===
+        function showStats() {
+            closeAISheet();
+            const valid = allCocktails.filter(c => c && c.name);
+            const total = valid.length;
+
+            const baseStats = {};
+            const baseLabel = {};
+            valid.forEach(c => {
+                const b = (c.base || 'Други').trim();
+                baseStats[b] = (baseStats[b] || 0) + 1;
+                if (!baseLabel[b]) baseLabel[b] = loc(c, 'base') || b;
+            });
+            const sortedBases = Object.entries(baseStats).sort((a, b) => b[1] - a[1]);
+            const topBase = sortedBases[0] || ['—', 0];
+
+            const hour = new Date().getHours();
+            let timeRec;
+            if (hour < 12) timeRec = t('stats_time_morning');
+            else if (hour < 17) timeRec = t('stats_time_afternoon');
+            else if (hour < 22) timeRec = t('stats_time_evening');
+            else timeRec = t('stats_time_late');
+
+            const html = `
+                <!-- Two big numbers -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="border border-gold-dim p-5 text-center">
+                        <div class="font-display text-5xl text-gold-bright leading-none mb-2">${toRoman(total)}</div>
+                        <div class="font-roman text-cream-dim text-[0.65rem] tracking-[0.4em] uppercase">${t('stats_cocktails')}</div>
+                    </div>
+                    <div class="border border-gold-dim p-5 text-center">
+                        <div class="font-display text-5xl text-gold-bright leading-none mb-2">${toRoman(favorites.length) || '–'}</div>
+                        <div class="font-roman text-cream-dim text-[0.65rem] tracking-[0.4em] uppercase">${t('stats_favorites')}</div>
+                    </div>
+                </div>
+
+                <!-- Distribution -->
+                <div class="border border-gold-dim p-5">
+                    <div class="deco-divider mb-5">
+                        <span class="font-roman text-gold text-[0.65rem] tracking-[0.4em] uppercase whitespace-nowrap">${t('stats_distribution')}</span>
+                    </div>
+                    ${sortedBases.slice(0, 8).map(([base, count]) => {
+                        const pct = total ? Math.round(count / total * 100) : 0;
+                        return `
+                            <div class="mb-4 last:mb-0">
+                                <div class="flex justify-between items-baseline mb-1.5">
+                                    <span class="font-roman text-cream text-sm tracking-[0.1em] uppercase">${escapeHtml(baseLabel[base] || base)}</span>
+                                    <span class="font-body italic text-cream-dim text-xs">${toRoman(count)} · ${pct}%</span>
+                                </div>
+                                <div class="h-px bg-gold-dim/40 relative overflow-hidden">
+                                    <div class="absolute inset-y-0 left-0 bg-gradient-to-r from-gold-dim via-gold to-gold-bright" style="width: ${pct}%; height: 2px; top: -0.5px;"></div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+
+                <!-- Recommendation block -->
+                <div class="border border-gold relative p-6">
+                    <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-ink px-3 font-roman text-gold text-[0.6rem] tracking-[0.5em] uppercase">${t('stats_rec_badge')}</span>
+                    <p class="font-body italic text-cream text-base leading-relaxed text-center">
+                        ${t('stats_rec_line1', { hour: `<span class="text-gold-bright">${hour}</span>`, rec: `<span class="text-gold-bright">${timeRec}</span>` })}
+                    </p>
+                    <p class="font-body italic text-cream-dim text-sm leading-relaxed text-center mt-3">
+                        ${t('stats_rec_line2', { base: `<span class="text-gold not-italic font-roman tracking-[0.1em] uppercase">${escapeHtml(baseLabel[topBase[0]] || topBase[0])}</span>`, count: `<span class="text-gold-bright">${toRoman(topBase[1])}</span>` })}
+                    </p>
+                </div>
+            `;
+
+            document.getElementById('stats-content').innerHTML = html;
+            document.getElementById('stats-modal').classList.remove('hidden');
+        }
+
+        function closeStats() { document.getElementById('stats-modal').classList.add('hidden'); }
+
+        // === SHARE ===
+        async function shareApp() {
+            const url  = window.location.href;
+            const data = { title: 'MixMaster · Cocktail Atelier', text: t('share_text'), url };
+            if (navigator.share) {
+                try { await navigator.share(data); return; } catch (e) {}
+            }
+            try {
+                await navigator.clipboard.writeText(url);
+                showToast(t('toast_link_copied'));
+            } catch (e) {
+                showToast(url);
+            }
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.remove('hidden');
+            setTimeout(() => t.classList.add('hidden'), 2500);
+        }
+
+        // === BACK TO TOP ===
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('back-to-top');
+            if (window.scrollY > 400) btn.classList.remove('hidden');
+            else btn.classList.add('hidden');
+        }, { passive: true });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') { closeAISheet(); closeStats(); closeScan(); closeSettings(); closePaywall(); }
+        });
+
+        // Init only if age already verified (new users go through age gate first)
+        try {
+            underAge=false; currentMode='mocktails'; init();
+        } catch(e) { init(); }
+    </script>
+
+    <!-- SERVICE WORKER REGISTRATION -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/mocktails/sw.js')
+                    .then(reg => console.log('SW registered:', reg.scope))
+                    .catch(err => console.log('SW error:', err));
+            });
+        }
+    </script>
+</body>
+</html>
