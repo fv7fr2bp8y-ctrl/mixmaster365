@@ -1,19 +1,19 @@
 // MixMaster — Universal data endpoint
 // Returns ALL columns (incl. translations name_en, recipe_ru, ...) as header-keyed JSON.
-// One deployment serves both tabs via ?gid=
+// One deployment serves many sheets via ?ssid= and ?gid=
 //   cocktails:   .../exec?gid=2075268599
 //   mocktails:   .../exec?gid=116292126
+//   breakfasts:  .../exec?ssid=1L4HfW_Mnyk0546Xw2CdY-XZqbpkcLicHuteJIg4YIcE&gid=2030962117
 //
-// DEPLOY:
-//   1. Paste into Apps Script (bound to the cocktails spreadsheet or standalone).
-//   2. Deploy → New deployment → Web app → Execute as: Me → Who has access: Anyone.
-//   3. Copy the /exec URL and send it back.
+// DEPLOY (re-deploy after editing to keep the SAME url: Deploy → Manage deployments → edit → new version):
+//   Execute as: Me → Who has access: Anyone.
 
-const SPREADSHEET_ID = '1GNVZxY3X6k3iDRWLu8CAL2sNM0I2GcI5FiWLXZYQ1hk';
+const SPREADSHEET_ID = '1GNVZxY3X6k3iDRWLu8CAL2sNM0I2GcI5FiWLXZYQ1hk'; // default (cocktails+mocktails)
 
 function doGet(e) {
   try {
-    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const ssid = e && e.parameter && e.parameter.ssid ? e.parameter.ssid : SPREADSHEET_ID;
+    const ss = SpreadsheetApp.openById(ssid);
     const gid = e && e.parameter && e.parameter.gid ? parseInt(e.parameter.gid, 10) : null;
 
     let sheet = null;
