@@ -139,3 +139,19 @@ GitHub Pages се ъпдейтва за ~1 мин. Хард рефреш: **Cmd+
 - **Преводи на съдържание:** `loc(item, field)` връща `item.<field>_<lang>` или пада на български.
 - **Единици:** `convertUnits(text)` (мл/ml → oz). Избор в `localStorage['mixmaster-unit']`.
 - **Логиката** (филтри, любими, COTD) винаги ползва оригиналните български полета.
+
+---
+
+## 🍎 iOS / App Store (за по-късно — отложено)
+
+Apple не позволява просто TWA-обвиване (Guideline 4.2 отхвърля „wrapped website").
+**Препоръчан път: Capacitor** (нативна черупка + native plugins).
+
+Предпоставки:
+- Apple Developer Program — **$99/година**
+- **Xcode** (пълен, ~7GB, от Mac App Store) + CocoaPods (Mac ✅ наличен)
+- **StoreKit** IAP вместо Play Billing → нужен нативен мост за премиума (уеб Digital Goods API не работи на iOS)
+
+План (когато решим): `npm i @capacitor/core @capacitor/cli` → `npx cap init` → добави iOS платформа →
+плъгини (camera, in-app-purchase/StoreKit, preferences) → Xcode archive → App Store Connect.
+Един Capacitor проект може да обслужи и трите апа (config per app).
