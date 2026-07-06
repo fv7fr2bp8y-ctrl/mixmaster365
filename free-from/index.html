@@ -93,6 +93,10 @@
   <div id="modal" class="hidden fixed inset-0 z-50">
     <button id="closeLayer" class="modal-bg absolute inset-0 w-full h-full" aria-label="Затвори"></button>
     <article class="absolute bottom-0 left-0 right-0 max-w-[520px] mx-auto max-h-[90vh] overflow-y-auto bg-[var(--paper)] border-t border-[var(--line)] safe-bottom">
+      <button onclick="closeModal()" class="sticky top-4 left-4 z-10 ml-4 mt-4 inline-flex items-center gap-2 bg-[var(--paper)]/90 backdrop-blur border border-[var(--line)] px-3 py-2 font-[Forum] text-xs tracking-[.22em] uppercase text-[var(--sage)] active:scale-95" aria-label="Назад към рецептите">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Назад
+      </button>
       <img id="modalImg" class="w-full h-64 object-cover" alt="">
       <div class="p-6">
         <div class="flex items-center justify-between gap-4 mb-3">

@@ -99,6 +99,46 @@
         body.theme-light .deco-card { box-shadow: 0 16px 50px rgba(121, 84, 37, 0.12); }
         body.theme-light input { color: var(--cream); }
         body.theme-light ::placeholder { color: var(--cream-dim); }
+        body.theme-light .page-frame::before { display: none; }
+        body.theme-light .deco-card {
+            background: rgba(255, 250, 240, 0.88);
+            border: 1px solid #d8c5aa;
+            box-shadow: 0 18px 50px rgba(81, 57, 31, 0.12);
+        }
+        body.theme-light .deco-card::before,
+        body.theme-light .deco-card::after,
+        body.theme-light .deco-card > .corners::before,
+        body.theme-light .deco-card > .corners::after {
+            display: none;
+        }
+        body.theme-light .image-frame {
+            border: 0;
+            outline: 0;
+        }
+        body.theme-light .filter-active {
+            color: #ffffff !important;
+        }
+        body.theme-light .filter-active span:first-child {
+            background: #66845d;
+            color: #ffffff;
+            border-color: #66845d;
+        }
+        body.theme-light #filters-container button span:first-child {
+            display: inline-flex;
+            align-items: center;
+            min-height: 2.25rem;
+            border: 1px solid #d8c5aa;
+            padding: 0.5rem 0.9rem;
+            letter-spacing: 0.18em;
+        }
+        body.theme-light #cotd-card {
+            border: 1px solid #d8c5aa;
+            box-shadow: 0 18px 50px rgba(81, 57, 31, 0.12);
+        }
+        body.theme-light .btn-gold {
+            background: linear-gradient(180deg, #c88b34 0%, #b6782d 100%);
+            box-shadow: 0 12px 30px rgba(121, 84, 37, 0.16);
+        }
 
         body {
             font-family: 'Cormorant Garamond', serif;
@@ -867,7 +907,7 @@
         });
     </script>
 
-    <div class="page-frame max-w-md mx-auto min-h-screen px-5 pb-44 relative" style="z-index: 2;">
+    <div class="page-frame max-w-[520px] mx-auto min-h-screen px-[18px] pb-44 relative" style="z-index: 2;">
 
         <!-- HEADER -->
         <header class="pt-10 pb-6 text-center relative">
@@ -889,10 +929,10 @@
                 <span class="text-base leading-none">☼</span>
             </button>
             <div class="flex items-center justify-center mb-3 px-12">
-                <h1 class="font-display text-[2.6rem] leading-none text-gold tracking-[0.25em] pl-[0.25em]">BREAKFAST</h1>
+                <h1 class="font-body text-[3rem] leading-none text-cream tracking-[0.08em] font-semibold">Breakfast 365</h1>
             </div>
             <div class="deco-divider mx-auto max-w-[280px]">
-                <span class="font-roman text-cream-dim text-[0.65rem] tracking-[0.4em] uppercase whitespace-nowrap">Breakfast Atelier · MMXXIV</span>
+                <span class="font-roman text-cream-dim text-[0.65rem] tracking-[0.34em] uppercase whitespace-nowrap">закуски всеки ден</span>
             </div>
         </header>
 
