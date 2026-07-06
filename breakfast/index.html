@@ -267,9 +267,9 @@
                 <path class="shaker-outline" d="M35,25 L65,25 L62,38 L68,43 L68,55 L74,65 L64,130 L36,130 L26,65 L32,55 L32,43 L38,38 Z" fill="none" stroke="#e2be5a" stroke-width="1.2" stroke-linecap="round" />
                 <circle class="gold-drop" cx="50" cy="20" r="2.5" fill="#e2be5a" />
             </svg>
-            <h1 class="loader-title">Mocktails</h1>
+            <h1 class="loader-title">Breakfasts</h1>
             <p class="loader-subtitle" data-i18n="intro_subtitle">Ателие за закуски</p>
-            <div class="loader-status" data-i18n="intro_status">Подготвяне на бара...</div>
+            <div class="loader-status" data-i18n="intro_status">Подготвяне на закуските...</div>
         </div>
     </div>
 
@@ -381,7 +381,7 @@
                 age_question:'Навършили ли сте 18 години?', age_yes:'Да, навършил/а съм',
                 age_no:'Не — покажи безалкохолни',
                 age_disclaimer:'Този сайт съдържа алкохолно съдържание. Достъпът е разрешен само за пълнолетни.',
-                loader_text:'Подготвяне на бара', intro_subtitle:'Ателие за закуски', intro_status:'Подготвяне на бара...',
+                loader_text:'Подготвяне на закуските', intro_subtitle:'Ателие за закуски', intro_status:'Подготвяне на закуските...',
                 scan_title:'АНАЛИЗ', scan_subtitle:'Разпознати бутилки', scan_loading:'Анализирам снимката...',
                 scan_detected:'Разпознати спиртове', scan_none:'Не разпознах алкохол на снимката. Опитай с по-ясна снимка.',
                 scan_suggestions:'Предложения', close:'Затвори',
@@ -424,7 +424,7 @@
                 age_question:'Are you 18 or older?', age_yes:'Yes, I am',
                 age_no:'No — show mocktails',
                 age_disclaimer:'This site contains alcohol content. Access is for adults only.',
-                loader_text:'Preparing the bar', intro_subtitle:'Breakfast Atelier', intro_status:'Preparing the bar...',
+                loader_text:'Preparing breakfast', intro_subtitle:'Breakfast Atelier', intro_status:'Preparing breakfast...',
                 scan_title:'ANALYSIS', scan_subtitle:'Detected bottles', scan_loading:'Analyzing the photo...',
                 scan_detected:'Detected spirits', scan_none:'No alcohol detected. Try a clearer photo.',
                 scan_suggestions:'Suggestions', close:'Close',
@@ -467,7 +467,7 @@
                 age_question:'Bist du 18 oder älter?', age_yes:'Ja, bin ich',
                 age_no:'Nein — Alkoholfreies zeigen',
                 age_disclaimer:'Diese Seite enthält Alkoholinhalte. Zugang nur für Erwachsene.',
-                loader_text:'Bar wird vorbereitet', intro_subtitle:'Atelier der Aromen', intro_status:'Bar wird vorbereitet...',
+                loader_text:'Frühstück wird vorbereitet', intro_subtitle:'Frühstücksatelier', intro_status:'Frühstück wird vorbereitet...',
                 scan_title:'ANALYSE', scan_subtitle:'Erkannte Flaschen', scan_loading:'Foto wird analysiert...',
                 scan_detected:'Erkannte Spirituosen', scan_none:'Kein Alkohol erkannt. Versuche ein klareres Foto.',
                 scan_suggestions:'Vorschläge', close:'Schließen',
@@ -510,7 +510,7 @@
                 age_question:'¿Tienes 18 años o más?', age_yes:'Sí, los tengo',
                 age_no:'No — ver sin alcohol',
                 age_disclaimer:'Este sitio contiene contenido con alcohol. Acceso solo para adultos.',
-                loader_text:'Preparando la barra', intro_subtitle:'Taller de sabores', intro_status:'Preparando la barra...',
+                loader_text:'Preparando el desayuno', intro_subtitle:'Taller de desayunos', intro_status:'Preparando el desayuno...',
                 scan_title:'ANÁLISIS', scan_subtitle:'Botellas detectadas', scan_loading:'Analizando la foto...',
                 scan_detected:'Licores detectados', scan_none:'No se detectó alcohol. Prueba con una foto más clara.',
                 scan_suggestions:'Sugerencias', close:'Cerrar',
@@ -553,7 +553,7 @@
                 age_question:'Вам есть 18 лет?', age_yes:'Да, есть',
                 age_no:'Нет — показать безалкогольные',
                 age_disclaimer:'Сайт содержит информацию об алкоголе. Доступ только для совершеннолетних.',
-                loader_text:'Готовим бар', intro_subtitle:'Ателье вкусов', intro_status:'Готовим бар...',
+                loader_text:'Готовим завтрак', intro_subtitle:'Ателье завтраков', intro_status:'Готовим завтрак...',
                 scan_title:'АНАЛИЗ', scan_subtitle:'Распознанные бутылки', scan_loading:'Анализирую фото...',
                 scan_detected:'Распознанные напитки', scan_none:'Алкоголь не распознан. Попробуйте более чёткое фото.',
                 scan_suggestions:'Предложения', close:'Закрыть',
@@ -945,7 +945,7 @@
                 <div class="absolute inset-0 border border-gold-dim deco-spin" style="clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);"></div>
                 <div class="absolute inset-2 border border-gold deco-spin" style="animation-direction: reverse; animation-duration: 3s;"></div>
             </div>
-            <p id="loader-text" data-i18n="loader_text" class="font-roman text-xs tracking-[0.4em] uppercase text-cream-dim">Подготвяне на бара</p>
+            <p id="loader-text" data-i18n="loader_text" class="font-roman text-xs tracking-[0.4em] uppercase text-cream-dim">Подготвяне на закуските</p>
         </div>
 
         <!-- COCKTAIL LIST -->
@@ -1151,8 +1151,10 @@
         })();
 
         const dataBase       = "https://script.google.com/macros/s/AKfycbwtMLRmJa3Lccsz4YLh0UwCFG7O_BZv-H-U08lcZgmX4JkCXmco0PmhoKB6Oc3PdEUYtQ/exec";
-        const apiUrl         = dataBase + "?ssid=1L4HfW_Mnyk0546Xw2CdY-XZqbpkcLicHuteJIg4YIcE&gid=2030962117"; // cocktails
-        const mocktailsUrl   = dataBase + "?ssid=1L4HfW_Mnyk0546Xw2CdY-XZqbpkcLicHuteJIg4YIcE&gid=2030962117";  // mocktails
+        const BREAKFAST_SHEET_ID = "1GRd1I9nZ8N1vSSngaTIM1PzP7NmXhrAWHhKmzi1XE1g";
+        const BREAKFAST_GID      = "83321663";
+        const apiUrl             = dataBase + `?ssid=${BREAKFAST_SHEET_ID}&gid=${BREAKFAST_GID}`;
+        const mocktailsUrl       = apiUrl;
         const geminiKey      = "AIzaSyB5PIZ1eDVvVUHieEtmMqPBlKYEn7jHPMg";
 
         // === STATE ===
@@ -1190,12 +1192,22 @@
         ];
 
         // === HELPERS ===
+        const LOCAL_BREAKFAST_IMAGES = {
+            '2': 'images/002-savory-oatmeal-egg-feta.png',
+            '3': 'images/003-avocado-toast-poached-egg.png',
+        };
+
         function getDriveImg(link) {
             if (!link || !link.includes("drive.google.com")) return link || 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600';
             try {
                 const id = link.match(/\/d\/(.+?)\//)[1];
                 return `https://lh3.googleusercontent.com/u/0/d/${id}`;
             } catch (e) { return link; }
+        }
+
+        function getRecipeImg(item) {
+            const local = item && LOCAL_BREAKFAST_IMAGES[String(item.id)];
+            return getDriveImg((item && item.image) || local);
         }
 
         function escapeHtml(s) {
@@ -1294,7 +1306,7 @@
 
             const months = I18N[LANG].months;
 
-            document.getElementById('cotd-img').src   = getDriveImg(cotdCocktail.image);
+            document.getElementById('cotd-img').src   = getRecipeImg(cotdCocktail);
             document.getElementById('cotd-name').textContent  = loc(cotdCocktail,'name');
             document.getElementById('cotd-base').textContent  = cotdCocktail.base ? '— ' + loc(cotdCocktail,'base') + ' —' : '';
             document.getElementById('cotd-icon').textContent  = cotdCocktail.icon || '🍸';
@@ -1394,7 +1406,7 @@
                         <!-- Image with gold frame -->
                         <div class="px-7 pb-6">
                             <div class="image-frame relative h-56 bg-ink overflow-hidden">
-                                <img src="${getDriveImg(d.image)}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600'">
+                                <img src="${getRecipeImg(d)}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-60"></div>
 
                                 <!-- Sunburst + icon -->

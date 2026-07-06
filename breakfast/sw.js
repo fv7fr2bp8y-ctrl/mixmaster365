@@ -1,4 +1,4 @@
-const CACHE_NAME = 'brk365-v1';
+const CACHE_NAME = 'brk365-v2';
 const STATIC = ['/breakfast/', '/breakfast/index.html', '/breakfast/manifest.json', '/breakfast/icon-192.png', '/breakfast/icon-512.png', 'https://cdn.tailwindcss.com'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(STATIC.map(u=>new Request(u,{mode:'no-cors'}))).catch(()=>{}))); self.skipWaiting(); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k))))); self.clients.claim(); });
