@@ -403,6 +403,8 @@
         }, 3500);
     </script>
 
+    <script src="data.js"></script>
+
     <!-- ============ I18N + UNITS CORE ============ -->
     <script>
         const LANGS = [
@@ -1448,18 +1450,40 @@
         }
 
         // === INIT ===
-        async function init() {
+        function hydrateBreakfastData(data) {
+            allMocktails = mixBreakfastOrder(Array.isArray(data) ? data : []);
+            allMocktails.forEach((c, i) => { if (c) c._idx = i; });
+            renderFilters();
+            render();
+            renderCOTD();
+            document.getElementById('loader').classList.add('hidden');
+        }
+
+        async function fetchWithTimeout(url, timeoutMs = 12000) {
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), timeoutMs);
             try {
-                const res = await fetch(mocktailsUrl);
-                const data = await res.json();
-                allMocktails = mixBreakfastOrder(Array.isArray(data) ? data : []);
-                allMocktails.forEach((c, i) => { if (c) c._idx = i; });
-                renderFilters();
-                render();
-                renderCOTD();
-                document.getElementById('loader').classList.add('hidden');
+                const res = await fetch(url, { signal: controller.signal, cache: 'no-store' });
+                if (!res.ok) throw new Error('Bad response');
+                return await res.json();
+            } finally {
+                clearTimeout(timer);
+            }
+        }
+
+        async function init() {
+            const localData = Array.isArray(window.BREAKFAST_DATA) ? window.BREAKFAST_DATA : [];
+            if (localData.length) {
+                hydrateBreakfastData(localData);
+            }
+
+            try {
+                const data = await fetchWithTimeout(mocktailsUrl);
+                if (Array.isArray(data) && data.length) hydrateBreakfastData(data);
             } catch (e) {
-                document.getElementById('loader-text').innerHTML = `<span class='text-red-400'>${t('error_connection')}</span>`;
+                if (!localData.length) {
+                    document.getElementById('loader-text').innerHTML = `<span class='text-red-400'>${t('error_connection')}</span>`;
+                }
             }
         }
 
