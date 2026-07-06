@@ -59,6 +59,47 @@
             --ink-soft: #161311;
         }
 
+        body.theme-light {
+            --gold: #b6782d;
+            --gold-bright: #cf8f3a;
+            --gold-dim: #bfa06c;
+            --cream: #3f2f1e;
+            --cream-dim: #7a6550;
+            --ink: #fff8ec;
+            --ink-soft: #f4e7d2;
+            background-color: var(--ink);
+            background-image:
+                radial-gradient(ellipse at top, rgba(207, 143, 58, 0.16) 0%, transparent 46%),
+                linear-gradient(180deg, rgba(255, 253, 247, 0.85) 0%, rgba(245, 232, 210, 0.95) 100%);
+        }
+
+        body.theme-light::before {
+            opacity: 0.08;
+            mix-blend-mode: multiply;
+        }
+
+        body.theme-light .text-cream { color: var(--cream) !important; }
+        body.theme-light .text-cream\/80 { color: rgba(63, 47, 30, 0.8) !important; }
+        body.theme-light .text-cream-dim,
+        body.theme-light .text-cream-dim\/50,
+        body.theme-light .text-cream-dim\/70 { color: var(--cream-dim) !important; }
+        body.theme-light .text-gold,
+        body.theme-light .text-gold-bright { color: var(--gold-bright) !important; }
+        body.theme-light .text-gold-dim { color: var(--gold-dim) !important; }
+        body.theme-light .bg-ink { background-color: var(--ink) !important; }
+        body.theme-light .bg-ink\/70 { background-color: rgba(255, 248, 236, 0.76) !important; }
+        body.theme-light .bg-ink\/80 { background-color: rgba(255, 248, 236, 0.88) !important; }
+        body.theme-light .bg-ink-soft { background-color: var(--ink-soft) !important; }
+        body.theme-light .from-ink { --tw-gradient-from: var(--ink) var(--tw-gradient-from-position); --tw-gradient-to: rgba(255, 248, 236, 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+        body.theme-light .via-ink { --tw-gradient-to: rgba(255, 248, 236, 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--ink) var(--tw-gradient-via-position), var(--tw-gradient-to); }
+        body.theme-light .via-ink\/60 { --tw-gradient-to: rgba(255, 248, 236, 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), rgba(255, 248, 236, 0.58) var(--tw-gradient-via-position), var(--tw-gradient-to); }
+        body.theme-light .to-ink\/10 { --tw-gradient-to: rgba(255, 248, 236, 0.1) var(--tw-gradient-to-position); }
+        body.theme-light .border-gold,
+        body.theme-light .border-gold-dim { border-color: var(--gold-dim) !important; }
+        body.theme-light .deco-card { box-shadow: 0 16px 50px rgba(121, 84, 37, 0.12); }
+        body.theme-light input { color: var(--cream); }
+        body.theme-light ::placeholder { color: var(--cream-dim); }
+
         body {
             font-family: 'Cormorant Garamond', serif;
             background-color: var(--ink);
@@ -661,6 +702,31 @@
             });
         }
 
+        let THEME = 'dark';
+        (function initTheme(){
+            try {
+                const savedTheme = localStorage.getItem('brk365-theme');
+                if (savedTheme === 'light' || savedTheme === 'dark') THEME = savedTheme;
+            } catch(e) {}
+        })();
+
+        function applyTheme() {
+            document.body.classList.toggle('theme-light', THEME === 'light');
+            const btn = document.getElementById('theme-toggle');
+            if (btn) {
+                btn.innerHTML = THEME === 'light'
+                    ? '<span class="text-base leading-none">☾</span>'
+                    : '<span class="text-base leading-none">☼</span>';
+                btn.setAttribute('aria-label', THEME === 'light' ? 'Тъмна тема' : 'Светла тема');
+            }
+        }
+
+        function toggleTheme() {
+            THEME = THEME === 'light' ? 'dark' : 'light';
+            try { localStorage.setItem('brk365-theme', THEME); } catch(e) {}
+            applyTheme();
+        }
+
         // --- Settings sheet (language + units) ---
         function openSettings() {
             const langGrid = LANGS.map(l => `
@@ -793,7 +859,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            applyStaticI18n(); checkPremiumEntitlement();
+            applyTheme(); applyStaticI18n(); checkPremiumEntitlement();
             // Show "Get it on Google Play" badge only on the web (not inside the app)
             if (!isTWA()) { var b=document.getElementById('play-badge'); if(b) b.classList.remove('hidden'); }
         });
@@ -815,6 +881,10 @@
                     <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
                     <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
                 </svg>
+            </button>
+            <button id="theme-toggle" onclick="toggleTheme()" aria-label="Светла тема"
+                class="absolute right-11 top-10 w-9 h-9 border border-gold-dim text-gold-dim hover:text-gold hover:border-gold flex items-center justify-center transition active:scale-90">
+                <span class="text-base leading-none">☼</span>
             </button>
             <div class="flex items-center justify-center mb-3 px-12">
                 <h1 class="font-display text-[2.6rem] leading-none text-gold tracking-[0.25em] pl-[0.25em]">BREAKFAST</h1>
@@ -1193,8 +1263,9 @@
 
         // === HELPERS ===
         const LOCAL_BREAKFAST_IMAGES = {
-            '2': 'images/002-savory-oatmeal-egg-feta.png',
-            '3': 'images/003-avocado-toast-poached-egg.png',
+            '1': 'images/001-shakshuka-eggs-roasted-peppers-no-parsley.png',
+            '2': 'images/002-savory-oatmeal-egg-feta.jpg',
+            '3': 'images/003-avocado-toast-poached-egg.jpg',
         };
 
         function getDriveImg(link) {
@@ -1208,6 +1279,45 @@
         function getRecipeImg(item) {
             const local = item && LOCAL_BREAKFAST_IMAGES[String(item.id)];
             return getDriveImg((item && item.image) || local);
+        }
+
+        function getRecipeFallbackImg(item) {
+            return (item && LOCAL_BREAKFAST_IMAGES[String(item.id)]) || 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600';
+        }
+
+        function hashString(value) {
+            let h = 2166136261;
+            const str = String(value || '');
+            for (let i = 0; i < str.length; i++) {
+                h ^= str.charCodeAt(i);
+                h = Math.imul(h, 16777619);
+            }
+            return h >>> 0;
+        }
+
+        function mixBreakfastOrder(items) {
+            const groups = new Map();
+            items.filter(c => c && c.name).forEach(item => {
+                const key = String(item.base || 'други').trim().toLowerCase() || 'други';
+                if (!groups.has(key)) groups.set(key, []);
+                groups.get(key).push(item);
+            });
+            const buckets = Array.from(groups.values())
+                .map(group => group.slice().sort((a, b) => hashString(a.name) - hashString(b.name)))
+                .sort((a, b) => b.length - a.length);
+            const mixed = [];
+            let added = true;
+            while (added) {
+                added = false;
+                buckets.forEach(group => {
+                    if (group.length) {
+                        mixed.push(group.shift());
+                        added = true;
+                    }
+                });
+            }
+            const invalid = items.filter(c => !c || !c.name);
+            return mixed.concat(invalid);
         }
 
         function escapeHtml(s) {
@@ -1306,7 +1416,9 @@
 
             const months = I18N[LANG].months;
 
-            document.getElementById('cotd-img').src   = getRecipeImg(cotdCocktail);
+            const cotdImg = document.getElementById('cotd-img');
+            cotdImg.onerror = () => { cotdImg.onerror = null; cotdImg.src = getRecipeFallbackImg(cotdCocktail); };
+            cotdImg.src = getRecipeImg(cotdCocktail);
             document.getElementById('cotd-name').textContent  = loc(cotdCocktail,'name');
             document.getElementById('cotd-base').textContent  = cotdCocktail.base ? '— ' + loc(cotdCocktail,'base') + ' —' : '';
             document.getElementById('cotd-icon').textContent  = cotdCocktail.icon || '🍸';
@@ -1340,7 +1452,7 @@
             try {
                 const res = await fetch(mocktailsUrl);
                 const data = await res.json();
-                allMocktails = Array.isArray(data) ? data : [];
+                allMocktails = mixBreakfastOrder(Array.isArray(data) ? data : []);
                 allMocktails.forEach((c, i) => { if (c) c._idx = i; });
                 renderFilters();
                 render();
@@ -1406,7 +1518,7 @@
                         <!-- Image with gold frame -->
                         <div class="px-7 pb-6">
                             <div class="image-frame relative h-56 bg-ink overflow-hidden">
-                                <img src="${getRecipeImg(d)}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600'">
+                                <img src="${getRecipeImg(d)}" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='${getRecipeFallbackImg(d)}'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-60"></div>
 
                                 <!-- Sunburst + icon -->

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#f7efe1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Free From">
+  <link rel="manifest" href="manifest.json">
+  <title>Free From 365 · Без глутен и млечни</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Forum&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #fffaf0;
+      --paper-soft: #f4ead8;
+      --ink: #30271d;
+      --muted: #7d6b58;
+      --line: #d8c5aa;
+      --sage: #66845d;
+      --berry: #9d4f55;
+      --honey: #c2852d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Cormorant Garamond", serif;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,250,240,.92), rgba(244,234,216,.94)),
+        url("https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=1400&auto=format&fit=crop&q=80") center/cover fixed;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: radial-gradient(circle at 20% 0%, rgba(194,133,45,.14), transparent 36%), radial-gradient(circle at 100% 18%, rgba(102,132,93,.12), transparent 34%);
+    }
+    button, input { font: inherit; }
+    .app { position: relative; z-index: 1; max-width: 520px; margin: 0 auto; min-height: 100vh; padding: 26px 18px 118px; }
+    .rule { display: flex; align-items: center; gap: 12px; color: var(--sage); }
+    .rule::before, .rule::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--line), transparent); }
+    .panel {
+      background: rgba(255,250,240,.88);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 50px rgba(81, 57, 31, .12);
+    }
+    .recipe-card { animation: rise .45s cubic-bezier(.16,1,.3,1) backwards; }
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .chip-active { background: var(--sage); color: white; border-color: var(--sage); }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .safe-bottom { padding-bottom: max(18px, env(safe-area-inset-bottom)); }
+    .modal-bg { background: rgba(48,39,29,.62); backdrop-filter: blur(10px); }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="pb-6 text-center">
+      <div class="flex items-center justify-between mb-5">
+        <a href="../breakfast/" class="w-10 h-10 border border-[var(--line)] grid place-items-center text-[var(--sage)] active:scale-95" aria-label="Назад">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </a>
+        <button id="shuffleBtn" class="w-10 h-10 border border-[var(--line)] grid place-items-center text-[var(--sage)] active:scale-95" aria-label="Размеси">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="m15 15 6 6"/><path d="m4 4 5 5"/></svg>
+        </button>
+      </div>
+      <p class="font-[Forum] text-xs tracking-[.34em] uppercase text-[var(--sage)]">Gluten Free · Dairy Free</p>
+      <h1 class="text-[3rem] leading-none tracking-[.08em] font-semibold mt-1">Free From 365</h1>
+      <div class="rule max-w-[280px] mx-auto mt-3"><span class="font-[Forum] text-xs tracking-[.28em] uppercase">чиста кухня</span></div>
+    </header>
+
+    <section class="panel p-4 mb-5">
+      <div class="relative">
+        <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--sage)]" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="m20 20-4.3-4.3"/></svg>
+        <input id="search" class="w-full bg-white/60 border border-[var(--line)] py-3 pl-10 pr-3 outline-none focus:border-[var(--sage)]" placeholder="Търси по име, съставка или режим">
+      </div>
+    </section>
+
+    <nav id="filters" class="flex gap-2 overflow-x-auto no-scrollbar pb-3 mb-3"></nav>
+
+    <div class="flex items-center justify-between mb-4">
+      <span id="count" class="font-[Forum] text-xs tracking-[.26em] uppercase text-[var(--muted)]"></span>
+      <button id="favoritesToggle" class="font-[Forum] text-xs tracking-[.22em] uppercase text-[var(--sage)]">◇ Любими</button>
+    </div>
+
+    <section id="list" class="space-y-5"></section>
+  </main>
+
+  <div id="modal" class="hidden fixed inset-0 z-50">
+    <button id="closeLayer" class="modal-bg absolute inset-0 w-full h-full" aria-label="Затвори"></button>
+    <article class="absolute bottom-0 left-0 right-0 max-w-[520px] mx-auto max-h-[90vh] overflow-y-auto bg-[var(--paper)] border-t border-[var(--line)] safe-bottom">
+      <img id="modalImg" class="w-full h-64 object-cover" alt="">
+      <div class="p-6">
+        <div class="flex items-center justify-between gap-4 mb-3">
+          <p id="modalTag" class="font-[Forum] text-xs tracking-[.26em] uppercase text-[var(--sage)]"></p>
+          <button id="modalFav" class="w-10 h-10 border border-[var(--line)] text-[var(--berry)] grid place-items-center text-xl">◇</button>
+        </div>
+        <h2 id="modalTitle" class="text-4xl leading-tight font-semibold mb-3"></h2>
+        <p id="modalMeta" class="text-[var(--muted)] italic mb-5"></p>
+        <div class="rule mb-5"><span class="font-[Forum] text-xs tracking-[.28em] uppercase">съставки</span></div>
+        <ul id="modalIngredients" class="space-y-2 mb-6"></ul>
+        <div class="rule mb-5"><span class="font-[Forum] text-xs tracking-[.28em] uppercase">стъпки</span></div>
+        <ol id="modalSteps" class="space-y-4"></ol>
+      </div>
+    </article>
+  </div>
+
+  <script>
+    const recipes = [
+      {id:1, cat:"Закуска", time:"12 мин", tag:"богата на протеин", name:"Киноа каша с ябълка и тахан", img:"https://images.unsplash.com/photo-1517673400267-0251440c45dc?w=900&auto=format&fit=crop&q=80", ingredients:["сварена киноа","настъргана ябълка","сусамов тахан","канела","орехи","кленов сироп"], steps:["Затопли киноата с малко вода или бадемово мляко.","Добави ябълка, канела и щипка сол.","Завърши с тахан, орехи и съвсем малко кленов сироп."]},
+      {id:2, cat:"Обяд", time:"25 мин", tag:"meal prep", name:"Пилешка купа с ориз и авокадо", img:"https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&auto=format&fit=crop&q=80", ingredients:["пилешко филе","ориз басмати","авокадо","краставица","лайм","зехтин","магданоз"], steps:["Изпечи пилешкото със сол, пипер и зехтин.","Сложи ориза в купа и добави зеленчуците.","Полей с лайм и зехтин, после нарежи пилешкото отгоре."]},
+      {id:3, cat:"Вечеря", time:"35 мин", tag:"уютна", name:"Сьомга с батат и зелен фасул", img:"https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=900&auto=format&fit=crop&q=80", ingredients:["филе сьомга","батат","зелен фасул","лимон","чесън","зехтин","копър"], steps:["Изпечи батата на кубчета със зехтин.","Добави сьомгата и фасула в тавата.","Печи до готовност и завърши с лимон и копър."]},
+      {id:4, cat:"Десерт", time:"15 мин", tag:"без печене", name:"Кокосов чиа крем с горски плодове", img:"https://images.unsplash.com/photo-1488477181946-6428a0291777?w=900&auto=format&fit=crop&q=80", ingredients:["чиа","кокосово мляко","ванилия","малини","боровинки","мед"], steps:["Разбъркай чиа с кокосово мляко и ванилия.","Остави да стегне поне 2 часа.","Поднеси с плодове и малко мед."]},
+      {id:5, cat:"Закуска", time:"18 мин", tag:"солена", name:"Нахутен омлет със зеленчуци", img:"https://images.unsplash.com/photo-1525351484163-7529414344d8?w=900&auto=format&fit=crop&q=80", ingredients:["нахутено брашно","вода","чушка","спанак","лук","куркума","зехтин"], steps:["Разбий брашното с вода, куркума и сол.","Добави нарязани зеленчуци.","Изпечи в тиган като дебела палачинка."]},
+      {id:6, cat:"Обяд", time:"20 мин", tag:"свежа", name:"Табуле от елда с мента", img:"https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?w=900&auto=format&fit=crop&q=80", ingredients:["сварена елда","домати","краставица","мента","магданоз","лимон","зехтин"], steps:["Охлади елдата добре.","Смеси с дребно нарязаните зеленчуци и билки.","Овкуси с лимон, зехтин и сол."]},
+      {id:7, cat:"Вечеря", time:"30 мин", tag:"растителна", name:"Къри с тиква и червена леща", img:"https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=900&auto=format&fit=crop&q=80", ingredients:["тиква","червена леща","кокосово мляко","къри паста без глутен","джинджифил","ориз"], steps:["Задуши джинджифила с къри пастата.","Добави тиква, леща и кокосово мляко.","Готви до омекване и поднеси с ориз."]},
+      {id:8, cat:"Снак", time:"10 мин", tag:"за кутия", name:"Оризови крекери с хумус", img:"https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=900&auto=format&fit=crop&q=80", ingredients:["оризови крекери","хумус","краставица","печен сусам","червен пипер"], steps:["Намажи крекерите с хумус.","Добави тънки резени краставица.","Поръси със сусам и червен пипер."]},
+      {id:9, cat:"Десерт", time:"22 мин", tag:"шоколад", name:"Брауни от сладък картоф", img:"https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=900&auto=format&fit=crop&q=80", ingredients:["печен сладък картоф","какао","бадемово брашно","фурми","кокосово масло","ванилия"], steps:["Пасирай сладкия картоф с фурмите.","Добави какао, брашно и кокосово масло.","Изпечи до стегнат център и охлади преди рязане."]},
+      {id:10, cat:"Закуска", time:"8 мин", tag:"бърза", name:"Смути купа с банан и спанак", img:"https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=900&auto=format&fit=crop&q=80", ingredients:["банан","спанак","авокадо","бадемово мляко","тиквени семки","кокос"], steps:["Блендирай банан, спанак, авокадо и мляко.","Изсипи в купа.","Добави семки и кокос."]},
+      {id:11, cat:"Обяд", time:"28 мин", tag:"засищащо", name:"Пълнени чушки с пуешко и ориз", img:"https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=900&auto=format&fit=crop&q=80", ingredients:["чушки","пуешка кайма","ориз","домати","риган","зехтин"], steps:["Смеси каймата с ориз, домати и риган.","Напълни чушките.","Печи с малко вода и зехтин до готовност."]},
+      {id:12, cat:"Вечеря", time:"24 мин", tag:"леко", name:"Скариди с оризови нудли", img:"https://images.unsplash.com/photo-1559847844-5315695dadae?w=900&auto=format&fit=crop&q=80", ingredients:["скариди","оризови нудли","морков","тиквичка","тамари без глутен","лайм"], steps:["Накисни нудлите според пакета.","Запържи скаридите и зеленчуците кратко.","Добави нудлите, тамари и лайм."]}
+    ];
+
+    const categories = ["Всички", "Закуска", "Обяд", "Вечеря", "Снак", "Десерт"];
+    let currentCat = "Всички";
+    let showFavs = false;
+    let orderSeed = 1;
+    let favorites = [];
+    try { favorites = JSON.parse(localStorage.getItem("freefrom-favorites") || "[]"); } catch(e) {}
+
+    const $ = (id) => document.getElementById(id);
+    const escapeHtml = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const isFav = (id) => favorites.includes(id);
+
+    function saveFavs() { try { localStorage.setItem("freefrom-favorites", JSON.stringify(favorites)); } catch(e) {} }
+    function toggleFav(id) {
+      favorites = isFav(id) ? favorites.filter(x => x !== id) : favorites.concat(id);
+      saveFavs();
+      render();
+      const recipe = recipes.find(r => r.id === id);
+      if (recipe && !$("modal").classList.contains("hidden")) fillModal(recipe);
+    }
+    function shuffled(list) {
+      return list.slice().sort((a,b) => ((a.id * 9301 + orderSeed * 49297) % 233280) - ((b.id * 9301 + orderSeed * 49297) % 233280));
+    }
+    function filtered() {
+      const q = $("search").value.trim().toLowerCase();
+      let data = recipes.filter(r => currentCat === "Всички" || r.cat === currentCat);
+      if (showFavs) data = data.filter(r => isFav(r.id));
+      if (q) data = data.filter(r => [r.name, r.cat, r.tag, r.ingredients.join(" ")].join(" ").toLowerCase().includes(q));
+      return shuffled(data);
+    }
+    function renderFilters() {
+      $("filters").innerHTML = categories.map(cat => `
+        <button class="${cat === currentCat ? "chip-active" : ""} shrink-0 border border-[var(--line)] px-4 py-2 font-[Forum] text-xs tracking-[.22em] uppercase text-[var(--muted)]"
+          onclick="currentCat='${cat}'; renderFilters(); render();">${cat}</button>
+      `).join("");
+    }
+    function render() {
+      const data = filtered();
+      $("count").textContent = `${data.length} рецепти`;
+      $("favoritesToggle").textContent = showFavs ? "◆ Всички" : `◇ Любими · ${favorites.length}`;
+      $("list").innerHTML = data.map((r, i) => `
+        <article class="recipe-card panel overflow-hidden" style="animation-delay:${Math.min(i * .04, .28)}s">
+          <div class="cursor-pointer" onclick="openRecipe(${r.id})">
+            <img class="w-full h-48 object-cover" src="${r.img}" alt="${escapeHtml(r.name)}" loading="lazy">
+            <div class="p-5">
+              <div class="flex items-center justify-between gap-3 mb-2">
+                <span class="font-[Forum] text-xs tracking-[.26em] uppercase text-[var(--sage)]">${escapeHtml(r.cat)} · ${escapeHtml(r.time)}</span>
+                <button onclick="event.stopPropagation(); toggleFav(${r.id})" class="text-xl text-[var(--berry)]">${isFav(r.id) ? "◆" : "◇"}</button>
+              </div>
+              <h2 class="text-3xl leading-tight font-semibold">${escapeHtml(r.name)}</h2>
+              <p class="mt-2 text-[var(--muted)] italic">${escapeHtml(r.tag)} · без глутен · без млечни</p>
+            </div>
+          </div>
+        </article>
+      `).join("") || `<div class="text-center py-16 text-[var(--muted)] italic">Няма рецепти в тази селекция.</div>`;
+    }
+    function fillModal(r) {
+      $("modalImg").src = r.img;
+      $("modalTitle").textContent = r.name;
+      $("modalTag").textContent = `${r.cat} · ${r.time}`;
+      $("modalMeta").textContent = `${r.tag} · без глутен · без млечни`;
+      $("modalFav").textContent = isFav(r.id) ? "◆" : "◇";
+      $("modalFav").onclick = () => toggleFav(r.id);
+      $("modalIngredients").innerHTML = r.ingredients.map(x => `<li class="flex gap-3"><span class="text-[var(--sage)]">◆</span><span>${escapeHtml(x)}</span></li>`).join("");
+      $("modalSteps").innerHTML = r.steps.map((x, i) => `<li class="flex gap-3"><span class="w-7 h-7 border border-[var(--line)] grid place-items-center shrink-0 font-[Forum] text-[var(--sage)]">${i+1}</span><span>${escapeHtml(x)}</span></li>`).join("");
+    }
+    function openRecipe(id) {
+      const r = recipes.find(x => x.id === id);
+      if (!r) return;
+      fillModal(r);
+      $("modal").classList.remove("hidden");
+    }
+    function closeModal() { $("modal").classList.add("hidden"); }
+
+    $("search").addEventListener("input", render);
+    $("favoritesToggle").addEventListener("click", () => { showFavs = !showFavs; render(); });
+    $("shuffleBtn").addEventListener("click", () => { orderSeed++; render(); window.scrollTo({top:0, behavior:"smooth"}); });
+    $("closeLayer").addEventListener("click", closeModal);
+    document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+    renderFilters();
+    render();
+    if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+  </script>
+</body>
+</html>
