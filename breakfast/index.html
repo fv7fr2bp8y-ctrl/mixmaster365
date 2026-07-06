@@ -299,7 +299,7 @@
         }
     </style>
 </head>
-<body class="text-cream">
+<body class="text-cream theme-light">
 
     <!-- INTRO BAR LOADER -->
     <div id="bar-loader">
@@ -319,7 +319,7 @@
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background-color: #0c0b09;
+            background-color: var(--ink);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -702,10 +702,10 @@
             });
         }
 
-        let THEME = 'dark';
+        let THEME = 'light';
         (function initTheme(){
             try {
-                const savedTheme = localStorage.getItem('brk365-theme');
+                const savedTheme = localStorage.getItem('brk365-breakfast-theme');
                 if (savedTheme === 'light' || savedTheme === 'dark') THEME = savedTheme;
             } catch(e) {}
         })();
@@ -723,7 +723,7 @@
 
         function toggleTheme() {
             THEME = THEME === 'light' ? 'dark' : 'light';
-            try { localStorage.setItem('brk365-theme', THEME); } catch(e) {}
+            try { localStorage.setItem('brk365-breakfast-theme', THEME); } catch(e) {}
             applyTheme();
         }
 
