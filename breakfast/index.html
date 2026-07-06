@@ -350,10 +350,7 @@
     <!-- INTRO BAR LOADER -->
     <div id="bar-loader">
         <div class="loader-content">
-            <svg class="shaker-svg" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
-                <path class="shaker-outline" d="M35,25 L65,25 L62,38 L68,43 L68,55 L74,65 L64,130 L36,130 L26,65 L32,55 L32,43 L38,38 Z" fill="none" stroke="#e2be5a" stroke-width="1.2" stroke-linecap="round" />
-                <circle class="gold-drop" cx="50" cy="20" r="2.5" fill="#e2be5a" />
-            </svg>
+            <div class="food-loader-icon">☀</div>
             <h1 class="loader-title">Breakfasts</h1>
             <p class="loader-subtitle" data-i18n="intro_subtitle">Ателие за закуски</p>
             <div class="loader-status" data-i18n="intro_status">Подготвяне на закуските...</div>
@@ -377,6 +374,19 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+        .food-loader-icon {
+            width: 86px;
+            height: 86px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            border: 1px solid #d8c5aa;
+            background: rgba(255,250,240,.72);
+            color: #c2852d;
+            font-size: 42px;
+            line-height: 1;
         }
         .shaker-svg {
             width: 90px;
@@ -751,29 +761,13 @@
         }
 
         let THEME = 'light';
-        (function initTheme(){
-            try {
-                const savedTheme = localStorage.getItem('brk365-breakfast-theme');
-                if (savedTheme === 'light' || savedTheme === 'dark') THEME = savedTheme;
-            } catch(e) {}
-        })();
+        (function initTheme(){ THEME = 'light'; })();
 
         function applyTheme() {
-            document.body.classList.toggle('theme-light', THEME === 'light');
-            const btn = document.getElementById('theme-toggle');
-            if (btn) {
-                btn.innerHTML = THEME === 'light'
-                    ? '<span class="text-base leading-none">☾</span>'
-                    : '<span class="text-base leading-none">☼</span>';
-                btn.setAttribute('aria-label', THEME === 'light' ? 'Тъмна тема' : 'Светла тема');
-            }
+            document.body.classList.add('theme-light');
         }
 
-        function toggleTheme() {
-            THEME = THEME === 'light' ? 'dark' : 'light';
-            try { localStorage.setItem('brk365-breakfast-theme', THEME); } catch(e) {}
-            applyTheme();
-        }
+        function toggleTheme() { applyTheme(); }
 
         // --- Settings sheet (language + units) ---
         function openSettings() {
@@ -930,10 +924,6 @@
                     <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
                 </svg>
             </button>
-            <button id="theme-toggle" onclick="toggleTheme()" aria-label="Светла тема"
-                class="absolute right-11 top-10 w-9 h-9 border border-gold-dim text-gold-dim hover:text-gold hover:border-gold flex items-center justify-center transition active:scale-90">
-                <span class="text-base leading-none">☼</span>
-            </button>
             <div class="flex items-center justify-center mb-3 px-12">
                 <h1 class="font-body text-[3rem] leading-none text-cream tracking-[0.08em] font-semibold">Breakfast 365</h1>
             </div>
@@ -961,28 +951,21 @@
             <div class="deco-divider mb-5">
                 <span class="font-roman text-gold text-[0.6rem] tracking-[0.45em] uppercase whitespace-nowrap">✦ <span data-i18n="cotd_title">Коктейл на Деня</span> ✦</span>
             </div>
-            <div id="cotd-card" class="deco-card relative overflow-hidden cursor-pointer active:scale-[0.99] transition-transform" style="height:300px" onclick="goToCOTD()">
-                <div class="corners"></div>
-                <img id="cotd-img" src="" alt="" class="absolute inset-0 w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-ink/10"></div>
-
-                <!-- Date badge -->
-                <div class="absolute top-4 left-4 border border-gold-dim bg-ink/80 backdrop-blur-sm px-3 py-2 text-center min-w-[44px]">
-                    <div id="cotd-day" class="font-display text-2xl text-gold-bright leading-none"></div>
-                    <div id="cotd-month" class="font-roman text-gold-dim text-[0.55rem] tracking-[0.25em] uppercase mt-0.5"></div>
+            <div id="cotd-card" class="deco-card overflow-hidden cursor-pointer active:scale-[0.99] transition-transform" onclick="goToCOTD()">
+                <div class="relative">
+                    <img id="cotd-img" src="" alt="" class="w-full h-56 object-cover">
+                    <div class="absolute top-4 left-4 border border-gold-dim bg-ink/80 backdrop-blur-sm px-3 py-2 text-center min-w-[44px]">
+                        <div id="cotd-day" class="font-body text-2xl text-gold-bright leading-none"></div>
+                        <div id="cotd-month" class="font-roman text-gold-dim text-[0.55rem] tracking-[0.25em] uppercase mt-0.5"></div>
+                    </div>
                 </div>
-
-                <!-- Icon sunburst top-right -->
-                <div class="absolute top-4 right-4 w-14 h-14 flex items-center justify-center opacity-80">
-                    <div class="sunburst"></div>
-                    <span id="cotd-icon" class="text-2xl relative z-10">🍸</span>
-                </div>
-
-                <!-- Content bottom -->
-                <div class="absolute bottom-0 left-0 right-0 p-6">
-                    <div id="cotd-base" class="font-roman text-gold-dim text-[0.6rem] tracking-[0.45em] uppercase mb-2"></div>
-                    <h2 id="cotd-name" class="font-display text-[2rem] leading-tight text-cream tracking-[0.04em] mb-4"></h2>
-                    <div class="flex items-center gap-2 text-gold font-roman text-xs tracking-[0.3em] uppercase">
+                <div class="p-5">
+                    <div class="flex items-center justify-between gap-3 mb-2">
+                        <div id="cotd-base" class="font-roman text-gold-dim text-xs tracking-[0.26em] uppercase"></div>
+                        <span id="cotd-icon" class="text-xl">🍳</span>
+                    </div>
+                    <h2 id="cotd-name" class="font-body text-3xl leading-tight text-cream font-semibold mb-3"></h2>
+                    <div class="flex items-center gap-2 text-gold font-roman text-xs tracking-[0.22em] uppercase">
                         <span data-i18n="cotd_see">Виж рецептата</span>
                         <span>›</span>
                     </div>
@@ -1149,7 +1132,7 @@
     </div>
 
     <!-- BOTTOM AI BUTTON -->
-    <div class="fixed bottom-0 left-0 right-0 px-5 pt-5 bg-gradient-to-t from-ink via-ink to-ink/0 z-40 safe-bottom">
+    <div class="hidden fixed bottom-0 left-0 right-0 px-5 pt-5 bg-gradient-to-t from-ink via-ink to-ink/0 z-40 safe-bottom">
         <div class="max-w-md mx-auto">
             <button onclick="openAISheet()" class="btn-gold w-full py-4 px-6 flex items-center justify-center gap-3 text-sm uppercase active:scale-[0.98] transition relative">
                 <span>✦</span>
