@@ -1,4 +1,4 @@
-const CACHE_NAME = "free-from-365-v4";
+const CACHE_NAME = "free-from-365-v5";
 const ASSETS = [
   "/free-from/",
   "/free-from/index.html",

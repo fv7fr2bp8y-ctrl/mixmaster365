@@ -68,9 +68,9 @@
             --ink: #fff8ec;
             --ink-soft: #f4e7d2;
             background-color: var(--ink);
-            background-image:
-                radial-gradient(ellipse at top, rgba(207, 143, 58, 0.16) 0%, transparent 46%),
-                linear-gradient(180deg, rgba(255, 253, 247, 0.85) 0%, rgba(245, 232, 210, 0.95) 100%);
+            background:
+                linear-gradient(180deg, rgba(255,250,240,.92), rgba(244,234,216,.94)),
+                url("https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=1400&auto=format&fit=crop&q=80") center/cover fixed;
         }
 
         body.theme-light::before {
@@ -139,6 +139,12 @@
             background: linear-gradient(180deg, #c88b34 0%, #b6782d 100%);
             box-shadow: 0 12px 30px rgba(121, 84, 37, 0.16);
         }
+        body.theme-light .recipe-content {
+            font-style: normal;
+            text-align: left;
+            color: rgba(48, 39, 29, 0.82);
+        }
+        body.theme-light .recipe-content p { margin: 0.6em 0; }
 
         body {
             font-family: 'Cormorant Garamond', serif;
@@ -1537,10 +1543,8 @@
                     : list.filter(c => c && c.name).length;
                 if (count === 0 && f.match) return '';
                 const isActive = currentFilter === f.key;
-                return `<button onclick="filterBy('${f.key}')" class="${isActive ? 'filter-active' : ''} group relative flex flex-col items-center gap-1 py-1 text-cream-dim hover:text-gold transition whitespace-nowrap">
-                    <span class="font-roman text-sm tracking-[0.2em] uppercase">${escapeHtml(t(f.key))}</span>
-                    <span class="text-[0.65rem] opacity-60">${toRoman(count)}</span>
-                    <span class="filter-underline absolute bottom-0 left-0 right-0 h-px bg-gold"></span>
+                return `<button onclick="filterBy('${f.key}')" class="${isActive ? 'filter-active' : ''} shrink-0 border border-gold-dim px-4 py-2 font-roman text-xs tracking-[0.22em] uppercase text-cream-dim hover:border-gold hover:text-gold transition whitespace-nowrap">
+                    ${escapeHtml(t(f.key))} · ${count}
                 </button>`;
             }).join('');
         }
@@ -1564,54 +1568,31 @@
         function renderCard(d, i) {
             const isFav = favorites.includes(d.name);
             const cardId = `card-${d._idx}`;
-            const number = i + 1;
             const delay = Math.min(i * 0.06, 0.4);
 
             return `
-                    <article class="cocktail-card deco-card" id="${cardId}" style="animation-delay: ${delay}s">
-                        <div class="corners"></div>
-
-                        <!-- Number header -->
-                        <div class="flex items-center justify-center gap-4 pt-7 pb-5 px-8">
-                            <span class="h-px flex-1 bg-gradient-to-r from-transparent via-gold-dim to-gold"></span>
-                            <span class="font-roman text-gold text-xs tracking-[0.3em]">Nº</span>
-                            <span class="font-roman text-gold-bright text-2xl tracking-[0.1em]">${number}</span>
-                            <span class="h-px flex-1 bg-gradient-to-l from-transparent via-gold-dim to-gold"></span>
+                    <article class="cocktail-card deco-card overflow-hidden" id="${cardId}" style="animation-delay: ${delay}s">
+                        <div class="relative">
+                            <img src="${getRecipeImg(d)}" class="w-full h-48 object-cover" loading="lazy" onerror="this.onerror=null;this.src='${getRecipeFallbackImg(d)}'">
+                            <button data-cocktail="${escapeHtml(d.name)}" onclick="toggleFavorite(this, event)"
+                                    aria-label="Toggle favorite"
+                                    class="fav-btn absolute top-3 right-3 w-10 h-10 bg-ink/80 backdrop-blur-sm border ${isFav ? 'border-gold-bright text-gold-bright' : 'border-gold-dim text-cream-dim'} flex items-center justify-center text-base active:scale-90 transition">
+                                ${isFav ? '◆' : '◇'}
+                            </button>
                         </div>
 
-                        <!-- Image with gold frame -->
-                        <div class="px-7 pb-6">
-                            <div class="image-frame relative h-56 bg-ink overflow-hidden">
-                                <img src="${getRecipeImg(d)}" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='${getRecipeFallbackImg(d)}'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-60"></div>
-
-                                <!-- Sunburst + icon -->
-                                <div class="absolute bottom-3 right-3 w-16 h-16 flex items-center justify-center">
-                                    <div class="sunburst"></div>
-                                    <span class="text-3xl relative z-10">${escapeHtml(d.icon || '🍸')}</span>
-                                </div>
-
-                                <!-- Favorite diamond -->
-                                <button data-cocktail="${escapeHtml(d.name)}" onclick="toggleFavorite(this, event)"
-                                        aria-label="Toggle favorite"
-                                        class="fav-btn absolute top-3 right-3 w-10 h-10 bg-ink/70 backdrop-blur-sm border ${isFav ? 'border-gold-bright text-gold-bright' : 'border-gold-dim text-cream-dim'} flex items-center justify-center text-base hover:border-gold hover:text-gold active:scale-90 transition">
-                                    ${isFav ? '◆' : '◇'}
-                                </button>
+                        <div class="p-5">
+                            <div class="flex items-center justify-between gap-3 mb-2">
+                                <span class="font-roman text-xs tracking-[0.26em] uppercase text-gold-dim">${escapeHtml(loc(d,'base') || 'Закуска')}</span>
+                                <span class="text-xl" aria-hidden="true">${escapeHtml(d.icon || '🍳')}</span>
                             </div>
-                        </div>
-
-                        <!-- Title block -->
-                        <div class="px-8 pb-4 text-center">
-                            ${d.base ? `<div class="font-roman text-gold-dim text-[0.65rem] tracking-[0.45em] uppercase mb-3">— ${escapeHtml(loc(d,'base'))} —</div>` : ''}
-                            <h2 class="font-display text-[1.85rem] leading-tight text-cream tracking-[0.05em] mb-3">${escapeHtml(loc(d,'name'))}</h2>
-                            <div class="deco-divider max-w-[140px] mx-auto">
-                                <span class="text-gold text-xs">◆</span>
-                            </div>
+                            <h2 class="font-body text-3xl leading-tight text-cream font-semibold">${escapeHtml(loc(d,'name'))}</h2>
+                            <p class="mt-2 text-cream-dim italic">${d.ingredients ? `${String(loc(d,'ingredients')).split(',').filter(Boolean).length} съставки` : 'Рецепта'} · Breakfast 365</p>
                         </div>
 
                         ${ isLocked(d) ? `
                         <!-- Locked (premium) -->
-                        <div class="px-8 pb-9 pt-6 border-t border-gold-dim/30 text-center">
+                        <div class="px-5 pb-6 pt-2 border-t border-gold-dim/30 text-center">
                             <div class="text-gold text-3xl mb-3 opacity-80">🔒</div>
                             <div class="font-roman text-gold text-xs tracking-[0.3em] uppercase mb-5">${escapeHtml(t('locked_title'))}</div>
                             <button onclick="openPaywall()" class="btn-gold w-full py-3 font-roman text-xs tracking-[0.2em] uppercase">
@@ -1620,19 +1601,21 @@
                         </div>` : `
                         <!-- Ingredients -->
                         ${d.ingredients ? `
-                        <div class="px-8 pb-5 pt-2">
+                        <div class="px-5 pb-5">
+                            <div class="deco-divider mb-4"><span class="font-roman text-xs tracking-[0.28em] uppercase text-gold">съставки</span></div>
                             <ul class="space-y-1.5">
                                 ${String(loc(d,'ingredients')).split(',').map(ing => ing.trim()).filter(Boolean).map(ing => `
                                 <li class="flex items-baseline gap-3">
                                     <span class="text-gold text-[0.5rem] shrink-0 mt-1">◆</span>
-                                    <span class="font-roman text-cream-dim text-sm tracking-[0.08em]">${escapeHtml(convertUnits(ing))}</span>
+                                    <span class="font-roman text-cream-dim text-sm">${escapeHtml(convertUnits(ing))}</span>
                                 </li>`).join('')}
                             </ul>
                         </div>` : ''}
 
                         <!-- Recipe -->
-                        <div class="px-8 pb-9 pt-2 border-t border-gold-dim/30">
-                            <div class="recipe-content text-cream/80 text-sm text-center pt-4">
+                        <div class="px-5 pb-6 pt-2 border-t border-gold-dim/30">
+                            <div class="deco-divider mb-4"><span class="font-roman text-xs tracking-[0.28em] uppercase text-gold">стъпки</span></div>
+                            <div class="recipe-content text-cream/80 text-base">
                                 ${convertUnits(loc(d,'recipe') || '')}
                             </div>
                         </div>` }
