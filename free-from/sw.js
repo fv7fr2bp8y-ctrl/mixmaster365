@@ -1,10 +1,11 @@
-const CACHE_NAME = "free-from-365-v5";
+const CACHE_NAME = "healthy-gut-365-v10";
 const ASSETS = [
   "/free-from/",
   "/free-from/index.html",
   "/free-from/manifest.json",
   "/free-from/icon-192.png",
-  "/free-from/icon-512.png"
+  "/free-from/icon-512.png",
+  "/free-from/logo-source.png"
 ];
 
 self.addEventListener("install", event => {

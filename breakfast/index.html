@@ -2,14 +2,14 @@
 <html lang="bg">
 <head>
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="MixMaster">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Brunch 365">
 
     <link rel="apple-touch-icon" href="/breakfast/icon-192.png">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>365 Breakfasts · Atelier</title>
+    <title>Brunch 365</title>
 
     <link rel="icon" href="/breakfast/icon-192.png" />
     <link rel="manifest" href="/breakfast/manifest.json">
@@ -243,7 +243,7 @@
             font-family: 'Forum', serif;
         }
 
-        /* Sunburst rays behind cocktail icon */
+        /* Sunburst rays behind the loader mark */
         .sunburst {
             position: absolute;
             inset: 0;
@@ -348,12 +348,14 @@
 <body class="text-cream theme-light">
 
     <!-- INTRO BAR LOADER -->
-    <div id="bar-loader">
+    <div id="bar-loader" aria-label="Brunch 365">
         <div class="loader-content">
-            <div class="food-loader-icon">☀</div>
-            <h1 class="loader-title">Breakfasts</h1>
-            <p class="loader-subtitle" data-i18n="intro_subtitle">Ателие за закуски</p>
-            <div class="loader-status" data-i18n="intro_status">Подготвяне на закуските...</div>
+            <div class="loader-logo-wrap">
+                <img class="loader-logo" src="logo-source.png" alt="">
+            </div>
+            <h1 class="loader-title">Brunch 365</h1>
+            <p class="loader-subtitle" data-i18n="intro_subtitle">Бранч всеки ден</p>
+            <div class="loader-status" data-i18n="intro_status">Подготвяне на рецептите...</div>
         </div>
     </div>
 
@@ -362,7 +364,9 @@
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background-color: var(--ink);
+            background:
+                radial-gradient(circle at 50% 28%, rgba(232,201,135,.18), transparent 34%),
+                linear-gradient(180deg, #fffaf0 0%, #f4ead8 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -375,34 +379,23 @@
             flex-direction: column;
             align-items: center;
         }
-        .food-loader-icon {
-            width: 86px;
-            height: 86px;
+        .loader-logo-wrap {
+            width: 112px;
+            height: 112px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 24px;
-            border: 1px solid #d8c5aa;
-            background: rgba(255,250,240,.72);
-            color: #c2852d;
-            font-size: 42px;
-            line-height: 1;
+            animation: logoReveal 1.2s cubic-bezier(.16,1,.3,1) both;
         }
-        .shaker-svg {
-            width: 90px;
-            height: 130px;
-            margin-bottom: 20px;
-        }
-        .shaker-outline {
-            stroke-dasharray: 450;
-            stroke-dashoffset: 450;
-            animation: drawLine 2.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        .gold-drop {
-            animation: dropFall 2.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) infinite;
+        .loader-logo {
+            width: 88px;
+            height: 88px;
+            object-fit: contain;
+            display: block;
         }
         .loader-title {
-            color: #e2be5a;
+            color: #30271d;
             font-size: 26px;
             font-weight: 400;
             letter-spacing: 10px;
@@ -413,7 +406,7 @@
             animation: fadeInElement 1.8s ease 1s forwards;
         }
         .loader-subtitle {
-            color: #9c8a70;
+            color: #7d6b58;
             font-size: 10px;
             letter-spacing: 6px;
             margin: 0 0 25px 0;
@@ -423,7 +416,7 @@
             animation: fadeInElement 1.8s ease 1.6s forwards;
         }
         .loader-status {
-            color: #70614c;
+            color: #9d4f55;
             font-size: 12px;
             font-style: italic;
             letter-spacing: 3px;
@@ -431,14 +424,9 @@
             opacity: 0;
             animation: fadeInElement 1.5s ease 2.2s forwards;
         }
-        @keyframes drawLine {
-            to { stroke-dashoffset: 0; }
-        }
-        @keyframes dropFall {
-            0%         { cy: 15; opacity: 0; }
-            15%        { opacity: 1; }
-            70%        { cy: 115; opacity: 1; }
-            80%, 100%  { cy: 115; opacity: 0; }
+        @keyframes logoReveal {
+            from { opacity: 0; transform: translateY(10px) scale(.92); }
+            to { opacity: 1; transform: none; }
         }
         @keyframes fadeInElement {
             to { opacity: 1; }
@@ -473,30 +461,25 @@
 
         const I18N = {
             bg: {
-                tab_cocktails:'Коктейли', tab_mocktails:'Безалкохолни',
-                cotd_title:'Закуска на деня', cotd_see:'Виж рецептата',
+                tab_cocktails:'Бранч', tab_mocktails:'Рецепти',
+                cotd_title:'Бранч на деня', cotd_see:'Виж рецептата',
                 search_ph:'Търсене по име или съставка',
                 fav_selected:'Избрани', fav_all:'Всички',
-                age_question:'Навършили ли сте 18 години?', age_yes:'Да, навършил/а съм',
-                age_no:'Не — покажи безалкохолни',
-                age_disclaimer:'Този сайт съдържа алкохолно съдържание. Достъпът е разрешен само за пълнолетни.',
-                loader_text:'Подготвяне на закуските', intro_subtitle:'Ателие за закуски', intro_status:'Подготвяне на закуските...',
-                scan_title:'АНАЛИЗ', scan_subtitle:'Разпознати бутилки', scan_loading:'Анализирам снимката...',
-                scan_detected:'Разпознати спиртове', scan_none:'Не разпознах алкохол на снимката. Опитай с по-ясна снимка.',
-                scan_suggestions:'Предложения', close:'Затвори',
+                loader_text:'Подготвяне на рецептите', intro_subtitle:'Бранч всеки ден', intro_status:'Подготвяне на рецептите...',
+                close:'Затвори',
                 ai_button:'Препоръка', ai_title:'ПРЕПОРЪКА', ai_subtitle:'Какво да приготвим?',
-                ai_scan_title:'Снимай бутилките', ai_scan_desc:'AI предлага коктейл от наличното',
-                ai_random_title:'Изненада', ai_random_desc:'Случаен коктейл от селекцията',
+                ai_scan_title:'Идея за бранч', ai_scan_desc:'Предложение от колекцията',
+                ai_random_title:'Изненада', ai_random_desc:'Случайна рецепта от селекцията',
                 ai_fav_show_all:'Покажи всички', ai_fav_title:'Избрани',
                 ai_fav_desc_off:'Изключи филтъра', ai_fav_desc_on:'Покажи запазените',
                 ai_stats_title:'Анализ на ателието', ai_stats_desc:'Статистика за колекцията',
-                stats_title:'АТЕЛИЕ', stats_subtitle:'Анализ на колекцията', stats_cocktails:'Коктейла',
+                stats_title:'АТЕЛИЕ', stats_subtitle:'Анализ на колекцията', stats_cocktails:'Рецепти',
                 stats_favorites:'Избрани', stats_distribution:'Разпределение', stats_rec_badge:'Препоръка',
                 stats_time_morning:'нещо освежаващо за бранч', stats_time_afternoon:'нещо леко и плодово',
                 stats_time_evening:'класика за вечер', stats_time_late:'нещо силно за късен час',
                 stats_rec_line1:'Сега, около {hour}:00 ч., е подходящо за {rec}.',
                 stats_rec_line2:'Най-разнообразната ви категория е {base} с {count} опции.',
-                count_word_one:'коктейл', count_word_many:'коктейла',
+                count_word_one:'рецепта', count_word_many:'рецепти',
                 empty_fav:'Все още нямате избрани.', empty_fav_hint:'— ОТБЕЛЕЖЕТЕ С ◇ —',
                 empty_search:'Няма съвпадение с «{q}»', empty_selection:'Тази селекция е празна.',
                 load_more:'Зареди още', alert_empty:'Селекцията е празна. Изчистете филтрите.',
@@ -505,38 +488,27 @@
                 filter_tequila:'Текила', filter_whisky:'Уиски',
                 filter_eggs:'Яйца', filter_oatmeal:'Овесена каша', filter_pancakes:'Палачинки', filter_toast:'Тост', filter_yogurt:'Йогурт', filter_smoothie:'Смути купа', filter_granola:'Гранола', filter_waffles:'Гофрети',
                 settings_title:'ЕЗИК', settings_subtitle:'Език и мерни единици', settings_units:'Мерни единици',
-                share_text:'365 уникални коктейла 🍸', toast_link_copied:'Линкът е копиран ✓',
+                share_text:'Brunch 365 - рецепти за всеки ден', toast_link_copied:'Линкът е копиран ✓',
                 aria_share:'Сподели', aria_top:'Нагоре', aria_settings:'Език',
-                paywall_title:'ПРЕМИУМ', paywall_subtitle:'Отключи цялото ателие',
-                paywall_b1:'Всички 365 рецепти за коктейли', paywall_b2:'AI скенер за бутилки', paywall_b3:'Безплатни ъпдейти завинаги',
-                paywall_cta:'Отключи', paywall_restore:'Възстанови покупка',
-                locked_title:'Премиум рецепта', unlock_btn:'Отключи всички рецепти',
-                premium_app_only:'Достъпно в Android приложението', premium_unlocked:'Премиум отключен ✓',
-                settings_unlock:'Отключи Премиум', settings_premium_on:'Премиум ✓',
                 months:['Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември'],
             },
             en: {
-                tab_cocktails:'Cocktails', tab_mocktails:'Mocktails',
-                cotd_title:'Breakfast of the Day', cotd_see:'View recipe',
+                tab_cocktails:'Brunch', tab_mocktails:'Recipes',
+                cotd_title:'Brunch of the Day', cotd_see:'View recipe',
                 search_ph:'Search by name or ingredient',
                 fav_selected:'Favorites', fav_all:'All',
-                age_question:'Are you 18 or older?', age_yes:'Yes, I am',
-                age_no:'No — show mocktails',
-                age_disclaimer:'This site contains alcohol content. Access is for adults only.',
-                loader_text:'Preparing breakfast', intro_subtitle:'Breakfast Atelier', intro_status:'Preparing breakfast...',
-                scan_title:'ANALYSIS', scan_subtitle:'Detected bottles', scan_loading:'Analyzing the photo...',
-                scan_detected:'Detected spirits', scan_none:'No alcohol detected. Try a clearer photo.',
-                scan_suggestions:'Suggestions', close:'Close',
+                loader_text:'Preparing recipes', intro_subtitle:'Brunch every day', intro_status:'Preparing recipes...',
+                close:'Close',
                 ai_button:'Suggestions', ai_title:'SUGGESTION', ai_subtitle:'What shall we make?',
-                ai_scan_title:'Scan the bottles', ai_scan_desc:'AI suggests a cocktail from what you have',
-                ai_random_title:'Surprise me', ai_random_desc:'A random cocktail from the selection',
+                ai_scan_title:'Brunch idea', ai_scan_desc:'A suggestion from the collection',
+                ai_random_title:'Surprise me', ai_random_desc:'A random recipe from the selection',
                 ai_fav_show_all:'Show all', ai_fav_title:'Favorites',
                 ai_fav_desc_off:'Turn off the filter', ai_fav_desc_on:'Show your saved ones',
-                ai_stats_title:'Atelier analysis', ai_stats_desc:'Collection statistics',
+                ai_stats_title:'Recipe analysis', ai_stats_desc:'Collection statistics',
                 stats_title:'ATELIER', stats_subtitle:'Collection analysis', stats_cocktails:'Recipes',
                 stats_favorites:'Favorites', stats_distribution:'Distribution', stats_rec_badge:'Recommendation',
                 stats_time_morning:'something refreshing for brunch', stats_time_afternoon:'something light and fruity',
-                stats_time_evening:'an evening classic', stats_time_late:'something strong for late hours',
+                stats_time_evening:'a cozy brunch-for-dinner idea', stats_time_late:'something simple for later',
                 stats_rec_line1:"Right now, around {hour}:00, it's a good time for {rec}.",
                 stats_rec_line2:'Your most diverse category is {base} with {count} options.',
                 count_word_one:'recipe', count_word_many:'recipes',
@@ -548,38 +520,27 @@
                 filter_tequila:'Tequila', filter_whisky:'Whisky',
                 filter_eggs:'Eggs', filter_oatmeal:'Oatmeal', filter_pancakes:'Pancakes', filter_toast:'Toast', filter_yogurt:'Yogurt', filter_smoothie:'Smoothie bowl', filter_granola:'Granola', filter_waffles:'Waffles',
                 settings_title:'LANGUAGE', settings_subtitle:'Language & units', settings_units:'Measurement units',
-                share_text:'365 unique cocktails 🍸', toast_link_copied:'Link copied ✓',
+                share_text:'Brunch 365 - everyday brunch recipes', toast_link_copied:'Link copied ✓',
                 aria_share:'Share', aria_top:'Top', aria_settings:'Language',
-                paywall_title:'PREMIUM', paywall_subtitle:'Unlock the full atelier',
-                paywall_b1:'All 365 cocktail recipes', paywall_b2:'AI bottle scanner', paywall_b3:'Free updates forever',
-                paywall_cta:'Unlock', paywall_restore:'Restore purchase',
-                locked_title:'Premium recipe', unlock_btn:'Unlock all recipes',
-                premium_app_only:'Available in the Android app', premium_unlocked:'Premium unlocked ✓',
-                settings_unlock:'Unlock Premium', settings_premium_on:'Premium ✓',
                 months:['January','February','March','April','May','June','July','August','September','October','November','December'],
             },
             de: {
-                tab_cocktails:'Cocktails', tab_mocktails:'Alkoholfrei',
-                cotd_title:'Frühstück des Tages', cotd_see:'Rezept ansehen',
+                tab_cocktails:'Brunch', tab_mocktails:'Rezepte',
+                cotd_title:'Brunch des Tages', cotd_see:'Rezept ansehen',
                 search_ph:'Suche nach Name oder Zutat',
                 fav_selected:'Favoriten', fav_all:'Alle',
-                age_question:'Bist du 18 oder älter?', age_yes:'Ja, bin ich',
-                age_no:'Nein — Alkoholfreies zeigen',
-                age_disclaimer:'Diese Seite enthält Alkoholinhalte. Zugang nur für Erwachsene.',
-                loader_text:'Frühstück wird vorbereitet', intro_subtitle:'Frühstücksatelier', intro_status:'Frühstück wird vorbereitet...',
-                scan_title:'ANALYSE', scan_subtitle:'Erkannte Flaschen', scan_loading:'Foto wird analysiert...',
-                scan_detected:'Erkannte Spirituosen', scan_none:'Kein Alkohol erkannt. Versuche ein klareres Foto.',
-                scan_suggestions:'Vorschläge', close:'Schließen',
+                loader_text:'Rezepte werden vorbereitet', intro_subtitle:'Brunch jeden Tag', intro_status:'Rezepte werden vorbereitet...',
+                close:'Schließen',
                 ai_button:'Empfehlungen', ai_title:'EMPFEHLUNG', ai_subtitle:'Was sollen wir machen?',
-                ai_scan_title:'Flaschen scannen', ai_scan_desc:'KI schlägt einen Cocktail vor',
-                ai_random_title:'Überrasch mich', ai_random_desc:'Zufälliger Cocktail aus der Auswahl',
+                ai_scan_title:'Brunch-Idee', ai_scan_desc:'Ein Vorschlag aus der Sammlung',
+                ai_random_title:'Überrasch mich', ai_random_desc:'Zufälliges Rezept aus der Auswahl',
                 ai_fav_show_all:'Alle zeigen', ai_fav_title:'Favoriten',
                 ai_fav_desc_off:'Filter ausschalten', ai_fav_desc_on:'Gespeicherte zeigen',
-                ai_stats_title:'Atelier-Analyse', ai_stats_desc:'Sammlungsstatistik',
+                ai_stats_title:'Rezeptanalyse', ai_stats_desc:'Sammlungsstatistik',
                 stats_title:'ATELIER', stats_subtitle:'Sammlungsanalyse', stats_cocktails:'Recipes',
                 stats_favorites:'Favoriten', stats_distribution:'Verteilung', stats_rec_badge:'Empfehlung',
                 stats_time_morning:'etwas Erfrischendes zum Brunch', stats_time_afternoon:'etwas Leichtes und Fruchtiges',
-                stats_time_evening:'ein Abendklassiker', stats_time_late:'etwas Starkes für späte Stunden',
+                stats_time_evening:'eine gemütliche Brunch-Idee am Abend', stats_time_late:'etwas Einfaches für später',
                 stats_rec_line1:'Jetzt, gegen {hour}:00 Uhr, passt {rec}.',
                 stats_rec_line2:'Deine vielfältigste Kategorie ist {base} mit {count} Optionen.',
                 count_word_one:'Rezept', count_word_many:'Rezepte',
@@ -591,38 +552,27 @@
                 filter_tequila:'Tequila', filter_whisky:'Whisky',
                 filter_eggs:'Eier', filter_oatmeal:'Haferbrei', filter_pancakes:'Pfannkuchen', filter_toast:'Toast', filter_yogurt:'Joghurt', filter_smoothie:'Smoothie-Bowl', filter_granola:'Granola', filter_waffles:'Waffeln',
                 settings_title:'SPRACHE', settings_subtitle:'Sprache & Einheiten', settings_units:'Maßeinheiten',
-                share_text:'365 einzigartige Cocktails 🍸', toast_link_copied:'Link kopiert ✓',
+                share_text:'Brunch 365 - Brunch-Rezepte für jeden Tag', toast_link_copied:'Link kopiert ✓',
                 aria_share:'Teilen', aria_top:'Nach oben', aria_settings:'Sprache',
-                paywall_title:'PREMIUM', paywall_subtitle:'Schalte das ganze Atelier frei',
-                paywall_b1:'Alle 365 Cocktail-Rezepte', paywall_b2:'KI-Flaschenscanner', paywall_b3:'Kostenlose Updates für immer',
-                paywall_cta:'Freischalten', paywall_restore:'Kauf wiederherstellen',
-                locked_title:'Premium-Rezept', unlock_btn:'Alle Rezepte freischalten',
-                premium_app_only:'In der Android-App verfügbar', premium_unlocked:'Premium freigeschaltet ✓',
-                settings_unlock:'Premium freischalten', settings_premium_on:'Premium ✓',
                 months:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
             },
             es: {
-                tab_cocktails:'Cócteles', tab_mocktails:'Sin alcohol',
-                cotd_title:'Desayuno del día', cotd_see:'Ver receta',
+                tab_cocktails:'Brunch', tab_mocktails:'Recetas',
+                cotd_title:'Brunch del día', cotd_see:'Ver receta',
                 search_ph:'Buscar por nombre o ingrediente',
                 fav_selected:'Favoritos', fav_all:'Todos',
-                age_question:'¿Tienes 18 años o más?', age_yes:'Sí, los tengo',
-                age_no:'No — ver sin alcohol',
-                age_disclaimer:'Este sitio contiene contenido con alcohol. Acceso solo para adultos.',
-                loader_text:'Preparando el desayuno', intro_subtitle:'Taller de desayunos', intro_status:'Preparando el desayuno...',
-                scan_title:'ANÁLISIS', scan_subtitle:'Botellas detectadas', scan_loading:'Analizando la foto...',
-                scan_detected:'Licores detectados', scan_none:'No se detectó alcohol. Prueba con una foto más clara.',
-                scan_suggestions:'Sugerencias', close:'Cerrar',
+                loader_text:'Preparando recetas', intro_subtitle:'Brunch todos los días', intro_status:'Preparando recetas...',
+                close:'Cerrar',
                 ai_button:'Sugerencias', ai_title:'SUGERENCIA', ai_subtitle:'¿Qué preparamos?',
-                ai_scan_title:'Escanea las botellas', ai_scan_desc:'La IA sugiere un cóctel con lo que tienes',
-                ai_random_title:'Sorpréndeme', ai_random_desc:'Un cóctel al azar de la selección',
+                ai_scan_title:'Idea de brunch', ai_scan_desc:'Una sugerencia de la colección',
+                ai_random_title:'Sorpréndeme', ai_random_desc:'Una receta al azar de la selección',
                 ai_fav_show_all:'Mostrar todos', ai_fav_title:'Favoritos',
                 ai_fav_desc_off:'Quitar el filtro', ai_fav_desc_on:'Ver los guardados',
                 ai_stats_title:'Análisis del taller', ai_stats_desc:'Estadísticas de la colección',
                 stats_title:'TALLER', stats_subtitle:'Análisis de la colección', stats_cocktails:'Recipes',
                 stats_favorites:'Favoritos', stats_distribution:'Distribución', stats_rec_badge:'Recomendación',
                 stats_time_morning:'algo refrescante para el brunch', stats_time_afternoon:'algo ligero y afrutado',
-                stats_time_evening:'un clásico de noche', stats_time_late:'algo fuerte para la noche',
+                stats_time_evening:'una idea acogedora para la noche', stats_time_late:'algo sencillo para más tarde',
                 stats_rec_line1:'Ahora, sobre las {hour}:00, es buen momento para {rec}.',
                 stats_rec_line2:'Tu categoría más variada es {base} con {count} opciones.',
                 count_word_one:'recipe', count_word_many:'recipes',
@@ -634,41 +584,30 @@
                 filter_tequila:'Tequila', filter_whisky:'Whisky',
                 filter_eggs:'Huevos', filter_oatmeal:'Avena', filter_pancakes:'Tortitas', filter_toast:'Tostada', filter_yogurt:'Yogur', filter_smoothie:'Smoothie bowl', filter_granola:'Granola', filter_waffles:'Gofres',
                 settings_title:'IDIOMA', settings_subtitle:'Idioma y unidades', settings_units:'Unidades de medida',
-                share_text:'365 cócteles únicos 🍸', toast_link_copied:'Enlace copiado ✓',
+                share_text:'Brunch 365 - recetas de brunch para cada día', toast_link_copied:'Enlace copiado ✓',
                 aria_share:'Compartir', aria_top:'Arriba', aria_settings:'Idioma',
-                paywall_title:'PREMIUM', paywall_subtitle:'Desbloquea todo el taller',
-                paywall_b1:'Las 365 recetas de cócteles', paywall_b2:'Escáner de botellas con IA', paywall_b3:'Actualizaciones gratis para siempre',
-                paywall_cta:'Desbloquear', paywall_restore:'Restaurar compra',
-                locked_title:'Receta premium', unlock_btn:'Desbloquear todas las recetas',
-                premium_app_only:'Disponible en la app de Android', premium_unlocked:'Premium desbloqueado ✓',
-                settings_unlock:'Desbloquear Premium', settings_premium_on:'Premium ✓',
                 months:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
             },
             ru: {
-                tab_cocktails:'Коктейли', tab_mocktails:'Безалкогольные',
-                cotd_title:'Завтрак дня', cotd_see:'Смотреть рецепт',
+                tab_cocktails:'Бранч', tab_mocktails:'Рецепты',
+                cotd_title:'Бранч дня', cotd_see:'Смотреть рецепт',
                 search_ph:'Поиск по названию или ингредиенту',
                 fav_selected:'Избранное', fav_all:'Все',
-                age_question:'Вам есть 18 лет?', age_yes:'Да, есть',
-                age_no:'Нет — показать безалкогольные',
-                age_disclaimer:'Сайт содержит информацию об алкоголе. Доступ только для совершеннолетних.',
-                loader_text:'Готовим завтрак', intro_subtitle:'Ателье завтраков', intro_status:'Готовим завтрак...',
-                scan_title:'АНАЛИЗ', scan_subtitle:'Распознанные бутылки', scan_loading:'Анализирую фото...',
-                scan_detected:'Распознанные напитки', scan_none:'Алкоголь не распознан. Попробуйте более чёткое фото.',
-                scan_suggestions:'Предложения', close:'Закрыть',
+                loader_text:'Готовим рецепты', intro_subtitle:'Бранч каждый день', intro_status:'Готовим рецепты...',
+                close:'Закрыть',
                 ai_button:'Идеи', ai_title:'ПОДБОР', ai_subtitle:'Что приготовим?',
-                ai_scan_title:'Сфотографируй бутылки', ai_scan_desc:'ИИ предложит коктейль из наличного',
-                ai_random_title:'Сюрприз', ai_random_desc:'Случайный коктейль из подборки',
+                ai_scan_title:'Идея для бранча', ai_scan_desc:'Предложение из коллекции',
+                ai_random_title:'Сюрприз', ai_random_desc:'Случайный рецепт из подборки',
                 ai_fav_show_all:'Показать все', ai_fav_title:'Избранное',
                 ai_fav_desc_off:'Выключить фильтр', ai_fav_desc_on:'Показать сохранённые',
                 ai_stats_title:'Анализ ателье', ai_stats_desc:'Статистика коллекции',
-                stats_title:'АТЕЛЬЕ', stats_subtitle:'Анализ коллекции', stats_cocktails:'Коктейли',
+                stats_title:'АТЕЛЬЕ', stats_subtitle:'Анализ коллекции', stats_cocktails:'Рецепты',
                 stats_favorites:'Избранное', stats_distribution:'Распределение', stats_rec_badge:'Рекомендация',
                 stats_time_morning:'что-то освежающее к бранчу', stats_time_afternoon:'что-то лёгкое и фруктовое',
-                stats_time_evening:'классика на вечер', stats_time_late:'что-то крепкое на поздний час',
+                stats_time_evening:'уютная идея на вечер', stats_time_late:'что-то простое на поздний час',
                 stats_rec_line1:'Сейчас, около {hour}:00, подходит {rec}.',
                 stats_rec_line2:'Самая разнообразная категория — {base}, {count} вариантов.',
-                count_word_one:'коктейль', count_word_many:'коктейлей',
+                count_word_one:'рецепт', count_word_many:'рецептов',
                 empty_fav:'Пока нет избранного.', empty_fav_hint:'— ОТМЕТЬТЕ ◇ —',
                 empty_search:'Нет совпадений с «{q}»', empty_selection:'Этот раздел пуст.',
                 load_more:'Показать ещё', alert_empty:'Раздел пуст. Сбросьте фильтры.',
@@ -677,14 +616,8 @@
                 filter_tequila:'Текила', filter_whisky:'Виски',
                 filter_eggs:'Яйца', filter_oatmeal:'Овсянка', filter_pancakes:'Блины', filter_toast:'Тост', filter_yogurt:'Йогурт', filter_smoothie:'Смузи-боул', filter_granola:'Гранола', filter_waffles:'Вафли',
                 settings_title:'ЯЗЫК', settings_subtitle:'Язык и единицы', settings_units:'Единицы измерения',
-                share_text:'365 уникальных коктейлей 🍸', toast_link_copied:'Ссылка скопирована ✓',
+                share_text:'Brunch 365 - рецепты для бранча на каждый день', toast_link_copied:'Ссылка скопирована ✓',
                 aria_share:'Поделиться', aria_top:'Наверх', aria_settings:'Язык',
-                paywall_title:'ПРЕМИУМ', paywall_subtitle:'Откройте всё ателье',
-                paywall_b1:'Все 365 рецептов коктейлей', paywall_b2:'AI-сканер бутылок', paywall_b3:'Бесплатные обновления навсегда',
-                paywall_cta:'Открыть', paywall_restore:'Восстановить покупку',
-                locked_title:'Премиум-рецепт', unlock_btn:'Открыть все рецепты',
-                premium_app_only:'Доступно в приложении Android', premium_unlocked:'Премиум открыт ✓',
-                settings_unlock:'Открыть Премиум', settings_premium_on:'Премиум ✓',
                 months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
             },
         };
@@ -706,24 +639,8 @@
             document.documentElement.lang = LANG;
         })();
 
-        // --- Premium (freemium gating) ---
-        const FREE_COCKTAILS = 30;          // first N cocktail ids are free
-        const PREMIUM_SKU    = 'breakfast_premium';
-        const PRICE_LABEL    = '€2.99';
-        let isPremium = false;
-        try { isPremium = localStorage.getItem('brk365-premium') === '1'; } catch(e) {}
-
         function isLocked(item) {
-            // Mocktails always free; cocktails beyond the free sample need premium
-            return !isPremium && Number(item && item.id) > FREE_COCKTAILS;
-        }
-        function setPremium(v) {
-            isPremium = !!v;
-            try { localStorage.setItem('brk365-premium', v ? '1' : '0'); } catch(e){}
-            if (v) showToast(t('premium_unlocked'));
-            refreshDynamic();
-            const sm = document.getElementById('settings-modal');
-            if (sm && !sm.classList.contains('hidden')) openSettings();
+            return false;
         }
 
         function t(key, vars) {
@@ -789,11 +706,7 @@
                         ${unitBtn('oz','oz')}
                     </div>
                 </div>
-                <div class="mt-7">
-                    ${ isPremium
-                        ? `<div class="border border-gold text-gold-bright py-3 text-center font-roman text-xs tracking-[0.3em] uppercase">✦ ${escapeHtml(t('settings_premium_on'))} ✦</div>`
-                        : `<button onclick="closeSettings(); openPaywall()" class="btn-gold w-full py-3 font-roman text-xs tracking-[0.2em] uppercase">✦ ${escapeHtml(t('settings_unlock'))} · ${PRICE_LABEL} ✦</button>` }
-                </div>`;
+                `;
             document.getElementById('settings-modal').classList.remove('hidden');
         }
         function closeSettings(){ document.getElementById('settings-modal').classList.add('hidden'); }
@@ -819,89 +732,16 @@
             openSettings();
         }
 
-        // --- Paywall ---
-        function openPaywall() {
-            closeAISheet && closeAISheet();
-            closeSettings && closeSettings();
-            const benefit = (txt) => `
-                <div class="flex items-center gap-3 py-1.5">
-                    <span class="text-gold text-sm">◆</span>
-                    <span class="font-roman text-cream text-sm tracking-[0.06em]">${txt}</span>
-                </div>`;
-            document.getElementById('paywall-content').innerHTML =
-                benefit(t('paywall_b1')) + benefit(t('paywall_b2')) + benefit(t('paywall_b3'));
-            document.getElementById('paywall-cta').textContent = t('paywall_cta') + ' · ' + PRICE_LABEL;
-            document.getElementById('paywall-restore').textContent = t('paywall_restore');
-            // In the Android app → show buy/restore; on the web → show Google Play badge instead
-            const inApp = isTWA();
-            document.getElementById('paywall-cta').classList.toggle('hidden', !inApp);
-            document.getElementById('paywall-restore').classList.toggle('hidden', !inApp);
-            document.getElementById('paywall-play').classList.toggle('hidden', inApp);
-            document.getElementById('paywall-modal').classList.remove('hidden');
-        }
-        function closePaywall(){ document.getElementById('paywall-modal').classList.add('hidden'); }
-
         // True when running inside the installed Android app (TWA), false on the web
         function isTWA() {
             try {
-                return ('getDigitalGoodsService' in window) ||
-                       document.referrer.startsWith('android-app://') ||
+                return document.referrer.startsWith('android-app://') ||
                        new URLSearchParams(location.search).get('app') === '1';
             } catch(e) { return false; }
         }
 
-        async function buyPremium() {
-            // Google Play Billing via Digital Goods API (works inside the TWA / Android app)
-            if (!('getDigitalGoodsService' in window)) { showToast(t('premium_app_only')); return; }
-            try {
-                const svc = await window.getDigitalGoodsService('https://play.google.com/billing');
-                let amount = { currency: 'EUR', value: '3.99' };
-                try {
-                    const details = await svc.getDetails([PREMIUM_SKU]);
-                    if (details && details[0] && details[0].price) amount = details[0].price;
-                } catch(e) {}
-                const pr = new PaymentRequest(
-                    [{ supportedMethods: 'https://play.google.com/billing', data: { sku: PREMIUM_SKU } }],
-                    { total: { label: 'MixMaster Premium', amount } }
-                );
-                const resp = await pr.show();
-                const token = resp.details && resp.details.token;
-                try { if (svc.acknowledge) await svc.acknowledge(token, 'onetime'); } catch(e) {}
-                await resp.complete('success');
-                closePaywall();
-                setPremium(true);
-            } catch (e) {
-                showToast(t('premium_app_only'));
-            }
-        }
-
-        async function restorePremium() {
-            if (!('getDigitalGoodsService' in window)) { showToast(t('premium_app_only')); return; }
-            try {
-                const svc = await window.getDigitalGoodsService('https://play.google.com/billing');
-                const purchases = await svc.listPurchases();
-                if (purchases && purchases.some(p => p.itemId === PREMIUM_SKU)) {
-                    closePaywall();
-                    setPremium(true);
-                } else {
-                    showToast(t('premium_app_only'));
-                }
-            } catch (e) { showToast(t('premium_app_only')); }
-        }
-
-        // On launch inside the app, silently restore entitlement
-        async function checkPremiumEntitlement() {
-            if (isPremium) return;
-            if (!('getDigitalGoodsService' in window)) return;
-            try {
-                const svc = await window.getDigitalGoodsService('https://play.google.com/billing');
-                const purchases = await svc.listPurchases();
-                if (purchases && purchases.some(p => p.itemId === PREMIUM_SKU)) setPremium(true);
-            } catch (e) {}
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
-            applyTheme(); applyStaticI18n(); checkPremiumEntitlement();
+            applyTheme(); applyStaticI18n();
             // Show "Get it on Google Play" badge only on the web (not inside the app)
             if (!isTWA()) { var b=document.getElementById('play-badge'); if(b) b.classList.remove('hidden'); }
         });
@@ -925,31 +765,31 @@
                 </svg>
             </button>
             <div class="flex items-center justify-center mb-3 px-12">
-                <h1 class="font-body text-[3rem] leading-none text-cream tracking-[0.08em] font-semibold">Breakfast 365</h1>
+                <h1 class="font-body text-[3rem] leading-none text-cream tracking-[0.08em] font-semibold">Brunch 365</h1>
             </div>
             <div class="deco-divider mx-auto max-w-[280px]">
-                <span class="font-roman text-cream-dim text-[0.65rem] tracking-[0.34em] uppercase whitespace-nowrap">закуски всеки ден</span>
+                <span class="font-roman text-cream-dim text-[0.65rem] tracking-[0.34em] uppercase whitespace-nowrap">бранч всеки ден</span>
             </div>
         </header>
 
-        <!-- MODE TOGGLE hidden (mocktails only) -->
+        <!-- MODE TOGGLE hidden (single recipe mode) -->
         <div class="hidden mb-8 flex border border-gold-dim overflow-hidden">
             <button id="tab-cocktails" onclick="setMode('cocktails')"
                 style="background:var(--gold);color:var(--ink);"
                 class="flex-1 py-3 font-roman text-xs tracking-[0.3em] uppercase transition flex items-center justify-center gap-2">
-                <span>🍸</span><span data-i18n="tab_cocktails">Коктейли</span>
+                <span>◇</span><span data-i18n="tab_cocktails">Бранч</span>
             </button>
             <button id="tab-mocktails" onclick="setMode('mocktails')"
                 style="background:transparent;color:var(--cream-dim);"
                 class="flex-1 py-3 font-roman text-xs tracking-[0.3em] uppercase transition flex items-center justify-center gap-2">
-                <span>🍹</span><span data-i18n="tab_mocktails">Безалкохолни</span>
+                <span>◇</span><span data-i18n="tab_mocktails">Рецепти</span>
             </button>
         </div>
 
-        <!-- COCKTAIL OF THE DAY -->
+        <!-- BREAKFAST OF THE DAY -->
         <section id="cotd-section" class="hidden mb-10">
             <div class="deco-divider mb-5">
-                <span class="font-roman text-gold text-[0.6rem] tracking-[0.45em] uppercase whitespace-nowrap">✦ <span data-i18n="cotd_title">Коктейл на Деня</span> ✦</span>
+                <span class="font-roman text-gold text-[0.6rem] tracking-[0.45em] uppercase whitespace-nowrap">✦ <span data-i18n="cotd_title">Бранч на деня</span> ✦</span>
             </div>
             <div id="cotd-card" class="deco-card overflow-hidden cursor-pointer active:scale-[0.99] transition-transform" onclick="goToCOTD()">
                 <div class="relative">
@@ -962,7 +802,7 @@
                 <div class="p-5">
                     <div class="flex items-center justify-between gap-3 mb-2">
                         <div id="cotd-base" class="font-roman text-gold-dim text-xs tracking-[0.26em] uppercase"></div>
-                        <span id="cotd-icon" class="text-xl">🍳</span>
+                        <span id="cotd-icon" class="text-xl">◇</span>
                     </div>
                     <h2 id="cotd-name" class="font-body text-3xl leading-tight text-cream font-semibold mb-3"></h2>
                     <div class="flex items-center gap-2 text-gold font-roman text-xs tracking-[0.22em] uppercase">
@@ -1007,35 +847,6 @@
         </div>
 
         <!-- LOADER -->
-        <!-- AGE GATE -->
-        <div id="age-gate" class="hidden fixed inset-0 z-[60] bg-ink flex flex-col items-center justify-center p-8 text-center">
-            <div class="max-w-xs w-full">
-                <div class="flex items-center justify-center gap-4 mb-8">
-                    <span class="text-gold text-2xl">◆</span>
-                    <h1 class="font-display text-[2.2rem] leading-none text-gold tracking-[0.25em] pl-[0.25em]">BREAKFAST</h1>
-                    <span class="text-gold text-2xl">◆</span>
-                </div>
-                <div class="border border-gold-dim p-8 relative">
-                    <div class="absolute top-3 left-3 w-3 h-3 border-t border-l border-gold"></div>
-                    <div class="absolute top-3 right-3 w-3 h-3 border-t border-r border-gold"></div>
-                    <div class="absolute bottom-3 left-3 w-3 h-3 border-b border-l border-gold"></div>
-                    <div class="absolute bottom-3 right-3 w-3 h-3 border-b border-r border-gold"></div>
-                    <div class="text-gold text-5xl mb-5 font-display">18</div>
-                    <p data-i18n="age_question" class="font-roman text-cream text-sm tracking-[0.15em] uppercase mb-7">Навършили ли сте 18 години?</p>
-                    <div class="space-y-3">
-                        <button onclick="ageVerify(true)" data-i18n="age_yes" class="btn-gold w-full py-3 font-roman text-sm tracking-[0.3em] uppercase">
-                            Да, навършил/а съм
-                        </button>
-                        <button onclick="ageVerify(false)" data-i18n="age_no" class="w-full border border-gold-dim text-cream-dim py-3 font-roman text-xs tracking-[0.25em] uppercase hover:border-gold hover:text-cream transition">
-                            Не — покажи безалкохолни
-                        </button>
-                    </div>
-                </div>
-                <p data-i18n="age_disclaimer" class="font-body italic text-cream-dim/50 text-xs mt-6">Този сайт съдържа алкохолно съдържание. Достъпът е разрешен само за пълнолетни.</p>
-            </div>
-        </div>
-
-
         <div id="loader" class="fixed inset-0 z-50 bg-ink flex flex-col items-center justify-center p-8 hidden">
             <div class="flex items-center gap-4 mb-6">
                 <span class="text-gold text-3xl">◆</span>
@@ -1046,14 +857,14 @@
                 <div class="absolute inset-0 border border-gold-dim deco-spin" style="clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);"></div>
                 <div class="absolute inset-2 border border-gold deco-spin" style="animation-direction: reverse; animation-duration: 3s;"></div>
             </div>
-            <p id="loader-text" data-i18n="loader_text" class="font-roman text-xs tracking-[0.4em] uppercase text-cream-dim">Подготвяне на закуските</p>
+            <p id="loader-text" data-i18n="loader_text" class="font-roman text-xs tracking-[0.4em] uppercase text-cream-dim">Подготвяне на рецептите</p>
         </div>
 
         <!-- COCKTAIL LIST -->
         <div id="cocktail-list" class="space-y-12 min-h-[40vh]"></div>
 
         <!-- GET ON GOOGLE PLAY (web only) -->
-        <a id="play-badge" href="https://play.google.com/store/apps/details?id=eu.breakfast365.twa"
+        <a id="play-badge" href="https://play.google.com/store/apps/details?id=eu.brunch365.twa"
            target="_blank" rel="noopener"
            class="hidden mt-14 mx-auto w-[200px] block active:scale-95 transition">
             <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
@@ -1063,58 +874,6 @@
         <!-- FOOTER ORNAMENT -->
         <div class="deco-divider mt-16 mb-2 max-w-[200px] mx-auto">
             <span class="text-gold text-xs">❦</span>
-        </div>
-    </div>
-
-    <!-- Hidden camera input -->
-    <input type="file" id="camera-input" accept="image/*" capture="environment" class="hidden" onchange="handleCameraInput(this)">
-
-    <!-- SCAN RESULTS MODAL -->
-    <div id="scan-modal" class="fixed inset-0 z-50 hidden">
-        <div onclick="closeScan()" class="sheet-overlay absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
-        <div class="sheet-panel absolute bottom-0 left-0 right-0 max-w-md mx-auto max-h-[90vh] overflow-y-auto no-scrollbar">
-            <div class="bg-ink border-t border-gold p-6 pb-10 safe-bottom">
-                <div class="deco-divider mx-auto max-w-[100px] mb-5">
-                    <span class="text-gold text-sm">◆</span>
-                </div>
-                <h2 data-i18n="scan_title" class="font-display text-3xl text-gold tracking-[0.15em] text-center mb-1">АНАЛИЗ</h2>
-                <p class="font-body italic text-cream-dim text-sm text-center mb-6">— <span data-i18n="scan_subtitle">Разпознати бутилки</span> —</p>
-
-                <!-- Preview image -->
-                <div id="scan-preview-wrap" class="hidden mb-6">
-                    <div class="image-frame overflow-hidden h-40">
-                        <img id="scan-preview" class="w-full h-full object-cover opacity-70">
-                    </div>
-                </div>
-
-                <!-- Status / loading -->
-                <div id="scan-status" class="text-center py-6">
-                    <div class="relative w-10 h-10 mx-auto mb-4">
-                        <div class="absolute inset-0 border border-gold-dim deco-spin" style="clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);"></div>
-                    </div>
-                    <p data-i18n="scan_loading" class="font-roman text-xs tracking-[0.4em] uppercase text-cream-dim">Анализирам снимката...</p>
-                </div>
-
-                <!-- Detected spirits -->
-                <div id="scan-spirits" class="hidden mb-6">
-                    <div class="deco-divider mb-4">
-                        <span data-i18n="scan_detected" class="font-roman text-gold text-[0.6rem] tracking-[0.4em] uppercase whitespace-nowrap">Разпознати спиртове</span>
-                    </div>
-                    <div id="scan-spirits-list" class="flex flex-wrap gap-2 justify-center"></div>
-                </div>
-
-                <!-- Suggested cocktails -->
-                <div id="scan-results" class="hidden space-y-3"></div>
-
-                <!-- No match -->
-                <div id="scan-none" class="hidden text-center py-4">
-                    <p data-i18n="scan_none" class="font-body italic text-cream-dim">Не разпознах алкохол на снимката. Опитай с по-ясна снимка.</p>
-                </div>
-
-                <button onclick="closeScan()" data-i18n="close" class="w-full mt-6 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
-                    Затвори
-                </button>
-            </div>
         </div>
     </div>
 
@@ -1136,7 +895,7 @@
         <div class="max-w-md mx-auto">
             <button onclick="openAISheet()" class="btn-gold w-full py-4 px-6 flex items-center justify-center gap-3 text-sm uppercase active:scale-[0.98] transition relative">
                 <span>✦</span>
-                <span data-i18n="ai_button">Препоръка на бармана</span>
+                <span data-i18n="ai_button">Препоръка</span>
                 <span>✦</span>
             </button>
         </div>
@@ -1196,55 +955,16 @@
         </div>
     </div>
 
-    <!-- PAYWALL MODAL -->
-    <div id="paywall-modal" class="fixed inset-0 z-[55] hidden">
-        <div onclick="closePaywall()" class="sheet-overlay absolute inset-0 bg-black/85 backdrop-blur-sm"></div>
-        <div class="sheet-panel absolute bottom-0 left-0 right-0 max-w-md mx-auto">
-            <div class="bg-ink border-t border-gold p-6 pb-10 safe-bottom">
-                <div class="deco-divider mx-auto max-w-[100px] mb-5">
-                    <span class="text-gold text-sm">◆</span>
-                </div>
-                <div class="text-gold text-4xl text-center mb-2">✦</div>
-                <h2 data-i18n="paywall_title" class="font-display text-3xl text-gold tracking-[0.15em] text-center mb-1">ПРЕМИУМ</h2>
-                <p class="font-body italic text-cream-dim text-sm text-center mb-6">— <span data-i18n="paywall_subtitle">Отключи цялото ателие</span> —</p>
-                <div id="paywall-content" class="border border-gold-dim p-5 mb-6"></div>
-                <button id="paywall-cta" onclick="buyPremium()" class="btn-gold w-full py-4 font-roman text-sm tracking-[0.2em] uppercase">Отключи · €3.99</button>
-                <button id="paywall-restore" onclick="restorePremium()" class="w-full mt-3 text-cream-dim hover:text-gold py-2 font-roman text-[0.7rem] tracking-[0.25em] uppercase transition">Възстанови покупка</button>
-                <a id="paywall-play" href="https://play.google.com/store/apps/details?id=eu.breakfast365.twa" target="_blank" rel="noopener" class="hidden w-[200px] mx-auto block active:scale-95 transition">
-                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" class="w-full" loading="lazy">
-                </a>
-                <button onclick="closePaywall()" data-i18n="close" class="w-full mt-2 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
-                    Затвори
-                </button>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // === AGE GATE ===
+        // === LEGACY STARTUP ===
         let underAge = false;
 
-        function ageVerify(isAdult) {
-            document.getElementById('age-gate').classList.add('hidden');
-            document.getElementById('loader').classList.remove('hidden');
-            if (isAdult) {
-                try { localStorage.setItem('brk365-age-ok', '1'); } catch(e) {}
-                init();
-            } else {
-                // Under 18 — load only mocktails, hide cocktails tab
-                underAge = true;
-                const tabC = document.getElementById('tab-cocktails');
-                tabC.style.display = 'none';
-                // Pre-select mocktails tab
-                const tabM = document.getElementById('tab-mocktails');
-                tabM.style.background = 'var(--gold)'; tabM.style.color = 'var(--ink)';
-                tabC.style.background = 'transparent'; tabC.style.color = 'var(--cream-dim)';
-                currentMode = 'mocktails';
-                init();
-            }
+        function ageVerify() {
+            underAge = false;
+            init();
         }
 
-        // Check if already verified
+        // Start the breakfast collection directly.
         (function() {
             try {
                 document.getElementById('loader').classList.remove('hidden');
@@ -1256,7 +976,6 @@
         const BREAKFAST_GID      = "83321663";
         const apiUrl             = dataBase + `?ssid=${BREAKFAST_SHEET_ID}&gid=${BREAKFAST_GID}`;
         const mocktailsUrl       = apiUrl;
-        const geminiKey      = "AIzaSyB5PIZ1eDVvVUHieEtmMqPBlKYEn7jHPMg";
 
         // === STATE ===
         let allCocktails  = [];
@@ -1452,7 +1171,7 @@
             cotdImg.src = getRecipeImg(cotdCocktail);
             document.getElementById('cotd-name').textContent  = loc(cotdCocktail,'name');
             document.getElementById('cotd-base').textContent  = cotdCocktail.base ? '— ' + loc(cotdCocktail,'base') + ' —' : '';
-            document.getElementById('cotd-icon').textContent  = cotdCocktail.icon || '🍸';
+            document.getElementById('cotd-icon').textContent  = '◇';
             document.getElementById('cotd-day').textContent   = today.getDate();
             document.getElementById('cotd-month').textContent = months[today.getMonth()];
 
@@ -1504,6 +1223,7 @@
             const localData = Array.isArray(window.BREAKFAST_DATA) ? window.BREAKFAST_DATA : [];
             if (localData.length) {
                 hydrateBreakfastData(localData);
+                return;
             }
 
             try {
@@ -1567,21 +1287,12 @@
                         <div class="p-5">
                             <div class="flex items-center justify-between gap-3 mb-2">
                                 <span class="font-roman text-xs tracking-[0.26em] uppercase text-gold-dim">${escapeHtml(loc(d,'base') || 'Закуска')}</span>
-                                <span class="text-xl" aria-hidden="true">${escapeHtml(d.icon || '🍳')}</span>
+                                <span class="text-xl" aria-hidden="true">◇</span>
                             </div>
                             <h2 class="font-body text-3xl leading-tight text-cream font-semibold">${escapeHtml(loc(d,'name'))}</h2>
-                            <p class="mt-2 text-cream-dim italic">${d.ingredients ? `${String(loc(d,'ingredients')).split(',').filter(Boolean).length} съставки` : 'Рецепта'} · Breakfast 365</p>
+                            <p class="mt-2 text-cream-dim italic">${d.ingredients ? `${String(loc(d,'ingredients')).split(',').filter(Boolean).length} съставки` : 'Рецепта'} · Brunch 365</p>
                         </div>
 
-                        ${ isLocked(d) ? `
-                        <!-- Locked (premium) -->
-                        <div class="px-5 pb-6 pt-2 border-t border-gold-dim/30 text-center">
-                            <div class="text-gold text-3xl mb-3 opacity-80">🔒</div>
-                            <div class="font-roman text-gold text-xs tracking-[0.3em] uppercase mb-5">${escapeHtml(t('locked_title'))}</div>
-                            <button onclick="openPaywall()" class="btn-gold w-full py-3 font-roman text-xs tracking-[0.2em] uppercase">
-                                ${escapeHtml(t('unlock_btn'))} · ${PRICE_LABEL}
-                            </button>
-                        </div>` : `
                         <!-- Ingredients -->
                         ${d.ingredients ? `
                         <div class="px-5 pb-5">
@@ -1601,7 +1312,7 @@
                             <div class="recipe-content text-cream/80 text-base">
                                 ${convertUnits(loc(d,'recipe') || '')}
                             </div>
-                        </div>` }
+                        </div>
                     </article>
                 `;
         }
@@ -1700,123 +1411,6 @@
             showFavoritesOnly = !showFavoritesOnly;
             window.scrollTo({ top: 0, behavior: 'smooth' });
             render();
-        }
-
-        // === BOTTLE SCANNER ===
-        function openScanner() {
-            closeAISheet();
-            if (!isPremium) { openPaywall(); return; }
-            document.getElementById('camera-input').click();
-        }
-
-        function handleCameraInput(input) {
-            if (!input.files || !input.files[0]) return;
-            const file = input.files[0];
-            input.value = '';
-
-            // Show modal with loading state
-            document.getElementById('scan-status').classList.remove('hidden');
-            document.getElementById('scan-spirits').classList.add('hidden');
-            document.getElementById('scan-results').classList.add('hidden');
-            document.getElementById('scan-none').classList.add('hidden');
-            document.getElementById('scan-preview-wrap').classList.remove('hidden');
-            document.getElementById('scan-modal').classList.remove('hidden');
-
-            // Preview image
-            const reader = new FileReader();
-            reader.onload = async (e) => {
-                const dataUrl = e.target.result;
-                document.getElementById('scan-preview').src = dataUrl;
-
-                const base64 = dataUrl.split(',')[1];
-                const mime   = file.type || 'image/jpeg';
-                await analyzeBottles(base64, mime);
-            };
-            reader.readAsDataURL(file);
-        }
-
-        async function analyzeBottles(base64, mime) {
-            try {
-                const resp = await fetch(
-                    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiKey}`,
-                    {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            contents: [{
-                                parts: [
-                                    { inline_data: { mime_type: mime, data: base64 } },
-                                    { text: 'Погледни снимката. Изброй само алкохолните напитки / спиртове, които виждаш на бутилките (напр. водка, джин, ром, текила, уиски, бърбън, мескал, коняк, ликьор и т.н.). Върни САМО JSON масив с имената на български, без обяснения. Пример: ["водка","джин"]. Ако не виждаш алкохол, върни [].' }
-                                ]
-                            }]
-                        })
-                    }
-                );
-
-                const json = await resp.json();
-                const text = json.candidates?.[0]?.content?.parts?.[0]?.text || '[]';
-
-                // Extract JSON array from response
-                const match = text.match(/\[[\s\S]*?\]/);
-                const spirits = match ? JSON.parse(match[0]) : [];
-
-                showScanResults(spirits);
-            } catch (e) {
-                showScanResults([]);
-            }
-        }
-
-        function showScanResults(spirits) {
-            document.getElementById('scan-status').classList.add('hidden');
-
-            if (!spirits.length) {
-                document.getElementById('scan-none').classList.remove('hidden');
-                return;
-            }
-
-            // Show detected spirits as tags
-            const spiritsEl = document.getElementById('scan-spirits');
-            document.getElementById('scan-spirits-list').innerHTML = spirits.map(s =>
-                `<span class="border border-gold-dim text-gold font-roman text-xs tracking-[0.2em] uppercase px-3 py-1">${escapeHtml(s)}</span>`
-            ).join('');
-            spiritsEl.classList.remove('hidden');
-
-            // Match cocktails
-            const spiritsLower = spirits.map(s => s.toLowerCase());
-            const matched = allCocktails.filter(c => {
-                if (!c || !c.name) return false;
-                const base = (c.base || '').toLowerCase();
-                return spiritsLower.some(s => base.includes(s) || s.includes(base.split(' ')[0]));
-            });
-
-            // Shuffle and take up to 5
-            const picks = matched.sort(() => Math.random() - 0.5).slice(0, 5);
-
-            if (!picks.length) {
-                document.getElementById('scan-none').classList.remove('hidden');
-                return;
-            }
-
-            const resultsEl = document.getElementById('scan-results');
-            resultsEl.innerHTML = `
-                <div class="deco-divider mb-4">
-                    <span class="font-roman text-gold text-[0.6rem] tracking-[0.4em] uppercase whitespace-nowrap">${t('scan_suggestions')} · ${toRoman(picks.length)}</span>
-                </div>
-                ${picks.map(c => `
-                <button onclick="closeScan(); highlightCocktail(allCocktails.find(x=>x&&x.name==='${escapeHtml(c.name).replace(/'/g,"\\'")}'))"
-                        class="w-full border border-gold-dim hover:border-gold hover:bg-ink-soft active:scale-[0.99] transition p-4 flex items-center gap-4 text-left group">
-                    <span class="text-2xl w-8 text-center">${escapeHtml(c.icon || '🍸')}</span>
-                    <div class="flex-1 min-w-0">
-                        <div class="font-roman text-cream tracking-[0.1em] uppercase text-sm group-hover:text-gold-bright transition truncate">${escapeHtml(loc(c,'name'))}</div>
-                        <div class="font-body italic text-xs text-cream-dim">${escapeHtml(loc(c,'base') || '')}</div>
-                    </div>
-                    <span class="text-gold-dim group-hover:text-gold transition shrink-0">›</span>
-                </button>`).join('')}`;
-            resultsEl.classList.remove('hidden');
-        }
-
-        function closeScan() {
-            document.getElementById('scan-modal').classList.add('hidden');
         }
 
         // === AI ACTION SHEET ===
@@ -1965,7 +1559,7 @@
         // === SHARE ===
         async function shareApp() {
             const url  = window.location.href;
-            const data = { title: 'MixMaster · Cocktail Atelier', text: t('share_text'), url };
+            const data = { title: 'Brunch 365', text: t('share_text'), url };
             if (navigator.share) {
                 try { await navigator.share(data); return; } catch (e) {}
             }
@@ -1992,7 +1586,7 @@
         }, { passive: true });
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') { closeAISheet(); closeStats(); closeScan(); closeSettings(); closePaywall(); }
+            if (e.key === 'Escape') { closeAISheet(); closeStats(); closeSettings(); }
         });
 
         // Init only if age already verified (new users go through age gate first)
