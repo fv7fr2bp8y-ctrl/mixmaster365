@@ -1,4 +1,4 @@
-const CACHE_NAME = "healthy-gut-365-v12";
+const CACHE_NAME = "healthy-gut-365-v13";
 const ASSETS = [
   "/free-from/",
   "/free-from/index.html",
