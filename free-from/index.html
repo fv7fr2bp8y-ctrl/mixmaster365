@@ -75,21 +75,34 @@
       padding: 32px;
     }
     .splash-logo-wrap {
-      width: 112px;
-      height: 112px;
+      position: relative;
+      width: 146px;
+      height: 146px;
       display: grid;
       place-items: center;
-      margin-bottom: 24px;
-      border: 1px solid rgba(102,132,93,.28);
-      background: rgba(255,250,240,.72);
-      box-shadow: 0 18px 48px rgba(48,39,29,.10);
+      margin-bottom: 20px;
       animation: splashReveal 1.2s cubic-bezier(.16,1,.3,1) both;
     }
+    .splash-logo-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border-radius: 999px;
+      background: conic-gradient(from 210deg, transparent 0 22%, rgba(102,132,93,.46) 33%, rgba(194,133,45,.55) 52%, transparent 66% 100%);
+      -webkit-mask: radial-gradient(circle, transparent 58%, #000 59% 64%, transparent 65%);
+      mask: radial-gradient(circle, transparent 58%, #000 59% 64%, transparent 65%);
+      opacity: .7;
+      animation: haloTurn 5.2s linear infinite;
+    }
     .splash-logo {
-      width: 88px;
-      height: 88px;
+      position: relative;
+      z-index: 1;
+      width: 108px;
+      height: 108px;
       object-fit: contain;
       display: block;
+      filter: drop-shadow(0 20px 34px rgba(48,39,29,.16));
+      animation: logoBreathe 3.4s ease-in-out .9s infinite;
     }
     .splash-title {
       margin: 15px 0 8px;
@@ -121,6 +134,24 @@
       opacity: 0;
       animation: splashFade 1.5s ease 2s forwards;
     }
+    .splash-progress {
+      position: relative;
+      width: 158px;
+      height: 1px;
+      margin-top: 18px;
+      overflow: hidden;
+      background: linear-gradient(90deg, transparent, rgba(216,197,170,.8), transparent);
+      opacity: 0;
+      animation: splashFade 1.2s ease 2.2s forwards;
+    }
+    .splash-progress::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 45%;
+      background: linear-gradient(90deg, transparent, rgba(194,133,45,.86), rgba(102,132,93,.78), transparent);
+      animation: progressGlide 1.9s cubic-bezier(.65,0,.35,1) infinite;
+    }
     .img-fallback {
       background:
         radial-gradient(circle at 50% 38%, rgba(102,132,93,.18), transparent 34%),
@@ -133,6 +164,34 @@
       to { opacity: 1; transform: none; }
     }
     @keyframes splashFade { to { opacity: 1; } }
+    @keyframes haloTurn { to { transform: rotate(360deg); } }
+    @keyframes logoBreathe {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-4px) scale(1.025); }
+    }
+    @keyframes progressGlide {
+      from { transform: translateX(-110%); }
+      to { transform: translateX(245%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .splash-logo-wrap,
+      .splash-logo-wrap::before,
+      .splash-logo,
+      .splash-title,
+      .splash-subtitle,
+      .splash-status,
+      .splash-progress,
+      .splash-progress::after,
+      .recipe-card {
+        animation: none !important;
+      }
+      .splash-title,
+      .splash-subtitle,
+      .splash-status,
+      .splash-progress {
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 <body>
@@ -144,6 +203,7 @@
       <h1 class="splash-title">Healthy Gut 365</h1>
       <p class="splash-subtitle">Gluten Free · Dairy Free</p>
       <div class="splash-status">Подготвяне на рецептите</div>
+      <div class="splash-progress" aria-hidden="true"></div>
     </div>
   </div>
 
