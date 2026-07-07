@@ -1,3 +1,29 @@
+# MixMaster365 Apps
+
+This repository now contains several related recipe/drink PWAs:
+
+- Main MixMaster cocktail/mocktail app at `/`
+- Brunch 365 at `/breakfast/`
+- Healthy Gut 365 at `/free-from/`
+
+For the current Healthy Gut work, read:
+
+- `HEALTHY_GUT_README.md`
+- `OTHER_CHAT_HANDOFF.md`
+- `google-play-assets/PLAY_PREP.md`
+
+Latest Healthy Gut status as of 2026-07-07:
+
+- App file: `free-from/index.html`
+- Recipes in app: 36
+- Drive images in app: 36
+- Google Sheet recipes: 365
+- Ready image rows in sheet: 36
+- Current service worker cache: `healthy-gut-365-v18`
+- Production image policy: Google Drive + Google Sheet, not local recipe image paths.
+
+---
+
 # MixMaster · Atelier 🍸
 
 Art-Deco каталог с **365 коктейла + 365 безалкохолни** напитки. PWA, 5 езика, AI скенер за бутилки, ml/oz, Cocktail of the Day.
