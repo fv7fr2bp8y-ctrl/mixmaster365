@@ -1,4 +1,4 @@
-const CACHE_NAME = 'brunch365-v14';
+const CACHE_NAME = 'brunch365-v15';
 const STATIC = ['/breakfast/', '/breakfast/index.html', '/breakfast/data.js', '/breakfast/manifest.json', '/breakfast/icon-192.png', '/breakfast/icon-512.png', '/breakfast/logo-source.png', 'https://cdn.tailwindcss.com'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(STATIC.map(u=>new Request(u,{mode:'no-cors'}))).catch(()=>{}))); self.skipWaiting(); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k))))); self.clients.claim(); });

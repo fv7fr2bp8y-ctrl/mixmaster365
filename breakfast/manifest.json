@@ -1,7 +1,7 @@
 {
   "name": "Brunch 365",
   "short_name": "Brunch 365",
-  "description": "365 закуски с рецепти и снимки — по една за всеки ден.",
+  "description": "365 бранч рецепти със снимки — по една за всеки ден.",
   "start_url": "/breakfast/",
   "scope": "/breakfast/",
   "display": "standalone",
