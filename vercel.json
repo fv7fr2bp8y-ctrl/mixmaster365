@@ -5,6 +5,31 @@
       "source": "/breakfast/:path*",
       "has": [{ "type": "host", "value": "breakfast.freefrom365.com" }],
       "destination": "/breakfast/:path*"
+    },
+    {
+      "source": "/free-from/:path*",
+      "has": [{ "type": "host", "value": "healthy-gut.freefrom365.com" }],
+      "destination": "/free-from/:path*"
+    },
+    {
+      "source": "/gluten-free/:path*",
+      "has": [{ "type": "host", "value": "gluten-free.freefrom365.com" }],
+      "destination": "/gluten-free/:path*"
+    },
+    {
+      "source": "/dairy-free/:path*",
+      "has": [{ "type": "host", "value": "dairy-free.freefrom365.com" }],
+      "destination": "/dairy-free/:path*"
+    },
+    {
+      "source": "/meat-free/:path*",
+      "has": [{ "type": "host", "value": "meat-free.freefrom365.com" }],
+      "destination": "/meat-free/:path*"
+    },
+    {
+      "source": "/plant-based/:path*",
+      "has": [{ "type": "host", "value": "plant-based.freefrom365.com" }],
+      "destination": "/plant-based/:path*"
     }
   ],
   "redirects": [
@@ -16,14 +41,44 @@
     },
     {
       "source": "/",
+      "has": [{ "type": "host", "value": "healthy-gut.freefrom365.com" }],
+      "destination": "/free-from/",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "gluten-free.freefrom365.com" }],
+      "destination": "/gluten-free/",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "dairy-free.freefrom365.com" }],
+      "destination": "/dairy-free/",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "meat-free.freefrom365.com" }],
+      "destination": "/meat-free/",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "plant-based.freefrom365.com" }],
+      "destination": "/plant-based/",
+      "permanent": false
+    },
+    {
+      "source": "/",
       "has": [{ "type": "host", "value": "freefrom365.com" }],
-      "destination": "https://breakfast.freefrom365.com/breakfast/",
+      "destination": "https://healthy-gut.freefrom365.com/free-from/",
       "permanent": false
     },
     {
       "source": "/",
       "has": [{ "type": "host", "value": "www.freefrom365.com" }],
-      "destination": "https://breakfast.freefrom365.com/breakfast/",
+      "destination": "https://healthy-gut.freefrom365.com/free-from/",
       "permanent": false
     }
   ]

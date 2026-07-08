@@ -4,34 +4,11 @@ Domain bought at Namecheap:
 
 - `freefrom365.com`
 
-## Phase 1: breakfast only
+GitHub Pages stays as it is for the cocktail site. Do not change the existing `CNAME` file with `mixmaster365.eu`.
 
-For now GitHub Pages stays as it is for the cocktail site. Do not change the existing `CNAME` file with `mixmaster365.eu`.
+## Active Vercel apps
 
-The first Vercel app/domain setup is only:
-
-- `breakfast.freefrom365.com` -> `breakfast/`
-- `freefrom365.com` -> redirects to `breakfast.freefrom365.com`
-- `www.freefrom365.com` -> redirects to `breakfast.freefrom365.com`
-
-The current `vercel.json` is intentionally limited to this Phase 1 setup.
-
-## Later app subdomains
-
-- `breakfast.freefrom365.com` -> `breakfast/`
-- `healthy-gut.freefrom365.com` -> `free-from/`
-- `gluten-free.freefrom365.com` -> `gluten-free/`
-- `dairy-free.freefrom365.com` -> `dairy-free/`
-- `meat-free.freefrom365.com` -> `meat-free/`
-- `plant-based.freefrom365.com` -> `plant-based/`
-
-## Best hosting approach
-
-Use Vercel if we want each subdomain to behave like a separate app root.
-
-GitHub Pages can host the folder paths, but mapping many subdomains to different folders is awkward without a routing layer.
-
-Later, when we are ready, `vercel.json` can be expanded with subdomain rewrites:
+This repo uses `vercel.json` to route each subdomain to its static app folder:
 
 ```txt
 breakfast.freefrom365.com   -> /breakfast/
@@ -42,75 +19,95 @@ meat-free.freefrom365.com   -> /meat-free/
 plant-based.freefrom365.com -> /plant-based/
 ```
 
-For Phase 1 the root domain redirects to `breakfast.freefrom365.com`.
+The root domain redirects to the main Healthy Gut app:
 
-## Vercel project setup
+```txt
+freefrom365.com     -> healthy-gut.freefrom365.com/free-from/
+www.freefrom365.com -> healthy-gut.freefrom365.com/free-from/
+```
 
-1. Go to Vercel and import this GitHub repo.
-2. Framework preset: `Other`.
-3. Build command: leave empty.
-4. Output directory: leave empty.
-5. Deploy.
-6. Project -> Settings -> Domains, add only:
+## Vercel domains
+
+In Vercel Project -> Settings -> Domains, add:
 
 ```txt
 freefrom365.com
 www.freefrom365.com
 breakfast.freefrom365.com
+healthy-gut.freefrom365.com
+gluten-free.freefrom365.com
+dairy-free.freefrom365.com
+meat-free.freefrom365.com
+plant-based.freefrom365.com
 ```
+
+If Vercel offers "Redirect apex domains to www", leave it off. Redirects are handled in `vercel.json`.
 
 ## Namecheap DNS records
 
-If using Vercel, add the domains in Vercel first. Vercel will show the exact DNS target, usually:
+In Namecheap -> Domain List -> `freefrom365.com` -> Manage -> Advanced DNS, keep these records:
 
 ```txt
-Type: CNAME
-Host: breakfast
-Value: cname.vercel-dns.com
-```
-
-For the apex domain:
-
-```txt
-Type: A
+Type: A Record
 Host: @
 Value: 76.76.21.21
+TTL: Automatic
 ```
 
-Then set `www`:
-
 ```txt
-Type: CNAME
+Type: CNAME Record
 Host: www
 Value: cname.vercel-dns.com
+TTL: Automatic
 ```
-
-Later, add more CNAME records only when we activate those apps:
 
 ```txt
-healthy-gut -> cname.vercel-dns.com
-gluten-free -> cname.vercel-dns.com
-dairy-free -> cname.vercel-dns.com
-meat-free -> cname.vercel-dns.com
-plant-based -> cname.vercel-dns.com
+Type: CNAME Record
+Host: breakfast
+Value: cname.vercel-dns.com
+TTL: Automatic
 ```
-
-## Suggested routing
-
-If all apps stay in this static repo, configure hosting redirects/rewrite rules:
 
 ```txt
-breakfast.freefrom365.com   -> /breakfast/index.html
-healthy-gut.freefrom365.com -> /free-from/index.html
-gluten-free.freefrom365.com -> /gluten-free/index.html
-dairy-free.freefrom365.com  -> /dairy-free/index.html
-meat-free.freefrom365.com   -> /meat-free/index.html
-plant-based.freefrom365.com -> /plant-based/index.html
+Type: CNAME Record
+Host: healthy-gut
+Value: cname.vercel-dns.com
+TTL: Automatic
 ```
+
+```txt
+Type: CNAME Record
+Host: gluten-free
+Value: cname.vercel-dns.com
+TTL: Automatic
+```
+
+```txt
+Type: CNAME Record
+Host: dairy-free
+Value: cname.vercel-dns.com
+TTL: Automatic
+```
+
+```txt
+Type: CNAME Record
+Host: meat-free
+Value: cname.vercel-dns.com
+TTL: Automatic
+```
+
+```txt
+Type: CNAME Record
+Host: plant-based
+Value: cname.vercel-dns.com
+TTL: Automatic
+```
+
+Remove Namecheap parking, URL redirect, or old records for the same hosts.
 
 ## Google Play / PWA notes
 
-Each app already has its own:
+Each app has its own:
 
 - `manifest.json`
 - `sw.js`
@@ -119,4 +116,4 @@ Each app already has its own:
 - local favorites storage key
 - route scope
 
-For separate subdomains, we may later change each manifest `start_url` and `scope` from folder paths to `/`, depending on hosting layout.
+The apps currently install with folder scopes such as `/breakfast/` and `/free-from/`. That is expected for this single static Vercel project setup.

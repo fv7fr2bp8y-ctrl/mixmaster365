@@ -1,11 +1,11 @@
-const CACHE_NAME = "healthy-gut-365-v19";
+const CACHE_NAME = "plant-based-365-v1";
 const ASSETS = [
-  "/free-from/",
-  "/free-from/index.html",
-  "/free-from/manifest.json",
-  "/free-from/icon-192.png",
-  "/free-from/icon-512.png",
-  "/free-from/logo-source.png"
+  "/plant-based/",
+  "/plant-based/index.html",
+  "/plant-based/manifest.json",
+  "/plant-based/icon-192.png",
+  "/plant-based/icon-512.png",
+  "/plant-based/logo-source.png"
 ];
 
 self.addEventListener("install", event => {
@@ -23,6 +23,6 @@ self.addEventListener("activate", event => {
 self.addEventListener("fetch", event => {
   if (event.request.method !== "GET") return;
   event.respondWith(
-    caches.match(event.request).then(cached => cached || fetch(event.request).catch(() => caches.match("/free-from/index.html")))
+    caches.match(event.request).then(cached => cached || fetch(event.request).catch(() => caches.match("/plant-based/index.html")))
   );
 });

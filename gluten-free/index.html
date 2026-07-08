@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#f7efe1">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Healthy Gut 365">
+  <meta name="apple-mobile-web-app-title" content="Gluten Free 365">
   <link rel="manifest" href="manifest.json">
-  <title>Healthy Gut 365 · Без глутен и млечни</title>
+  <title>Gluten Free 365 · Без глутен</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -224,13 +224,13 @@
   </style>
 </head>
 <body>
-  <div id="app-loader" aria-label="Healthy Gut 365">
+  <div id="app-loader" aria-label="Gluten Free 365">
     <div class="splash-content">
       <div class="splash-logo-wrap">
         <img class="splash-logo" src="logo-source.png" alt="">
       </div>
-      <h1 class="splash-title">Healthy Gut 365</h1>
-      <p class="splash-subtitle">Gluten Free · Dairy Free</p>
+      <h1 class="splash-title">Gluten Free 365</h1>
+      <p class="splash-subtitle">Gluten Free</p>
       <div class="splash-status">Подготвяне на рецептите</div>
       <div class="splash-progress" aria-hidden="true"></div>
     </div>
@@ -239,15 +239,13 @@
   <main class="app">
     <header class="pb-6 text-center">
       <div class="flex items-center justify-between mb-5">
-        <a href="../breakfast/" class="w-10 h-10 border border-[var(--line)] grid place-items-center text-[var(--sage)] active:scale-95" aria-label="Назад">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        </a>
+        <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="w-10 h-10 border border-[var(--line)] grid place-items-center text-[var(--sage)] active:scale-95" aria-label="Нагоре"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
         <button id="shuffleBtn" class="w-10 h-10 border border-[var(--line)] grid place-items-center text-[var(--sage)] active:scale-95" aria-label="Размеси">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="m15 15 6 6"/><path d="m4 4 5 5"/></svg>
         </button>
       </div>
-      <p class="font-[Forum] text-xs tracking-[.34em] uppercase text-[var(--sage)]">Gluten Free · Dairy Free</p>
-      <h1 class="text-[3rem] leading-none tracking-[.08em] font-semibold mt-1">Healthy Gut 365</h1>
+      <p class="font-[Forum] text-xs tracking-[.34em] uppercase text-[var(--sage)]">Gluten Free</p>
+      <h1 class="text-[3rem] leading-none tracking-[.08em] font-semibold mt-1">Gluten Free 365</h1>
       <div class="rule max-w-[280px] mx-auto mt-3"><span class="font-[Forum] text-xs tracking-[.28em] uppercase">чиста кухня</span></div>
     </header>
 
@@ -1079,7 +1077,7 @@
     const PAGE_SIZE = 20;
     let currentPage = 1;
     let favorites = [];
-    try { favorites = JSON.parse(localStorage.getItem("freefrom-favorites") || "[]"); } catch(e) {}
+    try { favorites = JSON.parse(localStorage.getItem("glutenfree-favorites") || "[]"); } catch(e) {}
 
     const $ = (id) => document.getElementById(id);
     const escapeHtml = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -1102,7 +1100,7 @@
       return result;
     }
 
-    function saveFavs() { try { localStorage.setItem("freefrom-favorites", JSON.stringify(favorites)); } catch(e) {} }
+    function saveFavs() { try { localStorage.setItem("glutenfree-favorites", JSON.stringify(favorites)); } catch(e) {} }
     function toggleFav(id) {
       favorites = isFav(id) ? favorites.filter(x => x !== id) : favorites.concat(id);
       saveFavs();
@@ -1149,7 +1147,7 @@
                 <span class="text-xl text-[var(--line)]" aria-hidden="true">◇</span>
               </div>
               <h2 class="text-3xl leading-tight font-semibold">${escapeHtml(r.name)}</h2>
-              <p class="mt-2 text-[var(--muted)] italic">${escapeHtml(r.tag)} · без глутен · без млечни</p>
+              <p class="mt-2 text-[var(--muted)] italic">${escapeHtml(r.tag)} · без глутен</p>
             </div>
             <div class="px-5 pb-5">
               <div class="deco-divider mb-4"><span class="font-[Forum] text-xs tracking-[.28em] uppercase text-[var(--honey)]">съставки</span></div>
@@ -1183,7 +1181,7 @@
       $("modalImg").src = imageSrc(r.img);
       $("modalTitle").textContent = r.name;
       $("modalTag").textContent = `${r.cat} · ${r.time}`;
-      $("modalMeta").textContent = `${r.tag} · без глутен · без млечни`;
+      $("modalMeta").textContent = `${r.tag} · без глутен`;
       $("modalFav").textContent = isFav(r.id) ? "◆" : "◇";
       $("modalFav").onclick = () => toggleFav(r.id);
       $("modalIngredients").innerHTML = r.ingredients.map(x => `<li class="flex gap-3"><span class="text-[var(--sage)]">◆</span><span>${escapeHtml(x)}</span></li>`).join("");

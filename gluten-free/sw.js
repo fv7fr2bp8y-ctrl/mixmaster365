@@ -1,11 +1,11 @@
-const CACHE_NAME = "healthy-gut-365-v19";
+const CACHE_NAME = "gluten-free-365-v1";
 const ASSETS = [
-  "/free-from/",
-  "/free-from/index.html",
-  "/free-from/manifest.json",
-  "/free-from/icon-192.png",
-  "/free-from/icon-512.png",
-  "/free-from/logo-source.png"
+  "/gluten-free/",
+  "/gluten-free/index.html",
+  "/gluten-free/manifest.json",
+  "/gluten-free/icon-192.png",
+  "/gluten-free/icon-512.png",
+  "/gluten-free/logo-source.png"
 ];
 
 self.addEventListener("install", event => {
@@ -23,6 +23,6 @@ self.addEventListener("activate", event => {
 self.addEventListener("fetch", event => {
   if (event.request.method !== "GET") return;
   event.respondWith(
-    caches.match(event.request).then(cached => cached || fetch(event.request).catch(() => caches.match("/free-from/index.html")))
+    caches.match(event.request).then(cached => cached || fetch(event.request).catch(() => caches.match("/gluten-free/index.html")))
   );
 });
