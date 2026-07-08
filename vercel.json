@@ -46,6 +46,12 @@
     },
     {
       "source": "/",
+      "has": [{ "type": "host", "value": "brunch.freefrom365.com" }],
+      "destination": "/breakfast/",
+      "permanent": false
+    },
+    {
+      "source": "/",
       "has": [{ "type": "host", "value": "healthy-gut.freefrom365.com" }],
       "destination": "/free-from/",
       "permanent": false
