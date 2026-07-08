@@ -1022,10 +1022,10 @@
         };
 
         function getDriveImg(link) {
-            if (!link || !link.includes("drive.google.com")) return link || 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600';
+            if (!link || !link.includes("drive.google.com")) return link || 'logo-source.png';
             try {
                 const id = link.match(/\/d\/(.+?)\//)[1];
-                return `https://lh3.googleusercontent.com/u/0/d/${id}`;
+                return `https://drive.google.com/thumbnail?id=${id}&sz=w1200`;
             } catch (e) { return link; }
         }
 
@@ -1035,7 +1035,7 @@
         }
 
         function getRecipeFallbackImg(item) {
-            return (item && LOCAL_BREAKFAST_IMAGES[String(item.id)]) || 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600';
+            return (item && LOCAL_BREAKFAST_IMAGES[String(item.id)]) || 'logo-source.png';
         }
 
         function hashString(value) {
