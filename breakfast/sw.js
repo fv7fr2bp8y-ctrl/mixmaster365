@@ -1,5 +1,12 @@
-const CACHE_NAME = "brunch365-v18";
+const CACHE_NAME = "brunch365-v19";
 const APP_SHELL = [
+  "/",
+  "/index.html",
+  "/data.js",
+  "/manifest.json",
+  "/icon-192.png",
+  "/icon-512.png",
+  "/logo-source.png",
   "/breakfast/",
   "/breakfast/index.html",
   "/breakfast/data.js",
@@ -25,7 +32,7 @@ self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
 
   const url = new URL(event.request.url);
-  const isAppShell = url.origin === self.location.origin && url.pathname.startsWith("/breakfast/");
+  const isAppShell = url.origin === self.location.origin && (url.pathname === "/" || url.pathname.startsWith("/breakfast/"));
   const isGoogleAsset = /(^|\.)google\.com$/.test(url.hostname) || url.hostname.includes("googleusercontent.com");
 
   if (isAppShell || event.request.mode === "navigate") {
@@ -38,7 +45,7 @@ self.addEventListener("fetch", (event) => {
           }
           return response;
         })
-        .catch(() => caches.match(event.request).then((cached) => cached || caches.match("/breakfast/index.html")))
+        .catch(() => caches.match(event.request).then((cached) => cached || caches.match("/") || caches.match("/breakfast/index.html")))
     );
     return;
   }

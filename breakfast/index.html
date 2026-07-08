@@ -1602,7 +1602,8 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/breakfast/sw.js')
+                const swPath = location.hostname === 'brunch.freefrom365.com' ? '/sw.js' : '/breakfast/sw.js';
+                navigator.serviceWorker.register(swPath)
                     .then(reg => console.log('SW registered:', reg.scope))
                     .catch(err => console.log('SW error:', err));
             });
