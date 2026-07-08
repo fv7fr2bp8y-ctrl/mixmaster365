@@ -1,0 +1,29 @@
+{
+  "trailingSlash": true,
+  "rewrites": [
+    {
+      "source": "/breakfast/:path*",
+      "has": [{ "type": "host", "value": "breakfast.freefrom365.com" }],
+      "destination": "/breakfast/:path*"
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "breakfast.freefrom365.com" }],
+      "destination": "/breakfast/:path*"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "freefrom365.com" }],
+      "destination": "https://breakfast.freefrom365.com/",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "www.freefrom365.com" }],
+      "destination": "https://breakfast.freefrom365.com/",
+      "permanent": false
+    }
+  ]
+}
