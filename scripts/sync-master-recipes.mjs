@@ -116,11 +116,45 @@ function writeFreeFrom(rows) {
   const file = path.join(root, "free-from", "index.html");
   const current = fs.readFileSync(file, "utf8");
   const next = current.replace(
-    /    const recipes = \[[\s\S]*?\n    \];\n\n    const categories/,
+    /    const recipes = \[[\s\S]*?\n\s*\];\n\n    const categories/,
     `    const recipes = ${JSON.stringify(recipes, null, 10)};\n\n    const categories`
   );
-  if (next === current) throw new Error("Could not replace free-from recipes array");
-  fs.writeFileSync(file, next);
+  if (next !== current) fs.writeFileSync(file, next);
+
+  const shellRecipes = rows
+    .filter((row) => isTrue(row.is_healthy_gut))
+    .map((row, index) => ({
+      id: index + 1,
+      source_id: row.global_id,
+      name: row.canonical_name_bg,
+      base: titleCaseBg(row.meal_type),
+      icon: "◇",
+      image: imageFor(row),
+      ingredients: splitList(row.ingredients_bg).join(", "),
+      recipe: paragraphs(row.steps_bg),
+      name_en: row.canonical_name_bg,
+      base_en: titleCaseBg(row.meal_type),
+      ingredients_en: splitList(row.ingredients_bg).join(", "),
+      recipe_en: paragraphs(row.steps_bg),
+      name_de: row.canonical_name_bg,
+      base_de: titleCaseBg(row.meal_type),
+      ingredients_de: splitList(row.ingredients_bg).join(", "),
+      recipe_de: paragraphs(row.steps_bg),
+      name_es: row.canonical_name_bg,
+      base_es: titleCaseBg(row.meal_type),
+      ingredients_es: splitList(row.ingredients_bg).join(", "),
+      recipe_es: paragraphs(row.steps_bg),
+      name_ru: row.canonical_name_bg,
+      base_ru: titleCaseBg(row.meal_type),
+      ingredients_ru: splitList(row.ingredients_bg).join(", "),
+      recipe_ru: paragraphs(row.steps_bg),
+    }));
+
+  fs.writeFileSync(
+    path.join(root, "free-from", "data.js"),
+    `window.BREAKFAST_DATA = ${JSON.stringify(shellRecipes, null, 2)};\n`
+  );
+
   return recipes.length;
 }
 
