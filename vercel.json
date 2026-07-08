@@ -7,6 +7,11 @@
       "destination": "/breakfast/:path*"
     },
     {
+      "source": "/",
+      "has": [{ "type": "host", "value": "brunch.freefrom365.com" }],
+      "destination": "/breakfast/"
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "brunch.freefrom365.com" }],
       "destination": "/breakfast/:path*"
@@ -41,12 +46,6 @@
     {
       "source": "/",
       "has": [{ "type": "host", "value": "breakfast.freefrom365.com" }],
-      "destination": "/breakfast/",
-      "permanent": false
-    },
-    {
-      "source": "/",
-      "has": [{ "type": "host", "value": "brunch.freefrom365.com" }],
       "destination": "/breakfast/",
       "permanent": false
     },
