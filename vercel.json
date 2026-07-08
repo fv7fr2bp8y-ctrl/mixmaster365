@@ -1,95 +1,64 @@
 {
   "trailingSlash": true,
-  "rewrites": [
+  "routes": [
     {
-      "source": "/breakfast/:path*",
-      "has": [{ "type": "host", "value": "breakfast.freefrom365.com" }],
-      "destination": "/breakfast/:path*"
-    },
-    {
-      "source": "/",
+      "src": "/",
       "has": [{ "type": "host", "value": "brunch.freefrom365.com" }],
-      "destination": "/breakfast/"
+      "dest": "/breakfast/"
     },
     {
-      "source": "/:path*",
+      "src": "/(.*)",
       "has": [{ "type": "host", "value": "brunch.freefrom365.com" }],
-      "destination": "/breakfast/:path*"
+      "dest": "/breakfast/$1"
     },
     {
-      "source": "/free-from/:path*",
-      "has": [{ "type": "host", "value": "healthy-gut.freefrom365.com" }],
-      "destination": "/free-from/:path*"
-    },
-    {
-      "source": "/gluten-free/:path*",
-      "has": [{ "type": "host", "value": "gluten-free.freefrom365.com" }],
-      "destination": "/gluten-free/:path*"
-    },
-    {
-      "source": "/dairy-free/:path*",
-      "has": [{ "type": "host", "value": "dairy-free.freefrom365.com" }],
-      "destination": "/dairy-free/:path*"
-    },
-    {
-      "source": "/meat-free/:path*",
-      "has": [{ "type": "host", "value": "meat-free.freefrom365.com" }],
-      "destination": "/meat-free/:path*"
-    },
-    {
-      "source": "/plant-based/:path*",
-      "has": [{ "type": "host", "value": "plant-based.freefrom365.com" }],
-      "destination": "/plant-based/:path*"
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/",
+      "src": "/",
       "has": [{ "type": "host", "value": "breakfast.freefrom365.com" }],
-      "destination": "/breakfast/",
-      "permanent": false
+      "status": 307,
+      "headers": { "Location": "/breakfast/" }
     },
     {
-      "source": "/",
+      "src": "/",
       "has": [{ "type": "host", "value": "healthy-gut.freefrom365.com" }],
-      "destination": "/free-from/",
-      "permanent": false
+      "status": 307,
+      "headers": { "Location": "/free-from/" }
     },
     {
-      "source": "/",
+      "src": "/",
       "has": [{ "type": "host", "value": "gluten-free.freefrom365.com" }],
-      "destination": "/gluten-free/",
-      "permanent": false
+      "status": 307,
+      "headers": { "Location": "/gluten-free/" }
     },
     {
-      "source": "/",
+      "src": "/",
       "has": [{ "type": "host", "value": "dairy-free.freefrom365.com" }],
-      "destination": "/dairy-free/",
-      "permanent": false
+      "status": 307,
+      "headers": { "Location": "/dairy-free/" }
     },
     {
-      "source": "/",
+      "src": "/",
       "has": [{ "type": "host", "value": "meat-free.freefrom365.com" }],
-      "destination": "/meat-free/",
-      "permanent": false
+      "status": 307,
+      "headers": { "Location": "/meat-free/" }
     },
     {
-      "source": "/",
+      "src": "/",
       "has": [{ "type": "host", "value": "plant-based.freefrom365.com" }],
-      "destination": "/plant-based/",
-      "permanent": false
+      "status": 307,
+      "headers": { "Location": "/plant-based/" }
     },
     {
-      "source": "/",
+      "src": "/",
       "has": [{ "type": "host", "value": "freefrom365.com" }],
-      "destination": "https://healthy-gut.freefrom365.com/free-from/",
-      "permanent": false
+      "status": 307,
+      "headers": { "Location": "https://healthy-gut.freefrom365.com/free-from/" }
     },
     {
-      "source": "/",
+      "src": "/",
       "has": [{ "type": "host", "value": "www.freefrom365.com" }],
-      "destination": "https://healthy-gut.freefrom365.com/free-from/",
-      "permanent": false
-    }
+      "status": 307,
+      "headers": { "Location": "https://healthy-gut.freefrom365.com/free-from/" }
+    },
+    { "handle": "filesystem" }
   ]
 }
