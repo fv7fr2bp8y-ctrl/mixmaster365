@@ -7,6 +7,11 @@
       "destination": "/breakfast/:path*"
     },
     {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "brunch.freefrom365.com" }],
+      "destination": "/breakfast/:path*"
+    },
+    {
       "source": "/free-from/:path*",
       "has": [{ "type": "host", "value": "healthy-gut.freefrom365.com" }],
       "destination": "/free-from/:path*"
@@ -36,7 +41,13 @@
     {
       "source": "/",
       "has": [{ "type": "host", "value": "breakfast.freefrom365.com" }],
-      "destination": "/breakfast/",
+      "destination": "https://brunch.freefrom365.com/",
+      "permanent": false
+    },
+    {
+      "source": "/breakfast/:path*",
+      "has": [{ "type": "host", "value": "breakfast.freefrom365.com" }],
+      "destination": "https://brunch.freefrom365.com/:path*",
       "permanent": false
     },
     {
