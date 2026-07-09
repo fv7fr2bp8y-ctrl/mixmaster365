@@ -1,4 +1,4 @@
-const CACHE_NAME = "dairy-free-365-v1";
+const CACHE_NAME = "dairy-free-365-v2";
 const ASSETS = [
   "/dairy-free/",
   "/dairy-free/index.html",

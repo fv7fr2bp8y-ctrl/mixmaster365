@@ -1,4 +1,4 @@
-const CACHE_NAME = "plant-based-365-v1";
+const CACHE_NAME = "plant-based-365-v2";
 const ASSETS = [
   "/plant-based/",
   "/plant-based/index.html",

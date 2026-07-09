@@ -1,4 +1,4 @@
-const CACHE_NAME = "meat-free-365-v1";
+const CACHE_NAME = "meat-free-365-v2";
 const ASSETS = [
   "/meat-free/",
   "/meat-free/index.html",
