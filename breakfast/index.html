@@ -836,7 +836,7 @@
 
         <!-- FILTERS (menu sections) -->
         <nav class="mb-6 overflow-x-auto no-scrollbar">
-            <div class="flex gap-7 px-1 pb-1 min-w-min" id="filters-container"></div>
+            <div class="flex gap-3 px-1 pb-1 min-w-min" id="filters-container"></div>
         </nav>
 
         <!-- META BAR: count + favorites toggle -->
@@ -1244,8 +1244,8 @@
                     : list.filter(c => c && c.name).length;
                 if (count === 0 && f.match) return '';
                 const isActive = currentFilter === f.key;
-                return `<button onclick="filterBy('${f.key}')" class="${isActive ? 'filter-active' : ''} shrink-0 border border-gold-dim px-4 py-2 font-roman text-xs tracking-[0.22em] uppercase text-cream-dim hover:border-gold hover:text-gold transition whitespace-nowrap">
-                    ${escapeHtml(t(f.key))} · ${count}
+                return `<button onclick="filterBy('${f.key}')" class="${isActive ? 'filter-active' : ''} shrink-0 font-roman text-xs uppercase text-cream-dim hover:text-gold transition whitespace-nowrap active:scale-95">
+                    <span>${escapeHtml(t(f.key))} · ${count}</span>
                 </button>`;
             }).join('');
         }
