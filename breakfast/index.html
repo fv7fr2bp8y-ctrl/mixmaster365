@@ -126,10 +126,10 @@
         body.theme-light #filters-container button span:first-child {
             display: inline-flex;
             align-items: center;
-            min-height: 2.25rem;
+            min-height: 2.05rem;
             border: 1px solid #d8c5aa;
-            padding: 0.5rem 0.9rem;
-            letter-spacing: 0.18em;
+            padding: 0.42rem 0.78rem;
+            letter-spacing: 0.14em;
         }
         body.theme-light #cotd-card {
             border: 1px solid #d8c5aa;
@@ -1038,6 +1038,10 @@
             return (item && LOCAL_BREAKFAST_IMAGES[String(item.id)]) || 'logo-source.png';
         }
 
+        function hasRecipeImage(item) {
+            return !!(item && String(item.image || '').trim());
+        }
+
         function hashString(value) {
             let h = 2166136261;
             const str = String(value || '');
@@ -1156,7 +1160,10 @@
         // === COCKTAIL OF THE DAY ===
         function renderCOTD() {
             const pool = activeList().filter(c => c && c.name);
-            if (!pool.length) return;
+            if (!pool.length) {
+                document.getElementById('cotd-section').classList.add('hidden');
+                return;
+            }
 
             const today = new Date();
             const seed  = today.getFullYear() * 1000 + today.getMonth() * 50 + today.getDate();
@@ -1197,7 +1204,7 @@
 
         // === INIT ===
         function hydrateBreakfastData(data) {
-            allMocktails = mixBreakfastOrder(Array.isArray(data) ? data : []);
+            allMocktails = mixBreakfastOrder(Array.isArray(data) ? data.filter(hasRecipeImage) : []);
             allMocktails.forEach((c, i) => { if (c) c._idx = i; });
             renderFilters();
             render();
