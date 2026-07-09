@@ -489,7 +489,7 @@
                 error_connection:'Връзката прекъсна',
                 filter_all:'Всички', filter_vodka:'Водка', filter_gin:'Джин', filter_rum:'Ром',
                 filter_tequila:'Текила', filter_whisky:'Уиски',
-                filter_eggs:'Яйца', filter_oatmeal:'Овесена каша', filter_pancakes:'Палачинки', filter_toast:'Тост', filter_yogurt:'Йогурт', filter_smoothie:'Смути купа', filter_granola:'Гранола', filter_waffles:'Гофрети',
+                filter_eggs:'Яйца', filter_oatmeal:'Каши', filter_pancakes:'Палачинки', filter_toast:'Тост', filter_bowls:'Купи', filter_soups:'Супи', filter_sweet:'Сладки', filter_legumes:'Бобови',
                 settings_title:'ЕЗИК', settings_subtitle:'Език и мерни единици', settings_units:'Мерни единици',
                 share_text:'Brunch 365 - рецепти за всеки ден', toast_link_copied:'Линкът е копиран ✓',
                 aria_share:'Сподели', aria_top:'Нагоре', aria_settings:'Език',
@@ -521,7 +521,7 @@
                 error_connection:'Connection lost',
                 filter_all:'All', filter_vodka:'Vodka', filter_gin:'Gin', filter_rum:'Rum',
                 filter_tequila:'Tequila', filter_whisky:'Whisky',
-                filter_eggs:'Eggs', filter_oatmeal:'Oatmeal', filter_pancakes:'Pancakes', filter_toast:'Toast', filter_yogurt:'Yogurt', filter_smoothie:'Smoothie bowl', filter_granola:'Granola', filter_waffles:'Waffles',
+                filter_eggs:'Eggs', filter_oatmeal:'Porridge', filter_pancakes:'Pancakes', filter_toast:'Toast', filter_bowls:'Bowls', filter_soups:'Soups', filter_sweet:'Sweet', filter_legumes:'Legumes',
                 settings_title:'LANGUAGE', settings_subtitle:'Language & units', settings_units:'Measurement units',
                 share_text:'Brunch 365 - everyday brunch recipes', toast_link_copied:'Link copied ✓',
                 aria_share:'Share', aria_top:'Top', aria_settings:'Language',
@@ -553,7 +553,7 @@
                 error_connection:'Verbindung unterbrochen',
                 filter_all:'Alle', filter_vodka:'Wodka', filter_gin:'Gin', filter_rum:'Rum',
                 filter_tequila:'Tequila', filter_whisky:'Whisky',
-                filter_eggs:'Eier', filter_oatmeal:'Haferbrei', filter_pancakes:'Pfannkuchen', filter_toast:'Toast', filter_yogurt:'Joghurt', filter_smoothie:'Smoothie-Bowl', filter_granola:'Granola', filter_waffles:'Waffeln',
+                filter_eggs:'Eier', filter_oatmeal:'Porridge', filter_pancakes:'Pfannkuchen', filter_toast:'Toast', filter_bowls:'Bowls', filter_soups:'Suppen', filter_sweet:'Süss', filter_legumes:'Hülsenfrüchte',
                 settings_title:'SPRACHE', settings_subtitle:'Sprache & Einheiten', settings_units:'Maßeinheiten',
                 share_text:'Brunch 365 - Brunch-Rezepte für jeden Tag', toast_link_copied:'Link kopiert ✓',
                 aria_share:'Teilen', aria_top:'Nach oben', aria_settings:'Sprache',
@@ -585,7 +585,7 @@
                 error_connection:'Conexión perdida',
                 filter_all:'Todos', filter_vodka:'Vodka', filter_gin:'Ginebra', filter_rum:'Ron',
                 filter_tequila:'Tequila', filter_whisky:'Whisky',
-                filter_eggs:'Huevos', filter_oatmeal:'Avena', filter_pancakes:'Tortitas', filter_toast:'Tostada', filter_yogurt:'Yogur', filter_smoothie:'Smoothie bowl', filter_granola:'Granola', filter_waffles:'Gofres',
+                filter_eggs:'Huevos', filter_oatmeal:'Gachas', filter_pancakes:'Tortitas', filter_toast:'Tostada', filter_bowls:'Bowls', filter_soups:'Sopas', filter_sweet:'Dulce', filter_legumes:'Legumbres',
                 settings_title:'IDIOMA', settings_subtitle:'Idioma y unidades', settings_units:'Unidades de medida',
                 share_text:'Brunch 365 - recetas de brunch para cada día', toast_link_copied:'Enlace copiado ✓',
                 aria_share:'Compartir', aria_top:'Arriba', aria_settings:'Idioma',
@@ -617,7 +617,7 @@
                 error_connection:'Соединение прервано',
                 filter_all:'Все', filter_vodka:'Водка', filter_gin:'Джин', filter_rum:'Ром',
                 filter_tequila:'Текила', filter_whisky:'Виски',
-                filter_eggs:'Яйца', filter_oatmeal:'Овсянка', filter_pancakes:'Блины', filter_toast:'Тост', filter_yogurt:'Йогурт', filter_smoothie:'Смузи-боул', filter_granola:'Гранола', filter_waffles:'Вафли',
+                filter_eggs:'Яйца', filter_oatmeal:'Каши', filter_pancakes:'Блины', filter_toast:'Тост', filter_bowls:'Боулы', filter_soups:'Супы', filter_sweet:'Сладкое', filter_legumes:'Бобовые',
                 settings_title:'ЯЗЫК', settings_subtitle:'Язык и единицы', settings_units:'Единицы измерения',
                 share_text:'Brunch 365 - рецепты для бранча на каждый день', toast_link_copied:'Ссылка скопирована ✓',
                 aria_share:'Поделиться', aria_top:'Наверх', aria_settings:'Язык',
@@ -990,14 +990,14 @@
 
         const MOCKTAIL_FILTERS = [
             { key: 'filter_all',       match: null },
-            { key: 'filter_eggs',      match: ['яйца'] },
-            { key: 'filter_oatmeal',   match: ['овесена каша'] },
-            { key: 'filter_pancakes',  match: ['палачинки'] },
-            { key: 'filter_toast',     match: ['тост'] },
-            { key: 'filter_yogurt',    match: ['йогурт'] },
-            { key: 'filter_smoothie',  match: ['смути купа'] },
-            { key: 'filter_granola',   match: ['гранола'] },
-            { key: 'filter_waffles',   match: ['гофрети'] },
+            { key: 'filter_eggs',      match: ['яйц', 'менемен', 'шакшука'] },
+            { key: 'filter_oatmeal',   match: ['каша', 'овес', 'просо', 'елда', 'теф', 'конджи'] },
+            { key: 'filter_pancakes',  match: ['палачин', 'доса', 'биндеток', 'дан бинг', 'тапиока', 'рости'] },
+            { key: 'filter_toast',     match: ['тост', 'toast', 'хляб', 'пита'] },
+            { key: 'filter_bowls',     match: ['купа', 'bowl'] },
+            { key: 'filter_soups',     match: ['супа', 'дал', 'фасолада', 'риболита', 'caldo'] },
+            { key: 'filter_sweet',     match: ['слад', 'манго', 'банан', 'боровинки', 'ябълка', 'круша', 'портокал', 'кокос'] },
+            { key: 'filter_legumes',   match: ['боб', 'нахут', 'леща', 'дал', 'лобио'] },
         ];
         let currentFilter = 'filter_all';
         let searchQuery = '';
@@ -1100,8 +1100,15 @@
 
         function matchesBase(cocktail, filter) {
             if (!filter || !filter.match) return true;
-            const b = (cocktail.base || '').toLowerCase();
-            return filter.match.some(m => b.includes(m));
+            const haystack = [
+                cocktail.name,
+                cocktail.base,
+                cocktail.ingredients,
+                loc(cocktail, 'name'),
+                loc(cocktail, 'base'),
+                loc(cocktail, 'ingredients')
+            ].join(' ').toLowerCase();
+            return filter.match.some(m => haystack.includes(String(m).toLowerCase()));
         }
 
         function getFiltered() {
