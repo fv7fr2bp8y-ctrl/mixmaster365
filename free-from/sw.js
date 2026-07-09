@@ -1,4 +1,4 @@
-const CACHE_NAME = "healthy-gut-365-v21";
+const CACHE_NAME = "healthy-gut-365-v22";
 const APP_SHELL = [
   "/free-from/",
   "/free-from/index.html",
