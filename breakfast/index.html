@@ -99,6 +99,15 @@
         body.theme-light .deco-card { box-shadow: 0 16px 50px rgba(121, 84, 37, 0.12); }
         body.theme-light input { color: var(--cream); }
         body.theme-light ::placeholder { color: var(--cream-dim); }
+        body.theme-light #search-input,
+        body.theme-light #search-input:focus {
+            background: rgba(255, 250, 240, 0.56) !important;
+            color: var(--cream) !important;
+        }
+        body.theme-light #search-input::placeholder {
+            color: var(--cream-dim) !important;
+            opacity: 1;
+        }
         body.theme-light .page-frame::before { display: none; }
         body.theme-light .deco-card {
             background: rgba(255, 250, 240, 0.88);
@@ -632,10 +641,6 @@
             try {
                 const sl = localStorage.getItem('brk365-lang');
                 if (sl && I18N[sl]) LANG = sl;
-                else {
-                    const nav = (navigator.language || 'bg').slice(0,2).toLowerCase();
-                    if (I18N[nav]) LANG = nav;
-                }
                 const su = localStorage.getItem('brk365-unit');
                 if (su === 'oz' || su === 'ml') UNIT = su;
             } catch(e) {}
