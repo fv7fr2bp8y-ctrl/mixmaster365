@@ -790,7 +790,7 @@
         </div>
 
         <!-- BREAKFAST OF THE DAY -->
-        <section id="cotd-section" class="hidden mb-10">
+        <section id="cotd-section" class="hidden mb-7">
             <div class="deco-divider mb-5">
                 <span class="font-roman text-gold text-[0.6rem] tracking-[0.45em] uppercase whitespace-nowrap">✦ <span data-i18n="cotd_title">Бранч на деня</span> ✦</span>
             </div>
@@ -817,7 +817,7 @@
         </section>
 
         <!-- SEARCH -->
-        <div class="mb-8 relative">
+        <div class="mb-5 relative">
             <div class="border border-gold-dim relative">
                 <input
                     type="text"
@@ -825,7 +825,7 @@
                     oninput="onSearch(this.value)"
                     placeholder="Търсене по име или съставка"
                     data-i18n-ph="search_ph"
-                    class="w-full bg-transparent text-cream pl-12 pr-12 py-4 outline-none focus:bg-ink-soft transition"
+                    class="w-full bg-transparent text-cream pl-12 pr-12 py-3.5 outline-none focus:bg-ink-soft transition"
                 />
                 <span id="search-icon" class="absolute left-4 top-1/2 -translate-y-1/2 text-gold pointer-events-none">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-4.3-4.3"/></svg>
@@ -835,12 +835,12 @@
         </div>
 
         <!-- FILTERS (menu sections) -->
-        <nav class="mb-6 overflow-x-auto no-scrollbar">
+        <nav class="mb-4 overflow-x-auto no-scrollbar">
             <div class="flex gap-3 px-1 pb-1 min-w-min" id="filters-container"></div>
         </nav>
 
         <!-- META BAR: count + favorites toggle -->
-        <div class="mb-8 flex justify-between items-center pt-3 border-t border-gold-dim/50">
+        <div class="mb-6 flex justify-between items-center pt-2 border-t border-gold-dim/50">
             <span id="result-count" class="font-roman text-cream-dim text-xs tracking-[0.3em] uppercase"></span>
             <button id="fav-toggle" onclick="toggleFavoritesView()" class="flex items-center gap-2 font-roman text-xs tracking-[0.25em] uppercase text-cream-dim hover:text-gold transition active:scale-95">
                 <span id="fav-icon" class="text-base leading-none">◇</span>
@@ -864,7 +864,7 @@
         </div>
 
         <!-- COCKTAIL LIST -->
-        <div id="cocktail-list" class="space-y-12 min-h-[40vh]"></div>
+        <div id="cocktail-list" class="space-y-8 min-h-[40vh]"></div>
 
         <!-- GET ON GOOGLE PLAY (web only) -->
         <a id="play-badge" href="https://play.google.com/store/apps/details?id=eu.brunch365.twa"
