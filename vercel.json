@@ -20,8 +20,12 @@
     {
       "src": "/",
       "has": [{ "type": "host", "value": "healthy-gut.freefrom365.com" }],
-      "status": 307,
-      "headers": { "Location": "/free-from/" }
+      "dest": "/free-from/"
+    },
+    {
+      "src": "/(.*)",
+      "has": [{ "type": "host", "value": "healthy-gut.freefrom365.com" }],
+      "dest": "/free-from/$1"
     },
     {
       "src": "/",

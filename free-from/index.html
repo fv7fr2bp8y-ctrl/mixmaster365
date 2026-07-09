@@ -99,6 +99,15 @@
         body.theme-light .deco-card { box-shadow: 0 16px 50px rgba(121, 84, 37, 0.12); }
         body.theme-light input { color: var(--cream); }
         body.theme-light ::placeholder { color: var(--cream-dim); }
+        body.theme-light #search-input,
+        body.theme-light #search-input:focus {
+            background: rgba(255, 250, 240, 0.56) !important;
+            color: var(--cream) !important;
+        }
+        body.theme-light #search-input::placeholder {
+            color: var(--cream-dim) !important;
+            opacity: 1;
+        }
         body.theme-light .page-frame::before { display: none; }
         body.theme-light .deco-card {
             background: rgba(255, 250, 240, 0.88);
@@ -126,10 +135,10 @@
         body.theme-light #filters-container button span:first-child {
             display: inline-flex;
             align-items: center;
-            min-height: 2.25rem;
+            min-height: 2.05rem;
             border: 1px solid #d8c5aa;
-            padding: 0.5rem 0.9rem;
-            letter-spacing: 0.18em;
+            padding: 0.42rem 0.78rem;
+            letter-spacing: 0.14em;
         }
         body.theme-light #cotd-card {
             border: 1px solid #d8c5aa;
@@ -354,7 +363,7 @@
                 <img class="loader-logo" src="logo-source.png" alt="">
             </div>
             <h1 class="loader-title">Healthy Gut 365</h1>
-            <p class="loader-subtitle" data-i18n="intro_subtitle">Бранч всеки ден</p>
+            <p class="loader-subtitle" data-i18n="intro_subtitle">Без глутен · без млечни</p>
             <div class="loader-status" data-i18n="intro_status">Подготвяне на рецептите...</div>
         </div>
     </div>
@@ -464,21 +473,21 @@
 
         const I18N = {
             bg: {
-                tab_cocktails:'Бранч', tab_mocktails:'Рецепти',
-                cotd_title:'Бранч на деня', cotd_see:'Виж рецептата',
+                tab_cocktails:'Healthy Gut', tab_mocktails:'Рецепти',
+                cotd_title:'Рецепта на деня', cotd_see:'Виж рецептата',
                 search_ph:'Търсене по име или съставка',
                 fav_selected:'Избрани', fav_all:'Всички',
-                loader_text:'Подготвяне на рецептите', intro_subtitle:'Бранч всеки ден', intro_status:'Подготвяне на рецептите...',
+                loader_text:'Подготвяне на рецептите', intro_subtitle:'Без глутен · без млечни', intro_status:'Подготвяне на рецептите...',
                 close:'Затвори',
                 ai_button:'Препоръка', ai_title:'ПРЕПОРЪКА', ai_subtitle:'Какво да приготвим?',
-                ai_scan_title:'Идея за бранч', ai_scan_desc:'Предложение от колекцията',
+                ai_scan_title:'Healthy Gut идея', ai_scan_desc:'Предложение от колекцията',
                 ai_random_title:'Изненада', ai_random_desc:'Случайна рецепта от селекцията',
                 ai_fav_show_all:'Покажи всички', ai_fav_title:'Избрани',
                 ai_fav_desc_off:'Изключи филтъра', ai_fav_desc_on:'Покажи запазените',
                 ai_stats_title:'Анализ на ателието', ai_stats_desc:'Статистика за колекцията',
                 stats_title:'АТЕЛИЕ', stats_subtitle:'Анализ на колекцията', stats_cocktails:'Рецепти',
                 stats_favorites:'Избрани', stats_distribution:'Разпределение', stats_rec_badge:'Препоръка',
-                stats_time_morning:'нещо освежаващо за бранч', stats_time_afternoon:'нещо леко и плодово',
+                stats_time_morning:'нещо леко и чисто', stats_time_afternoon:'нещо свежо и балансирано',
                 stats_time_evening:'класика за вечер', stats_time_late:'нещо силно за късен час',
                 stats_rec_line1:'Сега, около {hour}:00 ч., е подходящо за {rec}.',
                 stats_rec_line2:'Най-разнообразната ви категория е {base} с {count} опции.',
@@ -491,6 +500,7 @@
                 filter_tequila:'Текила', filter_whisky:'Уиски',
                 filter_breakfast:'Закуска', filter_lunch:'Обяд', filter_dinner:'Вечеря', filter_salad:'Салата', filter_snack:'Снак', filter_dessert:'Десерт',
                 settings_title:'ЕЗИК', settings_subtitle:'Език и мерни единици', settings_units:'Мерни единици',
+                footer_contact:'Контакт', footer_rights:'© 2026 New Age Studio. Всички права запазени.', footer_note:'Рецепти за вдъхновение. Съобразявайте съставките с личните си нужди и алергии.',
                 share_text:'Healthy Gut 365 - без глутен · без млечни', toast_link_copied:'Линкът е копиран ✓',
                 aria_share:'Сподели', aria_top:'Нагоре', aria_settings:'Език',
                 months:['Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември'],
@@ -523,6 +533,7 @@
                 filter_tequila:'Tequila', filter_whisky:'Whisky',
                 filter_breakfast:'Breakfast', filter_lunch:'Lunch', filter_dinner:'Dinner', filter_salad:'Salad', filter_snack:'Snack', filter_dessert:'Dessert',
                 settings_title:'LANGUAGE', settings_subtitle:'Language & units', settings_units:'Measurement units',
+                footer_contact:'Contact', footer_rights:'© 2026 New Age Studio. All rights reserved.', footer_note:'Recipes for inspiration. Adjust ingredients to your needs and allergies.',
                 share_text:'Healthy Gut 365 - everyday healthy gut recipes', toast_link_copied:'Link copied ✓',
                 aria_share:'Share', aria_top:'Top', aria_settings:'Language',
                 months:['January','February','March','April','May','June','July','August','September','October','November','December'],
@@ -555,6 +566,7 @@
                 filter_tequila:'Tequila', filter_whisky:'Whisky',
                 filter_breakfast:'Frühstück', filter_lunch:'Mittagessen', filter_dinner:'Abendessen', filter_salad:'Salat', filter_snack:'Snack', filter_dessert:'Dessert',
                 settings_title:'SPRACHE', settings_subtitle:'Sprache & Einheiten', settings_units:'Maßeinheiten',
+                footer_contact:'Kontakt', footer_rights:'© 2026 New Age Studio. Alle Rechte vorbehalten.', footer_note:'Rezepte zur Inspiration. Bitte Zutaten an persönliche Bedürfnisse und Allergien anpassen.',
                 share_text:'Healthy Gut 365 - Healthy Gut-Rezepte für jeden Tag', toast_link_copied:'Link kopiert ✓',
                 aria_share:'Teilen', aria_top:'Nach oben', aria_settings:'Sprache',
                 months:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
@@ -587,26 +599,27 @@
                 filter_tequila:'Tequila', filter_whisky:'Whisky',
                 filter_breakfast:'Desayuno', filter_lunch:'Comida', filter_dinner:'Cena', filter_salad:'Ensalada', filter_snack:'Snack', filter_dessert:'Postre',
                 settings_title:'IDIOMA', settings_subtitle:'Idioma y unidades', settings_units:'Unidades de medida',
+                footer_contact:'Contacto', footer_rights:'© 2026 New Age Studio. Todos los derechos reservados.', footer_note:'Recetas para inspirarte. Ajusta los ingredientes a tus necesidades y alergias.',
                 share_text:'Healthy Gut 365 - recetas de healthy gut para cada día', toast_link_copied:'Enlace copiado ✓',
                 aria_share:'Compartir', aria_top:'Arriba', aria_settings:'Idioma',
                 months:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
             },
             ru: {
-                tab_cocktails:'Бранч', tab_mocktails:'Рецепты',
-                cotd_title:'Бранч дня', cotd_see:'Смотреть рецепт',
+                tab_cocktails:'Healthy Gut', tab_mocktails:'Рецепты',
+                cotd_title:'Рецепт дня', cotd_see:'Смотреть рецепт',
                 search_ph:'Поиск по названию или ингредиенту',
                 fav_selected:'Избранное', fav_all:'Все',
-                loader_text:'Готовим рецепты', intro_subtitle:'Бранч каждый день', intro_status:'Готовим рецепты...',
+                loader_text:'Готовим рецепты', intro_subtitle:'Без глютена · без молочных продуктов', intro_status:'Готовим рецепты...',
                 close:'Закрыть',
                 ai_button:'Идеи', ai_title:'ПОДБОР', ai_subtitle:'Что приготовим?',
-                ai_scan_title:'Идея для бранча', ai_scan_desc:'Предложение из коллекции',
+                ai_scan_title:'Идея Healthy Gut', ai_scan_desc:'Предложение из коллекции',
                 ai_random_title:'Сюрприз', ai_random_desc:'Случайный рецепт из подборки',
                 ai_fav_show_all:'Показать все', ai_fav_title:'Избранное',
                 ai_fav_desc_off:'Выключить фильтр', ai_fav_desc_on:'Показать сохранённые',
                 ai_stats_title:'Анализ ателье', ai_stats_desc:'Статистика коллекции',
                 stats_title:'АТЕЛЬЕ', stats_subtitle:'Анализ коллекции', stats_cocktails:'Рецепты',
                 stats_favorites:'Избранное', stats_distribution:'Распределение', stats_rec_badge:'Рекомендация',
-                stats_time_morning:'что-то освежающее к бранчу', stats_time_afternoon:'что-то лёгкое и фруктовое',
+                stats_time_morning:'что-то лёгкое и чистое', stats_time_afternoon:'что-то свежее и сбалансированное',
                 stats_time_evening:'уютная идея на вечер', stats_time_late:'что-то простое на поздний час',
                 stats_rec_line1:'Сейчас, около {hour}:00, подходит {rec}.',
                 stats_rec_line2:'Самая разнообразная категория — {base}, {count} вариантов.',
@@ -619,7 +632,8 @@
                 filter_tequila:'Текила', filter_whisky:'Виски',
                 filter_breakfast:'Завтрак', filter_lunch:'Обед', filter_dinner:'Ужин', filter_salad:'Салат', filter_snack:'Снэк', filter_dessert:'Десерт',
                 settings_title:'ЯЗЫК', settings_subtitle:'Язык и единицы', settings_units:'Единицы измерения',
-                share_text:'Healthy Gut 365 - рецепты для бранча на каждый день', toast_link_copied:'Ссылка скопирована ✓',
+                footer_contact:'Контакт', footer_rights:'© 2026 New Age Studio. Все права защищены.', footer_note:'Рецепты для вдохновения. Учитывайте свои потребности и аллергии.',
+                share_text:'Healthy Gut 365 - рецепты без глютена и молочных продуктов', toast_link_copied:'Ссылка скопирована ✓',
                 aria_share:'Поделиться', aria_top:'Наверх', aria_settings:'Язык',
                 months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
             },
@@ -632,10 +646,6 @@
             try {
                 const sl = localStorage.getItem('healthy-gut-365-lang');
                 if (sl && I18N[sl]) LANG = sl;
-                else {
-                    const nav = (navigator.language || 'bg').slice(0,2).toLowerCase();
-                    if (I18N[nav]) LANG = nav;
-                }
                 const su = localStorage.getItem('healthy-gut-365-unit');
                 if (su === 'oz' || su === 'ml') UNIT = su;
             } catch(e) {}
@@ -745,8 +755,6 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             applyTheme(); applyStaticI18n();
-            // Show "Get it on Google Play" badge only on the web (not inside the app)
-            if (!isTWA()) { var b=document.getElementById('play-badge'); if(b) b.classList.remove('hidden'); }
         });
     </script>
 
@@ -771,7 +779,7 @@
                 <h1 class="font-body text-[3rem] leading-none text-cream tracking-[0.08em] font-semibold">Healthy Gut 365</h1>
             </div>
             <div class="deco-divider mx-auto max-w-[280px]">
-                <span class="font-roman text-cream-dim text-[0.65rem] tracking-[0.34em] uppercase whitespace-nowrap">бранч всеки ден</span>
+                <span class="font-roman text-cream-dim text-[0.65rem] tracking-[0.34em] uppercase whitespace-nowrap">без глутен · без млечни</span>
             </div>
         </header>
 
@@ -780,7 +788,7 @@
             <button id="tab-cocktails" onclick="setMode('cocktails')"
                 style="background:var(--gold);color:var(--ink);"
                 class="flex-1 py-3 font-roman text-xs tracking-[0.3em] uppercase transition flex items-center justify-center gap-2">
-                <span>◇</span><span data-i18n="tab_cocktails">Бранч</span>
+                <span>◇</span><span data-i18n="tab_cocktails">Healthy Gut</span>
             </button>
             <button id="tab-mocktails" onclick="setMode('mocktails')"
                 style="background:transparent;color:var(--cream-dim);"
@@ -792,7 +800,7 @@
         <!-- BREAKFAST OF THE DAY -->
         <section id="cotd-section" class="hidden mb-10">
             <div class="deco-divider mb-5">
-                <span class="font-roman text-gold text-[0.6rem] tracking-[0.45em] uppercase whitespace-nowrap">✦ <span data-i18n="cotd_title">Бранч на деня</span> ✦</span>
+                <span class="font-roman text-gold text-[0.6rem] tracking-[0.45em] uppercase whitespace-nowrap">✦ <span data-i18n="cotd_title">Рецепта на деня</span> ✦</span>
             </div>
             <div id="cotd-card" class="deco-card overflow-hidden cursor-pointer active:scale-[0.99] transition-transform" onclick="goToCOTD()">
                 <div class="relative">
@@ -817,7 +825,7 @@
         </section>
 
         <!-- SEARCH -->
-        <div class="mb-8 relative">
+        <div class="mb-5 relative">
             <div class="border border-gold-dim relative">
                 <input
                     type="text"
@@ -825,7 +833,7 @@
                     oninput="onSearch(this.value)"
                     placeholder="Търсене по име или съставка"
                     data-i18n-ph="search_ph"
-                    class="w-full bg-transparent text-cream pl-12 pr-12 py-4 outline-none focus:bg-ink-soft transition"
+                    class="w-full bg-transparent text-cream pl-12 pr-12 py-3.5 outline-none focus:bg-ink-soft transition"
                 />
                 <span id="search-icon" class="absolute left-4 top-1/2 -translate-y-1/2 text-gold pointer-events-none">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-4.3-4.3"/></svg>
@@ -835,12 +843,12 @@
         </div>
 
         <!-- FILTERS (menu sections) -->
-        <nav class="mb-6 overflow-x-auto no-scrollbar">
-            <div class="flex gap-7 px-1 pb-1 min-w-min" id="filters-container"></div>
+        <nav class="mb-4 overflow-x-auto no-scrollbar">
+            <div class="flex gap-3 px-1 pb-1 min-w-min" id="filters-container"></div>
         </nav>
 
         <!-- META BAR: count + favorites toggle -->
-        <div class="mb-8 flex justify-between items-center pt-3 border-t border-gold-dim/50">
+        <div class="mb-6 flex justify-between items-center pt-2 border-t border-gold-dim/50">
             <span id="result-count" class="font-roman text-cream-dim text-xs tracking-[0.3em] uppercase"></span>
             <button id="fav-toggle" onclick="toggleFavoritesView()" class="flex items-center gap-2 font-roman text-xs tracking-[0.25em] uppercase text-cream-dim hover:text-gold transition active:scale-95">
                 <span id="fav-icon" class="text-base leading-none">◇</span>
@@ -853,7 +861,7 @@
         <div id="loader" class="fixed inset-0 z-50 bg-[#fffaf0] flex flex-col items-center justify-center p-8 hidden">
             <div class="flex items-center gap-4 mb-6">
                 <span class="text-gold text-3xl">◆</span>
-                <h2 class="font-display text-3xl text-gold tracking-[0.25em]">BRUNCH</h2>
+                <h2 class="font-display text-3xl text-gold tracking-[0.18em]">HEALTHY GUT</h2>
                 <span class="text-gold text-3xl">◆</span>
             </div>
             <div class="relative w-12 h-12 mb-4">
@@ -864,18 +872,23 @@
         </div>
 
         <!-- COCKTAIL LIST -->
-        <div id="cocktail-list" class="space-y-12 min-h-[40vh]"></div>
+        <div id="cocktail-list" class="space-y-8 min-h-[40vh]"></div>
 
-        <!-- GET ON GOOGLE PLAY (web only) -->
-        <a id="play-badge" href="https://play.google.com/store/apps/details?id=eu.healthy gut365.twa"
-           target="_blank" rel="noopener"
-           class="hidden mt-14 mx-auto w-[200px] block active:scale-95 transition">
-            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
-                 alt="Get it on Google Play" class="w-full" loading="lazy">
-        </a>
+        <!-- FOOTER -->
+        <footer class="mt-14 text-center">
+            <div class="deco-divider mb-5 max-w-[200px] mx-auto">
+                <span class="text-gold text-xs">❦</span>
+            </div>
+            <p class="font-roman text-gold text-[0.65rem] tracking-[0.35em] uppercase mb-2" data-i18n="footer_contact">Контакт</p>
+            <a href="mailto:office@newage-studio.com" class="font-body italic text-cream text-lg hover:text-gold transition">
+                office@newage-studio.com
+            </a>
+            <p class="mt-5 font-roman text-cream-dim text-[0.58rem] tracking-[0.22em] uppercase" data-i18n="footer_rights">© 2026 New Age Studio. Всички права запазени.</p>
+            <p class="mt-3 mx-auto max-w-sm font-body italic text-cream-dim text-sm leading-relaxed" data-i18n="footer_note">Рецепти за вдъхновение. Съобразявайте съставките с личните си нужди и алергии.</p>
+        </footer>
 
         <!-- FOOTER ORNAMENT -->
-        <div class="deco-divider mt-16 mb-2 max-w-[200px] mx-auto">
+        <div class="deco-divider mt-10 mb-2 max-w-[200px] mx-auto">
             <span class="text-gold text-xs">❦</span>
         </div>
     </div>
@@ -1032,6 +1045,10 @@
             return (item && LOCAL_BREAKFAST_IMAGES[String(item.id)]) || 'logo-source.png';
         }
 
+        function hasRecipeImage(item) {
+            return !!(item && String(item.image || '').trim());
+        }
+
         function hashString(value) {
             let h = 2166136261;
             const str = String(value || '');
@@ -1095,7 +1112,7 @@
         }
 
         function getFiltered() {
-            let result = activeList().filter(c => c && c.name);
+            let result = activeList().filter(c => c && c.name && hasRecipeImage(c));
 
             if (showFavoritesOnly) {
                 result = result.filter(c => favorites.includes(c.name));
@@ -1149,7 +1166,7 @@
 
         // === COCKTAIL OF THE DAY ===
         function renderCOTD() {
-            const pool = activeList().filter(c => c && c.name);
+            const pool = activeList().filter(c => c && c.name && hasRecipeImage(c));
             if (!pool.length) return;
 
             const today = new Date();
@@ -1191,7 +1208,7 @@
 
         // === INIT ===
         function hydrateBreakfastData(data) {
-            allMocktails = mixBreakfastOrder(Array.isArray(data) ? data : []);
+            allMocktails = mixBreakfastOrder(Array.isArray(data) ? data.filter(hasRecipeImage) : []);
             allMocktails.forEach((c, i) => { if (c) c._idx = i; });
             renderFilters();
             render();
@@ -1234,8 +1251,8 @@
             const list = activeList();
             container.innerHTML = activeFilters().map(f => {
                 const count = f.match
-                    ? list.filter(c => c && c.name && matchesBase(c, f)).length
-                    : list.filter(c => c && c.name).length;
+                    ? list.filter(c => c && c.name && hasRecipeImage(c) && matchesBase(c, f)).length
+                    : list.filter(c => c && c.name && hasRecipeImage(c)).length;
                 if (count === 0 && f.match) return '';
                 const isActive = currentFilter === f.key;
                 return `<button onclick="filterBy('${f.key}')" class="${isActive ? 'filter-active' : ''} shrink-0 border border-gold-dim px-4 py-2 font-roman text-xs tracking-[0.22em] uppercase text-cream-dim hover:border-gold hover:text-gold transition whitespace-nowrap">
