@@ -1103,6 +1103,37 @@
             return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
         }
 
+        function recipeShareKey(item) {
+            return encodeURIComponent(String((item && (item.source_id || item.id)) || ''));
+        }
+
+        function recipeShareUrl(item) {
+            const url = new URL(window.location.href);
+            url.search = '';
+            url.hash = '';
+            const key = recipeShareKey(item);
+            if (key) url.searchParams.set('r', key);
+            return url.toString();
+        }
+
+        function getRequestedRecipeKey() {
+            const queryKey = new URLSearchParams(window.location.search).get('r');
+            if (queryKey) return decodeURIComponent(queryKey);
+            const hash = window.location.hash.replace(/^#/, '');
+            if (hash.startsWith('recipe-')) return decodeURIComponent(hash.slice(7));
+            return '';
+        }
+
+        function findRecipeByKey(key) {
+            const normalized = String(key || '').trim();
+            if (!normalized) return null;
+            return activeList().find(item => {
+                const source = String((item && item.source_id) || '').trim();
+                const id = String((item && item.id) || '').trim();
+                return source === normalized || id === normalized;
+            }) || null;
+        }
+
         function toRoman(num) {
             return Number.isFinite(Number(num)) ? String(Number(num)) : '';
         }
@@ -1244,7 +1275,12 @@
             allMocktails.forEach((c, i) => { if (c) c._idx = i; });
             renderFilters();
             render();
-            renderCOTD();
+            const requestedRecipeKey = getRequestedRecipeKey();
+            if (requestedRecipeKey) {
+                openSharedRecipe(requestedRecipeKey);
+            } else {
+                renderCOTD();
+            }
             document.getElementById('loader').classList.add('hidden');
         }
 
@@ -1328,6 +1364,11 @@
                     <article class="cocktail-card deco-card overflow-hidden" id="${cardId}" style="animation-delay: ${delay}s">
                         <div class="relative">
                             <img src="${getRecipeImg(d)}" class="w-full h-48 object-cover" loading="lazy" onerror="this.onerror=null;this.src='${getRecipeFallbackImg(d)}'">
+                            <button type="button" onclick="shareRecipe('${recipeShareKey(d)}', event)"
+                                    aria-label="${escapeHtml(t('aria_share'))}"
+                                    class="absolute top-3 left-3 w-10 h-10 bg-ink/80 backdrop-blur-sm border border-gold-dim text-cream-dim hover:text-gold hover:border-gold flex items-center justify-center text-base active:scale-90 transition">
+                                ↗
+                            </button>
                             <button data-cocktail="${escapeHtml(d.name)}" onclick="toggleFavorite(this, event)"
                                     aria-label="Toggle favorite"
                                     class="fav-btn absolute top-3 right-3 w-10 h-10 bg-ink/80 backdrop-blur-sm border ${isFav ? 'border-gold-bright text-gold-bright' : 'border-gold-dim text-cream-dim'} flex items-center justify-center text-base active:scale-90 transition">
@@ -1608,6 +1649,54 @@
         function closeStats() { document.getElementById('stats-modal').classList.add('hidden'); }
 
         // === SHARE ===
+        async function shareRecipe(key, event) {
+            if (event) {
+                event.stopPropagation();
+                event.preventDefault();
+            }
+            const recipe = findRecipeByKey(decodeURIComponent(String(key || '')));
+            if (!recipe) return;
+
+            const url = recipeShareUrl(recipe);
+            const title = loc(recipe, 'name') || document.title || 'Recipe 365';
+            const data = {
+                title,
+                text: title + ' · ' + (document.title || 'Recipe 365'),
+                url
+            };
+            if (navigator.share) {
+                try { await navigator.share(data); return; } catch (e) {}
+            }
+            try {
+                await navigator.clipboard.writeText(url);
+                showToast(t('toast_link_copied'));
+            } catch (e) {
+                showToast(url);
+            }
+        }
+
+        function openSharedRecipe(key) {
+            const recipe = findRecipeByKey(key);
+            if (!recipe) return;
+
+            currentFilter = 'filter_all';
+            searchQuery = '';
+            showFavoritesOnly = false;
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) searchInput.value = '';
+            const clearBtn = document.getElementById('search-clear');
+            const searchIcon = document.getElementById('search-icon');
+            if (clearBtn) clearBtn.classList.add('hidden');
+            if (searchIcon) searchIcon.classList.remove('hidden');
+
+            renderFilters();
+            const list = getFiltered();
+            const idx = list.findIndex(item => item && item._idx === recipe._idx);
+            currentPage = Math.max(1, Math.ceil((idx + 1) / PAGE_SIZE));
+            render(false);
+            setTimeout(() => highlightCocktail(recipe), 250);
+        }
+
         async function shareApp() {
             const url  = window.location.href;
             const data = { title: 'Meat Free 365', text: t('share_text'), url };
