@@ -125,13 +125,29 @@ function difficultyFor(row) {
 
 function difficultyForLang(row, lang) {
   const bg = difficultyFor(row);
-  if (lang !== "en") return translatedField(row, lang, "difficulty", bg);
-  const map = {
-    "Лесно": "Easy",
-    "Средно": "Medium",
-    "Трудно": "Hard",
+  const maps = {
+    en: {
+      "Лесно": "Easy",
+      "Средно": "Medium",
+      "Трудно": "Hard",
+    },
+    de: {
+      "Лесно": "Einfach",
+      "Средно": "Mittel",
+      "Трудно": "Schwer",
+    },
+    es: {
+      "Лесно": "Fácil",
+      "Средно": "Media",
+      "Трудно": "Difícil",
+    },
+    ru: {
+      "Лесно": "Легко",
+      "Средно": "Средне",
+      "Трудно": "Сложно",
+    },
   };
-  return translatedField(row, lang, "difficulty", map[bg] || bg);
+  return translatedField(row, lang, "difficulty", maps[lang]?.[bg] || bg);
 }
 
 function countryFor(row) {
@@ -150,33 +166,109 @@ function countryFor(row) {
 
 function countryForLang(row, lang, bgCountry) {
   if (row[`country_${lang}`]) return row[`country_${lang}`];
-  if (lang !== "en") return bgCountry;
-  const map = {
-    "Турция": "Turkey",
-    "Индия": "India",
-    "Япония": "Japan",
-    "Виетнам": "Vietnam",
-    "Гърция": "Greece",
-    "Мексико": "Mexico",
-    "Перу": "Peru",
-    "Етиопия": "Ethiopia",
-    "Мароко": "Morocco",
-    "Корея": "Korea",
-    "Ливан": "Lebanon",
-    "Тайланд": "Thailand",
-    "Испания": "Spain",
-    "Италия": "Italy",
-    "България": "Bulgaria",
-    "Средиземноморие": "Mediterranean",
-    "Скандинавия": "Scandinavia",
-    "Великобритания": "United Kingdom",
-    "Китай": "China",
-    "Египет": "Egypt",
-    "Домашна кухня": "Home cooking",
-    "Източна Европа": "Eastern Europe",
-    "Световна кухня": "World cuisine",
+  const maps = {
+    en: {
+      "Турция": "Turkey",
+      "Индия": "India",
+      "Япония": "Japan",
+      "Виетнам": "Vietnam",
+      "Гърция": "Greece",
+      "Мексико": "Mexico",
+      "Перу": "Peru",
+      "Етиопия": "Ethiopia",
+      "Мароко": "Morocco",
+      "Корея": "Korea",
+      "Ливан": "Lebanon",
+      "Тайланд": "Thailand",
+      "Испания": "Spain",
+      "Италия": "Italy",
+      "България": "Bulgaria",
+      "Средиземноморие": "Mediterranean",
+      "Скандинавия": "Scandinavia",
+      "Великобритания": "United Kingdom",
+      "Китай": "China",
+      "Египет": "Egypt",
+      "Домашна кухня": "Home cooking",
+      "Източна Европа": "Eastern Europe",
+      "Световна кухня": "World cuisine",
+    },
+    de: {
+      "Турция": "Türkei",
+      "Индия": "Indien",
+      "Япония": "Japan",
+      "Виетнам": "Vietnam",
+      "Гърция": "Griechenland",
+      "Мексико": "Mexiko",
+      "Перу": "Peru",
+      "Етиопия": "Äthiopien",
+      "Мароко": "Marokko",
+      "Корея": "Korea",
+      "Ливан": "Libanon",
+      "Тайланд": "Thailand",
+      "Испания": "Spanien",
+      "Италия": "Italien",
+      "България": "Bulgarien",
+      "Средиземноморие": "Mittelmeerraum",
+      "Скандинавия": "Skandinavien",
+      "Великобритания": "Vereinigtes Königreich",
+      "Китай": "China",
+      "Египет": "Ägypten",
+      "Домашна кухня": "Hausmannskost",
+      "Източна Европа": "Osteuropa",
+      "Световна кухня": "Weltküche",
+    },
+    es: {
+      "Турция": "Turquía",
+      "Индия": "India",
+      "Япония": "Japón",
+      "Виетнам": "Vietnam",
+      "Гърция": "Grecia",
+      "Мексико": "México",
+      "Перу": "Perú",
+      "Етиопия": "Etiopía",
+      "Мароко": "Marruecos",
+      "Корея": "Corea",
+      "Ливан": "Líbano",
+      "Тайланд": "Tailandia",
+      "Испания": "España",
+      "Италия": "Italia",
+      "България": "Bulgaria",
+      "Средиземноморие": "Mediterráneo",
+      "Скандинавия": "Escandinavia",
+      "Великобритания": "Reino Unido",
+      "Китай": "China",
+      "Египет": "Egipto",
+      "Домашна кухня": "Cocina casera",
+      "Източна Европа": "Europa del Este",
+      "Световна кухня": "Cocina mundial",
+    },
+    ru: {
+      "Турция": "Турция",
+      "Индия": "Индия",
+      "Япония": "Япония",
+      "Виетнам": "Вьетнам",
+      "Гърция": "Греция",
+      "Мексико": "Мексика",
+      "Перу": "Перу",
+      "Етиопия": "Эфиопия",
+      "Мароко": "Марокко",
+      "Корея": "Корея",
+      "Ливан": "Ливан",
+      "Тайланд": "Таиланд",
+      "Испания": "Испания",
+      "Италия": "Италия",
+      "България": "Болгария",
+      "Средиземноморие": "Средиземноморье",
+      "Скандинавия": "Скандинавия",
+      "Великобритания": "Великобритания",
+      "Китай": "Китай",
+      "Египет": "Египет",
+      "Домашна кухня": "Домашняя кухня",
+      "Източна Европа": "Восточная Европа",
+      "Световна кухня": "Мировая кухня",
+    },
   };
-  return map[bgCountry] || bgCountry;
+  return maps[lang]?.[bgCountry] || bgCountry;
 }
 
 function localizedRecipeFields(row, lang, fallbacks) {
