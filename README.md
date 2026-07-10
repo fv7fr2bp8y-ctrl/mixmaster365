@@ -1,183 +1,223 @@
-# MixMaster365 Apps
+# FreeFrom365 recipe apps
 
-This repository now contains several related recipe/drink PWAs:
+This repository contains two separate product families:
 
-- Main MixMaster cocktail/mocktail app at `/`
-- Brunch 365 at `/breakfast/`
-- Healthy Gut 365 at `/free-from/`
+1. **FreeFrom365 recipe apps**: six light recipe PWAs that share one curated recipe catalogue.
+2. **MixMaster365**: the existing cocktail and mocktail app at the repository root.
 
-For the current Healthy Gut work, read:
+Do not mix their data or deployment work. Recipe-app changes belong in the six app directories and the shared master spreadsheet. The root MixMaster files should only be changed when the cocktail app is explicitly in scope.
 
-- `HEALTHY_GUT_README.md`
-- `OTHER_CHAT_HANDOFF.md`
-- `google-play-assets/PLAY_PREP.md`
+## Live recipe apps
 
-Latest Healthy Gut status as of 2026-07-07:
-
-- App file: `free-from/index.html`
-- Recipes in app: 36
-- Drive images in app: 36
-- Google Sheet recipes: 365
-- Ready image rows in sheet: 36
-- Current service worker cache: `healthy-gut-365-v18`
-- Production image policy: Google Drive + Google Sheet, not local recipe image paths.
-
----
-
-# MixMaster · Atelier 🍸
-
-Art-Deco каталог с **365 коктейла + 365 безалкохолни** напитки. PWA, 5 езика, AI скенер за бутилки, ml/oz, Cocktail of the Day.
-
-**Live:** https://mixmaster365.eu · **Repo:** `fv7fr2bp8y-ctrl/mixmaster365` (branch `main`)
-
----
-
-## 🗂 Структура на репото
-
-| Файл | Какво е |
-|---|---|
-| `index.html` | Цялото приложение (single-file). Това е, което GitHub Pages сервира. |
-| `MixMaster365-Deco v0.4.html` | Огледало на index.html (текуща версия). |
-| `manifest.json` | PWA манифест. |
-| `sw.js` | Service worker (офлайн кеш). Вдигай `CACHE_NAME` при ъпдейт. |
-| `icon-192.png` / `icon-512.png` | PWA икони. |
-| `privacy.html` | Политика за поверителност (двуезична) — за Google Play. |
-| `CNAME` | `mixmaster365.eu` (custom domain). |
-| `scripts/*.gs` | Google Apps Script помощници (виж по-долу). |
-
----
-
-## 🔑 API ключ (Gemini)
-
-Скриптовете в `scripts/` имат `PASTE_YOUR_GEMINI_KEY_HERE`. Вземи ключ от
-[aistudio.google.com/apikey](https://aistudio.google.com/apikey) и го постави преди пускане.
-**Не качвай ключа в публичния repo.**
-
-Ключът за уеб приложението (бутилков скенер) е в `index.html` като `geminiKey` (`AIza...`) — този може да е публичен.
-
----
-
-## 📊 Данни (Google Sheets)
-
-Една таблица, два таба (tab):
-- **Spreadsheet ID:** `1GNVZxY3X6k3iDRWLu8CAL2sNM0I2GcI5FiWLXZYQ1hk`
-- **Коктейли:** `gid=2075268599`
-- **Безалкохолни:** `gid=116292126`
-
-Колони: `id, name, base, icon, image, ingredients, recipe` + по 4 преводни колони на език
-(`name_en, base_en, ingredients_en, recipe_en, … _de, _es, _ru`) = 23 колони общо.
-
-**Универсален endpoint** (връща всички колони като JSON):
-```
-https://script.google.com/macros/s/AKfycbwo8yV8kY20USsHptW_Mvd8wNXI_jBoOLtq6UI58ys7O9SgxxbAnMAeDrrWaEwriMS2/exec?gid=<GID>
-```
-Кодът му е `scripts/doGet_universal.gs`. В `index.html`: `apiUrl` = коктейли, `mocktailsUrl` = безалкохолни.
-
-Бърза проверка на прогреса:
-```bash
-curl -sL "https://docs.google.com/spreadsheets/d/1GNVZxY3X6k3iDRWLu8CAL2sNM0I2GcI5FiWLXZYQ1hk/export?format=csv&gid=116292126" | \
-python3 -c "import csv,sys; r=list(csv.reader(sys.stdin)); h=r[0]; ni=h.index('name_en'); ii=h.index('image'); \
-print('преводи', sum(1 for x in r[1:] if len(x)>ni and x[ni].strip()),'/365'); \
-print('снимки', sum(1 for x in r[1:] if len(x)>ii and x[ii].strip().startswith('http')),'/365')"
-```
-
----
-
-## ⚙️ Apps Script помощници (`scripts/`)
-
-Всеки е **авто-режим**: пускаш `startAuto()` веднъж → таймер го върти сам до край → спира се сам.
-`stopAuto()` спира таймера. Виж напредък с `checkProgress()` / `checkTranslationProgress()`.
-
-| Скрипт | Функция | Бележки |
+| App | Directory | Production domain |
 |---|---|---|
-| `translate_recipes.gs` | превежда BG → EN/DE/ES/RU | Постави ключ. Смени `SHEET_GID` за другия таб. |
-| `generate_images.gs` | генерира снимки (Gemini image) | Записва в Google Drive, линк в колона E. |
-| `doGet_universal.gs` | endpoint-ът | Deploy → Web app → Anyone. |
+| Brunch 365 | `breakfast/` | https://brunch.freefrom365.com |
+| Healthy Gut 365 | `free-from/` | https://healthy-gut.freefrom365.com |
+| Gluten Free 365 | `gluten-free/` | https://gluten-free.freefrom365.com |
+| Dairy Free 365 | `dairy-free/` | https://dairy-free.freefrom365.com |
+| Meat Free 365 | `meat-free/` | https://meat-free.freefrom365.com |
+| Plant Based 365 | `plant-based/` | https://plant-based.freefrom365.com |
 
-**Важно:** всеки скрипт = **отделен Apps Script проект** (иначе `const API_KEY` се дублира → грешка).
-6-минутният лимит е нормален — таймерът продължава автоматично.
+`https://freefrom365.com` and `https://www.freefrom365.com` currently redirect to Healthy Gut 365. The old `breakfast.freefrom365.com` address redirects to `brunch.freefrom365.com`.
 
----
+Host-based routing is defined in `vercel.json`. Every PWA is served at the root of its own domain even though its files live in a repository subdirectory.
 
-## ✅ Статус (към 7 юни 2026)
+## Current status
 
-| | Коктейли | Безалкохолни |
-|---|---|---|
-| Снимки | 365/365 ✅ | ~127/365 ⏳ (таймер върви) |
-| Преводи (×4 ез.) | 365/365 ✅ | 365/365 ✅ |
+Status verified from the generated `data.js` files on 10 July 2026:
 
-Готово също: домейн + HTTPS, PWA (manifest/SW/икони), privacy policy, 5 езика, ml⇄oz, Cocktail of the Day, споделяне, age gate (под 18 → само безалкохолни), бутилков скенер.
+| App | Visible recipes | Images | Complete translated recipe records | Recipes with quantities |
+|---|---:|---:|---:|---:|
+| Brunch | 132 | 132 | 132 | 132 |
+| Healthy Gut | 123 | 123 | 123 | 61 |
+| Gluten Free | 134 | 134 | 134 | 72 |
+| Dairy Free | 131 | 131 | 131 | 69 |
+| Meat Free | 151 | 151 | 151 | 89 |
+| Plant Based | 116 | 116 | 116 | 54 |
 
----
+The six supported languages are Bulgarian, English, German, Spanish, French and Russian.
 
-## 💰 Монетизация — Freemium (внедрено ✅)
+The immediate editorial target is **180 complete Brunch recipes**. There are 48 recipes left to add. New recipes should be added in curated blocks of 12 with quantities, all translations and a real Drive image before they are published.
 
-- **Безплатно:** всички 365 безалкохолни + първите 20 коктейла (пълна рецепта) + преглед на всички коктейли (снимка/име/база).
-- **Премиум (€3.99 еднократно):** рецептите на коктейли 21–365 + AI скенер за бутилки.
-- Код: `isLocked()`, `openPaywall()`, `buyPremium()`/`restorePremium()` (Google Play Billing през Digital Goods API). Флаг в `localStorage['mixmaster-premium']`.
-- SKU: **`premium_unlock`**. Цена-етикет в `PRICE_LABEL` (`index.html`); реалната цена идва от Play.
+## Source of truth
 
-## ⏳ ТЕКУЩ БЛОКЕР (Play publishing)
+The recipe catalogue is not maintained in local HTML or directly in the generated `data.js` files.
 
-Play приложението е създадено с package **`eu.mixmaster365.app`**, но PWABuilder билдът
-излиза с **`eu.mixmaster365.twa`** → Play отказва. При повторно сваляне PWABuilder върна
-**кеширан** стар билд (1913867 байта, идентичен) дори след смяна на Package ID.
+- Google spreadsheet: `FreeFrom365 Master Recipes`
+- Spreadsheet ID: `1wxcQ28CslNUa_7-hrhkIKEuO6fF2HAkfSrKxRYmIRek`
+- Tab: `Master_Recipes`
+- Sheet gid: `1571845576`
+- Sheet URL: https://docs.google.com/spreadsheets/d/1wxcQ28CslNUa_7-hrhkIKEuO6fF2HAkfSrKxRYmIRek/edit
+- Recipe image folder ID: `1OD_LY098yehbLRA4jYcucQ7FuxzUq2hN`
 
-**Решение — генерирай ПРЕСЕН билд:**
-- PWABuilder → hard refresh → `https://mixmaster365.eu` → Android
-- **Package ID: `eu.mixmaster365.app`** (задължително)
-- Signing key: **Use mine** → `signing.keystore` + alias/пароли от `signing-key-info.txt`
-  (в `~/Downloads/MixMaster - Google Play package/`)
-- Изчакай да СТРОИ → свали. Провери package ПРЕДИ качване:
-  ```bash
-  unzip -p NEW.aab base/manifest/AndroidManifest.xml | strings | grep -c '\.twa\.DYNAMIC'
-  # 0 = правилно (.app);  >0 = пак е .twa (грешен/кеширан)
-  ```
-- Ако пак кешира → построй локално: `npx @bubblewrap/cli init --manifest https://mixmaster365.eu/manifest.json`
-- След правилния .aab: качи → App integrity → копирай **App signing SHA-256** →
-  добави го в `.well-known/assetlinks.json` (към съществуващия) → публикувай.
+The spreadsheet and Google Drive are the source of truth. Local recipe data is generated output.
 
-## 🚀 Остава до Google Play
+### Publishing rules
 
-1. ✅ Снимки + преводи (365/365 за двете) — **готово**.
-2. ✅ Freemium заключване — **готово**.
-3. **Play Console** ($25) → създай **managed product** с ID `premium_unlock`, цена €3.99.
-4. **TWA билд:** [pwabuilder.com](https://pwabuilder.com) → `https://mixmaster365.eu` → Android →
-   **включи Google Play Billing** в опциите → свали `.aab`.
-5. **assetlinks.json:** PWABuilder дава SHA-256 → създай `/.well-known/assetlinks.json` в репото.
-6. **Обява:** скрийншоти, икона, content rating (алкохол → 18+),
-   privacy policy = `https://mixmaster365.eu/privacy.html`, качи `.aab`.
+A recipe is exported only when all of these conditions are true:
 
----
+- `status` is `ready`;
+- `recipe_quality` is `curated`;
+- the app-specific flag is `TRUE`;
+- `image_status` is `ready`;
+- `image_url` is present.
 
-## 🛠 Как да редактирам приложението
+This deliberately keeps recipes without approved images invisible on the sites.
 
-`index.html` е всичко. След промяна:
+Each recipe has one stable `global_id`. The app flags decide which catalogues include it, so overlapping recipes are stored once rather than copied into separate tables. The app slot columns determine the order in each app.
+
+## Recipe data requirements
+
+Every new recipe must include:
+
+- a unique stable ID;
+- Bulgarian name, description, tag, ingredients and preparation steps;
+- realistic ingredient quantities and units;
+- preparation time and meal type;
+- correct country or cuisine attribution;
+- English, German, Spanish, French and Russian translations;
+- accurate dietary flags;
+- an app ordering slot;
+- one approved food image in Google Drive;
+- `status=ready`, `recipe_quality=curated` and `image_status=ready` only after review.
+
+Dietary flags must describe the actual ingredients. Do not mark recipes containing dairy as dairy-free, recipes containing wheat as gluten-free, or recipes containing fish as meat-free. Plant-based recipes must contain no meat, fish, eggs, dairy or honey.
+
+Quantities should be useful in a real kitchen. Avoid vague ingredient-only lists, impossible portions, repeated template text and translations that merely fall back to Bulgarian.
+
+## Images
+
+Recipe images live in the shared Google Drive folder and their Drive links are stored in `image_url` in the master sheet.
+
+Image requirements:
+
+- one newly generated image per recipe, not crops from a contact sheet;
+- food must visibly match the recipe and key ingredients;
+- editorial natural-light food photography;
+- no text, logos, watermarks, hands or unrelated garnish;
+- no random placeholder services such as LoremFlickr;
+- upload to Drive first, then write the final link and `ready` status to the sheet.
+
+Do not add local image paths as a production workaround. Local generated-image folders are working material and are not the catalogue source.
+
+## Synchronizing the apps
+
+Export the current master sheet to a temporary CSV:
+
 ```bash
-cp index.html "MixMaster365-Deco v0.4.html"   # синхронизирай огледалото
-# вдигни CACHE_NAME в sw.js (mixmaster-vN+1), за да получат хората новото
-git add -A && git commit -m "..." && git push origin main
+curl -L "https://docs.google.com/spreadsheets/d/1wxcQ28CslNUa_7-hrhkIKEuO6fF2HAkfSrKxRYmIRek/export?format=csv&gid=1571845576" \
+  -o /tmp/freefrom365_master.csv
 ```
-GitHub Pages се ъпдейтва за ~1 мин. Хард рефреш: **Cmd+Shift+R**.
 
-### Архитектура накратко
-- **i18n:** обект `I18N` + `t(key)` + `data-i18n` атрибути. Език в `localStorage['mixmaster-lang']`.
-- **Преводи на съдържание:** `loc(item, field)` връща `item.<field>_<lang>` или пада на български.
-- **Единици:** `convertUnits(text)` (мл/ml → oz). Избор в `localStorage['mixmaster-unit']`.
-- **Логиката** (филтри, любими, COTD) винаги ползва оригиналните български полета.
+Generate the six local data files:
 
----
+```bash
+node scripts/sync-master-recipes.mjs /tmp/freefrom365_master.csv
+```
 
-## 🍎 iOS / App Store (за по-късно — отложено)
+The script writes:
 
-Apple не позволява просто TWA-обвиване (Guideline 4.2 отхвърля „wrapped website").
-**Препоръчан път: Capacitor** (нативна черупка + native plugins).
+- `breakfast/data.js`
+- `free-from/data.js`
+- `gluten-free/data.js`
+- `dairy-free/data.js`
+- `meat-free/data.js`
+- `plant-based/data.js`
 
-Предпоставки:
-- Apple Developer Program — **$99/година**
-- **Xcode** (пълен, ~7GB, от Mac App Store) + CocoaPods (Mac ✅ наличен)
-- **StoreKit** IAP вместо Play Billing → нужен нативен мост за премиума (уеб Digital Goods API не работи на iOS)
+Never hand-edit these generated files. Fix the master sheet and run the sync again.
 
-План (когато решим): `npm i @capacitor/core @capacitor/cli` → `npx cap init` → добави iOS платформа →
-плъгини (camera, in-app-purchase/StoreKit, preferences) → Xcode archive → App Store Connect.
-Един Capacitor проект може да обслужи и трите апа (config per app).
+## Verification
+
+Check JavaScript syntax and all manifests:
+
+```bash
+for file in \
+  scripts/sync-master-recipes.mjs \
+  breakfast/data.js free-from/data.js gluten-free/data.js \
+  dairy-free/data.js meat-free/data.js plant-based/data.js
+do
+  node --check "$file"
+done
+
+for file in \
+  breakfast/manifest.json free-from/manifest.json gluten-free/manifest.json \
+  dairy-free/manifest.json meat-free/manifest.json plant-based/manifest.json
+do
+  node -e "JSON.parse(require('fs').readFileSync('$file', 'utf8'))"
+done
+```
+
+Count the generated recipes:
+
+```bash
+for dir in breakfast free-from gluten-free dairy-free meat-free plant-based
+do
+  printf '%s: ' "$dir"
+  node -e "global.window={};require('./$dir/data.js');console.log(window.BREAKFAST_DATA.length)"
+done
+```
+
+Before publishing, open all six apps at desktop and mobile widths and verify:
+
+- splash and icon render without a frame inside a frame;
+- the recipe of the day has a valid image and opens correctly;
+- search and filters remain readable in the light theme;
+- filter labels change with the language;
+- ingredient quantities and steps use the selected language;
+- recipe share creates a direct recipe link and has a copy fallback;
+- back navigation from a recipe is obvious;
+- no broken images or console errors appear;
+- service worker and manifest load from the correct app domain.
+
+## App structure
+
+Each recipe directory contains:
+
+- `index.html`: interface, translations, filtering, favourites and sharing;
+- `data.js`: generated recipe catalogue;
+- `manifest.json`: installable PWA metadata;
+- `sw.js`: offline cache;
+- `icon-192.png` and `icon-512.png`: PWA icons;
+- splash/icon artwork used by that app.
+
+The six apps intentionally share the Brunch visual and interaction system: light editorial layout, recipe of the day, image-only visible catalogue, search, compact filters, favourites, language settings and direct recipe sharing.
+
+When changing cached application files, increment the cache name in the relevant `sw.js` so installed PWAs receive the update.
+
+## Deployment
+
+The recipe apps are deployed through the Vercel project connected to this repository. `vercel.json` maps each custom hostname to its app directory.
+
+Normal release flow:
+
+1. Update the master spreadsheet and Drive assets.
+2. Export the CSV and synchronize all six apps.
+3. Review the generated counts and diff.
+4. Run syntax, manifest and browser checks.
+5. Commit only the intended files.
+6. Push the current branch to `main`:
+
+```bash
+git push origin HEAD:main
+```
+
+7. Verify the production domains after Vercel finishes deploying.
+
+Do not stage unrelated OneDrive files, generated contact sheets, old icon candidates, downloaded Google Play packages or other untracked working assets.
+
+## Product roadmap
+
+Current priority order:
+
+1. Grow Brunch from 132 to 180 fully complete recipes in four blocks of 12.
+2. Complete quantities for all existing recipes in the other five apps.
+3. Continue each catalogue toward 365 carefully curated recipes.
+4. Perform a six-app editorial, translation and accessibility review.
+5. Finalize icons, splash screens, manifests, privacy pages and screenshots.
+6. Prepare and validate the six Google Play packages.
+
+## MixMaster365 boundary
+
+The repository root (`index.html`, root `manifest.json`, root `sw.js`, `mocktails/` and the MixMaster assets) belongs to the cocktail application at https://mixmaster365.eu.
+
+MixMaster has its own spreadsheet, image pipeline, PWA settings and Google Play package. It is not part of the FreeFrom365 master recipe sync. Do not modify it while working on Brunch or the five dietary apps unless the task explicitly asks for MixMaster changes.
