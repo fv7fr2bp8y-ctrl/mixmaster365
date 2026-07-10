@@ -6766,6 +6766,116 @@ window.BREAKFAST_DATA = [
   },
   {
     "id": 124,
+    "source_id": "BR-E005",
+    "name": "Розов хумус тост с авокадо и рохко яйце",
+    "base": "лесен цветен брънч",
+    "icon": "◇",
+    "image": "https://drive.google.com/file/d/18eqrlsbPVlRWW0kSX9MDqe1Kzw-f0FsQ/view?usp=drivesdk",
+    "description": "Ярък тост с цвеклов хумус, авокадо, рохко яйце и репички - лесен, свеж и много ефектен.",
+    "ingredients": "2 филии квасен хляб, 140 г цвеклов хумус, 1 авокадо, 2 яйца, 4 репички, 1 ч.л. сусам, 1 с.л. копър, 1 ч.л. лимонова кора",
+    "recipe": "<p>Запечи хляба.</p><p>Намажи с цвеклов хумус и подреди авокадото.</p><p>Добави рохко яйце, репички, сусам, копър и лимонова кора.</p>",
+    "time": 12,
+    "difficulty": "Лесно",
+    "country": "Световна кухня",
+    "tag": "лесен цветен брънч",
+    "description_en": "A vivid toast with beet hummus, avocado, jammy egg and radishes - easy, fresh and striking.",
+    "name_en": "Pink hummus avocado toast with jammy egg",
+    "base_en": "easy colorful brunch",
+    "ingredients_en": "2 slices sourdough bread, 140 g beet hummus, 1 avocado, 2 eggs, 4 radishes, 1 tsp sesame, 1 tbsp dill, 1 tsp lemon zest",
+    "recipe_en": "<p>Toast the bread.</p><p>Spread with beet hummus and arrange the avocado.</p><p>Add jammy egg, radishes, sesame, dill and lemon zest.</p>",
+    "difficulty_en": "Easy",
+    "country_en": "World cuisine",
+    "tag_en": "easy colorful brunch",
+    "description_de": "Ein leuchtender Toast mit Rote-Bete-Hummus, Avocado, wachsweichem Ei und Radieschen - einfach, frisch und auffällig.",
+    "name_de": "Rosa Hummus-Avocado-Toast mit wachsweichem Ei",
+    "base_de": "einfacher farbiger Brunch",
+    "ingredients_de": "2 Scheiben Sauerteigbrot, 140 g Rote-Bete-Hummus, 1 Avocado, 2 Eier, 4 Radieschen, 1 TL Sesam, 1 EL Dill, 1 TL Zitronenschale",
+    "recipe_de": "<p>Das Brot rösten.</p><p>Mit Rote-Bete-Hummus bestreichen und die Avocado darauflegen.</p><p>Mit wachsweichem Ei, Radieschen, Sesam, Dill und Zitronenschale abschließen.</p>",
+    "difficulty_de": "Einfach",
+    "country_de": "Weltküche",
+    "tag_de": "einfacher farbiger Brunch",
+    "description_es": "Una tostada vibrante con hummus de remolacha, aguacate, huevo cremoso y rábanos: fácil, fresca y llamativa.",
+    "name_es": "Tostada rosa de hummus con aguacate y huevo cremoso",
+    "base_es": "brunch fácil y colorido",
+    "ingredients_es": "2 rebanadas de pan de masa madre, 140 g hummus de remolacha, 1 aguacate, 2 huevos, 4 rábanos, 1 cdta sésamo, 1 cda eneldo, 1 cdta ralladura de limón",
+    "recipe_es": "<p>Tuesta el pan.</p><p>Unta el hummus de remolacha y coloca el aguacate.</p><p>Añade huevo cremoso, rábanos, sésamo, eneldo y ralladura de limón.</p>",
+    "difficulty_es": "Fácil",
+    "country_es": "Cocina mundial",
+    "tag_es": "brunch fácil y colorido",
+    "description_fr": "Un toast vif avec houmous de betterave, avocat, oeuf mollet et radis - facile, frais et très visuel.",
+    "name_fr": "Toast rose houmous avocat et oeuf mollet",
+    "base_fr": "brunch facile et coloré",
+    "ingredients_fr": "2 tranches de pain au levain, 140 g houmous de betterave, 1 avocat, 2 oeufs, 4 radis, 1 c. à café sésame, 1 c. à soupe aneth, 1 c. à café zeste de citron",
+    "recipe_fr": "<p>Faites griller le pain.</p><p>Tartinez de houmous de betterave et disposez l’avocat.</p><p>Ajoutez oeuf mollet, radis, sésame, aneth et zeste de citron.</p>",
+    "difficulty_fr": "Facile",
+    "country_fr": "Cuisine du monde",
+    "tag_fr": "brunch facile et coloré",
+    "description_ru": "Яркий тост со свекольным хумусом, авокадо, яйцом всмятку и редисом - легко, свежо и эффектно.",
+    "name_ru": "Розовый тост с хумусом, авокадо и яйцом всмятку",
+    "base_ru": "легкий цветной бранч",
+    "ingredients_ru": "2 ломтика хлеба на закваске, 140 г свекольного хумуса, 1 авокадо, 2 яйца, 4 редиса, 1 ч. л. кунжута, 1 ст. л. укропа, 1 ч. л. лимонной цедры",
+    "recipe_ru": "<p>Поджарьте хлеб.</p><p>Намажьте свекольным хумусом и выложите авокадо.</p><p>Добавьте яйцо всмятку, редис, кунжут, укроп и лимонную цедру.</p>",
+    "difficulty_ru": "Легко",
+    "country_ru": "Мировая кухня",
+    "tag_ru": "легкий цветной бранч"
+  },
+  {
+    "id": 125,
+    "source_id": "BR-E006",
+    "name": "Капрезе яйца на фурна с чери домати и моцарела",
+    "base": "лесен топъл брънч",
+    "icon": "◇",
+    "image": "https://drive.google.com/file/d/1sNZrSWnIO92R3axiQYTTsuumK_5ActCK/view?usp=drivesdk",
+    "description": "Малка тава с яйца, сладки чери домати, моцарела и босилек - топло, цветно и готово без усилие.",
+    "ingredients": "4 яйца, 260 г чери домати, 120 г моцарела, 8 листа босилек, 1 с.л. зехтин, 1 скилидка чесън, 2 филии квасен хляб, 1/4 ч.л. черен пипер",
+    "recipe": "<p>Сложи доматите, чесъна и зехтина в малка тава.</p><p>Добави яйцата и моцарелата и запечи до стегнат белтък.</p><p>Завърши с босилек и поднеси с тост.</p>",
+    "time": 18,
+    "difficulty": "Лесно",
+    "country": "Световна кухня",
+    "tag": "лесен топъл брънч",
+    "description_en": "A small dish of eggs, sweet cherry tomatoes, mozzarella and basil - warm, colorful and effortless.",
+    "name_en": "Caprese baked eggs with cherry tomatoes and mozzarella",
+    "base_en": "easy warm brunch",
+    "ingredients_en": "4 eggs, 260 g cherry tomatoes, 120 g mozzarella, 8 basil leaves, 1 tbsp olive oil, 1 garlic clove, 2 slices sourdough bread, 1/4 tsp black pepper",
+    "recipe_en": "<p>Put the tomatoes, garlic and olive oil in a small baking dish.</p><p>Add the eggs and mozzarella and bake until the whites are set.</p><p>Finish with basil and serve with toast.</p>",
+    "difficulty_en": "Easy",
+    "country_en": "World cuisine",
+    "tag_en": "easy warm brunch",
+    "description_de": "Eine kleine Form mit Eiern, süßen Kirschtomaten, Mozzarella und Basilikum - warm, bunt und mühelos.",
+    "name_de": "Caprese-Eier aus dem Ofen mit Kirschtomaten und Mozzarella",
+    "base_de": "einfacher warmer Brunch",
+    "ingredients_de": "4 Eier, 260 g Kirschtomaten, 120 g Mozzarella, 8 Basilikumblätter, 1 EL Olivenöl, 1 Knoblauchzehe, 2 Scheiben Sauerteigbrot, 1/4 TL schwarzer Pfeffer",
+    "recipe_de": "<p>Tomaten, Knoblauch und Olivenöl in eine kleine Form geben.</p><p>Eier und Mozzarella hinzufügen und backen, bis das Eiweiß stockt.</p><p>Mit Basilikum abschließen und mit Toast servieren.</p>",
+    "difficulty_de": "Einfach",
+    "country_de": "Weltküche",
+    "tag_de": "einfacher warmer Brunch",
+    "description_es": "Un pequeño plato de huevos, tomates cherry dulces, mozzarella y albahaca: cálido, colorido y sin esfuerzo.",
+    "name_es": "Huevos caprese al horno con tomates cherry y mozzarella",
+    "base_es": "brunch caliente fácil",
+    "ingredients_es": "4 huevos, 260 g tomates cherry, 120 g mozzarella, 8 hojas de albahaca, 1 cda aceite de oliva, 1 diente de ajo, 2 rebanadas de pan de masa madre, 1/4 cdta pimienta negra",
+    "recipe_es": "<p>Pon los tomates, el ajo y el aceite de oliva en una fuente pequeña.</p><p>Añade los huevos y la mozzarella y hornea hasta que las claras cuajen.</p><p>Termina con albahaca y sirve con tostada.</p>",
+    "difficulty_es": "Fácil",
+    "country_es": "Cocina mundial",
+    "tag_es": "brunch caliente fácil",
+    "description_fr": "Un petit plat d’oeufs, tomates cerises sucrées, mozzarella et basilic - chaud, coloré et sans effort.",
+    "name_fr": "Oeufs caprese au four avec tomates cerises et mozzarella",
+    "base_fr": "brunch chaud facile",
+    "ingredients_fr": "4 oeufs, 260 g tomates cerises, 120 g mozzarella, 8 feuilles de basilic, 1 c. à soupe huile d’olive, 1 gousse d’ail, 2 tranches de pain au levain, 1/4 c. à café poivre noir",
+    "recipe_fr": "<p>Mettez les tomates, l’ail et l’huile d’olive dans un petit plat.</p><p>Ajoutez les oeufs et la mozzarella, puis faites cuire jusqu’à ce que les blancs soient pris.</p><p>Terminez avec le basilic et servez avec du toast.</p>",
+    "difficulty_fr": "Facile",
+    "country_fr": "Cuisine du monde",
+    "tag_fr": "brunch chaud facile",
+    "description_ru": "Небольшая форма с яйцами, сладкими помидорами черри, моцареллой и базиликом - тепло, ярко и без усилий.",
+    "name_ru": "Яйца капрезе с черри и моцареллой",
+    "base_ru": "легкий теплый бранч",
+    "ingredients_ru": "4 яйца, 260 г помидоров черри, 120 г моцареллы, 8 листьев базилика, 1 ст. л. оливкового масла, 1 зубчик чеснока, 2 ломтика хлеба на закваске, 1/4 ч. л. черного перца",
+    "recipe_ru": "<p>Выложите помидоры, чеснок и оливковое масло в небольшую форму.</p><p>Добавьте яйца и моцареллу и запекайте, пока белки не схватятся.</p><p>Завершите базиликом и подавайте с тостом.</p>",
+    "difficulty_ru": "Легко",
+    "country_ru": "Мировая кухня",
+    "tag_ru": "легкий теплый бранч"
+  },
+  {
+    "id": 126,
     "source_id": "BR-C091",
     "name": "Корейски кимчи картофени палачинки с яйце",
     "base": "корейски брънч",
@@ -6820,7 +6930,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Корейский бранч"
   },
   {
-    "id": 125,
+    "id": 127,
     "source_id": "BR-C092",
     "name": "Турски чълбър с поширани яйца и чили масло",
     "base": "турска класика",
@@ -6875,7 +6985,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Турецкая классика"
   },
   {
-    "id": 126,
+    "id": 128,
     "source_id": "BR-C093",
     "name": "Бразилска тапиока креп с яйце и авокадо",
     "base": "безглутенов креп",
@@ -6930,7 +7040,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "безглютеновый блин"
   },
   {
-    "id": 127,
+    "id": 129,
     "source_id": "BR-C094",
     "name": "Тунизийска шакшука с нахут и хариса",
     "base": "пикантен тиган",
@@ -6985,7 +7095,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "острая сковорода"
   },
   {
-    "id": 128,
+    "id": 130,
     "source_id": "BR-C095",
     "name": "Датски ръжен тост с гъби, яйце и копър",
     "base": "северен тост",
@@ -7040,7 +7150,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "северный тост"
   },
   {
-    "id": 129,
+    "id": 131,
     "source_id": "BR-C096",
     "name": "Гръцка купа с йогурт, смокини и шамфъстък",
     "base": "сладка купа",
@@ -7095,7 +7205,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "сладкая миска"
   },
   {
-    "id": 130,
+    "id": 132,
     "source_id": "BR-C097",
     "name": "Израелска сабих чиния с патладжан и тахан",
     "base": "близкоизточна чиния",
@@ -7150,7 +7260,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Ближневосточное блюдо"
   },
   {
-    "id": 131,
+    "id": 133,
     "source_id": "BR-C098",
     "name": "Колумбийска арепа с боб, авокадо и яйце",
     "base": "латино брънч",
@@ -7205,7 +7315,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Латинский бранч"
   },
   {
-    "id": 132,
+    "id": 134,
     "source_id": "BR-C099",
     "name": "Филипински чеснов ориз с яйце и домати",
     "base": "оризова закуска",
@@ -7260,7 +7370,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "рисовый завтрак"
   },
   {
-    "id": 133,
+    "id": 135,
     "source_id": "BR-C100",
     "name": "Ливанска лабне питка със заатар и зеленчуци",
     "base": "левантски тост",
@@ -7315,7 +7425,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Левантийский тост"
   },
   {
-    "id": 134,
+    "id": 136,
     "source_id": "BR-C101",
     "name": "Тайландски кокосови оризови палачинки с манго",
     "base": "тропически палачинки",
@@ -7370,7 +7480,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "тропические блинчики"
   },
   {
-    "id": 135,
+    "id": 137,
     "source_id": "BR-C103",
     "name": "Австрийски кайзершмарн с горски плодове",
     "base": "сладък брънч",
@@ -7425,7 +7535,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "сладкий бранч"
   },
   {
-    "id": 136,
+    "id": 138,
     "source_id": "BR-C104",
     "name": "Грузински лобиани с билкова салата",
     "base": "пълнен хляб",
@@ -7480,7 +7590,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "фаршированный хлеб"
   },
   {
-    "id": 137,
+    "id": 139,
     "source_id": "BR-C105",
     "name": "Марокански мсемен с мед, бадеми и портокал",
     "base": "слоести палачинки",
@@ -7535,7 +7645,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "слоёные блины"
   },
   {
-    "id": 138,
+    "id": 140,
     "source_id": "BR-C106",
     "name": "Нигерийски акара с пипер сос и салата",
     "base": "бобени кюфтенца",
@@ -7590,7 +7700,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "фасолевые фрикадельки"
   },
   {
-    "id": 139,
+    "id": 141,
     "source_id": "BR-C108",
     "name": "Италианска фритата с тиквички и босилек",
     "base": "яйчен брънч",
@@ -7645,7 +7755,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "яичный бранч"
   },
   {
-    "id": 140,
+    "id": 142,
     "source_id": "BR-C109",
     "name": "Френска елдена галета с яйце и гъби",
     "base": "елдена галета",
@@ -7700,7 +7810,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "ржаные панировочные сухари"
   },
   {
-    "id": 141,
+    "id": 143,
     "source_id": "BR-C112",
     "name": "Български банички чашки със спанак и яйце",
     "base": "български брънч",
@@ -7755,7 +7865,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Болгарский бранч"
   },
   {
-    "id": 142,
+    "id": 144,
     "source_id": "BR-C113",
     "name": "Индонезийска гадо-гадо купа с яйце",
     "base": "зеленчукова купа",
@@ -7810,7 +7920,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "овощная миска"
   },
   {
-    "id": 143,
+    "id": 145,
     "source_id": "BR-C115",
     "name": "Немска селска закуска с картофи и яйца",
     "base": "картофен тиган",
@@ -7865,7 +7975,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "картофельная сковорода"
   },
   {
-    "id": 144,
+    "id": 146,
     "source_id": "BR-C116",
     "name": "Аржентинска проволета с яйца и чимичури",
     "base": "сиренен тиган",

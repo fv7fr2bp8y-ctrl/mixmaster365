@@ -221,6 +221,116 @@ window.BREAKFAST_DATA = [
   },
   {
     "id": 5,
+    "source_id": "BR-E005",
+    "name": "Розов хумус тост с авокадо и рохко яйце",
+    "base": "лесен цветен брънч",
+    "icon": "◇",
+    "image": "https://drive.google.com/file/d/18eqrlsbPVlRWW0kSX9MDqe1Kzw-f0FsQ/view?usp=drivesdk",
+    "description": "Ярък тост с цвеклов хумус, авокадо, рохко яйце и репички - лесен, свеж и много ефектен.",
+    "ingredients": "2 филии квасен хляб, 140 г цвеклов хумус, 1 авокадо, 2 яйца, 4 репички, 1 ч.л. сусам, 1 с.л. копър, 1 ч.л. лимонова кора",
+    "recipe": "<p>Запечи хляба.</p><p>Намажи с цвеклов хумус и подреди авокадото.</p><p>Добави рохко яйце, репички, сусам, копър и лимонова кора.</p>",
+    "time": 12,
+    "difficulty": "Лесно",
+    "country": "Световна кухня",
+    "tag": "лесен цветен брънч",
+    "description_en": "A vivid toast with beet hummus, avocado, jammy egg and radishes - easy, fresh and striking.",
+    "name_en": "Pink hummus avocado toast with jammy egg",
+    "base_en": "easy colorful brunch",
+    "ingredients_en": "2 slices sourdough bread, 140 g beet hummus, 1 avocado, 2 eggs, 4 radishes, 1 tsp sesame, 1 tbsp dill, 1 tsp lemon zest",
+    "recipe_en": "<p>Toast the bread.</p><p>Spread with beet hummus and arrange the avocado.</p><p>Add jammy egg, radishes, sesame, dill and lemon zest.</p>",
+    "difficulty_en": "Easy",
+    "country_en": "World cuisine",
+    "tag_en": "easy colorful brunch",
+    "description_de": "Ein leuchtender Toast mit Rote-Bete-Hummus, Avocado, wachsweichem Ei und Radieschen - einfach, frisch und auffällig.",
+    "name_de": "Rosa Hummus-Avocado-Toast mit wachsweichem Ei",
+    "base_de": "einfacher farbiger Brunch",
+    "ingredients_de": "2 Scheiben Sauerteigbrot, 140 g Rote-Bete-Hummus, 1 Avocado, 2 Eier, 4 Radieschen, 1 TL Sesam, 1 EL Dill, 1 TL Zitronenschale",
+    "recipe_de": "<p>Das Brot rösten.</p><p>Mit Rote-Bete-Hummus bestreichen und die Avocado darauflegen.</p><p>Mit wachsweichem Ei, Radieschen, Sesam, Dill und Zitronenschale abschließen.</p>",
+    "difficulty_de": "Einfach",
+    "country_de": "Weltküche",
+    "tag_de": "einfacher farbiger Brunch",
+    "description_es": "Una tostada vibrante con hummus de remolacha, aguacate, huevo cremoso y rábanos: fácil, fresca y llamativa.",
+    "name_es": "Tostada rosa de hummus con aguacate y huevo cremoso",
+    "base_es": "brunch fácil y colorido",
+    "ingredients_es": "2 rebanadas de pan de masa madre, 140 g hummus de remolacha, 1 aguacate, 2 huevos, 4 rábanos, 1 cdta sésamo, 1 cda eneldo, 1 cdta ralladura de limón",
+    "recipe_es": "<p>Tuesta el pan.</p><p>Unta el hummus de remolacha y coloca el aguacate.</p><p>Añade huevo cremoso, rábanos, sésamo, eneldo y ralladura de limón.</p>",
+    "difficulty_es": "Fácil",
+    "country_es": "Cocina mundial",
+    "tag_es": "brunch fácil y colorido",
+    "description_fr": "Un toast vif avec houmous de betterave, avocat, oeuf mollet et radis - facile, frais et très visuel.",
+    "name_fr": "Toast rose houmous avocat et oeuf mollet",
+    "base_fr": "brunch facile et coloré",
+    "ingredients_fr": "2 tranches de pain au levain, 140 g houmous de betterave, 1 avocat, 2 oeufs, 4 radis, 1 c. à café sésame, 1 c. à soupe aneth, 1 c. à café zeste de citron",
+    "recipe_fr": "<p>Faites griller le pain.</p><p>Tartinez de houmous de betterave et disposez l’avocat.</p><p>Ajoutez oeuf mollet, radis, sésame, aneth et zeste de citron.</p>",
+    "difficulty_fr": "Facile",
+    "country_fr": "Cuisine du monde",
+    "tag_fr": "brunch facile et coloré",
+    "description_ru": "Яркий тост со свекольным хумусом, авокадо, яйцом всмятку и редисом - легко, свежо и эффектно.",
+    "name_ru": "Розовый тост с хумусом, авокадо и яйцом всмятку",
+    "base_ru": "легкий цветной бранч",
+    "ingredients_ru": "2 ломтика хлеба на закваске, 140 г свекольного хумуса, 1 авокадо, 2 яйца, 4 редиса, 1 ч. л. кунжута, 1 ст. л. укропа, 1 ч. л. лимонной цедры",
+    "recipe_ru": "<p>Поджарьте хлеб.</p><p>Намажьте свекольным хумусом и выложите авокадо.</p><p>Добавьте яйцо всмятку, редис, кунжут, укроп и лимонную цедру.</p>",
+    "difficulty_ru": "Легко",
+    "country_ru": "Мировая кухня",
+    "tag_ru": "легкий цветной бранч"
+  },
+  {
+    "id": 6,
+    "source_id": "BR-E006",
+    "name": "Капрезе яйца на фурна с чери домати и моцарела",
+    "base": "лесен топъл брънч",
+    "icon": "◇",
+    "image": "https://drive.google.com/file/d/1sNZrSWnIO92R3axiQYTTsuumK_5ActCK/view?usp=drivesdk",
+    "description": "Малка тава с яйца, сладки чери домати, моцарела и босилек - топло, цветно и готово без усилие.",
+    "ingredients": "4 яйца, 260 г чери домати, 120 г моцарела, 8 листа босилек, 1 с.л. зехтин, 1 скилидка чесън, 2 филии квасен хляб, 1/4 ч.л. черен пипер",
+    "recipe": "<p>Сложи доматите, чесъна и зехтина в малка тава.</p><p>Добави яйцата и моцарелата и запечи до стегнат белтък.</p><p>Завърши с босилек и поднеси с тост.</p>",
+    "time": 18,
+    "difficulty": "Лесно",
+    "country": "Световна кухня",
+    "tag": "лесен топъл брънч",
+    "description_en": "A small dish of eggs, sweet cherry tomatoes, mozzarella and basil - warm, colorful and effortless.",
+    "name_en": "Caprese baked eggs with cherry tomatoes and mozzarella",
+    "base_en": "easy warm brunch",
+    "ingredients_en": "4 eggs, 260 g cherry tomatoes, 120 g mozzarella, 8 basil leaves, 1 tbsp olive oil, 1 garlic clove, 2 slices sourdough bread, 1/4 tsp black pepper",
+    "recipe_en": "<p>Put the tomatoes, garlic and olive oil in a small baking dish.</p><p>Add the eggs and mozzarella and bake until the whites are set.</p><p>Finish with basil and serve with toast.</p>",
+    "difficulty_en": "Easy",
+    "country_en": "World cuisine",
+    "tag_en": "easy warm brunch",
+    "description_de": "Eine kleine Form mit Eiern, süßen Kirschtomaten, Mozzarella und Basilikum - warm, bunt und mühelos.",
+    "name_de": "Caprese-Eier aus dem Ofen mit Kirschtomaten und Mozzarella",
+    "base_de": "einfacher warmer Brunch",
+    "ingredients_de": "4 Eier, 260 g Kirschtomaten, 120 g Mozzarella, 8 Basilikumblätter, 1 EL Olivenöl, 1 Knoblauchzehe, 2 Scheiben Sauerteigbrot, 1/4 TL schwarzer Pfeffer",
+    "recipe_de": "<p>Tomaten, Knoblauch und Olivenöl in eine kleine Form geben.</p><p>Eier und Mozzarella hinzufügen und backen, bis das Eiweiß stockt.</p><p>Mit Basilikum abschließen und mit Toast servieren.</p>",
+    "difficulty_de": "Einfach",
+    "country_de": "Weltküche",
+    "tag_de": "einfacher warmer Brunch",
+    "description_es": "Un pequeño plato de huevos, tomates cherry dulces, mozzarella y albahaca: cálido, colorido y sin esfuerzo.",
+    "name_es": "Huevos caprese al horno con tomates cherry y mozzarella",
+    "base_es": "brunch caliente fácil",
+    "ingredients_es": "4 huevos, 260 g tomates cherry, 120 g mozzarella, 8 hojas de albahaca, 1 cda aceite de oliva, 1 diente de ajo, 2 rebanadas de pan de masa madre, 1/4 cdta pimienta negra",
+    "recipe_es": "<p>Pon los tomates, el ajo y el aceite de oliva en una fuente pequeña.</p><p>Añade los huevos y la mozzarella y hornea hasta que las claras cuajen.</p><p>Termina con albahaca y sirve con tostada.</p>",
+    "difficulty_es": "Fácil",
+    "country_es": "Cocina mundial",
+    "tag_es": "brunch caliente fácil",
+    "description_fr": "Un petit plat d’oeufs, tomates cerises sucrées, mozzarella et basilic - chaud, coloré et sans effort.",
+    "name_fr": "Oeufs caprese au four avec tomates cerises et mozzarella",
+    "base_fr": "brunch chaud facile",
+    "ingredients_fr": "4 oeufs, 260 g tomates cerises, 120 g mozzarella, 8 feuilles de basilic, 1 c. à soupe huile d’olive, 1 gousse d’ail, 2 tranches de pain au levain, 1/4 c. à café poivre noir",
+    "recipe_fr": "<p>Mettez les tomates, l’ail et l’huile d’olive dans un petit plat.</p><p>Ajoutez les oeufs et la mozzarella, puis faites cuire jusqu’à ce que les blancs soient pris.</p><p>Terminez avec le basilic et servez avec du toast.</p>",
+    "difficulty_fr": "Facile",
+    "country_fr": "Cuisine du monde",
+    "tag_fr": "brunch chaud facile",
+    "description_ru": "Небольшая форма с яйцами, сладкими помидорами черри, моцареллой и базиликом - тепло, ярко и без усилий.",
+    "name_ru": "Яйца капрезе с черри и моцареллой",
+    "base_ru": "легкий теплый бранч",
+    "ingredients_ru": "4 яйца, 260 г помидоров черри, 120 г моцареллы, 8 листьев базилика, 1 ст. л. оливкового масла, 1 зубчик чеснока, 2 ломтика хлеба на закваске, 1/4 ч. л. черного перца",
+    "recipe_ru": "<p>Выложите помидоры, чеснок и оливковое масло в небольшую форму.</p><p>Добавьте яйца и моцареллу и запекайте, пока белки не схватятся.</p><p>Завершите базиликом и подавайте с тостом.</p>",
+    "difficulty_ru": "Легко",
+    "country_ru": "Мировая кухня",
+    "tag_ru": "легкий теплый бранч"
+  },
+  {
+    "id": 7,
     "source_id": "BR-C001",
     "name": "Менемен с печени чушки и домати",
     "base": "турска класика",
@@ -275,7 +385,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Турецкая классика"
   },
   {
-    "id": 6,
+    "id": 8,
     "source_id": "BR-C002",
     "name": "Масала доса с кокосово чътни",
     "base": "индийска ферментирала закуска",
@@ -330,7 +440,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Индийская ферментированная закуска"
   },
   {
-    "id": 7,
+    "id": 9,
     "source_id": "BR-C003",
     "name": "Японска оризова закуска с тамагояки и мисо зеленчуци",
     "base": "японска сутрешна купа",
@@ -385,7 +495,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "японская утренняя чашка"
   },
   {
-    "id": 8,
+    "id": 10,
     "source_id": "BR-C004",
     "name": "Фул медамес с тахан, лимон и билки",
     "base": "левантийска закуска",
@@ -440,7 +550,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Левантийский завтрак"
   },
   {
-    "id": 9,
+    "id": 11,
     "source_id": "BR-C005",
     "name": "Мексикански чилакилес вердес с яйце",
     "base": "мексикански brunch",
@@ -495,7 +605,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Мексиканский бранч"
   },
   {
-    "id": 10,
+    "id": 12,
     "source_id": "BR-C006",
     "name": "Елдена каша с печени сливи, орехи и канела",
     "base": "източноевропейска каша",
@@ -550,7 +660,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Восточноевропейская каша"
   },
   {
-    "id": 11,
+    "id": 13,
     "source_id": "BR-C007",
     "name": "Индийско поха с фъстъци, лайм и къри листа",
     "base": "индийска закуска",
@@ -605,7 +715,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "индийский завтрак"
   },
   {
-    "id": 12,
+    "id": 14,
     "source_id": "BR-C008",
     "name": "Испанска тортиля с картофи, лук и пушен пипер",
     "base": "испанска класика",
@@ -660,7 +770,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Испанская классика"
   },
   {
-    "id": 13,
+    "id": 15,
     "source_id": "BR-C009",
     "name": "Виетнамска оризова супа с гъби, джинджифил и билки",
     "base": "виетнамска купа",
@@ -715,7 +825,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Вьетнамская чашка"
   },
   {
-    "id": 14,
+    "id": 16,
     "source_id": "BR-C010",
     "name": "Гръцка страпацада с домати, яйца и риган",
     "base": "гръцка закуска",
@@ -770,7 +880,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "греческий завтрак"
   },
   {
-    "id": 15,
+    "id": 17,
     "source_id": "BR-C011",
     "name": "Перуанска киноа каша с какао, банан и амарант",
     "base": "андска закуска",
@@ -825,7 +935,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Андский завтрак"
   },
   {
-    "id": 16,
+    "id": 18,
     "source_id": "BR-C012",
     "name": "Скандинавска картофена закуска със сьомга, копър и краставица",
     "base": "северна закуска",
@@ -880,7 +990,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "северный завтрак"
   },
   {
-    "id": 17,
+    "id": 19,
     "source_id": "BR-C013",
     "name": "Френска сока с хумус, печени чушки и рукола",
     "base": "средиземноморска закуска",
@@ -935,7 +1045,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Средиземноморский завтрак"
   },
   {
-    "id": 18,
+    "id": 20,
     "source_id": "BR-C014",
     "name": "Турска супа от червена леща с лимон и мента",
     "base": "топла сутрешна супа",
@@ -990,7 +1100,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "горячий утренний суп"
   },
   {
-    "id": 19,
+    "id": 21,
     "source_id": "BR-C015",
     "name": "Арепас с черен боб, авокадо и лайм",
     "base": "латиноамериканска закуска",
@@ -1045,7 +1155,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Латиноамериканский завтрак"
   },
   {
-    "id": 20,
+    "id": 22,
     "source_id": "BR-C016",
     "name": "Китайски конджи с тофу, джинджифил и зелен лук",
     "base": "азиатска оризова каша",
@@ -1100,7 +1210,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Азиатская рисовая каша"
   },
   {
-    "id": 21,
+    "id": 23,
     "source_id": "BR-C017",
     "name": "Овесени палачинки с банан, боровинки и тахан",
     "base": "сладка закуска",
@@ -1155,7 +1265,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "сладкая закуска"
   },
   {
-    "id": 22,
+    "id": 24,
     "source_id": "BR-C018",
     "name": "Българска качамак купа с гъби, праз и орехи",
     "base": "балканска закуска",
@@ -1210,7 +1320,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Балканский завтрак"
   },
   {
-    "id": 23,
+    "id": 25,
     "source_id": "BR-C019",
     "name": "Тайвански дан бинг с оризова палачинка и тофу",
     "base": "тайванска закуска",
@@ -1265,7 +1375,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Тайваньский завтрак"
   },
   {
-    "id": 24,
+    "id": 26,
     "source_id": "BR-C020",
     "name": "Египетска таамия купа с боб, тахан и туршии",
     "base": "египетска закуска",
@@ -1320,7 +1430,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Египетский завтрак"
   },
   {
-    "id": 25,
+    "id": 27,
     "source_id": "BR-C021",
     "name": "Шведска елдена каша с боровинки и кардамон",
     "base": "северна каша",
@@ -1375,7 +1485,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "северная каша"
   },
   {
-    "id": 26,
+    "id": 28,
     "source_id": "BR-C022",
     "name": "Колумбийски болон де верде с боб и авокадо",
     "base": "латино закуска",
@@ -1430,7 +1540,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Латинский завтрак"
   },
   {
-    "id": 27,
+    "id": 29,
     "source_id": "BR-C023",
     "name": "Левантийски хумус фатте без хляб с хрупкав нахут",
     "base": "левантийски brunch",
@@ -1485,7 +1595,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Левантийский бранч"
   },
   {
-    "id": 28,
+    "id": 30,
     "source_id": "BR-C024",
     "name": "Кенийска угали закуска със сукума уики и боб",
     "base": "източноафриканска закуска",
@@ -1540,7 +1650,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Восточноафриканский завтрак"
   },
   {
-    "id": 29,
+    "id": 31,
     "source_id": "BR-C025",
     "name": "Филипински чеснов ориз с тофу и атчара",
     "base": "филипинска закуска",
@@ -1595,7 +1705,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Филиппинский завтрак"
   },
   {
-    "id": 30,
+    "id": 32,
     "source_id": "BR-C026",
     "name": "Мароканска бадемова хрира каша с портокал",
     "base": "мароканска сладка закуска",
@@ -1650,7 +1760,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "марокканская сладкая закуска"
   },
   {
-    "id": 31,
+    "id": 33,
     "source_id": "BR-C027",
     "name": "Корейски нокду биндеток с мунг боб и кимчи",
     "base": "корейска палачинка",
@@ -1705,7 +1815,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "корейский блинчик"
   },
   {
-    "id": 32,
+    "id": 34,
     "source_id": "BR-C028",
     "name": "Италианска панисе с розмарин, домати и маслини",
     "base": "лигурийска нахутена закуска",
@@ -1760,7 +1870,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Лигурийская закуска из нута"
   },
   {
-    "id": 33,
+    "id": 35,
     "source_id": "BR-C029",
     "name": "Бразилска тапиока с кокос, манго и лайм",
     "base": "тропическа закуска",
@@ -1815,7 +1925,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "тропический завтрак"
   },
   {
-    "id": 34,
+    "id": 36,
     "source_id": "BR-C030",
     "name": "Полска просена каша с ябълка, мак и канела",
     "base": "централноевропейска каша",
@@ -1870,7 +1980,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Центральноевропейская каша"
   },
   {
-    "id": 35,
+    "id": 37,
     "source_id": "BR-C031",
     "name": "Австралийска сладка картофена рости с авокадо",
     "base": "модерен brunch",
@@ -1925,7 +2035,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "современный бранч"
   },
   {
-    "id": 36,
+    "id": 38,
     "source_id": "BR-C032",
     "name": "Сирийска мухамара купа с нахут и краставици",
     "base": "левантийска паста",
@@ -1980,7 +2090,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Левантийская паста"
   },
   {
-    "id": 37,
+    "id": 39,
     "source_id": "BR-C033",
     "name": "Японски онигири с едамаме, сусам и умебоши",
     "base": "японска закуска",
@@ -2035,7 +2145,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "японский завтрак"
   },
   {
-    "id": 38,
+    "id": 40,
     "source_id": "BR-C034",
     "name": "Мексиканска тамал купа с червен боб и салса роха",
     "base": "царевична закуска",
@@ -2090,7 +2200,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "кукурузная закуска"
   },
   {
-    "id": 39,
+    "id": 41,
     "source_id": "BR-C035",
     "name": "Индийски идли с доматено чътни и самбар",
     "base": "южноиндийска пара",
@@ -2145,7 +2255,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "южноиндийский паровоз"
   },
   {
-    "id": 40,
+    "id": 42,
     "source_id": "BR-C036",
     "name": "Тосканска риболита закуска с бял боб и кейл",
     "base": "италианска сутрешна супа",
@@ -2200,7 +2310,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Итальянский утренний суп"
   },
   {
-    "id": 41,
+    "id": 43,
     "source_id": "BR-C037",
     "name": "Ганайско waakye с ориз, боб и пикантна салса",
     "base": "западноафриканска купа",
@@ -2255,7 +2365,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Кубок Западной Африки"
   },
   {
-    "id": 42,
+    "id": 44,
     "source_id": "BR-C038",
     "name": "Непалска гречана роти с картофи и доматен ачар",
     "base": "хималайска закуска",
@@ -2310,7 +2420,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Гималайский завтрак"
   },
   {
-    "id": 43,
+    "id": 45,
     "source_id": "BR-C039",
     "name": "Калифорнийска купа с киноа, темпе и ферментирали зеленчуци",
     "base": "модерна clean bowl",
@@ -2365,7 +2475,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "современная чистая миска"
   },
   {
-    "id": 44,
+    "id": 46,
     "source_id": "BR-C040",
     "name": "Гръцка фасолада купа с лимон и целина",
     "base": "гръцка бобена супа",
@@ -2420,7 +2530,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "греческий фасолевый суп"
   },
   {
-    "id": 45,
+    "id": 47,
     "source_id": "BR-C041",
     "name": "Виетнамски банх куон с гъби и билки",
     "base": "оризови рулца",
@@ -2475,7 +2585,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "рисовые рулеты"
   },
   {
-    "id": 46,
+    "id": 48,
     "source_id": "BR-C042",
     "name": "Етиопска теф каша с банан, сусам и бербере меджул",
     "base": "етиопска каша",
@@ -2530,7 +2640,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Эфиопская каша"
   },
   {
-    "id": 47,
+    "id": 49,
     "source_id": "BR-C043",
     "name": "Индонезийски bubur manado с тиква, царевица и спанак",
     "base": "индонезийска оризова каша",
@@ -2585,7 +2695,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Индонезийская рисовая каша"
   },
   {
-    "id": 48,
+    "id": 50,
     "source_id": "BR-C044",
     "name": "Сомалийска canjeero с лещен сос и банан",
     "base": "източноафриканска палачинка",
@@ -2640,7 +2750,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Восточноафриканский блин"
   },
   {
-    "id": 49,
+    "id": 51,
     "source_id": "BR-C045",
     "name": "Критска нахутена салата с портокал и маслини",
     "base": "средиземноморска закуска",
@@ -2695,7 +2805,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Средиземноморский завтрак"
   },
   {
-    "id": 50,
+    "id": 52,
     "source_id": "BR-C046",
     "name": "Канадска див ориз каша с круша и пекани",
     "base": "северноамериканска каша",
@@ -2750,7 +2860,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Североамериканская каша"
   },
   {
-    "id": 51,
+    "id": 53,
     "source_id": "BR-C047",
     "name": "Арменска лещена кюфта с орехи и нар",
     "base": "кавказка закуска",
@@ -2805,7 +2915,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Кавказский завтрак"
   },
   {
-    "id": 52,
+    "id": 54,
     "source_id": "BR-C048",
     "name": "Перуански тамал от киноа, царевица и жълт чили",
     "base": "андска закуска",
@@ -2860,7 +2970,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Андский завтрак"
   },
   {
-    "id": 53,
+    "id": 55,
     "source_id": "BR-C049",
     "name": "Лаоски лепкав ориз с кокос, манго и черен сусам",
     "base": "азиатска сладка закуска",
@@ -2915,7 +3025,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Азиатская сладкая закуска"
   },
   {
-    "id": 54,
+    "id": 56,
     "source_id": "BR-C050",
     "name": "Португалска супа caldo verde с бял боб и кейл",
     "base": "лека сутрешна супа",
@@ -2970,7 +3080,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "легкий утренний суп"
   },
   {
-    "id": 55,
+    "id": 57,
     "source_id": "BR-C051",
     "name": "Грузински мчади с лобио и кориандър",
     "base": "кавказка царевична закуска",
@@ -3025,7 +3135,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Кавказская кукурузная закуска"
   },
   {
-    "id": 56,
+    "id": 58,
     "source_id": "BR-C052",
     "name": "Шри Ланка string hoppers с кокосов самбол и дал",
     "base": "оризови нудли на пара",
@@ -3080,7 +3190,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "отварная рисовая лапша"
   },
   {
-    "id": 57,
+    "id": 59,
     "source_id": "BR-C053",
     "name": "Мароканска zaalouk купа с яйчен заместител от нахут",
     "base": "магребски brunch",
@@ -3135,7 +3245,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "бранч в Магрибе"
   },
   {
-    "id": 58,
+    "id": 60,
     "source_id": "BR-C054",
     "name": "Българска бобена разядка с печен пипер и орехи",
     "base": "балканска разядка",
@@ -3190,7 +3300,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Балканская закуска"
   },
   {
-    "id": 59,
+    "id": 61,
     "source_id": "BR-C055",
     "name": "Копенхагенски ръжен тост със скариди, яйце и копър",
     "base": "скандинавски modern brunch",
@@ -3245,7 +3355,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "скандинавский современный бранч"
   },
   {
-    "id": 60,
+    "id": 62,
     "source_id": "BR-C056",
     "name": "Сеулски кимчи френч тост с гочуджанг мед и сусам",
     "base": "корейски сладко-пикантен brunch",
@@ -3300,7 +3410,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Корейский бранч со сладкими и острыми блюдами"
   },
   {
-    "id": 61,
+    "id": 63,
     "source_id": "BR-C057",
     "name": "Мексико Сити huevos divorciados с два соса и черен боб",
     "base": "мексиканска brunch класика",
@@ -3355,7 +3465,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Классическое блюдо мексиканской кухни для бранча."
   },
   {
-    "id": 62,
+    "id": 64,
     "source_id": "BR-C058",
     "name": "Тел Авив сабих пита с яйце, патладжан и амба тахан",
     "base": "израелски street brunch",
@@ -3410,7 +3520,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Израильский уличный бранч"
   },
   {
-    "id": 63,
+    "id": 65,
     "source_id": "BR-C059",
     "name": "Мелбърн авокадо тост с дука, лабне и чили олио",
     "base": "австралийски cafe brunch",
@@ -3465,7 +3575,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "австралийский кафе-бранч"
   },
   {
-    "id": 64,
+    "id": 66,
     "source_id": "BR-C060",
     "name": "Токио тамаго сандо с карамелизиран мисо бекон",
     "base": "японски comfort brunch",
@@ -3520,7 +3630,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Японский уютный бранч"
   },
   {
-    "id": 65,
+    "id": 67,
     "source_id": "BR-C061",
     "name": "Лисабонски тост с бакаляу, яйце и печен пипер",
     "base": "португалски coastal brunch",
@@ -3575,7 +3685,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "португальский прибрежный бранч"
   },
   {
-    "id": 66,
+    "id": 68,
     "source_id": "BR-C062",
     "name": "Лос Анджелис breakfast taco с чоризо от гъби и лайм крема",
     "base": "LA plant-forward brunch",
@@ -3630,7 +3740,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Бранч в Лос-Анджелесе с акцентом на растительную пищу"
   },
   {
-    "id": 67,
+    "id": 69,
     "source_id": "BR-C063",
     "name": "Парижки croque madame с трюфелов бешамел и салата",
     "base": "френски luxe brunch",
@@ -3685,7 +3795,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Французский роскошный бранч"
   },
   {
-    "id": 68,
+    "id": 70,
     "source_id": "BR-C064",
     "name": "Истанбул чълбър с пушено масло, кисело мляко и яйца",
     "base": "турски poached egg brunch",
@@ -3740,7 +3850,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "турецкий бранч с яйцом-пашот"
   },
   {
-    "id": 69,
+    "id": 71,
     "source_id": "BR-C065",
     "name": "Банкок кокосови палачинки kanom krok с царевица и лук",
     "base": "тайландски street brunch",
@@ -3795,7 +3905,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Тайский уличный бранч"
   },
   {
-    "id": 70,
+    "id": 72,
     "source_id": "BR-C066",
     "name": "Ню Йорк bagel board със сьомга, крем сирене и каперси",
     "base": "NYC brunch board",
@@ -3850,7 +3960,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Совет по организации бранчей в Нью-Йорке"
   },
   {
-    "id": 71,
+    "id": 73,
     "source_id": "BR-C067",
     "name": "Буенос Айрес provoleta тост с яйце и чимичури",
     "base": "аржентински grill brunch",
@@ -3905,7 +4015,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Аргентинский гриль-бранч"
   },
   {
-    "id": 72,
+    "id": 74,
     "source_id": "BR-C068",
     "name": "Маракеш msemen с медено масло, лабне и портокал",
     "base": "марокански сладък brunch",
@@ -3960,7 +4070,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Марокканский сладкий бранч"
   },
   {
-    "id": 73,
+    "id": 75,
     "source_id": "BR-C069",
     "name": "Хонконг pineapple bun с яйце, масло и черен чай карамел",
     "base": "хонконгски cafe brunch",
@@ -4015,7 +4125,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Гонконгский кафе-бранч"
   },
   {
-    "id": 74,
+    "id": 76,
     "source_id": "BR-C070",
     "name": "Ню Орлиънс shrimp and grits с поширано яйце",
     "base": "южняшки американски brunch",
@@ -4070,7 +4180,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Бранч в южноамериканском стиле"
   },
   {
-    "id": 75,
+    "id": 77,
     "source_id": "BR-C071",
     "name": "Барселона pan con tomate с хамон, яйце и айоли",
     "base": "каталунски brunch",
@@ -4125,7 +4235,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Каталонский бранч"
   },
   {
-    "id": 76,
+    "id": 78,
     "source_id": "BR-C072",
     "name": "Атина strapatsada тост с фета, домати и риган",
     "base": "гръцки островен brunch",
@@ -4180,7 +4290,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "бранч на греческом острове"
   },
   {
-    "id": 77,
+    "id": 79,
     "source_id": "BR-C073",
     "name": "Кейптаун shakshuka bun с chakalaka и яйце",
     "base": "южноафрикански brunch",
@@ -4235,7 +4345,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Южноафриканский бранч"
   },
   {
-    "id": 78,
+    "id": 80,
     "source_id": "BR-C074",
     "name": "Стокхолм картофени rösti с хайвер, сметана и копър",
     "base": "северен luxe brunch",
@@ -4290,7 +4400,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "северный роскошный бранч"
   },
   {
-    "id": 79,
+    "id": 81,
     "source_id": "BR-C075",
     "name": "Шанхай scallion pancake с яйце, краставица и хойсин",
     "base": "китайски хрупкав brunch",
@@ -4345,7 +4455,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Китайский хрустящий бранч"
   },
   {
-    "id": 80,
+    "id": 82,
     "source_id": "BR-C076",
     "name": "Римска maritozzo brioche с рикота, еспресо и портокал",
     "base": "италиански sweet brunch",
@@ -4400,7 +4510,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Итальянский сладкий бранч"
   },
   {
-    "id": 81,
+    "id": 83,
     "source_id": "BR-C077",
     "name": "Рейкявик skyr bowl с ръжена гранола и арктически плодове",
     "base": "исландски clean brunch",
@@ -4455,7 +4565,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Исландский чистый бранч"
   },
   {
-    "id": 82,
+    "id": 84,
     "source_id": "BR-C078",
     "name": "Ханой banh mi op la с пате, яйце и мариновани зеленчуци",
     "base": "виетнамски cafe brunch",
@@ -4510,7 +4620,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Вьетнамский бранч в кафе"
   },
   {
-    "id": 83,
+    "id": 85,
     "source_id": "BR-C079",
     "name": "Дубай шафранови френч тост кубчета с фурми и тахан",
     "base": "middle eastern luxe brunch",
@@ -4565,7 +4675,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "роскошный бранч на Ближнем Востоке"
   },
   {
-    "id": 84,
+    "id": 86,
     "source_id": "BR-C080",
     "name": "Мумбай akuri тост с масала яйца и кориандър чатни",
     "base": "парси brunch",
@@ -4620,7 +4730,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Парсийский бранч"
   },
   {
-    "id": 85,
+    "id": 87,
     "source_id": "BR-C081",
     "name": "Осака okonomiyaki brunch с яйце, нори и майо",
     "base": "японски savory pancake brunch",
@@ -4675,7 +4785,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Японский бранч с несладкими блинчиками"
   },
   {
-    "id": 86,
+    "id": 88,
     "source_id": "BR-C082",
     "name": "Лондон kedgeree bowl с пушена риба, яйце и билки",
     "base": "британски colonial brunch",
@@ -4730,7 +4840,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Британский колониальный бранч"
   },
   {
-    "id": 87,
+    "id": 89,
     "source_id": "BR-C083",
     "name": "Сингапур kaya toast set с яйца и соев карамел",
     "base": "сингапурски cafe set",
@@ -4785,7 +4895,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Сингапурское кафе"
   },
   {
-    "id": 88,
+    "id": 90,
     "source_id": "BR-C084",
     "name": "Сан Себастиан tortilla pintxo с аншоа и пиперада",
     "base": "баски pintxo brunch",
@@ -4840,7 +4950,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "бранч с баскскими пинчос"
   },
   {
-    "id": 89,
+    "id": 91,
     "source_id": "BR-C085",
     "name": "Лима ceviche tostada с батат, авокадо и яйце",
     "base": "перуански coastal brunch",
@@ -4895,7 +5005,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Перуанский прибрежный бранч"
   },
   {
-    "id": 90,
+    "id": 92,
     "source_id": "BR-C086",
     "name": "Тбилиси аджарски хачапури с билково яйце",
     "base": "грузински comfort brunch",
@@ -4950,7 +5060,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "грузинский уютный бранч"
   },
   {
-    "id": 91,
+    "id": 93,
     "source_id": "BR-C087",
     "name": "Кайро ful toast с яйце, тахан и доматена салса",
     "base": "египетски brunch",
@@ -5005,7 +5115,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Египетский бранч"
   },
   {
-    "id": 92,
+    "id": 94,
     "source_id": "BR-C088",
     "name": "Монреал smoked meat hash с картофи, яйце и горчица",
     "base": "канадски deli brunch",
@@ -5060,7 +5170,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "канадский бранч в гастрономическом отделе"
   },
   {
-    "id": 93,
+    "id": 95,
     "source_id": "BR-C089",
     "name": "Окланд green pea fritters с халуми, мента и яйце",
     "base": "новозеландски garden brunch",
@@ -5115,7 +5225,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "новозеландский садовый бранч"
   },
   {
-    "id": 94,
+    "id": 96,
     "source_id": "BR-C090",
     "name": "Бейрут manoushe board със заатар, лабне, яйца и зеленчуци",
     "base": "левантийски shared brunch",
@@ -5170,7 +5280,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Левантийский бранч на двоих"
   },
   {
-    "id": 95,
+    "id": 97,
     "source_id": "FF-C055",
     "name": "Овесени палачинки с банан и тахан",
     "base": "лесна закуска",
@@ -5225,7 +5335,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простой завтрак"
   },
   {
-    "id": 96,
+    "id": 98,
     "source_id": "FF-C056",
     "name": "Оризова каша с ябълка, канела и орехи",
     "base": "домашна каша",
@@ -5280,7 +5390,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "домашняя каша"
   },
   {
-    "id": 97,
+    "id": 99,
     "source_id": "FF-C057",
     "name": "Тост от сладък картоф с авокадо и домат",
     "base": "без хляб",
@@ -5335,7 +5445,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "без хлеба"
   },
   {
-    "id": 98,
+    "id": 100,
     "source_id": "FF-C058",
     "name": "Солена елда с гъби и спанак",
     "base": "солена каша",
@@ -5390,7 +5500,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "соленая каша"
   },
   {
-    "id": 99,
+    "id": 101,
     "source_id": "BR-C091",
     "name": "Корейски кимчи картофени палачинки с яйце",
     "base": "корейски брънч",
@@ -5445,7 +5555,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Корейский бранч"
   },
   {
-    "id": 100,
+    "id": 102,
     "source_id": "BR-C092",
     "name": "Турски чълбър с поширани яйца и чили масло",
     "base": "турска класика",
@@ -5500,7 +5610,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Турецкая классика"
   },
   {
-    "id": 101,
+    "id": 103,
     "source_id": "BR-C093",
     "name": "Бразилска тапиока креп с яйце и авокадо",
     "base": "безглутенов креп",
@@ -5555,7 +5665,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "безглютеновый блин"
   },
   {
-    "id": 102,
+    "id": 104,
     "source_id": "BR-C094",
     "name": "Тунизийска шакшука с нахут и хариса",
     "base": "пикантен тиган",
@@ -5610,7 +5720,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "острая сковорода"
   },
   {
-    "id": 103,
+    "id": 105,
     "source_id": "BR-C095",
     "name": "Датски ръжен тост с гъби, яйце и копър",
     "base": "северен тост",
@@ -5665,7 +5775,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "северный тост"
   },
   {
-    "id": 104,
+    "id": 106,
     "source_id": "BR-C096",
     "name": "Гръцка купа с йогурт, смокини и шамфъстък",
     "base": "сладка купа",
@@ -5720,7 +5830,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "сладкая миска"
   },
   {
-    "id": 105,
+    "id": 107,
     "source_id": "BR-C097",
     "name": "Израелска сабих чиния с патладжан и тахан",
     "base": "близкоизточна чиния",
@@ -5775,7 +5885,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Ближневосточное блюдо"
   },
   {
-    "id": 106,
+    "id": 108,
     "source_id": "BR-C098",
     "name": "Колумбийска арепа с боб, авокадо и яйце",
     "base": "латино брънч",
@@ -5830,7 +5940,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Латинский бранч"
   },
   {
-    "id": 107,
+    "id": 109,
     "source_id": "BR-C099",
     "name": "Филипински чеснов ориз с яйце и домати",
     "base": "оризова закуска",
@@ -5885,7 +5995,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "рисовый завтрак"
   },
   {
-    "id": 108,
+    "id": 110,
     "source_id": "BR-C100",
     "name": "Ливанска лабне питка със заатар и зеленчуци",
     "base": "левантски тост",
@@ -5940,7 +6050,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Левантийский тост"
   },
   {
-    "id": 109,
+    "id": 111,
     "source_id": "BR-C101",
     "name": "Тайландски кокосови оризови палачинки с манго",
     "base": "тропически палачинки",
@@ -5995,7 +6105,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "тропические блинчики"
   },
   {
-    "id": 110,
+    "id": 112,
     "source_id": "BR-C102",
     "name": "Полски картофени палачинки със сьомга и копър",
     "base": "картофени палачинки",
@@ -6050,7 +6160,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "картофельные оладьи"
   },
   {
-    "id": 111,
+    "id": 113,
     "source_id": "BR-C103",
     "name": "Австрийски кайзершмарн с горски плодове",
     "base": "сладък брънч",
@@ -6105,7 +6215,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "сладкий бранч"
   },
   {
-    "id": 112,
+    "id": 114,
     "source_id": "BR-C104",
     "name": "Грузински лобиани с билкова салата",
     "base": "пълнен хляб",
@@ -6160,7 +6270,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "фаршированный хлеб"
   },
   {
-    "id": 113,
+    "id": 115,
     "source_id": "BR-C105",
     "name": "Марокански мсемен с мед, бадеми и портокал",
     "base": "слоести палачинки",
@@ -6215,7 +6325,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "слоёные блины"
   },
   {
-    "id": 114,
+    "id": 116,
     "source_id": "BR-C106",
     "name": "Нигерийски акара с пипер сос и салата",
     "base": "бобени кюфтенца",
@@ -6270,7 +6380,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "фасолевые фрикадельки"
   },
   {
-    "id": 115,
+    "id": 117,
     "source_id": "BR-C107",
     "name": "Шведски ръжен сандвич със скариди и яйце",
     "base": "отворен сандвич",
@@ -6325,7 +6435,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "открытый бутерброд"
   },
   {
-    "id": 116,
+    "id": 118,
     "source_id": "BR-C108",
     "name": "Италианска фритата с тиквички и босилек",
     "base": "яйчен брънч",
@@ -6380,7 +6490,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "яичный бранч"
   },
   {
-    "id": 117,
+    "id": 119,
     "source_id": "BR-C109",
     "name": "Френска елдена галета с яйце и гъби",
     "base": "елдена галета",
@@ -6435,7 +6545,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "ржаные панировочные сухари"
   },
   {
-    "id": 118,
+    "id": 120,
     "source_id": "BR-C110",
     "name": "Ню Йорк бейгъл с локс и крем сирене",
     "base": "бейгъл класика",
@@ -6490,7 +6600,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "классический бублик"
   },
   {
-    "id": 119,
+    "id": 121,
     "source_id": "BR-C111",
     "name": "Малайзийска наси лемак купа с яйце",
     "base": "оризова купа",
@@ -6545,7 +6655,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "рисовая миска"
   },
   {
-    "id": 120,
+    "id": 122,
     "source_id": "BR-C112",
     "name": "Български банички чашки със спанак и яйце",
     "base": "български брънч",
@@ -6600,7 +6710,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Болгарский бранч"
   },
   {
-    "id": 121,
+    "id": 123,
     "source_id": "BR-C113",
     "name": "Индонезийска гадо-гадо купа с яйце",
     "base": "зеленчукова купа",
@@ -6655,7 +6765,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "овощная миска"
   },
   {
-    "id": 122,
+    "id": 124,
     "source_id": "BR-C114",
     "name": "Португалски сладък картоф със сардини и яйце",
     "base": "морски тост",
@@ -6710,7 +6820,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "тост с морепродуктами"
   },
   {
-    "id": 123,
+    "id": 125,
     "source_id": "BR-C115",
     "name": "Немска селска закуска с картофи и яйца",
     "base": "картофен тиган",
@@ -6765,7 +6875,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "картофельная сковорода"
   },
   {
-    "id": 124,
+    "id": 126,
     "source_id": "BR-C116",
     "name": "Аржентинска проволета с яйца и чимичури",
     "base": "сиренен тиган",
