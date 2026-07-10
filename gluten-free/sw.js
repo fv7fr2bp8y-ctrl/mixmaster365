@@ -1,4 +1,4 @@
-const CACHE_NAME = "gluten-free-365-v1";
+const CACHE_NAME = "gluten-free-365-v2";
 const APP_SHELL = [
   "/",
   "/index.html",
