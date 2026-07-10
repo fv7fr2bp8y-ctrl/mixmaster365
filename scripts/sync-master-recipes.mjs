@@ -90,6 +90,12 @@ function translatedField(row, lang, field, fallback = "") {
   return textField(row, `${field}_${lang}`, fallback);
 }
 
+function ingredientsFor(row, lang = "bg") {
+  const quantifiedField = lang === "bg" ? "ingredients_qty_bg" : `ingredients_qty_${lang}`;
+  const plainField = lang === "bg" ? "ingredients_bg" : `ingredients_${lang}`;
+  return textField(row, quantifiedField, textField(row, plainField, row.ingredients_bg));
+}
+
 function titleCaseBg(value) {
   const normalized = String(value || "").trim().toLowerCase();
   const map = {
@@ -492,7 +498,7 @@ function countryForLang(row, lang, bgCountry) {
 }
 
 function localizedRecipeFields(row, lang, fallbacks) {
-  const ingredientsSource = translatedField(row, lang, "ingredients", row.ingredients_bg);
+  const ingredientsSource = ingredientsFor(row, lang);
   const stepsSource = translatedField(row, lang, "steps", row.steps_bg);
   return {
     name: translatedField(row, lang, "name", row.canonical_name_bg),
@@ -560,7 +566,7 @@ function applyEditorialOverrides(recipe) {
 
 function recipeFor(row, index) {
   const base = row.tag || titleCaseBg(row.meal_type);
-  const ingredients = splitList(row.ingredients_bg).join(", ");
+  const ingredients = splitList(ingredientsFor(row)).join(", ");
   const recipe = paragraphs(row.steps_bg);
   const difficulty = difficultyFor(row);
   const country = countryFor(row);
