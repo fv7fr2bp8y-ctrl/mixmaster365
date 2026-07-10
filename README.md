@@ -28,16 +28,16 @@ Status verified from the generated `data.js` files on 10 July 2026:
 
 | App | Visible recipes | Images | Complete translated recipe records | Recipes with quantities |
 |---|---:|---:|---:|---:|
-| Brunch | 132 | 132 | 132 | 132 |
-| Healthy Gut | 123 | 123 | 123 | 61 |
-| Gluten Free | 134 | 134 | 134 | 72 |
-| Dairy Free | 131 | 131 | 131 | 69 |
-| Meat Free | 151 | 151 | 151 | 89 |
-| Plant Based | 116 | 116 | 116 | 54 |
+| Brunch | 180 | 180 | 180 | 180 |
+| Healthy Gut | 153 | 153 | 153 | 91 |
+| Gluten Free | 167 | 167 | 167 | 105 |
+| Dairy Free | 161 | 161 | 161 | 99 |
+| Meat Free | 195 | 195 | 195 | 133 |
+| Plant Based | 143 | 143 | 143 | 81 |
 
 The six supported languages are Bulgarian, English, German, Spanish, French and Russian.
 
-The immediate editorial target is **180 complete Brunch recipes**. There are 48 recipes left to add. New recipes should be added in curated blocks of 12 with quantities, all translations and a real Drive image before they are published.
+The **180 complete Brunch recipes** milestone is finished. Future additions should continue in curated blocks with quantities, all translations and a real Drive image before they are published.
 
 ## Source of truth
 
@@ -209,7 +209,7 @@ Do not stage unrelated OneDrive files, generated contact sheets, old icon candid
 
 Current priority order:
 
-1. Grow Brunch from 132 to 180 fully complete recipes in four blocks of 12.
+1. Review the 48-recipe Brunch expansion in all six languages and polish any machine-assisted phrasing.
 2. Complete quantities for all existing recipes in the other five apps.
 3. Continue each catalogue toward 365 carefully curated recipes.
 4. Perform a six-app editorial, translation and accessibility review.
