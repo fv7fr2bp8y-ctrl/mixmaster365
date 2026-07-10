@@ -3,82 +3,165 @@
   "routes": [
     {
       "src": "/",
-      "has": [{ "type": "host", "value": "brunch.freefrom365.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "brunch.freefrom365.com"
+        }
+      ],
       "dest": "/breakfast/"
     },
     {
       "src": "/(.*)",
-      "has": [{ "type": "host", "value": "brunch.freefrom365.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "brunch.freefrom365.com"
+        }
+      ],
       "dest": "/breakfast/$1"
     },
     {
       "src": "/",
-      "has": [{ "type": "host", "value": "breakfast.freefrom365.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "breakfast.freefrom365.com"
+        }
+      ],
       "status": 307,
-      "headers": { "Location": "/breakfast/" }
+      "headers": {
+        "Location": "https://brunch.freefrom365.com/"
+      }
     },
     {
       "src": "/",
-      "has": [{ "type": "host", "value": "healthy-gut.freefrom365.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "healthy-gut.freefrom365.com"
+        }
+      ],
       "dest": "/free-from/"
     },
     {
       "src": "/(.*)",
-      "has": [{ "type": "host", "value": "healthy-gut.freefrom365.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "healthy-gut.freefrom365.com"
+        }
+      ],
       "dest": "/free-from/$1"
     },
     {
       "src": "/",
-      "has": [{ "type": "host", "value": "gluten-free.freefrom365.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "gluten-free.freefrom365.com"
+        }
+      ],
       "dest": "/gluten-free/"
     },
     {
       "src": "/(.*)",
-      "has": [{ "type": "host", "value": "gluten-free.freefrom365.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "gluten-free.freefrom365.com"
+        }
+      ],
       "dest": "/gluten-free/$1"
     },
     {
       "src": "/",
-      "has": [{ "type": "host", "value": "dairy-free.freefrom365.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "dairy-free.freefrom365.com"
+        }
+      ],
       "dest": "/dairy-free/"
     },
     {
       "src": "/(.*)",
-      "has": [{ "type": "host", "value": "dairy-free.freefrom365.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "dairy-free.freefrom365.com"
+        }
+      ],
       "dest": "/dairy-free/$1"
     },
     {
       "src": "/",
-      "has": [{ "type": "host", "value": "meat-free.freefrom365.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "meat-free.freefrom365.com"
+        }
+      ],
       "dest": "/meat-free/"
     },
     {
       "src": "/(.*)",
-      "has": [{ "type": "host", "value": "meat-free.freefrom365.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "meat-free.freefrom365.com"
+        }
+      ],
       "dest": "/meat-free/$1"
     },
     {
       "src": "/",
-      "has": [{ "type": "host", "value": "plant-based.freefrom365.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "plant-based.freefrom365.com"
+        }
+      ],
       "dest": "/plant-based/"
     },
     {
       "src": "/(.*)",
-      "has": [{ "type": "host", "value": "plant-based.freefrom365.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "plant-based.freefrom365.com"
+        }
+      ],
       "dest": "/plant-based/$1"
     },
     {
       "src": "/",
-      "has": [{ "type": "host", "value": "freefrom365.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "freefrom365.com"
+        }
+      ],
       "status": 307,
-      "headers": { "Location": "https://healthy-gut.freefrom365.com/free-from/" }
+      "headers": {
+        "Location": "https://healthy-gut.freefrom365.com/"
+      }
     },
     {
       "src": "/",
-      "has": [{ "type": "host", "value": "www.freefrom365.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "www.freefrom365.com"
+        }
+      ],
       "status": 307,
-      "headers": { "Location": "https://healthy-gut.freefrom365.com/free-from/" }
+      "headers": {
+        "Location": "https://healthy-gut.freefrom365.com/"
+      }
     },
-    { "handle": "filesystem" }
+    {
+      "handle": "filesystem"
+    }
   ]
 }

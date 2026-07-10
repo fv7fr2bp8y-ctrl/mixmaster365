@@ -2,16 +2,30 @@
   "name": "Gluten Free 365",
   "short_name": "Gluten Free 365",
   "description": "Рецепти без глутен, подредени за бързо готвене.",
-  "start_url": "/gluten-free/",
-  "scope": "/gluten-free/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#fffaf0",
   "theme_color": "#f7efe1",
   "orientation": "portrait-primary",
   "lang": "bg",
   "icons": [
-    { "src": "/gluten-free/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "/gluten-free/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ],
-  "categories": ["food", "health", "lifestyle"]
+  "categories": [
+    "food",
+    "health",
+    "lifestyle"
+  ]
 }

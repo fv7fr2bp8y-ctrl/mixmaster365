@@ -5,14 +5,14 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Brunch 365">
 
-    <link rel="apple-touch-icon" href="/breakfast/icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Brunch 365</title>
 
-    <link rel="icon" href="/breakfast/icon-192.png" />
-    <link rel="manifest" href="/breakfast/manifest.json">
+    <link rel="icon" href="icon-192.png" />
+    <link rel="manifest" href="manifest.json">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -497,6 +497,7 @@
                 load_more:'Зареди още', alert_empty:'Селекцията е празна. Изчистете филтрите.',
                 error_connection:'Връзката прекъсна',
                 filter_all:'Всички', filter_vodka:'Водка', filter_gin:'Джин', filter_rum:'Ром',
+                filter_easy:'Лесно', filter_under20:'До 20 мин', filter_under30:'До 30 мин', meta_min:'мин',
                 filter_tequila:'Текила', filter_whisky:'Уиски',
                 filter_eggs:'Яйца', filter_oatmeal:'Каши', filter_pancakes:'Палачинки', filter_toast:'Тост', filter_bowls:'Купи', filter_soups:'Супи', filter_sweet:'Сладки', filter_legumes:'Бобови',
                 settings_title:'ЕЗИК', settings_subtitle:'Език и мерни единици', settings_units:'Мерни единици',
@@ -530,6 +531,7 @@
                 load_more:'Load more', alert_empty:'Selection is empty. Clear the filters.',
                 error_connection:'Connection lost',
                 filter_all:'All', filter_vodka:'Vodka', filter_gin:'Gin', filter_rum:'Rum',
+                filter_easy:'Easy', filter_under20:'Under 20 min', filter_under30:'Under 30 min', meta_min:'min',
                 filter_tequila:'Tequila', filter_whisky:'Whisky',
                 filter_eggs:'Eggs', filter_oatmeal:'Porridge', filter_pancakes:'Pancakes', filter_toast:'Toast', filter_bowls:'Bowls', filter_soups:'Soups', filter_sweet:'Sweet', filter_legumes:'Legumes',
                 settings_title:'LANGUAGE', settings_subtitle:'Language & units', settings_units:'Measurement units',
@@ -563,6 +565,7 @@
                 load_more:'Mehr laden', alert_empty:'Auswahl ist leer. Filter zurücksetzen.',
                 error_connection:'Verbindung unterbrochen',
                 filter_all:'Alle', filter_vodka:'Wodka', filter_gin:'Gin', filter_rum:'Rum',
+                filter_easy:'Einfach', filter_under20:'Unter 20 Min', filter_under30:'Unter 30 Min', meta_min:'Min',
                 filter_tequila:'Tequila', filter_whisky:'Whisky',
                 filter_eggs:'Eier', filter_oatmeal:'Porridge', filter_pancakes:'Pfannkuchen', filter_toast:'Toast', filter_bowls:'Bowls', filter_soups:'Suppen', filter_sweet:'Süss', filter_legumes:'Hülsenfrüchte',
                 settings_title:'SPRACHE', settings_subtitle:'Sprache & Einheiten', settings_units:'Maßeinheiten',
@@ -596,6 +599,7 @@
                 load_more:'Cargar más', alert_empty:'La selección está vacía. Borra los filtros.',
                 error_connection:'Conexión perdida',
                 filter_all:'Todos', filter_vodka:'Vodka', filter_gin:'Ginebra', filter_rum:'Ron',
+                filter_easy:'Fácil', filter_under20:'Hasta 20 min', filter_under30:'Hasta 30 min', meta_min:'min',
                 filter_tequila:'Tequila', filter_whisky:'Whisky',
                 filter_eggs:'Huevos', filter_oatmeal:'Gachas', filter_pancakes:'Tortitas', filter_toast:'Tostada', filter_bowls:'Bowls', filter_soups:'Sopas', filter_sweet:'Dulce', filter_legumes:'Legumbres',
                 settings_title:'IDIOMA', settings_subtitle:'Idioma y unidades', settings_units:'Unidades de medida',
@@ -629,6 +633,7 @@
                 load_more:'Показать ещё', alert_empty:'Раздел пуст. Сбросьте фильтры.',
                 error_connection:'Соединение прервано',
                 filter_all:'Все', filter_vodka:'Водка', filter_gin:'Джин', filter_rum:'Ром',
+                filter_easy:'Легко', filter_under20:'До 20 мин', filter_under30:'До 30 мин', meta_min:'мин',
                 filter_tequila:'Текила', filter_whisky:'Виски',
                 filter_eggs:'Яйца', filter_oatmeal:'Каши', filter_pancakes:'Блины', filter_toast:'Тост', filter_bowls:'Боулы', filter_soups:'Супы', filter_sweet:'Сладкое', filter_legumes:'Бобовые',
                 settings_title:'ЯЗЫК', settings_subtitle:'Язык и единицы', settings_units:'Единицы измерения',
@@ -1003,6 +1008,9 @@
             { key: 'filter_soups',     match: ['супа', 'дал', 'фасолада', 'риболита', 'caldo'] },
             { key: 'filter_sweet',     match: ['слад', 'манго', 'банан', 'боровинки', 'ябълка', 'круша', 'портокал', 'кокос'] },
             { key: 'filter_legumes',   match: ['боб', 'нахут', 'леща', 'дал', 'лобио'] },
+            { key: 'filter_easy',     test: c => c.difficulty === 'Лесно' },
+            { key: 'filter_under20',  test: c => Number(c.time || 0) > 0 && Number(c.time || 0) <= 20 },
+            { key: 'filter_under30',  test: c => Number(c.time || 0) > 0 && Number(c.time || 0) <= 30 },
         ];
         let currentFilter = 'filter_all';
         let searchQuery = '';
@@ -1134,9 +1142,15 @@
                     (c.name || '').toLowerCase().includes(q) ||
                     (c.recipe || '').toLowerCase().includes(q) ||
                     (c.base || '').toLowerCase().includes(q) ||
+                    (c.country || '').toLowerCase().includes(q) ||
+                    (c.difficulty || '').toLowerCase().includes(q) ||
+                    (c.tag || '').toLowerCase().includes(q) ||
                     String(loc(c,'name')).toLowerCase().includes(q) ||
                     String(loc(c,'ingredients')).toLowerCase().includes(q) ||
-                    String(loc(c,'base')).toLowerCase().includes(q)
+                    String(loc(c,'base')).toLowerCase().includes(q) ||
+                    String(loc(c,'country')).toLowerCase().includes(q) ||
+                    String(loc(c,'difficulty')).toLowerCase().includes(q) ||
+                    String(loc(c,'tag')).toLowerCase().includes(q)
                 );
             }
             return result;
@@ -1285,6 +1299,16 @@
             }
         }
 
+        function recipeMeta(d) {
+            const parts = [];
+            if (d.time) parts.push(escapeHtml(d.time) + ' ' + t('meta_min'));
+            if (d.difficulty) parts.push(escapeHtml(loc(d, 'difficulty') || d.difficulty));
+            if (d.country) parts.push(escapeHtml(loc(d, 'country') || d.country));
+            if (d.ingredients) parts.push(String(loc(d,'ingredients')).split(',').filter(Boolean).length + ' съставки');
+            parts.push(escapeHtml(document.title || 'Recipe 365'));
+            return parts.join(' · ');
+        }
+
         function renderCard(d, i) {
             const isFav = favorites.includes(d.name);
             const cardId = `card-${d._idx}`;
@@ -1307,7 +1331,7 @@
                                 <span class="text-xl" aria-hidden="true">◇</span>
                             </div>
                             <h2 class="font-body text-3xl leading-tight text-cream font-semibold">${escapeHtml(loc(d,'name'))}</h2>
-                            <p class="mt-2 text-cream-dim italic">${d.ingredients ? `${String(loc(d,'ingredients')).split(',').filter(Boolean).length} съставки` : 'Рецепта'} · Brunch 365</p>
+                            <p class="mt-2 text-cream-dim italic">${recipeMeta(d)}</p>
                         </div>
 
                         <!-- Ingredients -->

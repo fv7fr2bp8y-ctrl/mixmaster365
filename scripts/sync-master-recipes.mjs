@@ -98,99 +98,97 @@ function imageFor(row) {
   return row.image_url && row.image_status === "ready" ? row.image_url : "";
 }
 
-function writeFreeFrom(rows) {
-  const recipes = rows
-    .filter((row) => isTrue(row.is_healthy_gut))
-    .map((row, index) => ({
-      id: index + 1,
-      source_id: row.global_id,
-      cat: titleCaseBg(row.meal_type),
-      time: `${row.time_min || "30"} мин`,
-      tag: row.tag || row.recipe_quality || "curated",
-      name: row.canonical_name_bg,
-      img: imageFor(row),
-      ingredients: splitList(row.ingredients_bg),
-      steps: splitSteps(row.steps_bg),
-    }));
+const appConfigs = [
+  { dir: "breakfast", label: "Brunch", flag: "is_breakfast", slot: "breakfast_slot" },
+  { dir: "free-from", label: "Healthy Gut", flag: "is_healthy_gut", slot: "healthy_gut_slot" },
+  { dir: "gluten-free", label: "Gluten Free", flag: "is_gluten_free", slot: "gluten_free_slot" },
+  { dir: "dairy-free", label: "Dairy Free", flag: "is_dairy_free", slot: "dairy_free_slot" },
+  { dir: "meat-free", label: "Meat Free", flag: "is_meat_free", slot: "meat_free_slot" },
+  { dir: "plant-based", label: "Plant Based", flag: "is_plant_based", slot: "plant_based_slot" },
+];
 
-  const file = path.join(root, "free-from", "index.html");
-  const current = fs.readFileSync(file, "utf8");
-  const next = current.replace(
-    /    const recipes = \[[\s\S]*?\n\s*\];\n\n    const categories/,
-    `    const recipes = ${JSON.stringify(recipes, null, 10)};\n\n    const categories`
-  );
-  if (next !== current) fs.writeFileSync(file, next);
-
-  const shellRecipes = rows
-    .filter((row) => isTrue(row.is_healthy_gut))
-    .map((row, index) => ({
-      id: index + 1,
-      source_id: row.global_id,
-      name: row.canonical_name_bg,
-      base: titleCaseBg(row.meal_type),
-      icon: "◇",
-      image: imageFor(row),
-      ingredients: splitList(row.ingredients_bg).join(", "),
-      recipe: paragraphs(row.steps_bg),
-      name_en: row.canonical_name_bg,
-      base_en: titleCaseBg(row.meal_type),
-      ingredients_en: splitList(row.ingredients_bg).join(", "),
-      recipe_en: paragraphs(row.steps_bg),
-      name_de: row.canonical_name_bg,
-      base_de: titleCaseBg(row.meal_type),
-      ingredients_de: splitList(row.ingredients_bg).join(", "),
-      recipe_de: paragraphs(row.steps_bg),
-      name_es: row.canonical_name_bg,
-      base_es: titleCaseBg(row.meal_type),
-      ingredients_es: splitList(row.ingredients_bg).join(", "),
-      recipe_es: paragraphs(row.steps_bg),
-      name_ru: row.canonical_name_bg,
-      base_ru: titleCaseBg(row.meal_type),
-      ingredients_ru: splitList(row.ingredients_bg).join(", "),
-      recipe_ru: paragraphs(row.steps_bg),
-    }));
-
-  fs.writeFileSync(
-    path.join(root, "free-from", "data.js"),
-    `window.BREAKFAST_DATA = ${JSON.stringify(shellRecipes, null, 2)};\n`
-  );
-
-  return recipes.length;
+function difficultyFor(row) {
+  const minutes = Number(row.time_min || 30);
+  if (minutes <= 25) return "Лесно";
+  if (minutes <= 40) return "Средно";
+  return "Трудно";
 }
 
-function writeBreakfast(rows) {
-  const recipes = rows
-    .filter((row) => isTrue(row.is_breakfast))
-    .sort((a, b) => Number(a.breakfast_slot || 9999) - Number(b.breakfast_slot || 9999))
-    .map((row, index) => ({
-      id: index + 1,
-      source_id: row.global_id,
-      name: row.canonical_name_bg,
-      base: row.tag || titleCaseBg(row.meal_type),
-      icon: "◇",
-      image: imageFor(row),
-      ingredients: splitList(row.ingredients_bg).join(", "),
-      recipe: paragraphs(row.steps_bg),
-      name_en: row.canonical_name_bg,
-      base_en: row.tag || titleCaseBg(row.meal_type),
-      ingredients_en: splitList(row.ingredients_bg).join(", "),
-      recipe_en: paragraphs(row.steps_bg),
-      name_de: row.canonical_name_bg,
-      base_de: row.tag || titleCaseBg(row.meal_type),
-      ingredients_de: splitList(row.ingredients_bg).join(", "),
-      recipe_de: paragraphs(row.steps_bg),
-      name_es: row.canonical_name_bg,
-      base_es: row.tag || titleCaseBg(row.meal_type),
-      ingredients_es: splitList(row.ingredients_bg).join(", "),
-      recipe_es: paragraphs(row.steps_bg),
-      name_ru: row.canonical_name_bg,
-      base_ru: row.tag || titleCaseBg(row.meal_type),
-      ingredients_ru: splitList(row.ingredients_bg).join(", "),
-      recipe_ru: paragraphs(row.steps_bg),
-    }));
+function countryFor(row) {
+  const haystack = `${row.tag || ""} ${row.canonical_name_bg || ""} ${row.seo_title_bg || ""}`.toLowerCase();
+  const mappings = [
+    ["тур", "Турция"], ["индий", "Индия"], ["япон", "Япония"], ["виетнам", "Виетнам"],
+    ["гръц", "Гърция"], ["мексикан", "Мексико"], ["перуан", "Перу"], ["етип", "Етиопия"],
+    ["етиоп", "Етиопия"], ["марок", "Мароко"], ["корей", "Корея"], ["ливан", "Ливан"],
+    ["леван", "Ливан"], ["тайланд", "Тайланд"], ["испан", "Испания"], ["италиан", "Италия"],
+    ["българ", "България"], ["средизем", "Средиземноморие"], ["скандинав", "Скандинавия"],
+    ["британ", "Великобритания"], ["китай", "Китай"], ["египет", "Египет"], ["домаш", "Домашна кухня"],
+    ["елда", "Източна Европа"], ["бобена", "България"], ["тава", "Домашна кухня"],
+  ];
+  return mappings.find(([needle]) => haystack.includes(needle))?.[1] || "Световна кухня";
+}
 
-  const file = path.join(root, "breakfast", "data.js");
-  fs.writeFileSync(file, `window.BREAKFAST_DATA = ${JSON.stringify(recipes, null, 2)};\n`);
+function recipeFor(row, index) {
+  const base = row.tag || titleCaseBg(row.meal_type);
+  const ingredients = splitList(row.ingredients_bg).join(", ");
+  const recipe = paragraphs(row.steps_bg);
+  const difficulty = difficultyFor(row);
+  const country = countryFor(row);
+  return {
+    id: index + 1,
+    source_id: row.global_id,
+    name: row.canonical_name_bg,
+    base,
+    icon: "◇",
+    image: imageFor(row),
+    ingredients,
+    recipe,
+    time: Number(row.time_min || 30),
+    difficulty,
+    country,
+    tag: row.tag || row.recipe_quality || "curated",
+    name_en: row.canonical_name_bg,
+    base_en: base,
+    ingredients_en: ingredients,
+    recipe_en: recipe,
+    difficulty_en: difficulty,
+    country_en: country,
+    tag_en: row.tag || row.recipe_quality || "curated",
+    name_de: row.canonical_name_bg,
+    base_de: base,
+    ingredients_de: ingredients,
+    recipe_de: recipe,
+    difficulty_de: difficulty,
+    country_de: country,
+    tag_de: row.tag || row.recipe_quality || "curated",
+    name_es: row.canonical_name_bg,
+    base_es: base,
+    ingredients_es: ingredients,
+    recipe_es: recipe,
+    difficulty_es: difficulty,
+    country_es: country,
+    tag_es: row.tag || row.recipe_quality || "curated",
+    name_ru: row.canonical_name_bg,
+    base_ru: base,
+    ingredients_ru: ingredients,
+    recipe_ru: recipe,
+    difficulty_ru: difficulty,
+    country_ru: country,
+    tag_ru: row.tag || row.recipe_quality || "curated",
+  };
+}
+
+function writeApp(rows, config) {
+  const recipes = rows
+    .filter((row) => isTrue(row[config.flag]))
+    .filter((row) => imageFor(row))
+    .sort((a, b) => Number(a[config.slot] || 9999) - Number(b[config.slot] || 9999))
+    .map(recipeFor);
+
+  fs.writeFileSync(
+    path.join(root, config.dir, "data.js"),
+    `window.BREAKFAST_DATA = ${JSON.stringify(recipes, null, 2)};\n`
+  );
   return recipes.length;
 }
 
@@ -198,7 +196,7 @@ const rows = recordsFromCsv(fs.readFileSync(csvPath, "utf8")).filter(
   (row) => row.status === "ready" && row.recipe_quality === "curated"
 );
 
-const freeFromCount = writeFreeFrom(rows);
-const breakfastCount = writeBreakfast(rows);
-
-console.log(`Synced ${freeFromCount} Healthy Gut recipes and ${breakfastCount} Brunch recipes.`);
+for (const config of appConfigs) {
+  const count = writeApp(rows, config);
+  console.log(`Synced ${count} ${config.label} recipes.`);
+}

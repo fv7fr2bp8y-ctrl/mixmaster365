@@ -2,16 +2,30 @@
   "name": "Healthy Gut 365",
   "short_name": "Healthy Gut 365",
   "description": "Рецепти без глутен и без млечни, подредени за бързо готвене.",
-  "start_url": "/free-from/",
-  "scope": "/free-from/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#fffaf0",
   "theme_color": "#f7efe1",
   "orientation": "portrait-primary",
   "lang": "bg",
   "icons": [
-    { "src": "/free-from/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "/free-from/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ],
-  "categories": ["food", "health", "lifestyle"]
+  "categories": [
+    "food",
+    "health",
+    "lifestyle"
+  ]
 }

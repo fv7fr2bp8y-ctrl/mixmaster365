@@ -1,28 +1,59 @@
-const CACHE_NAME = "plant-based-365-v2";
-const ASSETS = [
+const CACHE_NAME = "plant-based-365-v1";
+const APP_SHELL = [
+  "/",
+  "/index.html",
+  "/data.js",
+  "/manifest.json",
+  "/icon-192.png",
+  "/icon-512.png",
+  "/logo-source.png",
   "/plant-based/",
   "/plant-based/index.html",
+  "/plant-based/data.js",
   "/plant-based/manifest.json",
   "/plant-based/icon-192.png",
   "/plant-based/icon-512.png",
   "/plant-based/logo-source.png"
 ];
 
-self.addEventListener("install", event => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS)).catch(() => {}));
+self.addEventListener("install", (event) => {
+  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)).catch(() => {}));
   self.skipWaiting();
 });
 
-self.addEventListener("activate", event => {
+self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))))
+    caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))))
   );
   self.clients.claim();
 });
 
-self.addEventListener("fetch", event => {
+self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
-  event.respondWith(
-    caches.match(event.request).then(cached => cached || fetch(event.request).catch(() => caches.match("/plant-based/index.html")))
-  );
+
+  const url = new URL(event.request.url);
+  const isAppShell = url.origin === self.location.origin && (url.pathname === "/" || url.pathname.startsWith("/plant-based/"));
+  const isGoogleAsset = /(^|\.)google\.com$/.test(url.hostname) || url.hostname.includes("googleusercontent.com");
+
+  if (isAppShell || event.request.mode === "navigate") {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          if (response && response.status === 200) {
+            const copy = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+          }
+          return response;
+        })
+        .catch(() => caches.match(event.request).then((cached) => cached || caches.match("/") || caches.match("/plant-based/index.html")))
+    );
+    return;
+  }
+
+  if (isGoogleAsset) {
+    event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
+    return;
+  }
+
+  event.respondWith(caches.match(event.request).then((cached) => cached || fetch(event.request)));
 });

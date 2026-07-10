@@ -1,1225 +1,1661 @@
 <!DOCTYPE html>
 <html lang="bg">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#f7efe1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Gluten Free 365">
-  <link rel="manifest" href="manifest.json">
-  <title>Gluten Free 365 · Без глутен</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Forum&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --paper: #fffaf0;
-      --paper-soft: #f4ead8;
-      --ink: #30271d;
-      --muted: #7d6b58;
-      --line: #d8c5aa;
-      --sage: #66845d;
-      --berry: #9d4f55;
-      --honey: #c2852d;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: "Cormorant Garamond", serif;
-      color: var(--ink);
-      background:
-        linear-gradient(180deg, rgba(255,250,240,.92), rgba(244,234,216,.94)),
-        url("https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=1400&auto=format&fit=crop&q=80") center/cover fixed;
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image: radial-gradient(circle at 20% 0%, rgba(194,133,45,.14), transparent 36%), radial-gradient(circle at 100% 18%, rgba(102,132,93,.12), transparent 34%);
-    }
-    button, input { font: inherit; }
-    .app { position: relative; z-index: 1; max-width: 520px; margin: 0 auto; min-height: 100vh; padding: 26px 18px 118px; }
-    .rule { display: flex; align-items: center; gap: 12px; color: var(--sage); }
-    .rule::before, .rule::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--line), transparent); }
-    .panel {
-      background: rgba(255,250,240,.88);
-      border: 1px solid var(--line);
-      box-shadow: 0 18px 50px rgba(81, 57, 31, .12);
-    }
-    .deco-card {
-      background: rgba(255,250,240,.9);
-      border: 1px solid var(--line);
-      box-shadow: 0 18px 50px rgba(81, 57, 31, .12);
-    }
-    .deco-divider {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--honey);
-    }
-    .deco-divider::before,
-    .deco-divider::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--line), transparent);
-    }
-    .recipe-content {
-      font-family: "Cormorant Garamond", serif;
-      font-style: italic;
-      line-height: 1.72;
-    }
-    .recipe-card { animation: rise .45s cubic-bezier(.16,1,.3,1) backwards; }
-    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-    .chip-active {
-      background: var(--sage) !important;
-      color: white !important;
-      border-color: var(--sage) !important;
-    }
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .safe-bottom { padding-bottom: max(18px, env(safe-area-inset-bottom)); }
-    .modal-bg { background: rgba(48,39,29,.62); backdrop-filter: blur(10px); }
-    .star-pop { animation: starPop .42s cubic-bezier(.16,1,.3,1); }
-    @keyframes starPop {
-      0% { transform: scale(.72); }
-      55% { transform: scale(1.22); }
-      100% { transform: scale(1); }
-    }
-    #app-loader {
-      position: fixed;
-      inset: 0;
-      z-index: 99999;
-      display: grid;
-      place-items: center;
-      background:
-        radial-gradient(circle at 50% 28%, rgba(102,132,93,.16), transparent 34%),
-        linear-gradient(180deg, #fffaf0 0%, #f4ead8 100%);
-      transition: opacity .8s cubic-bezier(.25,1,.5,1), visibility .8s;
-    }
-    #app-loader.loaded { opacity: 0; visibility: hidden; pointer-events: none; }
-    .splash-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 32px;
-    }
-    .splash-logo-wrap {
-      position: relative;
-      width: 146px;
-      height: 146px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 20px;
-      animation: splashReveal 1.2s cubic-bezier(.16,1,.3,1) both;
-    }
-    .splash-logo-wrap::before {
-      content: "";
-      position: absolute;
-      inset: 12px;
-      border-radius: 999px;
-      background: conic-gradient(from 210deg, transparent 0 22%, rgba(102,132,93,.46) 33%, rgba(194,133,45,.55) 52%, transparent 66% 100%);
-      -webkit-mask: radial-gradient(circle, transparent 58%, #000 59% 64%, transparent 65%);
-      mask: radial-gradient(circle, transparent 58%, #000 59% 64%, transparent 65%);
-      opacity: .7;
-      animation: haloTurn 5.2s linear infinite;
-    }
-    .splash-logo {
-      position: relative;
-      z-index: 1;
-      width: 108px;
-      height: 108px;
-      object-fit: contain;
-      display: block;
-      filter: drop-shadow(0 20px 34px rgba(48,39,29,.16));
-      animation: logoBreathe 3.4s ease-in-out .9s infinite;
-    }
-    .splash-title {
-      margin: 15px 0 8px;
-      color: var(--ink);
-      font-family: "Forum", serif;
-      font-size: 28px;
-      font-weight: 400;
-      letter-spacing: 8px;
-      text-transform: uppercase;
-      opacity: 0;
-      animation: splashFade 1.8s ease 1s forwards;
-    }
-    .splash-subtitle {
-      margin: 0 0 25px;
-      color: var(--sage);
-      font-family: "Forum", serif;
-      font-size: 10px;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      opacity: 0;
-      animation: splashFade 1.8s ease 1.5s forwards;
-    }
-    .splash-status {
-      color: var(--berry);
-      font-family: "Forum", serif;
-      font-size: 12px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      opacity: 0;
-      animation: splashFade 1.5s ease 2s forwards;
-    }
-    .splash-progress {
-      position: relative;
-      width: 158px;
-      height: 1px;
-      margin-top: 18px;
-      overflow: hidden;
-      background: linear-gradient(90deg, transparent, rgba(216,197,170,.8), transparent);
-      opacity: 0;
-      animation: splashFade 1.2s ease 2.2s forwards;
-    }
-    .splash-progress::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      width: 45%;
-      background: linear-gradient(90deg, transparent, rgba(194,133,45,.86), rgba(102,132,93,.78), transparent);
-      animation: progressGlide 1.9s cubic-bezier(.65,0,.35,1) infinite;
-    }
-    .img-fallback {
-      background:
-        radial-gradient(circle at 50% 38%, rgba(102,132,93,.18), transparent 34%),
-        linear-gradient(135deg, rgba(255,250,240,.98), rgba(244,234,216,.95));
-      object-fit: contain !important;
-      padding: 42px;
-    }
-    @keyframes splashReveal {
-      from { opacity: 0; transform: translateY(10px) scale(.92); }
-      to { opacity: 1; transform: none; }
-    }
-    @keyframes splashFade { to { opacity: 1; } }
-    @keyframes haloTurn { to { transform: rotate(360deg); } }
-    @keyframes logoBreathe {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-4px) scale(1.025); }
-    }
-    @keyframes progressGlide {
-      from { transform: translateX(-110%); }
-      to { transform: translateX(245%); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .splash-logo-wrap,
-      .splash-logo-wrap::before,
-      .splash-logo,
-      .splash-title,
-      .splash-subtitle,
-      .splash-status,
-      .splash-progress,
-      .splash-progress::after,
-      .recipe-card {
-        animation: none !important;
-      }
-      .splash-title,
-      .splash-subtitle,
-      .splash-status,
-      .splash-progress {
-        opacity: 1;
-      }
-    }
-  </style>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Gluten Free 365">
+
+    <link rel="apple-touch-icon" href="icon-192.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Gluten Free 365</title>
+
+    <link rel="icon" href="icon-192.png" />
+    <link rel="manifest" href="manifest.json">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Forum&family=Poiret+One&family=Cinzel:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: '#0a0908',
+                        'ink-soft': '#161311',
+                        gold: {
+                            DEFAULT: '#c9a961',
+                            bright: '#e8c987',
+                            dim: '#7a6535',
+                            faint: 'rgba(201, 169, 97, 0.15)'
+                        },
+                        cream: {
+                            DEFAULT: '#f0e4cf',
+                            dim: '#b9a98a',
+                            faint: 'rgba(240, 228, 207, 0.5)'
+                        },
+                    },
+                    fontFamily: {
+                        display: ['"Poiret One"', 'serif'],
+                        roman: ['Forum', 'serif'],
+                        body: ['"Cormorant Garamond"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --gold: #c9a961;
+            --gold-bright: #e8c987;
+            --gold-dim: #7a6535;
+            --cream: #f0e4cf;
+            --cream-dim: #b9a98a;
+            --ink: #0a0908;
+            --ink-soft: #161311;
+        }
+
+        body.theme-light {
+            --gold: #b6782d;
+            --gold-bright: #cf8f3a;
+            --gold-dim: #bfa06c;
+            --cream: #3f2f1e;
+            --cream-dim: #7a6550;
+            --ink: #fff8ec;
+            --ink-soft: #f4e7d2;
+            background-color: var(--ink);
+            background:
+                linear-gradient(180deg, rgba(255,250,240,.92), rgba(244,234,216,.94)),
+                url("https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=1400&auto=format&fit=crop&q=80") center/cover fixed;
+        }
+
+        body.theme-light::before {
+            opacity: 0.08;
+            mix-blend-mode: multiply;
+        }
+
+        body.theme-light .text-cream { color: var(--cream) !important; }
+        body.theme-light .text-cream\/80 { color: rgba(63, 47, 30, 0.8) !important; }
+        body.theme-light .text-cream-dim,
+        body.theme-light .text-cream-dim\/50,
+        body.theme-light .text-cream-dim\/70 { color: var(--cream-dim) !important; }
+        body.theme-light .text-gold,
+        body.theme-light .text-gold-bright { color: var(--gold-bright) !important; }
+        body.theme-light .text-gold-dim { color: var(--gold-dim) !important; }
+        body.theme-light .bg-ink { background-color: var(--ink) !important; }
+        body.theme-light .bg-ink\/70 { background-color: rgba(255, 248, 236, 0.76) !important; }
+        body.theme-light .bg-ink\/80 { background-color: rgba(255, 248, 236, 0.88) !important; }
+        body.theme-light .bg-ink-soft { background-color: var(--ink-soft) !important; }
+        body.theme-light .from-ink { --tw-gradient-from: var(--ink) var(--tw-gradient-from-position); --tw-gradient-to: rgba(255, 248, 236, 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+        body.theme-light .via-ink { --tw-gradient-to: rgba(255, 248, 236, 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--ink) var(--tw-gradient-via-position), var(--tw-gradient-to); }
+        body.theme-light .via-ink\/60 { --tw-gradient-to: rgba(255, 248, 236, 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), rgba(255, 248, 236, 0.58) var(--tw-gradient-via-position), var(--tw-gradient-to); }
+        body.theme-light .to-ink\/10 { --tw-gradient-to: rgba(255, 248, 236, 0.1) var(--tw-gradient-to-position); }
+        body.theme-light .border-gold,
+        body.theme-light .border-gold-dim { border-color: var(--gold-dim) !important; }
+        body.theme-light .deco-card { box-shadow: 0 16px 50px rgba(121, 84, 37, 0.12); }
+        body.theme-light input { color: var(--cream); }
+        body.theme-light ::placeholder { color: var(--cream-dim); }
+        body.theme-light #search-input,
+        body.theme-light #search-input:focus {
+            background: rgba(255, 250, 240, 0.56) !important;
+            color: var(--cream) !important;
+        }
+        body.theme-light #search-input::placeholder {
+            color: var(--cream-dim) !important;
+            opacity: 1;
+        }
+        body.theme-light .page-frame::before { display: none; }
+        body.theme-light .deco-card {
+            background: rgba(255, 250, 240, 0.88);
+            border: 1px solid #d8c5aa;
+            box-shadow: 0 18px 50px rgba(81, 57, 31, 0.12);
+        }
+        body.theme-light .deco-card::before,
+        body.theme-light .deco-card::after,
+        body.theme-light .deco-card > .corners::before,
+        body.theme-light .deco-card > .corners::after {
+            display: none;
+        }
+        body.theme-light .image-frame {
+            border: 0;
+            outline: 0;
+        }
+        body.theme-light .filter-active {
+            background: #66845d !important;
+            border-color: #66845d !important;
+            color: #ffffff !important;
+        }
+        body.theme-light #filters-container button.filter-active {
+            background: #66845d !important;
+            border-color: #66845d !important;
+            color: #ffffff !important;
+        }
+        body.theme-light .filter-active span:first-child {
+            background: #66845d;
+            color: #ffffff;
+            border-color: #66845d;
+        }
+        body.theme-light #filters-container button span:first-child {
+            display: inline-flex;
+            align-items: center;
+            min-height: 2.05rem;
+            border: 1px solid #d8c5aa;
+            padding: 0.42rem 0.78rem;
+            letter-spacing: 0.14em;
+        }
+        body.theme-light #cotd-card {
+            border: 1px solid #d8c5aa;
+            box-shadow: 0 18px 50px rgba(81, 57, 31, 0.12);
+        }
+        body.theme-light .btn-gold {
+            background: linear-gradient(180deg, #c88b34 0%, #b6782d 100%);
+            box-shadow: 0 12px 30px rgba(121, 84, 37, 0.16);
+        }
+        body.theme-light .recipe-content {
+            font-style: normal;
+            text-align: left;
+            color: rgba(48, 39, 29, 0.82);
+        }
+        body.theme-light .recipe-content p { margin: 0.6em 0; }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background-color: var(--ink);
+            color: var(--cream);
+            margin: 0;
+            /* Subtle radial vignette for depth */
+            background-image:
+                radial-gradient(ellipse at top, rgba(201, 169, 97, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom, rgba(74, 14, 14, 0.08) 0%, transparent 60%);
+            background-attachment: fixed;
+        }
+
+        /* Subtle paper-grain noise overlay, super faint */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.025;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        input { font-size: 16px; font-family: 'Cormorant Garamond', serif; }
+        ::placeholder { color: var(--cream-dim); opacity: 0.6; font-style: italic; }
+
+        .hidden { display: none !important; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+
+        /* === Deco ornaments === */
+        .deco-divider {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--gold);
+        }
+        .deco-divider::before, .deco-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
+        }
+
+        /* Card frame with deco corners */
+        .deco-card {
+            position: relative;
+            background: var(--ink-soft);
+            border: 1px solid var(--gold-dim);
+        }
+        .deco-card::before, .deco-card::after,
+        .deco-card > .corners::before, .deco-card > .corners::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border: 1.5px solid var(--gold);
+            pointer-events: none;
+            z-index: 2;
+        }
+        .deco-card::before { top: 6px; left: 6px; border-right: none; border-bottom: none; }
+        .deco-card::after { top: 6px; right: 6px; border-left: none; border-bottom: none; }
+        .deco-card > .corners::before { bottom: 6px; left: 6px; border-right: none; border-top: none; }
+        .deco-card > .corners::after { bottom: 6px; right: 6px; border-left: none; border-top: none; }
+
+        /* Image gold frame */
+        .image-frame {
+            position: relative;
+            border: 1px solid var(--gold);
+            outline: 1px solid var(--gold-dim);
+            outline-offset: 4px;
+        }
+
+        /* Active filter underline */
+        .filter-active {
+            color: var(--gold-bright) !important;
+        }
+        .filter-active .filter-underline {
+            transform: scaleX(1) !important;
+            opacity: 1 !important;
+        }
+        .filter-underline {
+            transform: scaleX(0);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Roman numeral medallion */
+        .numeral-medallion {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-family: 'Forum', serif;
+        }
+
+        /* Sunburst rays behind the loader mark */
+        .sunburst {
+            position: absolute;
+            inset: 0;
+            opacity: 0.25;
+            background:
+                conic-gradient(from 0deg,
+                    transparent 0deg, var(--gold) 1deg, transparent 2deg,
+                    transparent 14deg, var(--gold) 15deg, transparent 16deg,
+                    transparent 28deg, var(--gold) 29deg, transparent 30deg,
+                    transparent 44deg, var(--gold) 45deg, transparent 46deg,
+                    transparent 58deg, var(--gold) 59deg, transparent 60deg,
+                    transparent 74deg, var(--gold) 75deg, transparent 76deg,
+                    transparent 88deg, var(--gold) 89deg, transparent 90deg,
+                    transparent 104deg, var(--gold) 105deg, transparent 106deg,
+                    transparent 118deg, var(--gold) 119deg, transparent 120deg,
+                    transparent 134deg, var(--gold) 135deg, transparent 136deg,
+                    transparent 148deg, var(--gold) 149deg, transparent 150deg,
+                    transparent 164deg, var(--gold) 165deg, transparent 166deg,
+                    transparent 178deg, var(--gold) 179deg, transparent 180deg,
+                    transparent 194deg, var(--gold) 195deg, transparent 196deg,
+                    transparent 208deg, var(--gold) 209deg, transparent 210deg,
+                    transparent 224deg, var(--gold) 225deg, transparent 226deg,
+                    transparent 238deg, var(--gold) 239deg, transparent 240deg,
+                    transparent 254deg, var(--gold) 255deg, transparent 256deg,
+                    transparent 268deg, var(--gold) 269deg, transparent 270deg,
+                    transparent 284deg, var(--gold) 285deg, transparent 286deg,
+                    transparent 298deg, var(--gold) 299deg, transparent 300deg,
+                    transparent 314deg, var(--gold) 315deg, transparent 316deg,
+                    transparent 328deg, var(--gold) 329deg, transparent 330deg,
+                    transparent 344deg, var(--gold) 345deg, transparent 346deg);
+            -webkit-mask: radial-gradient(circle, transparent 30%, black 35%, black 90%, transparent 100%);
+                    mask: radial-gradient(circle, transparent 30%, black 35%, black 90%, transparent 100%);
+            border-radius: 50%;
+        }
+
+        /* Gold button */
+        .btn-gold {
+            background: linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 50%, var(--gold-dim) 100%);
+            color: var(--ink);
+            font-family: 'Forum', serif;
+            letter-spacing: 0.25em;
+            border: 1px solid var(--gold);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+                0 4px 20px rgba(201, 169, 97, 0.2);
+        }
+        .btn-gold:active { transform: translateY(1px); }
+
+        /* Animations */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        .cocktail-card { animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards; }
+
+        @keyframes goldPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(232, 201, 135, 0.6), inset 0 0 0 1px var(--gold); }
+            50% { box-shadow: 0 0 0 18px rgba(232, 201, 135, 0), inset 0 0 0 2px var(--gold-bright); }
+        }
+        .highlight { animation: goldPulse 1.6s ease-out 2; }
+
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .sheet-overlay { animation: fadeIn 0.25s ease-out; }
+        .sheet-panel { animation: slideUp 0.4s cubic-bezier(0.32, 0.72, 0, 1); }
+
+        @keyframes diamondPop {
+            0%, 100% { transform: scale(1) rotate(0); }
+            45% { transform: scale(1.4) rotate(45deg); }
+        }
+        .star-pop { animation: diamondPop 0.45s ease-out; }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .deco-spin { animation: spin 2s linear infinite; }
+
+        /* Recipe content (rendered HTML from sheets) */
+        .recipe-content { font-family: 'Cormorant Garamond', serif; font-style: italic; line-height: 1.7; }
+        .recipe-content a { color: var(--gold-bright); text-decoration: underline; text-decoration-color: var(--gold-dim); }
+        .recipe-content strong, .recipe-content b { color: var(--cream); font-weight: 600; font-style: normal; }
+        .recipe-content p { margin: 0.4em 0; }
+        .recipe-content ul, .recipe-content ol { padding-left: 1.2em; margin: 0.4em 0; }
+
+        /* Safe area for iPhone notch / home bar */
+        .safe-bottom { padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); }
+
+        /* Page edge frame (subtle gold rule on each side) */
+        .page-frame {
+            position: relative;
+        }
+        .page-frame::before {
+            content: '';
+            position: absolute;
+            top: 1.5rem;
+            bottom: 1.5rem;
+            left: 0.25rem;
+            right: 0.25rem;
+            border-left: 1px solid var(--gold-dim);
+            border-right: 1px solid var(--gold-dim);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+    </style>
 </head>
-<body>
-  <div id="app-loader" aria-label="Gluten Free 365">
-    <div class="splash-content">
-      <div class="splash-logo-wrap">
-        <img class="splash-logo" src="logo-source.png" alt="">
-      </div>
-      <h1 class="splash-title">Gluten Free 365</h1>
-      <p class="splash-subtitle">Gluten Free</p>
-      <div class="splash-status">Подготвяне на рецептите</div>
-      <div class="splash-progress" aria-hidden="true"></div>
-    </div>
-  </div>
+<body class="text-cream theme-light">
 
-  <main class="app">
-    <header class="pb-6 text-center">
-      <div class="flex items-center justify-between mb-5">
-        <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="w-10 h-10 border border-[var(--line)] grid place-items-center text-[var(--sage)] active:scale-95" aria-label="Нагоре"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
-        <button id="shuffleBtn" class="w-10 h-10 border border-[var(--line)] grid place-items-center text-[var(--sage)] active:scale-95" aria-label="Размеси">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="m15 15 6 6"/><path d="m4 4 5 5"/></svg>
-        </button>
-      </div>
-      <p class="font-[Forum] text-xs tracking-[.34em] uppercase text-[var(--sage)]">Gluten Free</p>
-      <h1 class="text-[3rem] leading-none tracking-[.08em] font-semibold mt-1">Gluten Free 365</h1>
-      <div class="rule max-w-[280px] mx-auto mt-3"><span class="font-[Forum] text-xs tracking-[.28em] uppercase">чиста кухня</span></div>
-    </header>
-
-    <section class="panel p-4 mb-5">
-      <div class="relative">
-        <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--sage)]" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="m20 20-4.3-4.3"/></svg>
-        <input id="search" class="w-full bg-white/60 border border-[var(--line)] py-3.5 pl-10 pr-12 outline-none focus:border-[var(--sage)]" placeholder="Търси по име, съставка или режим">
-        <button id="searchClear" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-7 h-7 border border-[var(--line)] text-[var(--muted)] active:scale-95" aria-label="Изчисти търсенето">×</button>
-      </div>
-    </section>
-
-    <nav id="filters" class="flex gap-3 overflow-x-auto no-scrollbar pb-3 mb-3"></nav>
-
-    <div class="flex items-center justify-between mb-4">
-      <span id="count" class="font-[Forum] text-xs tracking-[.26em] uppercase text-[var(--muted)]"></span>
-      <button id="favoritesToggle" class="font-[Forum] text-xs tracking-[.22em] uppercase text-[var(--sage)]">◇ Любими · 0</button>
+    <!-- INTRO BAR LOADER -->
+    <div id="bar-loader" aria-label="Gluten Free 365">
+        <div class="loader-content">
+            <div class="loader-logo-wrap">
+                <img class="loader-logo" src="logo-source.png" alt="">
+            </div>
+            <h1 class="loader-title">Gluten Free 365</h1>
+            <p class="loader-subtitle" data-i18n="intro_subtitle">Без глутен</p>
+            <div class="loader-status" data-i18n="intro_status">Подготвяне на рецептите...</div>
+        </div>
     </div>
 
-    <section id="list" class="space-y-8"></section>
-    <footer class="mt-14 text-center">
-      <div class="deco-divider mb-5 max-w-[200px] mx-auto"><span class="text-[var(--honey)] text-xs">❦</span></div>
-      <p class="font-[Forum] text-[var(--honey)] text-[.65rem] tracking-[.35em] uppercase mb-2">Контакт</p>
-      <a href="mailto:office@newage-studio.com" class="italic text-lg text-[var(--ink)] hover:text-[var(--honey)] transition">office@newage-studio.com</a>
-      <p class="mt-5 font-[Forum] text-[var(--muted)] text-[.58rem] tracking-[.22em] uppercase">© 2026 New Age Studio. Всички права запазени.</p>
-      <p class="mt-3 mx-auto max-w-sm italic text-[var(--muted)] text-sm leading-relaxed">Рецепти за вдъхновение. Съобразявайте съставките с личните си нужди и алергии.</p>
-    </footer>
-  </main>
+    <style>
+        #bar-loader {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background:
+                radial-gradient(circle at 50% 28%, rgba(232,201,135,.18), transparent 34%),
+                linear-gradient(180deg, #fffaf0 0%, #f4ead8 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.8s;
+        }
+        .loader-content {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .loader-logo-wrap {
+            width: 112px;
+            height: 112px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            border: 1px solid rgba(194,133,45,.26);
+            background: rgba(255,250,240,.72);
+            box-shadow: 0 18px 48px rgba(48,39,29,.10);
+            animation: logoReveal 1.2s cubic-bezier(.16,1,.3,1) both;
+        }
+        .loader-logo {
+            width: 88px;
+            height: 88px;
+            object-fit: contain;
+            display: block;
+        }
+        .loader-title {
+            color: #30271d;
+            font-size: 26px;
+            font-weight: 400;
+            letter-spacing: 10px;
+            margin: 15px 0 8px 0;
+            text-transform: uppercase;
+            font-family: 'Cinzel', serif;
+            opacity: 0;
+            animation: fadeInElement 1.8s ease 1s forwards;
+        }
+        .loader-subtitle {
+            color: #7d6b58;
+            font-size: 10px;
+            letter-spacing: 6px;
+            margin: 0 0 25px 0;
+            text-transform: uppercase;
+            font-family: 'Cinzel', serif;
+            opacity: 0;
+            animation: fadeInElement 1.8s ease 1.6s forwards;
+        }
+        .loader-status {
+            color: #9d4f55;
+            font-size: 12px;
+            font-style: italic;
+            letter-spacing: 3px;
+            font-family: 'Cinzel', serif;
+            opacity: 0;
+            animation: fadeInElement 1.5s ease 2.2s forwards;
+        }
+        @keyframes logoReveal {
+            from { opacity: 0; transform: translateY(10px) scale(.92); }
+            to { opacity: 1; transform: none; }
+        }
+        @keyframes fadeInElement {
+            to { opacity: 1; }
+        }
+        #bar-loader.loaded {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+    </style>
 
-  <button id="backToTop" class="hidden fixed bottom-5 right-5 z-40 w-10 h-10 border border-[var(--line)] bg-[var(--paper)]/90 backdrop-blur text-[var(--sage)] active:scale-95" aria-label="Нагоре">
-    ↑
-  </button>
+    <script>
+        // Hide loader after 3.5s, then remove from DOM
+        setTimeout(function() {
+            const loader = document.getElementById('bar-loader');
+            loader.classList.add('loaded');
+            setTimeout(() => loader.remove(), 900);
+        }, 3500);
+    </script>
 
-  <div id="modal" class="hidden fixed inset-0 z-50">
-    <button id="closeLayer" class="modal-bg absolute inset-0 w-full h-full" aria-label="Затвори"></button>
-    <article class="absolute bottom-0 left-0 right-0 max-w-[520px] mx-auto max-h-[90vh] overflow-y-auto bg-[var(--paper)] border-t border-[var(--line)] safe-bottom">
-      <button onclick="closeModal()" class="sticky top-4 left-4 z-10 ml-4 mt-4 inline-flex items-center gap-2 bg-[var(--paper)]/90 backdrop-blur border border-[var(--line)] px-3 py-2 font-[Forum] text-xs tracking-[.22em] uppercase text-[var(--sage)] active:scale-95" aria-label="Назад към рецептите">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        Назад
-      </button>
-      <img id="modalImg" class="w-full h-64 object-cover" alt="">
-      <div class="p-6">
-        <div class="flex items-center justify-between gap-4 mb-3">
-          <p id="modalTag" class="font-[Forum] text-xs tracking-[.26em] uppercase text-[var(--sage)]"></p>
-          <button id="modalFav" class="w-10 h-10 border border-[var(--line)] text-[var(--berry)] grid place-items-center text-xl">◇</button>
+    <script src="data.js"></script>
+
+    <!-- ============ I18N + UNITS CORE ============ -->
+    <script>
+        const LANGS = [
+            { code: 'en', name: 'English',   flag: '🇬🇧' },
+            { code: 'de', name: 'Deutsch',   flag: '🇩🇪' },
+            { code: 'es', name: 'Español',   flag: '🇪🇸' },
+            { code: 'ru', name: 'Русский',   flag: '🇷🇺' },
+            { code: 'bg', name: 'Български', flag: '🇧🇬' },
+        ];
+
+        const I18N = {
+            bg: {
+                tab_cocktails:'Gluten Free', tab_mocktails:'Рецепти',
+                cotd_title:'Рецепта на деня', cotd_see:'Виж рецептата',
+                search_ph:'Търсене по име или съставка',
+                fav_selected:'Избрани', fav_all:'Всички',
+                loader_text:'Подготвяне на рецептите', intro_subtitle:'Без глутен', intro_status:'Подготвяне на рецептите...',
+                close:'Затвори',
+                ai_button:'Препоръка', ai_title:'ПРЕПОРЪКА', ai_subtitle:'Какво да приготвим?',
+                ai_scan_title:'Gluten Free идея', ai_scan_desc:'Предложение от колекцията',
+                ai_random_title:'Изненада', ai_random_desc:'Случайна рецепта от селекцията',
+                ai_fav_show_all:'Покажи всички', ai_fav_title:'Избрани',
+                ai_fav_desc_off:'Изключи филтъра', ai_fav_desc_on:'Покажи запазените',
+                ai_stats_title:'Анализ на ателието', ai_stats_desc:'Статистика за колекцията',
+                stats_title:'АТЕЛИЕ', stats_subtitle:'Анализ на колекцията', stats_cocktails:'Рецепти',
+                stats_favorites:'Избрани', stats_distribution:'Разпределение', stats_rec_badge:'Препоръка',
+                stats_time_morning:'нещо лесно и балансирано', stats_time_afternoon:'нещо свежо и достъпно',
+                stats_time_evening:'класика за вечер', stats_time_late:'нещо силно за късен час',
+                stats_rec_line1:'Сега, около {hour}:00 ч., е подходящо за {rec}.',
+                stats_rec_line2:'Най-разнообразната ви категория е {base} с {count} опции.',
+                count_word_one:'рецепта', count_word_many:'рецепти',
+                empty_fav:'Все още нямате избрани.', empty_fav_hint:'— ОТБЕЛЕЖЕТЕ С ◇ —',
+                empty_search:'Няма съвпадение с «{q}»', empty_selection:'Тази селекция е празна.',
+                load_more:'Зареди още', alert_empty:'Селекцията е празна. Изчистете филтрите.',
+                error_connection:'Връзката прекъсна',
+                filter_all:'Всички', filter_vodka:'Водка', filter_gin:'Джин', filter_rum:'Ром',
+                filter_easy:'Лесно', filter_under20:'До 20 мин', filter_under30:'До 30 мин', meta_min:'мин',
+                filter_tequila:'Текила', filter_whisky:'Уиски',
+                filter_breakfast:'Закуска', filter_lunch:'Обяд', filter_dinner:'Вечеря', filter_salad:'Салата', filter_snack:'Снак', filter_dessert:'Десерт',
+                settings_title:'ЕЗИК', settings_subtitle:'Език и мерни единици', settings_units:'Мерни единици',
+                footer_contact:'Контакт', footer_rights:'© 2026 New Age Studio. Всички права запазени.', footer_note:'Рецепти за вдъхновение. Съобразявайте съставките с личните си нужди и алергии.',
+                share_text:'Gluten Free 365 - без глутен', toast_link_copied:'Линкът е копиран ✓',
+                aria_share:'Сподели', aria_top:'Нагоре', aria_settings:'Език',
+                months:['Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември'],
+            },
+            en: {
+                tab_cocktails:'Gluten Free', tab_mocktails:'Recipes',
+                cotd_title:'Recipe of the Day', cotd_see:'View recipe',
+                search_ph:'Search by name or ingredient',
+                fav_selected:'Favorites', fav_all:'All',
+                loader_text:'Preparing recipes', intro_subtitle:'Gluten free', intro_status:'Preparing recipes...',
+                close:'Close',
+                ai_button:'Suggestions', ai_title:'SUGGESTION', ai_subtitle:'What shall we make?',
+                ai_scan_title:'Gluten Free идея', ai_scan_desc:'A suggestion from the collection',
+                ai_random_title:'Surprise me', ai_random_desc:'A random recipe from the selection',
+                ai_fav_show_all:'Show all', ai_fav_title:'Favorites',
+                ai_fav_desc_off:'Turn off the filter', ai_fav_desc_on:'Show your saved ones',
+                ai_stats_title:'Recipe analysis', ai_stats_desc:'Collection statistics',
+                stats_title:'ATELIER', stats_subtitle:'Collection analysis', stats_cocktails:'Recipes',
+                stats_favorites:'Favorites', stats_distribution:'Distribution', stats_rec_badge:'Recommendation',
+                stats_time_morning:'something refreshing for gluten free', stats_time_afternoon:'something light and fruity',
+                stats_time_evening:'a cozy gluten free-for-dinner idea', stats_time_late:'something simple for later',
+                stats_rec_line1:"Right now, around {hour}:00, it's a good time for {rec}.",
+                stats_rec_line2:'Your most diverse category is {base} with {count} options.',
+                count_word_one:'recipe', count_word_many:'recipes',
+                empty_fav:'You have no favorites yet.', empty_fav_hint:'— MARK WITH ◇ —',
+                empty_search:'No match for «{q}»', empty_selection:'This selection is empty.',
+                load_more:'Load more', alert_empty:'Selection is empty. Clear the filters.',
+                error_connection:'Connection lost',
+                filter_all:'All', filter_vodka:'Vodka', filter_gin:'Gin', filter_rum:'Rum',
+                filter_easy:'Easy', filter_under20:'Under 20 min', filter_under30:'Under 30 min', meta_min:'min',
+                filter_tequila:'Tequila', filter_whisky:'Whisky',
+                filter_breakfast:'Breakfast', filter_lunch:'Lunch', filter_dinner:'Dinner', filter_salad:'Salad', filter_snack:'Snack', filter_dessert:'Dessert',
+                settings_title:'LANGUAGE', settings_subtitle:'Language & units', settings_units:'Measurement units',
+                footer_contact:'Contact', footer_rights:'© 2026 New Age Studio. All rights reserved.', footer_note:'Recipes for inspiration. Adjust ingredients to your needs and allergies.',
+                share_text:'Gluten Free 365 - everyday gluten-free recipes', toast_link_copied:'Link copied ✓',
+                aria_share:'Share', aria_top:'Top', aria_settings:'Language',
+                months:['January','February','March','April','May','June','July','August','September','October','November','December'],
+            },
+            de: {
+                tab_cocktails:'Gluten Free', tab_mocktails:'Rezepte',
+                cotd_title:'Rezept des Tages', cotd_see:'Rezept ansehen',
+                search_ph:'Suche nach Name oder Zutat',
+                fav_selected:'Favoriten', fav_all:'Alle',
+                loader_text:'Rezepte werden vorbereitet', intro_subtitle:'Glutenfrei', intro_status:'Rezepte werden vorbereitet...',
+                close:'Schließen',
+                ai_button:'Empfehlungen', ai_title:'EMPFEHLUNG', ai_subtitle:'Was sollen wir machen?',
+                ai_scan_title:'Gluten Free Idee', ai_scan_desc:'Ein Vorschlag aus der Sammlung',
+                ai_random_title:'Überrasch mich', ai_random_desc:'Zufälliges Rezept aus der Auswahl',
+                ai_fav_show_all:'Alle zeigen', ai_fav_title:'Favoriten',
+                ai_fav_desc_off:'Filter ausschalten', ai_fav_desc_on:'Gespeicherte zeigen',
+                ai_stats_title:'Rezeptanalyse', ai_stats_desc:'Sammlungsstatistik',
+                stats_title:'ATELIER', stats_subtitle:'Sammlungsanalyse', stats_cocktails:'Recipes',
+                stats_favorites:'Favoriten', stats_distribution:'Verteilung', stats_rec_badge:'Empfehlung',
+                stats_time_morning:'etwas Erfrischendes zum Gluten Free', stats_time_afternoon:'etwas Leichtes und Fruchtiges',
+                stats_time_evening:'eine gemütliche Gluten Free Idee am Abend', stats_time_late:'etwas Einfaches für später',
+                stats_rec_line1:'Jetzt, gegen {hour}:00 Uhr, passt {rec}.',
+                stats_rec_line2:'Deine vielfältigste Kategorie ist {base} mit {count} Optionen.',
+                count_word_one:'Rezept', count_word_many:'Rezepte',
+                empty_fav:'Noch keine Favoriten.', empty_fav_hint:'— MIT ◇ MARKIEREN —',
+                empty_search:'Kein Treffer für «{q}»', empty_selection:'Diese Auswahl ist leer.',
+                load_more:'Mehr laden', alert_empty:'Auswahl ist leer. Filter zurücksetzen.',
+                error_connection:'Verbindung unterbrochen',
+                filter_all:'Alle', filter_vodka:'Wodka', filter_gin:'Gin', filter_rum:'Rum',
+                filter_easy:'Einfach', filter_under20:'Unter 20 Min', filter_under30:'Unter 30 Min', meta_min:'Min',
+                filter_tequila:'Tequila', filter_whisky:'Whisky',
+                filter_breakfast:'Frühstück', filter_lunch:'Mittagessen', filter_dinner:'Abendessen', filter_salad:'Salat', filter_snack:'Snack', filter_dessert:'Dessert',
+                settings_title:'SPRACHE', settings_subtitle:'Sprache & Einheiten', settings_units:'Maßeinheiten',
+                footer_contact:'Kontakt', footer_rights:'© 2026 New Age Studio. Alle Rechte vorbehalten.', footer_note:'Rezepte zur Inspiration. Bitte Zutaten an persönliche Bedürfnisse und Allergien anpassen.',
+                share_text:'Gluten Free 365 - glutenfreie Rezepte für jeden Tag', toast_link_copied:'Link kopiert ✓',
+                aria_share:'Teilen', aria_top:'Nach oben', aria_settings:'Sprache',
+                months:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
+            },
+            es: {
+                tab_cocktails:'Gluten Free', tab_mocktails:'Recetas',
+                cotd_title:'Receta del día', cotd_see:'Ver receta',
+                search_ph:'Buscar por nombre o ingrediente',
+                fav_selected:'Favoritos', fav_all:'Todos',
+                loader_text:'Preparando recetas', intro_subtitle:'Sin gluten', intro_status:'Preparando recetas...',
+                close:'Cerrar',
+                ai_button:'Sugerencias', ai_title:'SUGERENCIA', ai_subtitle:'¿Qué preparamos?',
+                ai_scan_title:'Idea de gluten free', ai_scan_desc:'Una sugerencia de la colección',
+                ai_random_title:'Sorpréndeme', ai_random_desc:'Una receta al azar de la selección',
+                ai_fav_show_all:'Mostrar todos', ai_fav_title:'Favoritos',
+                ai_fav_desc_off:'Quitar el filtro', ai_fav_desc_on:'Ver los guardados',
+                ai_stats_title:'Análisis del taller', ai_stats_desc:'Estadísticas de la colección',
+                stats_title:'TALLER', stats_subtitle:'Análisis de la colección', stats_cocktails:'Recipes',
+                stats_favorites:'Favoritos', stats_distribution:'Distribución', stats_rec_badge:'Recomendación',
+                stats_time_morning:'algo refrescante para el gluten free', stats_time_afternoon:'algo ligero y afrutado',
+                stats_time_evening:'una idea acogedora para la noche', stats_time_late:'algo sencillo para más tarde',
+                stats_rec_line1:'Ahora, sobre las {hour}:00, es buen momento para {rec}.',
+                stats_rec_line2:'Tu categoría más variada es {base} con {count} opciones.',
+                count_word_one:'recipe', count_word_many:'recipes',
+                empty_fav:'Aún no tienes favoritos.', empty_fav_hint:'— MARCA CON ◇ —',
+                empty_search:'Sin coincidencias para «{q}»', empty_selection:'Esta selección está vacía.',
+                load_more:'Cargar más', alert_empty:'La selección está vacía. Borra los filtros.',
+                error_connection:'Conexión perdida',
+                filter_all:'Todos', filter_vodka:'Vodka', filter_gin:'Ginebra', filter_rum:'Ron',
+                filter_easy:'Fácil', filter_under20:'Hasta 20 min', filter_under30:'Hasta 30 min', meta_min:'min',
+                filter_tequila:'Tequila', filter_whisky:'Whisky',
+                filter_breakfast:'Desayuno', filter_lunch:'Comida', filter_dinner:'Cena', filter_salad:'Ensalada', filter_snack:'Snack', filter_dessert:'Postre',
+                settings_title:'IDIOMA', settings_subtitle:'Idioma y unidades', settings_units:'Unidades de medida',
+                footer_contact:'Contacto', footer_rights:'© 2026 New Age Studio. Todos los derechos reservados.', footer_note:'Recetas para inspirarte. Ajusta los ingredientes a tus necesidades y alergias.',
+                share_text:'Gluten Free 365 - recetas sin gluten para cada día', toast_link_copied:'Enlace copiado ✓',
+                aria_share:'Compartir', aria_top:'Arriba', aria_settings:'Idioma',
+                months:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+            },
+            ru: {
+                tab_cocktails:'Gluten Free', tab_mocktails:'Рецепты',
+                cotd_title:'Рецепт дня', cotd_see:'Смотреть рецепт',
+                search_ph:'Поиск по названию или ингредиенту',
+                fav_selected:'Избранное', fav_all:'Все',
+                loader_text:'Готовим рецепты', intro_subtitle:'Без глютена', intro_status:'Готовим рецепты...',
+                close:'Закрыть',
+                ai_button:'Идеи', ai_title:'ПОДБОР', ai_subtitle:'Что приготовим?',
+                ai_scan_title:'Идея Gluten Free', ai_scan_desc:'Предложение из коллекции',
+                ai_random_title:'Сюрприз', ai_random_desc:'Случайный рецепт из подборки',
+                ai_fav_show_all:'Показать все', ai_fav_title:'Избранное',
+                ai_fav_desc_off:'Выключить фильтр', ai_fav_desc_on:'Показать сохранённые',
+                ai_stats_title:'Анализ ателье', ai_stats_desc:'Статистика коллекции',
+                stats_title:'АТЕЛЬЕ', stats_subtitle:'Анализ коллекции', stats_cocktails:'Рецепты',
+                stats_favorites:'Избранное', stats_distribution:'Распределение', stats_rec_badge:'Рекомендация',
+                stats_time_morning:'что-то лёгкое и чистое', stats_time_afternoon:'что-то свежее и сбалансированное',
+                stats_time_evening:'уютная идея на вечер', stats_time_late:'что-то простое на поздний час',
+                stats_rec_line1:'Сейчас, около {hour}:00, подходит {rec}.',
+                stats_rec_line2:'Самая разнообразная категория — {base}, {count} вариантов.',
+                count_word_one:'рецепт', count_word_many:'рецептов',
+                empty_fav:'Пока нет избранного.', empty_fav_hint:'— ОТМЕТЬТЕ ◇ —',
+                empty_search:'Нет совпадений с «{q}»', empty_selection:'Этот раздел пуст.',
+                load_more:'Показать ещё', alert_empty:'Раздел пуст. Сбросьте фильтры.',
+                error_connection:'Соединение прервано',
+                filter_all:'Все', filter_vodka:'Водка', filter_gin:'Джин', filter_rum:'Ром',
+                filter_easy:'Легко', filter_under20:'До 20 мин', filter_under30:'До 30 мин', meta_min:'мин',
+                filter_tequila:'Текила', filter_whisky:'Виски',
+                filter_breakfast:'Завтрак', filter_lunch:'Обед', filter_dinner:'Ужин', filter_salad:'Салат', filter_snack:'Снэк', filter_dessert:'Десерт',
+                settings_title:'ЯЗЫК', settings_subtitle:'Язык и единицы', settings_units:'Единицы измерения',
+                footer_contact:'Контакт', footer_rights:'© 2026 New Age Studio. Все права защищены.', footer_note:'Рецепты для вдохновения. Учитывайте свои потребности и аллергии.',
+                share_text:'Gluten Free 365 - рецепты без глютена', toast_link_copied:'Ссылка скопирована ✓',
+                aria_share:'Поделиться', aria_top:'Наверх', aria_settings:'Язык',
+                months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+            },
+        };
+
+        // --- State ---
+        let LANG = 'bg';
+        let UNIT = 'ml';
+        (function initPrefs(){
+            try {
+                const sl = localStorage.getItem('gluten-free-365-lang');
+                if (sl && I18N[sl]) LANG = sl;
+                const su = localStorage.getItem('gluten-free-365-unit');
+                if (su === 'oz' || su === 'ml') UNIT = su;
+            } catch(e) {}
+            document.documentElement.lang = LANG;
+        })();
+
+        function isLocked(item) {
+            return false;
+        }
+
+        function t(key, vars) {
+            let s = (I18N[LANG] && I18N[LANG][key]) || (I18N.bg[key]) || key;
+            if (vars) for (const k in vars) s = s.replace('{'+k+'}', vars[k]);
+            return s;
+        }
+
+        // --- Units (ml <-> oz) ---
+        function mlToOz(ml) {
+            const oz = Math.round((ml/29.5735) * 4) / 4;
+            return oz.toString();
+        }
+        function convertUnits(text) {
+            if (UNIT !== 'oz' || !text) return text;
+            return String(text).replace(/(\d+(?:[.,]\d+)?)\s*(мл|ml)(?=[\s.,;:)]|$)/gi, (m, n) => {
+                const ml = parseFloat(n.replace(',', '.'));
+                if (isNaN(ml)) return m;
+                return mlToOz(ml) + ' oz';
+            });
+        }
+
+        // --- Apply static translations to DOM ---
+        function applyStaticI18n() {
+            document.documentElement.lang = LANG;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                el.textContent = t(el.getAttribute('data-i18n'));
+            });
+            document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+                el.setAttribute('placeholder', t(el.getAttribute('data-i18n-ph')));
+            });
+            document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+                el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria')));
+            });
+        }
+
+        let THEME = 'light';
+        (function initTheme(){ THEME = 'light'; })();
+
+        function applyTheme() {
+            document.body.classList.add('theme-light');
+        }
+
+        function toggleTheme() { applyTheme(); }
+
+        // --- Settings sheet (language + units) ---
+        function openSettings() {
+            const langGrid = LANGS.map(l => `
+                <button onclick="setLang('${l.code}')" class="border ${l.code===LANG?'border-gold text-gold-bright bg-ink-soft':'border-gold-dim text-cream-dim'} hover:border-gold hover:text-gold active:scale-[0.98] transition p-3 flex items-center gap-3">
+                    <span class="text-2xl">${l.flag}</span>
+                    <span class="font-roman text-sm tracking-[0.1em]">${l.name}</span>
+                </button>`).join('');
+            const unitBtn = (u, label) => `
+                <button onclick="setUnit('${u}')" class="flex-1 py-3 font-roman text-xs tracking-[0.3em] uppercase transition border ${u===UNIT?'border-gold bg-gold text-ink':'border-gold-dim text-cream-dim hover:text-gold hover:border-gold'}">${label}</button>`;
+            document.getElementById('settings-content').innerHTML = `
+                <div class="grid grid-cols-1 gap-2.5">${langGrid}</div>
+                <div class="mt-7">
+                    <div class="deco-divider mb-4">
+                        <span class="font-roman text-gold text-[0.6rem] tracking-[0.4em] uppercase whitespace-nowrap">${t('settings_units')}</span>
+                    </div>
+                    <div class="flex gap-2">
+                        ${unitBtn('ml','ml')}
+                        ${unitBtn('oz','oz')}
+                    </div>
+                </div>
+                `;
+            document.getElementById('settings-modal').classList.remove('hidden');
+        }
+        function closeSettings(){ document.getElementById('settings-modal').classList.add('hidden'); }
+
+        function refreshDynamic() {
+            if (typeof renderFilters === 'function') renderFilters();
+            if (typeof render === 'function') render(false);
+            if (typeof renderCOTD === 'function') renderCOTD();
+            if (typeof updateFavBar === 'function') updateFavBar();
+        }
+        function setLang(code) {
+            if (!I18N[code]) return;
+            LANG = code;
+            try { localStorage.setItem('gluten-free-365-lang', code); } catch(e){}
+            applyStaticI18n();
+            refreshDynamic();
+            openSettings(); // refresh highlight
+        }
+        function setUnit(u) {
+            UNIT = u;
+            try { localStorage.setItem('gluten-free-365-unit', u); } catch(e){}
+            refreshDynamic();
+            openSettings();
+        }
+
+        // True when running inside the installed Android app (TWA), false on the web
+        function isTWA() {
+            try {
+                return document.referrer.startsWith('android-app://') ||
+                       new URLSearchParams(location.search).get('app') === '1';
+            } catch(e) { return false; }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            applyTheme(); applyStaticI18n();
+        });
+    </script>
+
+    <div class="page-frame max-w-[520px] mx-auto min-h-screen px-[18px] pb-44 relative" style="z-index: 2;">
+
+        <!-- HEADER -->
+        <header class="pt-10 pb-6 text-center relative">
+            <button onclick="openSettings()" data-i18n-aria="aria_settings" aria-label="Език"
+                class="absolute left-0 top-10 w-9 h-9 border border-gold-dim text-gold-dim hover:text-gold hover:border-gold flex items-center justify-center transition active:scale-90">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                    <circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18"/>
+                </svg>
+            </button>
+            <button onclick="shareApp()" data-i18n-aria="aria_share" aria-label="Сподели"
+                class="absolute right-0 top-10 w-9 h-9 border border-gold-dim text-gold-dim hover:text-gold hover:border-gold flex items-center justify-center transition active:scale-90">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                </svg>
+            </button>
+            <div class="flex items-center justify-center mb-3 px-12">
+                <h1 class="font-body text-[3rem] leading-none text-cream tracking-[0.08em] font-semibold">Gluten Free 365</h1>
+            </div>
+            <div class="deco-divider mx-auto max-w-[280px]">
+                <span class="font-roman text-cream-dim text-[0.65rem] tracking-[0.34em] uppercase whitespace-nowrap">без глутен</span>
+            </div>
+        </header>
+
+        <!-- MODE TOGGLE hidden (single recipe mode) -->
+        <div class="hidden mb-8 flex border border-gold-dim overflow-hidden">
+            <button id="tab-cocktails" onclick="setMode('cocktails')"
+                style="background:var(--gold);color:var(--ink);"
+                class="flex-1 py-3 font-roman text-xs tracking-[0.3em] uppercase transition flex items-center justify-center gap-2">
+                <span>◇</span><span data-i18n="tab_cocktails">Gluten Free</span>
+            </button>
+            <button id="tab-mocktails" onclick="setMode('mocktails')"
+                style="background:transparent;color:var(--cream-dim);"
+                class="flex-1 py-3 font-roman text-xs tracking-[0.3em] uppercase transition flex items-center justify-center gap-2">
+                <span>◇</span><span data-i18n="tab_mocktails">Рецепти</span>
+            </button>
         </div>
-        <h2 id="modalTitle" class="text-4xl leading-tight font-semibold mb-3"></h2>
-        <p id="modalMeta" class="text-[var(--muted)] italic mb-5"></p>
-        <div class="rule mb-5"><span class="font-[Forum] text-xs tracking-[.28em] uppercase">съставки</span></div>
-        <ul id="modalIngredients" class="space-y-2 mb-6"></ul>
-        <div class="rule mb-5"><span class="font-[Forum] text-xs tracking-[.28em] uppercase">стъпки</span></div>
-        <ol id="modalSteps" class="space-y-4"></ol>
-      </div>
-    </article>
-  </div>
 
-  <script>
-    setTimeout(function() {
-      const loader = document.getElementById("app-loader");
-      if (!loader) return;
-      loader.classList.add("loaded");
-      setTimeout(() => loader.remove(), 900);
-    }, 3200);
-
-    const recipes = [
-          {
-                "id": 1,
-                "cat": "Закуска",
-                "time": "12 мин",
-                "tag": "богата на протеин",
-                "name": "Киноа каша с ябълка и тахан",
-                "img": "https://drive.google.com/file/d/1S1RtRCH9sjGxj8gcsi5IWMG9HrYBY7Mi/view?usp=drivesdk",
-                "ingredients": [
-                      "сварена киноа",
-                      "настъргана ябълка",
-                      "сусамов тахан",
-                      "канела",
-                      "орехи",
-                      "кленов сироп"
-                ],
-                "steps": [
-                      "Затопли киноата с малко вода или бадемово мляко.",
-                      "Добави ябълка, канела и щипка сол.",
-                      "Завърши с тахан, орехи и съвсем малко кленов сироп."
-                ]
-          },
-          {
-                "id": 2,
-                "cat": "Обяд",
-                "time": "25 мин",
-                "tag": "meal prep",
-                "name": "Пилешка купа с ориз и авокадо",
-                "img": "https://drive.google.com/file/d/13jYvvMX4b_j7VGzTUdnlPZzFlwvupCqM/view?usp=drivesdk",
-                "ingredients": [
-                      "пилешко филе",
-                      "ориз басмати",
-                      "авокадо",
-                      "краставица",
-                      "лайм",
-                      "зехтин",
-                      "магданоз"
-                ],
-                "steps": [
-                      "Изпечи пилешкото със сол, пипер и зехтин.",
-                      "Сложи ориза в купа и добави зеленчуците.",
-                      "Полей с лайм и зехтин, после нарежи пилешкото отгоре."
-                ]
-          },
-          {
-                "id": 3,
-                "cat": "Вечеря",
-                "time": "35 мин",
-                "tag": "уютна",
-                "name": "Сьомга с батат и зелен фасул",
-                "img": "https://drive.google.com/file/d/1noZzliDjJzDKZ-2ukTU85h31BPPxD2Z_/view?usp=drivesdk",
-                "ingredients": [
-                      "филе сьомга",
-                      "батат",
-                      "зелен фасул",
-                      "лимон",
-                      "чесън",
-                      "зехтин",
-                      "копър"
-                ],
-                "steps": [
-                      "Изпечи батата на кубчета със зехтин.",
-                      "Добави сьомгата и фасула в тавата.",
-                      "Печи до готовност и завърши с лимон и копър."
-                ]
-          },
-          {
-                "id": 4,
-                "cat": "Десерт",
-                "time": "15 мин",
-                "tag": "без печене",
-                "name": "Кокосов чиа крем с горски плодове",
-                "img": "https://drive.google.com/file/d/101wmsnwafkfwBURtBrOFitPFGKoTRSNG/view?usp=drivesdk",
-                "ingredients": [
-                      "чиа",
-                      "кокосово мляко",
-                      "ванилия",
-                      "малини",
-                      "боровинки",
-                      "мед"
-                ],
-                "steps": [
-                      "Разбъркай чиа с кокосово мляко и ванилия.",
-                      "Остави да стегне поне 2 часа.",
-                      "Поднеси с плодове и малко мед."
-                ]
-          },
-          {
-                "id": 5,
-                "cat": "Закуска",
-                "time": "18 мин",
-                "tag": "солена",
-                "name": "Нахутен омлет със зеленчуци",
-                "img": "https://drive.google.com/file/d/1wue5ThCfxV0UPQBGH3T1qOnJxvQkeZuF/view?usp=drivesdk",
-                "ingredients": [
-                      "нахутено брашно",
-                      "вода",
-                      "чушка",
-                      "спанак",
-                      "лук",
-                      "куркума",
-                      "зехтин"
-                ],
-                "steps": [
-                      "Разбий нахутеното брашно с вода, куркума и сол.",
-                      "Добави нарязани зеленчуци.",
-                      "Изпечи в тиган като дебела палачинка."
-                ]
-          },
-          {
-                "id": 6,
-                "cat": "Обяд",
-                "time": "20 мин",
-                "tag": "свежа",
-                "name": "Табуле от елда с мента",
-                "img": "https://drive.google.com/file/d/1cxn2DTphZ9E9ZUjs3Uk3aXy7z2XWXZOV/view?usp=drivesdk",
-                "ingredients": [
-                      "сварена елда",
-                      "домати",
-                      "краставица",
-                      "мента",
-                      "магданоз",
-                      "лимон",
-                      "зехтин"
-                ],
-                "steps": [
-                      "Охлади елдата добре.",
-                      "Смеси с дребно нарязаните зеленчуци и билки.",
-                      "Овкуси с лимон, зехтин и сол."
-                ]
-          },
-          {
-                "id": 7,
-                "cat": "Вечеря",
-                "time": "30 мин",
-                "tag": "растителна",
-                "name": "Къри с тиква и червена леща",
-                "img": "https://drive.google.com/file/d/1dkTY1wV5xZFsolJ8aPznKL6fgaZ92zwB/view?usp=drivesdk",
-                "ingredients": [
-                      "тиква",
-                      "червена леща",
-                      "кокосово мляко",
-                      "къри паста без глутен",
-                      "джинджифил",
-                      "ориз"
-                ],
-                "steps": [
-                      "Задуши джинджифила с къри пастата.",
-                      "Добави тиква, леща и кокосово мляко.",
-                      "Готви до омекване и поднеси с ориз."
-                ]
-          },
-          {
-                "id": 8,
-                "cat": "Снак",
-                "time": "10 мин",
-                "tag": "за кутия",
-                "name": "Оризови крекери с хумус",
-                "img": "https://drive.google.com/file/d/1CHRliYX3EFESBKj7RkkK4FitW_2dX3vG/view?usp=drivesdk",
-                "ingredients": [
-                      "оризови крекери",
-                      "хумус",
-                      "краставица",
-                      "печен сусам",
-                      "червен пипер"
-                ],
-                "steps": [
-                      "Намажи крекерите с хумус.",
-                      "Добави тънки резени краставица.",
-                      "Поръси със сусам и червен пипер."
-                ]
-          },
-          {
-                "id": 9,
-                "cat": "Десерт",
-                "time": "22 мин",
-                "tag": "шоколад",
-                "name": "Брауни от сладък картоф",
-                "img": "https://drive.google.com/file/d/17V_dwj9u6wEd1KSpCKqMGckzvSqawaZ5/view?usp=drivesdk",
-                "ingredients": [
-                      "печен сладък картоф",
-                      "какао",
-                      "бадемово брашно",
-                      "фурми",
-                      "кокосово масло",
-                      "ванилия"
-                ],
-                "steps": [
-                      "Пасирай сладкия картоф с фурмите.",
-                      "Добави какао, бадемово брашно и кокосово масло.",
-                      "Изпечи до стегнат център и охлади преди рязане."
-                ]
-          },
-          {
-                "id": 10,
-                "cat": "Закуска",
-                "time": "8 мин",
-                "tag": "бърза",
-                "name": "Смути купа с банан и спанак",
-                "img": "https://drive.google.com/file/d/1icsmP_PdvaNNlEZZpmYGIunyJswIxyQD/view?usp=drivesdk",
-                "ingredients": [
-                      "банан",
-                      "спанак",
-                      "авокадо",
-                      "бадемово мляко",
-                      "тиквени семки",
-                      "кокос"
-                ],
-                "steps": [
-                      "Блендирай банан, спанак, авокадо и мляко.",
-                      "Изсипи в купа.",
-                      "Добави семки и кокос."
-                ]
-          },
-          {
-                "id": 11,
-                "cat": "Обяд",
-                "time": "28 мин",
-                "tag": "засищащо",
-                "name": "Пълнени чушки с пуешко и ориз",
-                "img": "https://drive.google.com/file/d/14ikG8Z6dQmz3CB6Ta3OlYUvq-lhqH_Uc/view?usp=drivesdk",
-                "ingredients": [
-                      "чушки",
-                      "пуешка кайма",
-                      "ориз",
-                      "домати",
-                      "риган",
-                      "зехтин"
-                ],
-                "steps": [
-                      "Смеси каймата с ориз, домати и риган.",
-                      "Напълни чушките.",
-                      "Печи с малко вода и зехтин до готовност."
-                ]
-          },
-          {
-                "id": 12,
-                "cat": "Вечеря",
-                "time": "24 мин",
-                "tag": "леко",
-                "name": "Скариди с оризови нудли",
-                "img": "https://drive.google.com/file/d/1hUXZRXpcgIofZ78slJDCEp1vjni1bvlC/view?usp=drivesdk",
-                "ingredients": [
-                      "скариди",
-                      "оризови нудли",
-                      "морков",
-                      "тиквичка",
-                      "тамари без глутен",
-                      "лайм"
-                ],
-                "steps": [
-                      "Накисни нудлите според пакета.",
-                      "Запържи скаридите и зеленчуците кратко.",
-                      "Добави нудлите, тамари и лайм."
-                ]
-          },
-          {
-                "id": 13,
-                "cat": "Закуска",
-                "time": "16 мин",
-                "tag": "топла",
-                "name": "Амарант с круша и канела",
-                "img": "https://drive.google.com/file/d/1IBAXX45paPkdYa2kphJpSatEWOZYLuXu/view?usp=drivesdk",
-                "ingredients": [
-                      "сварен амарант",
-                      "круша",
-                      "канела",
-                      "бадемово мляко",
-                      "лешници",
-                      "мед"
-                ],
-                "steps": [
-                      "Затопли амаранта с бадемово мляко.",
-                      "Добави кубчета круша и канела.",
-                      "Поднеси с лешници и малко мед."
-                ]
-          },
-          {
-                "id": 14,
-                "cat": "Обяд",
-                "time": "22 мин",
-                "tag": "средиземноморска",
-                "name": "Салата с риба тон и бял боб",
-                "img": "https://drive.google.com/file/d/1MLzC6T64a-KiMuN_lDVDC6udOMdyzj5e/view?usp=drivesdk",
-                "ingredients": [
-                      "риба тон",
-                      "бял боб",
-                      "чери домати",
-                      "маслини",
-                      "червен лук",
-                      "лимон",
-                      "зехтин"
-                ],
-                "steps": [
-                      "Изплакни боба и го смеси с рибата тон.",
-                      "Добави домати, маслини и тънко нарязан лук.",
-                      "Овкуси с лимон, зехтин и черен пипер."
-                ]
-          },
-          {
-                "id": 15,
-                "cat": "Вечеря",
-                "time": "32 мин",
-                "tag": "една тава",
-                "name": "Пуешки кюфтенца с тиквички",
-                "img": "https://drive.google.com/file/d/1r14NnFncywg4nkT3MCKjAho4-19_I5Ti/view?usp=drivesdk",
-                "ingredients": [
-                      "пуешка кайма",
-                      "настъргана тиквичка",
-                      "яйце",
-                      "оризово брашно",
-                      "чесън",
-                      "домати"
-                ],
-                "steps": [
-                      "Смеси каймата с тиквичка, яйце, чесън и оризово брашно.",
-                      "Оформи малки кюфтенца.",
-                      "Изпечи ги върху доматен сос до готовност."
-                ]
-          },
-          {
-                "id": 16,
-                "cat": "Снак",
-                "time": "12 мин",
-                "tag": "хрупкаво",
-                "name": "Печен нахут с пушен пипер",
-                "img": "https://drive.google.com/file/d/14XRW9tuNfBEbbUZLOZNw1KzTt8XalWEu/view?usp=drivesdk",
-                "ingredients": [
-                      "нахут",
-                      "зехтин",
-                      "пушен пипер",
-                      "чесън на прах",
-                      "сол",
-                      "лимонова кора"
-                ],
-                "steps": [
-                      "Подсуши нахута много добре.",
-                      "Овкуси със зехтин, пипер, чесън и сол.",
-                      "Печи до хрупкавост и завърши с лимонова кора."
-                ]
-          },
-          {
-                "id": 17,
-                "cat": "Десерт",
-                "time": "18 мин",
-                "tag": "плодов",
-                "name": "Печени праскови с бадемов крем",
-                "img": "https://drive.google.com/file/d/1oGcC24ti_O1T1daXkWd50jTVfx9EodQR/view?usp=drivesdk",
-                "ingredients": [
-                      "праскови",
-                      "бадемов тахан",
-                      "мед",
-                      "канела",
-                      "филирани бадеми",
-                      "ванилия"
-                ],
-                "steps": [
-                      "Разрежи прасковите и ги запечи леко.",
-                      "Разбъркай тахан с мед, ванилия и канела.",
-                      "Поднеси прасковите с крема и бадемите."
-                ]
-          },
-          {
-                "id": 18,
-                "cat": "Закуска",
-                "time": "14 мин",
-                "tag": "енергийна",
-                "name": "Оризова каша с какао и банан",
-                "img": "https://drive.google.com/file/d/11YtmC0o-lVemrteMXJ96Jz3vuOffKZLq/view?usp=drivesdk",
-                "ingredients": [
-                      "оризови ядки",
-                      "банан",
-                      "какао",
-                      "кокосово мляко",
-                      "чиа",
-                      "какаови зърна"
-                ],
-                "steps": [
-                      "Свари оризовите ядки с кокосово мляко.",
-                      "Разбъркай с какао и намачкан банан.",
-                      "Поръси с чиа и какаови зърна."
-                ]
-          },
-          {
-                "id": 19,
-                "cat": "Обяд",
-                "time": "30 мин",
-                "tag": "зеленчукова",
-                "name": "Печен патладжан с таханов сос",
-                "img": "https://drive.google.com/file/d/1onstKRTrc3cE2r01bbGCNOmK4Vd1A9Dk/view?usp=drivesdk",
-                "ingredients": [
-                      "патладжан",
-                      "тахан",
-                      "лимон",
-                      "чесън",
-                      "нар",
-                      "магданоз",
-                      "ориз"
-                ],
-                "steps": [
-                      "Разполови патладжана и го изпечи до мекота.",
-                      "Разбъркай тахан с лимон, чесън и вода.",
-                      "Поднеси върху ориз със сос, нар и магданоз."
-                ]
-          },
-          {
-                "id": 20,
-                "cat": "Вечеря",
-                "time": "38 мин",
-                "tag": "домашна",
-                "name": "Телешко рагу с полента от царевица",
-                "img": "https://drive.google.com/file/d/1pGZneuKrzV1rYMzMLqapKp_Ykr-jIccr/view?usp=drivesdk",
-                "ingredients": [
-                      "телешко месо",
-                      "морков",
-                      "целина",
-                      "домати",
-                      "царевичен грис",
-                      "зехтин",
-                      "мащерка"
-                ],
-                "steps": [
-                      "Задуши телешкото със зеленчуците.",
-                      "Добави домати и мащерка, после готви до омекване.",
-                      "Поднеси върху мека полента от царевичен грис."
-                ]
-          },
-          {
-                "id": 21,
-                "cat": "Снак",
-                "time": "9 мин",
-                "tag": "свежо",
-                "name": "Ябълкови резени с тахан и семена",
-                "img": "https://drive.google.com/file/d/1d05LX2nYT7bG1Ect5n0qJ9XGK8-iqCrH/view?usp=drivesdk",
-                "ingredients": [
-                      "ябълка",
-                      "слънчогледов тахан",
-                      "конопено семе",
-                      "канела",
-                      "стафиди"
-                ],
-                "steps": [
-                      "Нарежи ябълката на дебели резени.",
-                      "Намажи с тахан.",
-                      "Поръси със семена, канела и стафиди."
-                ]
-          },
-          {
-                "id": 22,
-                "cat": "Десерт",
-                "time": "25 мин",
-                "tag": "кремообразен",
-                "name": "Манго мус с кокос и лайм",
-                "img": "https://drive.google.com/file/d/11ehrl1o1GDeBIKHVJzxWNMqjU0oPY7A1/view?usp=drivesdk",
-                "ingredients": [
-                      "манго",
-                      "кокосова сметана",
-                      "лайм",
-                      "желатин или агар",
-                      "мед",
-                      "кокосови стърготини"
-                ],
-                "steps": [
-                      "Пасирай мангото с лайм и мед.",
-                      "Разбъркай с кокосова сметана и стегни с агар или желатин.",
-                      "Охлади и поднеси с кокосови стърготини."
-                ]
-          },
-          {
-                "id": 23,
-                "cat": "Закуска",
-                "time": "20 мин",
-                "tag": "солена",
-                "name": "Картофени рьощи с пушена сьомга",
-                "img": "https://drive.google.com/file/d/1aJri2k5XjKL16PchKcZRpQimhMcmYDtm/view?usp=drivesdk",
-                "ingredients": [
-                      "картофи",
-                      "яйце",
-                      "оризово брашно",
-                      "пушена сьомга",
-                      "краставица",
-                      "копър",
-                      "лимон"
-                ],
-                "steps": [
-                      "Настържи картофите и ги изстискай добре.",
-                      "Смеси с яйце и оризово брашно, после изпечи малки рьощи.",
-                      "Поднеси със сьомга, краставица, копър и лимон."
-                ]
-          },
-          {
-                "id": 24,
-                "cat": "Обяд",
-                "time": "26 мин",
-                "tag": "азиатска",
-                "name": "Оризова купа с темпе и броколи",
-                "img": "https://drive.google.com/file/d/1pINfT7aL46AlaltTcZQC1NwhLrGUBrHV/view?usp=drivesdk",
-                "ingredients": [
-                      "темпе без глутен",
-                      "броколи",
-                      "ориз жасмин",
-                      "тамари без глутен",
-                      "сусамово олио",
-                      "джинджифил",
-                      "сусам"
-                ],
-                "steps": [
-                      "Запечи темпето с тамари, джинджифил и сусамово олио.",
-                      "Бланширай броколите кратко.",
-                      "Сервирай върху ориз и поръси със сусам."
-                ]
-          },
-          {
-                "id": 25,
-                "cat": "Закуска",
-                "time": "15 мин",
-                "tag": "свежа",
-                "name": "Просо с ягоди и кокос",
-                "img": "https://drive.google.com/file/d/136VZo31Ukn3cNFRZYFVhxQz3GYUKyjy2/view?usp=drivesdk",
-                "ingredients": [
-                      "сварено просо",
-                      "ягоди",
-                      "кокосово мляко",
-                      "кокосови стърготини",
-                      "ванилия",
-                      "тиквени семки"
-                ],
-                "steps": [
-                      "Затопли просото с кокосово мляко и ванилия.",
-                      "Добави нарязани ягоди.",
-                      "Поръси с кокосови стърготини и тиквени семки."
-                ]
-          },
-          {
-                "id": 26,
-                "cat": "Обяд",
-                "time": "24 мин",
-                "tag": "леко пикантна",
-                "name": "Тако купа с царевица и черен боб",
-                "img": "https://drive.google.com/file/d/1yU33DZs0ZdysciX5231lGT0rqBNzmU24/view?usp=drivesdk",
-                "ingredients": [
-                      "черен боб",
-                      "царевица",
-                      "ориз",
-                      "авокадо",
-                      "домати",
-                      "лайм",
-                      "кимион"
-                ],
-                "steps": [
-                      "Затопли боба с царевица, кимион и щипка сол.",
-                      "Сложи ориза в купа и добави домати и авокадо.",
-                      "Завърши с лайм и зехтин."
-                ]
-          },
-          {
-                "id": 27,
-                "cat": "Вечеря",
-                "time": "34 мин",
-                "tag": "ароматна",
-                "name": "Пиле с маслини и лимон",
-                "img": "https://drive.google.com/file/d/1j9qtrJXYMGp6A8gZa2P-aEwfG-HVLzXB/view?usp=drivesdk",
-                "ingredients": [
-                      "пилешки бутчета",
-                      "зелени маслини",
-                      "лимон",
-                      "картофи",
-                      "розмарин",
-                      "зехтин",
-                      "чесън"
-                ],
-                "steps": [
-                      "Овкуси пилето с лимон, чесън и розмарин.",
-                      "Подреди с картофи и маслини в тава.",
-                      "Печи до златиста кожа и меки картофи."
-                ]
-          },
-          {
-                "id": 28,
-                "cat": "Снак",
-                "time": "11 мин",
-                "tag": "протеинов",
-                "name": "Фурми с бадемов тахан",
-                "img": "https://drive.google.com/file/d/1PHJMUae5kCYFVLwamRLjPg4QQn7Y4-6d/view?usp=drivesdk",
-                "ingredients": [
-                      "фурми",
-                      "бадемов тахан",
-                      "какао",
-                      "морска сол",
-                      "нарязани бадеми"
-                ],
-                "steps": [
-                      "Разрежи фурмите и махни костилките.",
-                      "Напълни ги с бадемов тахан.",
-                      "Поръси с какао, сол и бадеми."
-                ]
-          },
-          {
-                "id": 29,
-                "cat": "Десерт",
-                "time": "30 мин",
-                "tag": "печен",
-                "name": "Крушов крамбъл с овес без глутен",
-                "img": "https://drive.google.com/file/d/13UvPtoqRzH3QZUhuq_P5Oh6CsrF2Ys8x/view?usp=drivesdk",
-                "ingredients": [
-                      "круши",
-                      "овес без глутен",
-                      "бадемово брашно",
-                      "кокосово масло",
-                      "канела",
-                      "кленов сироп"
-                ],
-                "steps": [
-                      "Нарежи крушите и ги сложи в малка форма.",
-                      "Смеси овеса, бадемовото брашно, канелата, сиропа и кокосовото масло.",
-                      "Покрий крушите и печи до златист крамбъл."
-                ]
-          },
-          {
-                "id": 30,
-                "cat": "Закуска",
-                "time": "10 мин",
-                "tag": "бърза",
-                "name": "Тост от сладък картоф с авокадо",
-                "img": "https://drive.google.com/file/d/10grofasZtJd-wS9hdndbWsp7-g3Pic2E/view?usp=drivesdk",
-                "ingredients": [
-                      "сладък картоф",
-                      "авокадо",
-                      "лайм",
-                      "чили",
-                      "сусам",
-                      "сол"
-                ],
-                "steps": [
-                      "Нарежи сладкия картоф на тънки филии и го запечи.",
-                      "Намачкай авокадото с лайм и сол.",
-                      "Намажи върху картофа и поръси с чили и сусам."
-                ]
-          },
-          {
-                "id": 31,
-                "cat": "Обяд",
-                "time": "27 мин",
-                "tag": "ситна супа",
-                "name": "Крем супа от морков и джинджифил",
-                "img": "https://drive.google.com/file/d/1P7RMQfkyDIvHZEWox4I81J-aAjnwMoUA/view?usp=drivesdk",
-                "ingredients": [
-                      "моркови",
-                      "джинджифил",
-                      "кокосово мляко",
-                      "лук",
-                      "зеленчуков бульон без глутен",
-                      "тиквени семки"
-                ],
-                "steps": [
-                      "Задуши лука, морковите и джинджифила.",
-                      "Добави бульона и готви до омекване.",
-                      "Пасирай с кокосово мляко и поднеси със семки."
-                ]
-          },
-          {
-                "id": 32,
-                "cat": "Вечеря",
-                "time": "29 мин",
-                "tag": "морска",
-                "name": "Бяла риба с домати и каперси",
-                "img": "https://drive.google.com/file/d/1Ul7LBm88liEuzRIA8QaJV-xijww9Fa5v/view?usp=drivesdk",
-                "ingredients": [
-                      "филе бяла риба",
-                      "чери домати",
-                      "каперси",
-                      "лимон",
-                      "зехтин",
-                      "босилек",
-                      "ориз"
-                ],
-                "steps": [
-                      "Сложи рибата в тава с домати, каперси и зехтин.",
-                      "Печи кратко, докато рибата стане крехка.",
-                      "Поднеси с ориз, лимон и босилек."
-                ]
-          },
-          {
-                "id": 33,
-                "cat": "Снак",
-                "time": "14 мин",
-                "tag": "за път",
-                "name": "Енергийни топчета с какао и сусам",
-                "img": "https://drive.google.com/file/d/10Zg5NBVacGasZMVD88ZCVor7iGiHjXdw/view?usp=drivesdk",
-                "ingredients": [
-                      "фурми",
-                      "сусамов тахан",
-                      "какао",
-                      "кокосови стърготини",
-                      "ленено семе",
-                      "щипка сол"
-                ],
-                "steps": [
-                      "Пасирай фурмите с тахан и какао.",
-                      "Добави ленено семе и щипка сол.",
-                      "Оформи топчета и оваляй в кокос."
-                ]
-          },
-          {
-                "id": 34,
-                "cat": "Десерт",
-                "time": "12 мин",
-                "tag": "леден",
-                "name": "Бананов сладолед с фъстъчен тахан",
-                "img": "https://drive.google.com/file/d/1u26o6wqYalo6ZLDPBI7igWQwbG2NQeVy/view?usp=drivesdk",
-                "ingredients": [
-                      "замразени банани",
-                      "фъстъчен тахан",
-                      "какао",
-                      "ванилия",
-                      "печени фъстъци"
-                ],
-                "steps": [
-                      "Блендирай замразените банани с тахан и ванилия.",
-                      "Добави какао за шоколадов вариант.",
-                      "Поднеси веднага с печени фъстъци."
-                ]
-          },
-          {
-                "id": 35,
-                "cat": "Закуска",
-                "time": "17 мин",
-                "tag": "пухкава",
-                "name": "Палачинки от банан и елда",
-                "img": "https://drive.google.com/file/d/1AEoeb8-haapLYAiiX2V2f1PtDsSAGxd-/view?usp=drivesdk",
-                "ingredients": [
-                      "банан",
-                      "яйца",
-                      "елдено брашно",
-                      "бакпулвер без глутен",
-                      "канела",
-                      "кокосово масло"
-                ],
-                "steps": [
-                      "Намачкай банана и разбий с яйцата.",
-                      "Добави елдено брашно, канела и бакпулвер.",
-                      "Изпечи малки палачинки в тиган с кокосово масло."
-                ]
-          },
-          {
-                "id": 36,
-                "cat": "Вечеря",
-                "time": "36 мин",
-                "tag": "растителна",
-                "name": "Гъбено ризото с карфиолен крем",
-                "img": "https://drive.google.com/file/d/1Rm_uxjhARmF8tVetJRH52F7MY54fQ1RZ/view?usp=drivesdk",
-                "ingredients": [
-                      "ориз арборио",
-                      "гъби",
-                      "карфиол",
-                      "чесън",
-                      "зеленчуков бульон без глутен",
-                      "зехтин",
-                      "мащерка"
-                ],
-                "steps": [
-                      "Свари карфиола и го пасирай на крем със зехтин.",
-                      "Готви ориза с бульон и гъби до кремообразност.",
-                      "Разбъркай с карфиоления крем и мащерка."
-                ]
-          }
-    ];
-
-    const categories = ["Всички", "Закуска", "Обяд", "Вечеря", "Снак", "Десерт"];
-    let currentCat = "Всички";
-    let showFavs = false;
-    let orderSeed = 1;
-    const PAGE_SIZE = 20;
-    let currentPage = 1;
-    let favorites = [];
-    try { favorites = JSON.parse(localStorage.getItem("glutenfree-favorites") || "[]"); } catch(e) {}
-
-    const $ = (id) => document.getElementById(id);
-    const escapeHtml = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-    const imageSrc = (src) => {
-      const match = String(src || "").match(/drive\.google\.com\/file\/d\/([^/]+)/);
-      return match ? `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1200` : src;
-    };
-    const imgFallback = (img) => {
-      img.onerror = null;
-      img.src = "logo-source.png";
-      img.classList.add("img-fallback");
-    };
-    const isFav = (id) => favorites.includes(id);
-    function toRoman(num) {
-      return Number.isFinite(Number(num)) ? String(Number(num)) : "";
-    }
-
-    function saveFavs() { try { localStorage.setItem("glutenfree-favorites", JSON.stringify(favorites)); } catch(e) {} }
-    function toggleFav(id) {
-      favorites = isFav(id) ? favorites.filter(x => x !== id) : favorites.concat(id);
-      saveFavs();
-      render(false);
-      const btn = document.querySelector(`[data-fav-id="${id}"]`);
-      if (btn && isFav(id)) {
-        btn.classList.add("star-pop");
-        setTimeout(() => btn.classList.remove("star-pop"), 450);
-      }
-    }
-    function shuffled(list) {
-      return list.slice().sort((a,b) => ((a.id * 9301 + orderSeed * 49297) % 233280) - ((b.id * 9301 + orderSeed * 49297) % 233280));
-    }
-    function filtered() {
-      const q = $("search").value.trim().toLowerCase();
-      let data = recipes.filter(r => currentCat === "Всички" || r.cat === currentCat);
-      if (showFavs) data = data.filter(r => isFav(r.id));
-      if (q) data = data.filter(r => [r.name, r.cat, r.tag, r.ingredients.join(" ")].join(" ").toLowerCase().includes(q));
-      return shuffled(data);
-    }
-    function renderFilters() {
-      $("filters").innerHTML = categories.map(cat => `
-        <button class="${cat === currentCat ? "chip-active" : ""} shrink-0 border border-[var(--line)] px-4 py-2 font-[Forum] text-xs tracking-[.22em] uppercase text-[var(--muted)]"
-          onclick="currentCat='${cat}'; currentPage=1; renderFilters(); render();">${cat}</button>
-      `).join("");
-    }
-    function render(resetPage = false) {
-      if (resetPage) currentPage = 1;
-      const data = filtered();
-      $("count").textContent = `${toRoman(data.length) || "–"} · рецепти`;
-      $("favoritesToggle").textContent = showFavs ? `◆ Всички · ${toRoman(favorites.length) || "–"}` : `◇ Любими · ${toRoman(favorites.length) || "–"}`;
-      const page = data.slice(0, currentPage * PAGE_SIZE);
-      const hasMore = data.length > page.length;
-      $("list").innerHTML = page.map((r, i) => `
-        <article class="recipe-card deco-card overflow-hidden" style="animation-delay:${Math.min(i * .04, .28)}s">
-          <div>
-            <div class="relative">
-            <img class="w-full h-48 object-cover" src="${imageSrc(r.img)}" alt="${escapeHtml(r.name)}" loading="lazy" onerror="imgFallback(this)">
-              <button data-fav-id="${r.id}" onclick="event.stopPropagation(); toggleFav(${r.id})" aria-label="Любима рецепта" class="absolute top-3 right-3 w-10 h-10 bg-[var(--paper)]/80 backdrop-blur border border-[var(--line)] text-[var(--berry)] grid place-items-center text-xl active:scale-90">${isFav(r.id) ? "◆" : "◇"}</button>
+        <!-- BREAKFAST OF THE DAY -->
+        <section id="cotd-section" class="hidden mb-10">
+            <div class="deco-divider mb-5">
+                <span class="font-roman text-gold text-[0.6rem] tracking-[0.45em] uppercase whitespace-nowrap">✦ <span data-i18n="cotd_title">Рецепта на деня</span> ✦</span>
             </div>
-            <div class="p-5">
-              <div class="flex items-center justify-between gap-3 mb-2">
-                <span class="font-[Forum] text-xs tracking-[.26em] uppercase text-[var(--sage)]">${escapeHtml(r.cat)} · ${escapeHtml(r.time)}</span>
-                <span class="text-xl text-[var(--line)]" aria-hidden="true">◇</span>
-              </div>
-              <h2 class="text-3xl leading-tight font-semibold">${escapeHtml(r.name)}</h2>
-              <p class="mt-2 text-[var(--muted)] italic">${escapeHtml(r.tag)} · без глутен</p>
+            <div id="cotd-card" class="deco-card overflow-hidden cursor-pointer active:scale-[0.99] transition-transform" onclick="goToCOTD()">
+                <div class="relative">
+                    <img id="cotd-img" src="" alt="" class="w-full h-56 object-cover">
+                    <div class="absolute top-4 left-4 border border-gold-dim bg-ink/80 backdrop-blur-sm px-3 py-2 text-center min-w-[44px]">
+                        <div id="cotd-day" class="font-body text-2xl text-gold-bright leading-none"></div>
+                        <div id="cotd-month" class="font-roman text-gold-dim text-[0.55rem] tracking-[0.25em] uppercase mt-0.5"></div>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center justify-between gap-3 mb-2">
+                        <div id="cotd-base" class="font-roman text-gold-dim text-xs tracking-[0.26em] uppercase"></div>
+                        <span id="cotd-icon" class="text-xl">◇</span>
+                    </div>
+                    <h2 id="cotd-name" class="font-body text-3xl leading-tight text-cream font-semibold mb-3"></h2>
+                    <div class="flex items-center gap-2 text-gold font-roman text-xs tracking-[0.22em] uppercase">
+                        <span data-i18n="cotd_see">Виж рецептата</span>
+                        <span>›</span>
+                    </div>
+                </div>
             </div>
-            <div class="px-5 pb-5">
-              <div class="deco-divider mb-4"><span class="font-[Forum] text-xs tracking-[.28em] uppercase text-[var(--honey)]">съставки</span></div>
-              <ul class="space-y-1.5">
-                ${r.ingredients.map(x => `<li class="flex items-baseline gap-3"><span class="text-[var(--honey)] text-[.5rem] shrink-0 mt-1">◆</span><span class="font-[Forum] text-sm text-[var(--muted)]">${escapeHtml(x)}</span></li>`).join("")}
-              </ul>
+        </section>
+
+        <!-- SEARCH -->
+        <div class="mb-5 relative">
+            <div class="border border-gold-dim relative">
+                <input
+                    type="text"
+                    id="search-input"
+                    oninput="onSearch(this.value)"
+                    placeholder="Търсене по име или съставка"
+                    data-i18n-ph="search_ph"
+                    class="w-full bg-transparent text-cream pl-12 pr-12 py-3.5 outline-none focus:bg-ink-soft transition"
+                />
+                <span id="search-icon" class="absolute left-4 top-1/2 -translate-y-1/2 text-gold pointer-events-none">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-4.3-4.3"/></svg>
+                </span>
+                <button id="search-clear" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-7 h-7 border border-gold-dim text-gold-dim hover:text-gold hover:border-gold flex items-center justify-center text-xs transition">✕</button>
             </div>
-            <div class="px-5 pb-6 pt-2 border-t border-[var(--line)]/70">
-              <div class="deco-divider mb-4"><span class="font-[Forum] text-xs tracking-[.28em] uppercase text-[var(--honey)]">стъпки</span></div>
-              <ol class="recipe-content space-y-3 text-[var(--ink)]/82">
-                ${r.steps.map((x, idx) => `<li class="flex gap-3"><span class="w-7 h-7 border border-[var(--line)] grid place-items-center shrink-0 font-[Forum] not-italic text-[var(--sage)]">${idx + 1}</span><span>${escapeHtml(x)}</span></li>`).join("")}
-              </ol>
-            </div>
-          </div>
-        </article>
-      `).join("") + (hasMore ? `
-        <div class="text-center py-5">
-          <button onclick="loadMore()" class="border border-[var(--line)] text-[var(--muted)] hover:text-[var(--sage)] hover:border-[var(--sage)] font-[Forum] text-xs tracking-[.28em] uppercase py-3 px-7 active:scale-95 transition">
-            Покажи още · ${toRoman(data.length - page.length)}
-          </button>
         </div>
-      ` : "") || `<div class="text-center py-16 text-[var(--muted)] italic">Няма рецепти в тази селекция.</div>`;
-    }
-    function loadMore() {
-      currentPage++;
-      render(false);
-    }
-    function fillModal(r) {
-      $("modalImg").classList.remove("img-fallback");
-      $("modalImg").onerror = function() { imgFallback(this); };
-      $("modalImg").src = imageSrc(r.img);
-      $("modalTitle").textContent = r.name;
-      $("modalTag").textContent = `${r.cat} · ${r.time}`;
-      $("modalMeta").textContent = `${r.tag} · без глутен`;
-      $("modalFav").textContent = isFav(r.id) ? "◆" : "◇";
-      $("modalFav").onclick = () => toggleFav(r.id);
-      $("modalIngredients").innerHTML = r.ingredients.map(x => `<li class="flex gap-3"><span class="text-[var(--sage)]">◆</span><span>${escapeHtml(x)}</span></li>`).join("");
-      $("modalSteps").innerHTML = r.steps.map((x, i) => `<li class="flex gap-3"><span class="w-7 h-7 border border-[var(--line)] grid place-items-center shrink-0 font-[Forum] text-[var(--sage)]">${i+1}</span><span>${escapeHtml(x)}</span></li>`).join("");
-    }
-    function openRecipe(id) {
-      const r = recipes.find(x => x.id === id);
-      if (!r) return;
-      fillModal(r);
-      $("modal").classList.remove("hidden");
-    }
-    function closeModal() { $("modal").classList.add("hidden"); }
 
-    $("search").addEventListener("input", () => {
-      $("searchClear").classList.toggle("hidden", !$("search").value);
-      render(true);
-    });
-    $("searchClear").addEventListener("click", () => {
-      $("search").value = "";
-      $("searchClear").classList.add("hidden");
-      render(true);
-      $("search").focus();
-    });
-    $("favoritesToggle").addEventListener("click", () => { showFavs = !showFavs; render(true); window.scrollTo({top:0, behavior:"smooth"}); });
-    $("shuffleBtn").addEventListener("click", () => { orderSeed++; render(true); window.scrollTo({top:0, behavior:"smooth"}); });
-    $("closeLayer").addEventListener("click", closeModal);
-    document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
-    $("backToTop").addEventListener("click", () => window.scrollTo({top:0, behavior:"smooth"}));
-    window.addEventListener("scroll", () => $("backToTop").classList.toggle("hidden", window.scrollY < 520), { passive: true });
-    renderFilters();
-    render();
-    if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
-  </script>
+        <!-- FILTERS (menu sections) -->
+        <nav class="mb-4 overflow-x-auto no-scrollbar">
+            <div class="flex gap-3 px-1 pb-1 min-w-min" id="filters-container"></div>
+        </nav>
+
+        <!-- META BAR: count + favorites toggle -->
+        <div class="mb-6 flex justify-between items-center pt-2 border-t border-gold-dim/50">
+            <span id="result-count" class="font-roman text-cream-dim text-xs tracking-[0.3em] uppercase"></span>
+            <button id="fav-toggle" onclick="toggleFavoritesView()" class="flex items-center gap-2 font-roman text-xs tracking-[0.25em] uppercase text-cream-dim hover:text-gold transition active:scale-95">
+                <span id="fav-icon" class="text-base leading-none">◇</span>
+                <span id="fav-label">Избрани</span>
+                <span id="fav-count" class="opacity-70">·  0</span>
+            </button>
+        </div>
+
+        <!-- LOADER -->
+        <div id="loader" class="fixed inset-0 z-50 bg-[#fffaf0] flex flex-col items-center justify-center p-8 hidden">
+            <div class="flex items-center gap-4 mb-6">
+                <span class="text-gold text-3xl">◆</span>
+                <h2 class="font-display text-3xl text-gold tracking-[0.18em]">GLUTEN FREE</h2>
+                <span class="text-gold text-3xl">◆</span>
+            </div>
+            <div class="relative w-12 h-12 mb-4">
+                <div class="absolute inset-0 border border-gold-dim deco-spin" style="clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);"></div>
+                <div class="absolute inset-2 border border-gold deco-spin" style="animation-direction: reverse; animation-duration: 3s;"></div>
+            </div>
+            <p id="loader-text" data-i18n="loader_text" class="font-roman text-xs tracking-[0.4em] uppercase text-[#7d6b58]">Подготвяне на рецептите</p>
+        </div>
+
+        <!-- COCKTAIL LIST -->
+        <div id="cocktail-list" class="space-y-8 min-h-[40vh]"></div>
+
+        <!-- FOOTER -->
+        <footer class="mt-14 text-center">
+            <div class="deco-divider mb-5 max-w-[200px] mx-auto">
+                <span class="text-gold text-xs">❦</span>
+            </div>
+            <p class="font-roman text-gold text-[0.65rem] tracking-[0.35em] uppercase mb-2" data-i18n="footer_contact">Контакт</p>
+            <a href="mailto:office@newage-studio.com" class="font-body italic text-cream text-lg hover:text-gold transition">
+                office@newage-studio.com
+            </a>
+            <p class="mt-5 font-roman text-cream-dim text-[0.58rem] tracking-[0.22em] uppercase" data-i18n="footer_rights">© 2026 New Age Studio. Всички права запазени.</p>
+            <p class="mt-3 mx-auto max-w-sm font-body italic text-cream-dim text-sm leading-relaxed" data-i18n="footer_note">Рецепти за вдъхновение. Съобразявайте съставките с личните си нужди и алергии.</p>
+        </footer>
+
+        <!-- FOOTER ORNAMENT -->
+        <div class="deco-divider mt-10 mb-2 max-w-[200px] mx-auto">
+            <span class="text-gold text-xs">❦</span>
+        </div>
+    </div>
+
+    <!-- BACK TO TOP -->
+    <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" data-i18n-aria="aria_top" aria-label="Нагоре"
+        class="hidden fixed bottom-24 right-4 z-40 w-10 h-10 border border-gold text-gold bg-ink hover:bg-ink-soft active:scale-90 flex items-center justify-center transition">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <polyline points="18 15 12 9 6 15"/>
+        </svg>
+    </button>
+
+    <!-- TOAST -->
+    <div id="toast" class="hidden fixed top-6 left-1/2 -translate-x-1/2 z-[70] bg-ink border border-gold px-5 py-3 font-roman text-xs tracking-[0.3em] uppercase text-gold whitespace-nowrap">
+        Копирано ✓
+    </div>
+
+    <!-- BOTTOM AI BUTTON -->
+    <div class="hidden fixed bottom-0 left-0 right-0 px-5 pt-5 bg-gradient-to-t from-ink via-ink to-ink/0 z-40 safe-bottom">
+        <div class="max-w-md mx-auto">
+            <button onclick="openAISheet()" class="btn-gold w-full py-4 px-6 flex items-center justify-center gap-3 text-sm uppercase active:scale-[0.98] transition relative">
+                <span>✦</span>
+                <span data-i18n="ai_button">Препоръка</span>
+                <span>✦</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- AI ACTION SHEET -->
+    <div id="ai-sheet" class="fixed inset-0 z-50 hidden">
+        <div onclick="closeAISheet()" class="sheet-overlay absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        <div class="sheet-panel absolute bottom-0 left-0 right-0 max-w-md mx-auto">
+            <div class="bg-ink border-t border-gold p-6 pb-10 safe-bottom">
+                <div class="deco-divider mx-auto max-w-[100px] mb-5">
+                    <span class="text-gold text-sm">◆</span>
+                </div>
+                <h2 data-i18n="ai_title" class="font-display text-3xl text-gold tracking-[0.15em] text-center mb-1">ПРЕПОРЪКА</h2>
+                <p class="font-body italic text-cream-dim text-sm text-center mb-7">— <span data-i18n="ai_subtitle">Какво да приготвим?</span> —</p>
+                <div class="space-y-3" id="ai-actions"></div>
+                <button onclick="closeAISheet()" data-i18n="close" class="w-full mt-5 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
+                    Затвори
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- STATS MODAL -->
+    <div id="stats-modal" class="fixed inset-0 z-50 hidden">
+        <div onclick="closeStats()" class="sheet-overlay absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        <div class="sheet-panel absolute bottom-0 left-0 right-0 max-w-md mx-auto max-h-[88vh] overflow-y-auto no-scrollbar">
+            <div class="bg-ink border-t border-gold p-6 pb-10 safe-bottom">
+                <div class="deco-divider mx-auto max-w-[100px] mb-5">
+                    <span class="text-gold text-sm">◆</span>
+                </div>
+                <h2 data-i18n="stats_title" class="font-display text-3xl text-gold tracking-[0.15em] text-center mb-1">АТЕЛИЕ</h2>
+                <p class="font-body italic text-cream-dim text-sm text-center mb-7">— <span data-i18n="stats_subtitle">Анализ на колекцията</span> —</p>
+                <div id="stats-content" class="space-y-5"></div>
+                <button onclick="closeStats()" data-i18n="close" class="w-full mt-6 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
+                    Затвори
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SETTINGS MODAL (language + units) -->
+    <div id="settings-modal" class="fixed inset-0 z-50 hidden">
+        <div onclick="closeSettings()" class="sheet-overlay absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        <div class="sheet-panel absolute bottom-0 left-0 right-0 max-w-md mx-auto max-h-[88vh] overflow-y-auto no-scrollbar">
+            <div class="bg-ink border-t border-gold p-6 pb-10 safe-bottom">
+                <div class="deco-divider mx-auto max-w-[100px] mb-5">
+                    <span class="text-gold text-sm">◆</span>
+                </div>
+                <h2 data-i18n="settings_title" class="font-display text-3xl text-gold tracking-[0.15em] text-center mb-1">ЕЗИК</h2>
+                <p class="font-body italic text-cream-dim text-sm text-center mb-7">— <span data-i18n="settings_subtitle">Език и мерни единици</span> —</p>
+                <div id="settings-content" class="space-y-2"></div>
+                <button onclick="closeSettings()" data-i18n="close" class="w-full mt-6 border border-gold-dim text-cream-dim hover:text-gold hover:border-gold py-3 font-roman text-xs tracking-[0.3em] uppercase transition">
+                    Затвори
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // === LEGACY STARTUP ===
+        let underAge = false;
+
+        function ageVerify() {
+            underAge = false;
+            init();
+        }
+
+        // Start the gluten-free collection directly.
+        (function() {
+            try {
+                document.getElementById('loader').classList.remove('hidden');
+            } catch(e) {}
+        })();
+
+        const dataBase       = "https://script.google.com/macros/s/AKfycbwtMLRmJa3Lccsz4YLh0UwCFG7O_BZv-H-U08lcZgmX4JkCXmco0PmhoKB6Oc3PdEUYtQ/exec";
+        const FREEFROM_SHEET_ID = "1GRd1I9nZ8N1vSSngaTIM1PzP7NmXhrAWHhKmzi1XE1g";
+        const FREEFROM_GID      = "83321663";
+        const apiUrl             = dataBase + `?ssid=${FREEFROM_SHEET_ID}&gid=${FREEFROM_GID}`;
+        const mocktailsUrl       = apiUrl;
+
+        // === STATE ===
+        let allCocktails  = [];
+        let allMocktails  = [];
+        let cotdCocktail  = null;
+        let currentMode   = 'mocktails'; // 'cocktails' | 'mocktails'
+        const PAGE_SIZE   = 20;
+        let currentPage   = 1;
+
+        const MOCKTAIL_FILTERS = [
+            { key: 'filter_all',       match: null },
+            { key: 'filter_breakfast', match: ['закуска'] },
+            { key: 'filter_lunch',     match: ['обяд'] },
+            { key: 'filter_dinner',    match: ['вечеря'] },
+            { key: 'filter_salad',     match: ['салата'] },
+            { key: 'filter_snack',     match: ['снак'] },
+            { key: 'filter_dessert',   match: ['десерт'] },
+            { key: 'filter_easy',     test: c => c.difficulty === 'Лесно' },
+            { key: 'filter_under20',  test: c => Number(c.time || 0) > 0 && Number(c.time || 0) <= 20 },
+            { key: 'filter_under30',  test: c => Number(c.time || 0) > 0 && Number(c.time || 0) <= 30 },
+        ];
+        let currentFilter = 'filter_all';
+        let searchQuery = '';
+        let showFavoritesOnly = false;
+        let favorites = [];
+        try { favorites = JSON.parse(localStorage.getItem('gluten-free-365-favorites') || '[]'); } catch (e) { favorites = []; }
+
+        const FILTERS = [
+            { key: 'filter_all',     match: null },
+            { key: 'filter_vodka',   match: ['водка', 'vodka'] },
+            { key: 'filter_gin',     match: ['джин', 'gin'] },
+            { key: 'filter_rum',     match: ['ром', 'rum'] },
+            { key: 'filter_tequila', match: ['текила', 'tequila'] },
+            { key: 'filter_whisky',  match: ['уиски', 'whisky', 'whiskey', 'bourbon'] },
+        ];
+
+        // === HELPERS ===
+        const LOCAL_BREAKFAST_IMAGES = {};
+
+        function getDriveImg(link) {
+            if (!link || !link.includes("drive.google.com")) return link || 'logo-source.png';
+            try {
+                const id = link.match(/\/d\/(.+?)\//)[1];
+                return `https://drive.google.com/thumbnail?id=${id}&sz=w1200`;
+            } catch (e) { return link; }
+        }
+
+        function getRecipeImg(item) {
+            const local = item && LOCAL_BREAKFAST_IMAGES[String(item.id)];
+            return getDriveImg((item && item.image) || local);
+        }
+
+        function getRecipeFallbackImg(item) {
+            return (item && LOCAL_BREAKFAST_IMAGES[String(item.id)]) || 'logo-source.png';
+        }
+
+        function hasRecipeImage(item) {
+            return !!(item && String(item.image || '').trim());
+        }
+
+        function hashString(value) {
+            let h = 2166136261;
+            const str = String(value || '');
+            for (let i = 0; i < str.length; i++) {
+                h ^= str.charCodeAt(i);
+                h = Math.imul(h, 16777619);
+            }
+            return h >>> 0;
+        }
+
+        function mixBreakfastOrder(items) {
+            const groups = new Map();
+            items.filter(c => c && c.name).forEach(item => {
+                const key = String(item.base || 'други').trim().toLowerCase() || 'други';
+                if (!groups.has(key)) groups.set(key, []);
+                groups.get(key).push(item);
+            });
+            const buckets = Array.from(groups.values())
+                .map(group => group.slice().sort((a, b) => hashString(a.name) - hashString(b.name)))
+                .sort((a, b) => b.length - a.length);
+            const mixed = [];
+            let added = true;
+            while (added) {
+                added = false;
+                buckets.forEach(group => {
+                    if (group.length) {
+                        mixed.push(group.shift());
+                        added = true;
+                    }
+                });
+            }
+            const invalid = items.filter(c => !c || !c.name);
+            return mixed.concat(invalid);
+        }
+
+        function escapeHtml(s) {
+            return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        }
+
+        function toRoman(num) {
+            return Number.isFinite(Number(num)) ? String(Number(num)) : '';
+        }
+
+        function activeList()    { return currentMode === 'mocktails' ? allMocktails : allCocktails; }
+        function activeFilters() { return currentMode === 'mocktails' ? MOCKTAIL_FILTERS : FILTERS; }
+
+        // Localized field accessor — falls back to original Bulgarian
+        function loc(item, field) {
+            if (!item) return '';
+            if (LANG !== 'bg') {
+                const v = item[field + '_' + LANG];
+                if (v != null && String(v).trim()) return v;
+            }
+            return item[field] != null ? item[field] : '';
+        }
+
+        function matchesBase(cocktail, filter) {
+            if (!filter) return true;
+            if (typeof filter.test === 'function') return filter.test(cocktail);
+            if (!filter.match) return true;
+            const haystack = [
+                cocktail.base,
+                cocktail.difficulty,
+                cocktail.country,
+                cocktail.tag,
+                loc(cocktail, 'base'),
+                loc(cocktail, 'difficulty'),
+                loc(cocktail, 'country'),
+                loc(cocktail, 'tag')
+            ].join(' ').toLowerCase();
+            return filter.match.some(m => haystack.includes(String(m).toLowerCase()));
+        }
+
+        function getFiltered() {
+            let result = activeList().filter(c => c && c.name && hasRecipeImage(c));
+
+            if (showFavoritesOnly) {
+                result = result.filter(c => favorites.includes(c.name));
+            }
+
+            const filterObj = activeFilters().find(f => f.key === currentFilter);
+            if (filterObj && filterObj.match) {
+                result = result.filter(c => matchesBase(c, filterObj));
+            }
+
+            if (searchQuery) {
+                const q = searchQuery.toLowerCase().trim();
+                result = result.filter(c =>
+                    (c.name || '').toLowerCase().includes(q) ||
+                    (c.recipe || '').toLowerCase().includes(q) ||
+                    (c.base || '').toLowerCase().includes(q) ||
+                    (c.country || '').toLowerCase().includes(q) ||
+                    (c.difficulty || '').toLowerCase().includes(q) ||
+                    (c.tag || '').toLowerCase().includes(q) ||
+                    String(loc(c,'name')).toLowerCase().includes(q) ||
+                    String(loc(c,'ingredients')).toLowerCase().includes(q) ||
+                    String(loc(c,'base')).toLowerCase().includes(q) ||
+                    String(loc(c,'country')).toLowerCase().includes(q) ||
+                    String(loc(c,'difficulty')).toLowerCase().includes(q) ||
+                    String(loc(c,'tag')).toLowerCase().includes(q)
+                );
+            }
+            return result;
+        }
+
+        // === MODE SWITCH ===
+        function setMode(mode) {
+            currentMode = mode;
+            currentFilter = 'filter_all';
+            searchQuery = '';
+            showFavoritesOnly = false;
+            document.getElementById('search-input').value = '';
+            document.getElementById('search-clear').classList.add('hidden');
+            document.getElementById('search-icon').classList.remove('hidden');
+
+            // Tab styling via inline style (reliable across Tailwind CDN)
+            const tabC = document.getElementById('tab-cocktails');
+            const tabM = document.getElementById('tab-mocktails');
+            if (mode === 'cocktails') {
+                tabC.style.background = 'var(--gold)'; tabC.style.color = 'var(--ink)';
+                tabM.style.background = 'transparent'; tabM.style.color = 'var(--cream-dim)';
+            } else {
+                tabM.style.background = 'var(--gold)'; tabM.style.color = 'var(--ink)';
+                tabC.style.background = 'transparent'; tabC.style.color = 'var(--cream-dim)';
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            renderFilters();
+            render();
+            renderCOTD();
+        }
+
+        // === COCKTAIL OF THE DAY ===
+        function renderCOTD() {
+            const pool = activeList().filter(c => c && c.name && hasRecipeImage(c));
+            if (!pool.length) return;
+
+            const today = new Date();
+            const seed  = today.getFullYear() * 1000 + today.getMonth() * 50 + today.getDate();
+            cotdCocktail = pool[seed % pool.length];
+
+            const months = I18N[LANG].months;
+
+            const cotdImg = document.getElementById('cotd-img');
+            cotdImg.onerror = () => { cotdImg.onerror = null; cotdImg.src = getRecipeFallbackImg(cotdCocktail); };
+            cotdImg.src = getRecipeImg(cotdCocktail);
+            document.getElementById('cotd-name').textContent  = loc(cotdCocktail,'name');
+            document.getElementById('cotd-base').textContent  = cotdCocktail.base ? '— ' + loc(cotdCocktail,'base') + ' —' : '';
+            document.getElementById('cotd-icon').textContent  = '◇';
+            document.getElementById('cotd-day').textContent   = today.getDate();
+            document.getElementById('cotd-month').textContent = months[today.getMonth()];
+
+            document.getElementById('cotd-section').classList.remove('hidden');
+        }
+
+        function goToCOTD() {
+            if (!cotdCocktail) return;
+            currentFilter  = 'filter_all';
+            searchQuery    = '';
+            showFavoritesOnly = false;
+            document.getElementById('search-input').value = '';
+            document.getElementById('search-clear').classList.add('hidden');
+            document.getElementById('search-icon').classList.remove('hidden');
+            renderFilters();
+
+            // Render enough pages so the COTD card is visible
+            const data = getFiltered();
+            const idx  = data.findIndex(d => d._idx === cotdCocktail._idx);
+            currentPage = Math.max(1, Math.ceil((idx + 1) / PAGE_SIZE));
+            render(false);
+
+            setTimeout(() => highlightCocktail(cotdCocktail), 150);
+        }
+
+        // === INIT ===
+        function hydrateBreakfastData(data) {
+            allMocktails = mixBreakfastOrder(Array.isArray(data) ? data.filter(hasRecipeImage) : []);
+            allMocktails.forEach((c, i) => { if (c) c._idx = i; });
+            renderFilters();
+            render();
+            renderCOTD();
+            document.getElementById('loader').classList.add('hidden');
+        }
+
+        async function fetchWithTimeout(url, timeoutMs = 12000) {
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), timeoutMs);
+            try {
+                const res = await fetch(url, { signal: controller.signal, cache: 'no-store' });
+                if (!res.ok) throw new Error('Bad response');
+                return await res.json();
+            } finally {
+                clearTimeout(timer);
+            }
+        }
+
+        async function init() {
+            const localData = Array.isArray(window.BREAKFAST_DATA) ? window.BREAKFAST_DATA : [];
+            if (localData.length) {
+                hydrateBreakfastData(localData);
+                return;
+            }
+
+            try {
+                const data = await fetchWithTimeout(mocktailsUrl);
+                if (Array.isArray(data) && data.length) hydrateBreakfastData(data);
+            } catch (e) {
+                if (!localData.length) {
+                    document.getElementById('loader-text').innerHTML = `<span class='text-red-400'>${t('error_connection')}</span>`;
+                }
+            }
+        }
+
+        // === RENDER ===
+        function renderFilters() {
+            const container = document.getElementById('filters-container');
+            const list = activeList();
+            container.innerHTML = activeFilters().map(f => {
+                const count = f.match
+                    ? list.filter(c => c && c.name && hasRecipeImage(c) && matchesBase(c, f)).length
+                    : list.filter(c => c && c.name && hasRecipeImage(c)).length;
+                if (count === 0 && f.match) return '';
+                const isActive = currentFilter === f.key;
+                return `<button onclick="filterBy('${f.key}')" class="${isActive ? 'filter-active' : ''} shrink-0 border border-gold-dim px-4 py-2 font-roman text-xs tracking-[0.22em] uppercase text-cream-dim hover:border-gold hover:text-gold transition whitespace-nowrap">
+                    ${escapeHtml(t(f.key))} · ${count}
+                </button>`;
+            }).join('');
+        }
+
+        function updateFavBar() {
+            document.getElementById('fav-count').textContent = `· ${toRoman(favorites.length) || '–'}`;
+            const btn = document.getElementById('fav-toggle');
+            const icon = document.getElementById('fav-icon');
+            const label = document.getElementById('fav-label');
+            if (showFavoritesOnly) {
+                btn.classList.add('!text-gold-bright');
+                icon.textContent = '◆';
+                label.textContent = t('fav_all');
+            } else {
+                btn.classList.remove('!text-gold-bright');
+                icon.textContent = '◇';
+                label.textContent = t('fav_selected');
+            }
+        }
+
+        function recipeMeta(d) {
+            const parts = [];
+            if (d.time) parts.push(escapeHtml(d.time) + ' ' + t('meta_min'));
+            if (d.difficulty) parts.push(escapeHtml(loc(d, 'difficulty') || d.difficulty));
+            if (d.country) parts.push(escapeHtml(loc(d, 'country') || d.country));
+            if (d.ingredients) parts.push(String(loc(d,'ingredients')).split(',').filter(Boolean).length + ' съставки');
+            parts.push(escapeHtml(document.title || 'Recipe 365'));
+            return parts.join(' · ');
+        }
+
+        function renderCard(d, i) {
+            const isFav = favorites.includes(d.name);
+            const cardId = `card-${d._idx}`;
+            const delay = Math.min(i * 0.06, 0.4);
+
+            return `
+                    <article class="cocktail-card deco-card overflow-hidden" id="${cardId}" style="animation-delay: ${delay}s">
+                        <div class="relative">
+                            <img src="${getRecipeImg(d)}" class="w-full h-48 object-cover" loading="lazy" onerror="this.onerror=null;this.src='${getRecipeFallbackImg(d)}'">
+                            <button data-cocktail="${escapeHtml(d.name)}" onclick="toggleFavorite(this, event)"
+                                    aria-label="Toggle favorite"
+                                    class="fav-btn absolute top-3 right-3 w-10 h-10 bg-ink/80 backdrop-blur-sm border ${isFav ? 'border-gold-bright text-gold-bright' : 'border-gold-dim text-cream-dim'} flex items-center justify-center text-base active:scale-90 transition">
+                                ${isFav ? '◆' : '◇'}
+                            </button>
+                        </div>
+
+                        <div class="p-5">
+                            <div class="flex items-center justify-between gap-3 mb-2">
+                                <span class="font-roman text-xs tracking-[0.26em] uppercase text-gold-dim">${escapeHtml(loc(d,'base') || 'Закуска')}</span>
+                                <span class="text-xl" aria-hidden="true">◇</span>
+                            </div>
+                            <h2 class="font-body text-3xl leading-tight text-cream font-semibold">${escapeHtml(loc(d,'name'))}</h2>
+                            <p class="mt-2 text-cream-dim italic">${recipeMeta(d)}</p>
+                        </div>
+
+                        <!-- Ingredients -->
+                        ${d.ingredients ? `
+                        <div class="px-5 pb-5">
+                            <div class="deco-divider mb-4"><span class="font-roman text-xs tracking-[0.28em] uppercase text-gold">съставки</span></div>
+                            <ul class="space-y-1.5">
+                                ${String(loc(d,'ingredients')).split(',').map(ing => ing.trim()).filter(Boolean).map(ing => `
+                                <li class="flex items-baseline gap-3">
+                                    <span class="text-gold text-[0.5rem] shrink-0 mt-1">◆</span>
+                                    <span class="font-roman text-cream-dim text-sm">${escapeHtml(convertUnits(ing))}</span>
+                                </li>`).join('')}
+                            </ul>
+                        </div>` : ''}
+
+                        <!-- Recipe -->
+                        <div class="px-5 pb-6 pt-2 border-t border-gold-dim/30">
+                            <div class="deco-divider mb-4"><span class="font-roman text-xs tracking-[0.28em] uppercase text-gold">стъпки</span></div>
+                            <div class="recipe-content text-cream/80 text-base">
+                                ${convertUnits(loc(d,'recipe') || '')}
+                            </div>
+                        </div>
+                    </article>
+                `;
+        }
+
+        function render(resetPage = true) {
+            const data = getFiltered();
+            const container = document.getElementById('cocktail-list');
+            const countEl = document.getElementById('result-count');
+
+            const word = data.length === 1 ? t('count_word_one') : t('count_word_many');
+            countEl.textContent = `${toRoman(data.length) || '–'} · ${word}`;
+            updateFavBar();
+
+            if (resetPage) currentPage = 1;
+
+            if (data.length === 0) {
+                let msg;
+                if (showFavoritesOnly && favorites.length === 0) {
+                    msg = `${t('empty_fav')}<br><span class="font-roman text-xs tracking-widest text-cream-dim/70 mt-3 inline-block">${t('empty_fav_hint')}</span>`;
+                } else if (searchQuery) {
+                    msg = t('empty_search', { q: `<span class="text-gold italic">${escapeHtml(searchQuery)}</span>` });
+                } else {
+                    msg = t('empty_selection');
+                }
+                container.innerHTML = `
+                    <div class="text-center py-20">
+                        <div class="text-gold text-4xl mb-6 opacity-30">✦ ◆ ✦</div>
+                        <p class="font-body italic text-cream-dim">${msg}</p>
+                    </div>`;
+                return;
+            }
+
+            const page   = data.slice(0, currentPage * PAGE_SIZE);
+            const hasMore = data.length > page.length;
+
+            container.innerHTML = page.map((d, i) => renderCard(d, i)).join('') +
+                (hasMore ? `
+                <div class="text-center py-8">
+                    <button onclick="loadMore()" class="border border-gold-dim text-cream-dim hover:text-gold hover:border-gold font-roman text-xs tracking-[0.3em] uppercase py-3 px-8 transition">
+                        ${t('load_more')} · ${toRoman(data.length - page.length)}
+                    </button>
+                </div>` : '');
+        }
+
+        function loadMore() {
+            currentPage++;
+            render(false);
+            // Keep scroll position
+        }
+
+        // === SEARCH ===
+        function onSearch(q) {
+            searchQuery = q;
+            document.getElementById('search-clear').classList.toggle('hidden', !q);
+            document.getElementById('search-icon').classList.toggle('hidden', !!q);
+            render();
+        }
+        function clearSearch() {
+            document.getElementById('search-input').value = '';
+            onSearch('');
+        }
+
+        // === FILTERS ===
+        function filterBy(category) {
+            currentFilter = category;
+            renderFilters();
+            render();
+        }
+
+        // === FAVORITES ===
+        function toggleFavorite(btn, event) {
+            event.stopPropagation();
+            event.preventDefault();
+            const name = btn.dataset.cocktail;
+            if (!name) return;
+
+            const wasFav = favorites.includes(name);
+            if (wasFav) {
+                favorites = favorites.filter(f => f !== name);
+            } else {
+                favorites.push(name);
+                btn.classList.add('star-pop');
+                setTimeout(() => btn.classList.remove('star-pop'), 450);
+            }
+            try { localStorage.setItem('gluten-free-365-favorites', JSON.stringify(favorites)); } catch (e) {}
+
+            const isFav = !wasFav;
+            btn.innerHTML = isFav ? '◆' : '◇';
+            btn.className = `fav-btn absolute top-3 right-3 w-10 h-10 bg-ink/70 backdrop-blur-sm border ${isFav ? 'border-gold-bright text-gold-bright' : 'border-gold-dim text-cream-dim'} flex items-center justify-center text-base hover:border-gold hover:text-gold active:scale-90 transition`;
+
+            updateFavBar();
+            if (showFavoritesOnly && !isFav) render();
+        }
+
+        function toggleFavoritesView() {
+            showFavoritesOnly = !showFavoritesOnly;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            render();
+        }
+
+        // === AI ACTION SHEET ===
+        function openAISheet() {
+            const actions = [
+                { icon: '✦', title: t('ai_random_title'), desc: t('ai_random_desc'), action: 'pickRandom()' },
+                { icon: showFavoritesOnly ? '◇' : '◆', title: showFavoritesOnly ? t('ai_fav_show_all') : `${t('ai_fav_title')} · ${toRoman(favorites.length) || '–'}`, desc: showFavoritesOnly ? t('ai_fav_desc_off') : t('ai_fav_desc_on'), action: 'fromSheetFavorites()' },
+                { icon: '❦', title: t('ai_stats_title'), desc: t('ai_stats_desc'), action: 'showStats()' },
+            ];
+
+            document.getElementById('ai-actions').innerHTML = actions.map(a => `
+                <button onclick="${a.action}" class="w-full border border-gold-dim hover:border-gold hover:bg-ink-soft active:scale-[0.99] transition p-4 flex items-center gap-4 text-left group">
+                    <span class="text-2xl text-gold w-8 text-center">${a.icon}</span>
+                    <div class="flex-1 min-w-0">
+                        <div class="font-roman text-cream tracking-[0.15em] uppercase text-sm group-hover:text-gold-bright transition">${escapeHtml(a.title)}</div>
+                        <div class="font-body italic text-xs text-cream-dim truncate">${escapeHtml(a.desc)}</div>
+                    </div>
+                    <span class="text-gold-dim group-hover:text-gold transition">›</span>
+                </button>
+            `).join('');
+
+            document.getElementById('ai-sheet').classList.remove('hidden');
+        }
+
+        function closeAISheet() { document.getElementById('ai-sheet').classList.add('hidden'); }
+
+        function pickRandom() {
+            closeAISheet();
+            const pool = getFiltered();
+            if (pool.length === 0) { alert(t('alert_empty')); return; }
+            const pick = pool[Math.floor(Math.random() * pool.length)];
+            highlightCocktail(pick);
+        }
+
+        function cocktailOfTheDay() {
+            closeAISheet();
+            const pool = allCocktails.filter(c => c && c.name);
+            if (pool.length === 0) return;
+            const today = new Date();
+            const seed = today.getFullYear() * 1000 + today.getMonth() * 50 + today.getDate();
+            const pick = pool[seed % pool.length];
+
+            currentFilter = 'filter_all';
+            searchQuery = '';
+            showFavoritesOnly = false;
+            document.getElementById('search-input').value = '';
+            document.getElementById('search-clear').classList.add('hidden');
+            document.getElementById('search-icon').classList.remove('hidden');
+            renderFilters();
+            render();
+
+            setTimeout(() => highlightCocktail(pick), 200);
+        }
+
+        function fromSheetFavorites() {
+            closeAISheet();
+            toggleFavoritesView();
+        }
+
+        function highlightCocktail(cocktail) {
+            const el = document.getElementById(`card-${cocktail._idx}`);
+            if (el) {
+                el.scrollIntoView({ behavior: 'instant', block: 'center' });
+                setTimeout(() => {
+                    el.classList.add('highlight');
+                    setTimeout(() => el.classList.remove('highlight'), 3500);
+                }, 450);
+            }
+        }
+
+        // === STATS ===
+        function showStats() {
+            closeAISheet();
+            const valid = allCocktails.filter(c => c && c.name);
+            const total = valid.length;
+
+            const baseStats = {};
+            const baseLabel = {};
+            valid.forEach(c => {
+                const b = (c.base || 'Други').trim();
+                baseStats[b] = (baseStats[b] || 0) + 1;
+                if (!baseLabel[b]) baseLabel[b] = loc(c, 'base') || b;
+            });
+            const sortedBases = Object.entries(baseStats).sort((a, b) => b[1] - a[1]);
+            const topBase = sortedBases[0] || ['—', 0];
+
+            const hour = new Date().getHours();
+            let timeRec;
+            if (hour < 12) timeRec = t('stats_time_morning');
+            else if (hour < 17) timeRec = t('stats_time_afternoon');
+            else if (hour < 22) timeRec = t('stats_time_evening');
+            else timeRec = t('stats_time_late');
+
+            const html = `
+                <!-- Two big numbers -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="border border-gold-dim p-5 text-center">
+                        <div class="font-display text-5xl text-gold-bright leading-none mb-2">${toRoman(total)}</div>
+                        <div class="font-roman text-cream-dim text-[0.65rem] tracking-[0.4em] uppercase">${t('stats_cocktails')}</div>
+                    </div>
+                    <div class="border border-gold-dim p-5 text-center">
+                        <div class="font-display text-5xl text-gold-bright leading-none mb-2">${toRoman(favorites.length) || '–'}</div>
+                        <div class="font-roman text-cream-dim text-[0.65rem] tracking-[0.4em] uppercase">${t('stats_favorites')}</div>
+                    </div>
+                </div>
+
+                <!-- Distribution -->
+                <div class="border border-gold-dim p-5">
+                    <div class="deco-divider mb-5">
+                        <span class="font-roman text-gold text-[0.65rem] tracking-[0.4em] uppercase whitespace-nowrap">${t('stats_distribution')}</span>
+                    </div>
+                    ${sortedBases.slice(0, 8).map(([base, count]) => {
+                        const pct = total ? Math.round(count / total * 100) : 0;
+                        return `
+                            <div class="mb-4 last:mb-0">
+                                <div class="flex justify-between items-baseline mb-1.5">
+                                    <span class="font-roman text-cream text-sm tracking-[0.1em] uppercase">${escapeHtml(baseLabel[base] || base)}</span>
+                                    <span class="font-body italic text-cream-dim text-xs">${toRoman(count)} · ${pct}%</span>
+                                </div>
+                                <div class="h-px bg-gold-dim/40 relative overflow-hidden">
+                                    <div class="absolute inset-y-0 left-0 bg-gradient-to-r from-gold-dim via-gold to-gold-bright" style="width: ${pct}%; height: 2px; top: -0.5px;"></div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+
+                <!-- Recommendation block -->
+                <div class="border border-gold relative p-6">
+                    <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-ink px-3 font-roman text-gold text-[0.6rem] tracking-[0.5em] uppercase">${t('stats_rec_badge')}</span>
+                    <p class="font-body italic text-cream text-base leading-relaxed text-center">
+                        ${t('stats_rec_line1', { hour: `<span class="text-gold-bright">${hour}</span>`, rec: `<span class="text-gold-bright">${timeRec}</span>` })}
+                    </p>
+                    <p class="font-body italic text-cream-dim text-sm leading-relaxed text-center mt-3">
+                        ${t('stats_rec_line2', { base: `<span class="text-gold not-italic font-roman tracking-[0.1em] uppercase">${escapeHtml(baseLabel[topBase[0]] || topBase[0])}</span>`, count: `<span class="text-gold-bright">${toRoman(topBase[1])}</span>` })}
+                    </p>
+                </div>
+            `;
+
+            document.getElementById('stats-content').innerHTML = html;
+            document.getElementById('stats-modal').classList.remove('hidden');
+        }
+
+        function closeStats() { document.getElementById('stats-modal').classList.add('hidden'); }
+
+        // === SHARE ===
+        async function shareApp() {
+            const url  = window.location.href;
+            const data = { title: 'Gluten Free 365', text: t('share_text'), url };
+            if (navigator.share) {
+                try { await navigator.share(data); return; } catch (e) {}
+            }
+            try {
+                await navigator.clipboard.writeText(url);
+                showToast(t('toast_link_copied'));
+            } catch (e) {
+                showToast(url);
+            }
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.remove('hidden');
+            setTimeout(() => t.classList.add('hidden'), 2500);
+        }
+
+        // === BACK TO TOP ===
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('back-to-top');
+            if (window.scrollY > 400) btn.classList.remove('hidden');
+            else btn.classList.add('hidden');
+        }, { passive: true });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') { closeAISheet(); closeStats(); closeSettings(); }
+        });
+
+        // Init only if age already verified (new users go through age gate first)
+        try {
+            underAge=false; currentMode='mocktails'; init();
+        } catch(e) { init(); }
+    </script>
+
+    <!-- SERVICE WORKER REGISTRATION -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                const swPath = location.hostname.endsWith('.freefrom365.com') ? '/sw.js' : '/gluten-free/sw.js';
+                navigator.serviceWorker.register(swPath)
+                    .then(reg => console.log('SW registered:', reg.scope))
+                    .catch(err => console.log('SW error:', err));
+            });
+        }
+    </script>
 </body>
 </html>
