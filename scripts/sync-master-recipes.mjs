@@ -141,6 +141,11 @@ function difficultyForLang(row, lang) {
       "Средно": "Media",
       "Трудно": "Difícil",
     },
+    fr: {
+      "Лесно": "Facile",
+      "Средно": "Moyen",
+      "Трудно": "Difficile",
+    },
     ru: {
       "Лесно": "Легко",
       "Средно": "Средне",
@@ -242,6 +247,31 @@ function countryForLang(row, lang, bgCountry) {
       "Източна Европа": "Europa del Este",
       "Световна кухня": "Cocina mundial",
     },
+    fr: {
+      "Турция": "Turquie",
+      "Индия": "Inde",
+      "Япония": "Japon",
+      "Виетнам": "Vietnam",
+      "Гърция": "Grèce",
+      "Мексико": "Mexique",
+      "Перу": "Pérou",
+      "Етиопия": "Éthiopie",
+      "Мароко": "Maroc",
+      "Корея": "Corée",
+      "Ливан": "Liban",
+      "Тайланд": "Thaïlande",
+      "Испания": "Espagne",
+      "Италия": "Italie",
+      "България": "Bulgarie",
+      "Средиземноморие": "Méditerranée",
+      "Скандинавия": "Scandinavie",
+      "Великобритания": "Royaume-Uni",
+      "Китай": "Chine",
+      "Египет": "Égypte",
+      "Домашна кухня": "Cuisine maison",
+      "Източна Европа": "Europe de l'Est",
+      "Световна кухня": "Cuisine du monde",
+    },
     ru: {
       "Турция": "Турция",
       "Индия": "Индия",
@@ -297,6 +327,7 @@ function recipeFor(row, index) {
   const en = localizedRecipeFields(row, "en", fallbacks);
   const de = localizedRecipeFields(row, "de", fallbacks);
   const es = localizedRecipeFields(row, "es", fallbacks);
+  const fr = localizedRecipeFields(row, "fr", fallbacks);
   const ru = localizedRecipeFields(row, "ru", fallbacks);
 
   return {
@@ -337,6 +368,14 @@ function recipeFor(row, index) {
     difficulty_es: es.difficulty,
     country_es: es.country,
     tag_es: es.tag,
+    description_fr: fr.description,
+    name_fr: fr.name,
+    base_fr: fr.base,
+    ingredients_fr: fr.ingredients,
+    recipe_fr: fr.recipe,
+    difficulty_fr: fr.difficulty,
+    country_fr: fr.country,
+    tag_fr: fr.tag,
     description_ru: ru.description,
     name_ru: ru.name,
     base_ru: ru.base,

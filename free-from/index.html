@@ -466,14 +466,15 @@
         }, 3500);
     </script>
 
-    <script src="data.js?v=20260710-6"></script>
+    <script src="data.js?v=20260710-7"></script>
 
     <!-- ============ I18N + UNITS CORE ============ -->
     <script>
         const LANGS = [
             { code: 'en', name: 'English',   flag: '🇬🇧' },
-            { code: 'de', name: 'Deutsch',   flag: '🇩🇪' },
             { code: 'es', name: 'Español',   flag: '🇪🇸' },
+            { code: 'de', name: 'Deutsch',   flag: '🇩🇪' },
+            { code: 'fr', name: 'Français',  flag: '🇫🇷' },
             { code: 'ru', name: 'Русский',   flag: '🇷🇺' },
             { code: 'bg', name: 'Български', flag: '🇧🇬' },
         ];
@@ -649,6 +650,39 @@
                 aria_share:'Поделиться', aria_top:'Наверх', aria_settings:'Язык',
                 months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
             },
+        };
+
+        I18N.fr = {
+            ...I18N.en,
+            tab_cocktails:'Recettes', tab_mocktails:'Recettes',
+            cotd_title:'Recette du jour', cotd_see:'Voir la recette',
+            search_ph:'Rechercher par nom ou ingrédient',
+            fav_selected:'Favoris', fav_all:'Tous',
+            loader_text:'Préparation des recettes', intro_status:'Préparation des recettes...',
+            close:'Fermer',
+            ai_button:'Suggestions', ai_title:'SUGGESTION', ai_subtitle:'Que préparons-nous ?',
+            ai_scan_title:'Idée recette', ai_scan_desc:'Une suggestion de la collection',
+            ai_random_title:'Surprends-moi', ai_random_desc:'Une recette au hasard de la sélection',
+            ai_fav_show_all:'Tout afficher', ai_fav_title:'Favoris',
+            ai_fav_desc_off:'Désactiver le filtre', ai_fav_desc_on:'Afficher les recettes enregistrées',
+            ai_stats_title:'Analyse des recettes', ai_stats_desc:'Statistiques de la collection',
+            stats_title:'ATELIER', stats_subtitle:'Analyse de la collection', stats_cocktails:'Recettes',
+            stats_favorites:'Favoris', stats_distribution:'Répartition', stats_rec_badge:'Recommandation',
+            stats_time_morning:'quelque chose de frais', stats_time_afternoon:'quelque chose de léger et fruité',
+            stats_time_evening:'une idée réconfortante pour le soir', stats_time_late:'quelque chose de simple pour plus tard',
+            stats_rec_line1:"En ce moment, vers {hour}:00, c'est idéal pour {rec}.",
+            stats_rec_line2:'Votre catégorie la plus variée est {base}, avec {count} options.',
+            count_word_one:'recette', count_word_many:'recettes',
+            empty_fav:"Vous n'avez pas encore de favoris.", empty_fav_hint:'— MARQUEZ AVEC ◇ —',
+            empty_search:'Aucun résultat pour «{q}»', empty_selection:'Cette sélection est vide.',
+            load_more:'Charger plus', alert_empty:'La sélection est vide. Effacez les filtres.',
+            error_connection:'Connexion perdue',
+            filter_all:'Tous', filter_easy:'Facile', filter_under20:'Moins de 20 min', filter_under30:'Moins de 30 min', meta_min:'min',
+            settings_title:'LANGUE', settings_subtitle:'Langue et unités', settings_units:'Unités de mesure',
+            footer_contact:'Contact', footer_rights:'© 2026 New Age Studio. Tous droits réservés.', footer_note:'Recettes pour inspiration. Adaptez les ingrédients à vos besoins et allergies.',
+            share_text:'FreeFrom 365 - recettes au quotidien', toast_link_copied:'Lien copié ✓',
+            aria_share:'Partager', aria_top:'Haut', aria_settings:'Langue',
+            months:['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
         };
 
         // --- State ---

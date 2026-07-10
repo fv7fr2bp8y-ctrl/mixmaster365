@@ -1,4 +1,4 @@
-const CACHE_NAME = "brunch365-v31";
+const CACHE_NAME = "brunch365-v32";
 const APP_SHELL = [
   "/",
   "/index.html",
