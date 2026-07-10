@@ -81,6 +81,15 @@ function paragraphs(value) {
     .join("");
 }
 
+function textField(row, field, fallback = "") {
+  const value = String(row[field] || "").trim();
+  return value || fallback;
+}
+
+function translatedField(row, lang, field, fallback = "") {
+  return textField(row, `${field}_${lang}`, fallback);
+}
+
 function titleCaseBg(value) {
   const normalized = String(value || "").trim().toLowerCase();
   const map = {
@@ -114,6 +123,17 @@ function difficultyFor(row) {
   return "Трудно";
 }
 
+function difficultyForLang(row, lang) {
+  const bg = difficultyFor(row);
+  if (lang !== "en") return translatedField(row, lang, "difficulty", bg);
+  const map = {
+    "Лесно": "Easy",
+    "Средно": "Medium",
+    "Трудно": "Hard",
+  };
+  return translatedField(row, lang, "difficulty", map[bg] || bg);
+}
+
 function countryFor(row) {
   const haystack = `${row.tag || ""} ${row.canonical_name_bg || ""} ${row.seo_title_bg || ""}`.toLowerCase();
   const mappings = [
@@ -128,12 +148,65 @@ function countryFor(row) {
   return mappings.find(([needle]) => haystack.includes(needle))?.[1] || "Световна кухня";
 }
 
+function countryForLang(row, lang, bgCountry) {
+  if (row[`country_${lang}`]) return row[`country_${lang}`];
+  if (lang !== "en") return bgCountry;
+  const map = {
+    "Турция": "Turkey",
+    "Индия": "India",
+    "Япония": "Japan",
+    "Виетнам": "Vietnam",
+    "Гърция": "Greece",
+    "Мексико": "Mexico",
+    "Перу": "Peru",
+    "Етиопия": "Ethiopia",
+    "Мароко": "Morocco",
+    "Корея": "Korea",
+    "Ливан": "Lebanon",
+    "Тайланд": "Thailand",
+    "Испания": "Spain",
+    "Италия": "Italy",
+    "България": "Bulgaria",
+    "Средиземноморие": "Mediterranean",
+    "Скандинавия": "Scandinavia",
+    "Великобритания": "United Kingdom",
+    "Китай": "China",
+    "Египет": "Egypt",
+    "Домашна кухня": "Home cooking",
+    "Източна Европа": "Eastern Europe",
+    "Световна кухня": "World cuisine",
+  };
+  return map[bgCountry] || bgCountry;
+}
+
+function localizedRecipeFields(row, lang, fallbacks) {
+  const ingredientsSource = translatedField(row, lang, "ingredients", row.ingredients_bg);
+  const stepsSource = translatedField(row, lang, "steps", row.steps_bg);
+  return {
+    name: translatedField(row, lang, "name", row.canonical_name_bg),
+    description: translatedField(row, lang, "description", row.description_bg),
+    base: translatedField(row, lang, "tag", fallbacks.base),
+    ingredients: splitList(ingredientsSource).join(", "),
+    recipe: paragraphs(stepsSource),
+    difficulty: difficultyForLang(row, lang),
+    country: countryForLang(row, lang, fallbacks.country),
+    tag: translatedField(row, lang, "tag", fallbacks.tag),
+  };
+}
+
 function recipeFor(row, index) {
   const base = row.tag || titleCaseBg(row.meal_type);
   const ingredients = splitList(row.ingredients_bg).join(", ");
   const recipe = paragraphs(row.steps_bg);
   const difficulty = difficultyFor(row);
   const country = countryFor(row);
+  const tag = row.tag || row.recipe_quality || "curated";
+  const fallbacks = { base, country, tag };
+  const en = localizedRecipeFields(row, "en", fallbacks);
+  const de = localizedRecipeFields(row, "de", fallbacks);
+  const es = localizedRecipeFields(row, "es", fallbacks);
+  const ru = localizedRecipeFields(row, "ru", fallbacks);
+
   return {
     id: index + 1,
     source_id: row.global_id,
@@ -141,40 +214,45 @@ function recipeFor(row, index) {
     base,
     icon: "◇",
     image: imageFor(row),
+    description: row.description_bg,
     ingredients,
     recipe,
     time: Number(row.time_min || 30),
     difficulty,
     country,
-    tag: row.tag || row.recipe_quality || "curated",
-    name_en: row.canonical_name_bg,
-    base_en: base,
-    ingredients_en: ingredients,
-    recipe_en: recipe,
-    difficulty_en: difficulty,
-    country_en: country,
-    tag_en: row.tag || row.recipe_quality || "curated",
-    name_de: row.canonical_name_bg,
-    base_de: base,
-    ingredients_de: ingredients,
-    recipe_de: recipe,
-    difficulty_de: difficulty,
-    country_de: country,
-    tag_de: row.tag || row.recipe_quality || "curated",
-    name_es: row.canonical_name_bg,
-    base_es: base,
-    ingredients_es: ingredients,
-    recipe_es: recipe,
-    difficulty_es: difficulty,
-    country_es: country,
-    tag_es: row.tag || row.recipe_quality || "curated",
-    name_ru: row.canonical_name_bg,
-    base_ru: base,
-    ingredients_ru: ingredients,
-    recipe_ru: recipe,
-    difficulty_ru: difficulty,
-    country_ru: country,
-    tag_ru: row.tag || row.recipe_quality || "curated",
+    tag,
+    description_en: en.description,
+    name_en: en.name,
+    base_en: en.base,
+    ingredients_en: en.ingredients,
+    recipe_en: en.recipe,
+    difficulty_en: en.difficulty,
+    country_en: en.country,
+    tag_en: en.tag,
+    description_de: de.description,
+    name_de: de.name,
+    base_de: de.base,
+    ingredients_de: de.ingredients,
+    recipe_de: de.recipe,
+    difficulty_de: de.difficulty,
+    country_de: de.country,
+    tag_de: de.tag,
+    description_es: es.description,
+    name_es: es.name,
+    base_es: es.base,
+    ingredients_es: es.ingredients,
+    recipe_es: es.recipe,
+    difficulty_es: es.difficulty,
+    country_es: es.country,
+    tag_es: es.tag,
+    description_ru: ru.description,
+    name_ru: ru.name,
+    base_ru: ru.base,
+    ingredients_ru: ru.ingredients,
+    recipe_ru: ru.recipe,
+    difficulty_ru: ru.difficulty,
+    country_ru: ru.country,
+    tag_ru: ru.tag,
   };
 }
 

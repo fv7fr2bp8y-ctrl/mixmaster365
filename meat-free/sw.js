@@ -1,4 +1,4 @@
-const CACHE_NAME = "meat-free-365-v4";
+const CACHE_NAME = "meat-free-365-v5";
 const APP_SHELL = [
   "/",
   "/index.html",
