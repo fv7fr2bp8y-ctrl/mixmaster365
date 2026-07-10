@@ -6601,6 +6601,61 @@ window.BREAKFAST_DATA = [
   },
   {
     "id": 121,
+    "source_id": "BR-E008",
+    "name": "Средиземноморска хумус купа с яйце и хрупкав нахут",
+    "base": "лесна средиземноморска купа",
+    "icon": "◇",
+    "image": "https://drive.google.com/file/d/18vJmEic5y8S8G_boOsMes2Or4f3IgCpn/view?usp=drivesdk",
+    "description": "Кремообразен хумус с рохко яйце, хрупкав нахут, зеленчуци, маслини и топла питка.",
+    "ingredients": "220 г хумус, 2 яйца, 160 г сварен нахут, 1/2 краставица, 140 г чери домати, 50 г маслини, 2 с.л. магданоз, 1 пита, 1 с.л. зехтин, 1 ч.л. заатар",
+    "recipe": "<p>Запечи нахута с малко зехтин и заатар.</p><p>Разстели хумуса в купа.</p><p>Добави яйце, зеленчуци, маслини, нахут и питка.</p>",
+    "time": 15,
+    "difficulty": "Лесно",
+    "country": "Средиземноморие",
+    "tag": "лесна средиземноморска купа",
+    "description_en": "Creamy hummus with jammy egg, crispy chickpeas, vegetables, olives and warm pita.",
+    "name_en": "Mediterranean hummus bowl with egg and crispy chickpeas",
+    "base_en": "easy Mediterranean bowl",
+    "ingredients_en": "220 g hummus, 2 eggs, 160 g cooked chickpeas, 1/2 cucumber, 140 g cherry tomatoes, 50 g olives, 2 tbsp parsley, 1 pita, 1 tbsp olive oil, 1 tsp zaatar",
+    "recipe_en": "<p>Roast the chickpeas with a little olive oil and zaatar.</p><p>Spread hummus in a bowl.</p><p>Add egg, vegetables, olives, chickpeas and pita.</p>",
+    "difficulty_en": "Easy",
+    "country_en": "Mediterranean",
+    "tag_en": "easy Mediterranean bowl",
+    "description_de": "Cremiger Hummus mit wachsweichem Ei, knusprigen Kichererbsen, Gemüse, Oliven und warmer Pita.",
+    "name_de": "Mediterrane Hummus-Bowl mit Ei und knusprigen Kichererbsen",
+    "base_de": "einfache mediterrane Bowl",
+    "ingredients_de": "220 g Hummus, 2 Eier, 160 g gekochte Kichererbsen, 1/2 Gurke, 140 g Kirschtomaten, 50 g Oliven, 2 EL Petersilie, 1 Pita, 1 EL Olivenöl, 1 TL Za'atar",
+    "recipe_de": "<p>Kichererbsen mit etwas Olivenöl und Za'atar rösten.</p><p>Hummus in einer Schüssel verstreichen.</p><p>Ei, Gemüse, Oliven, Kichererbsen und Pita hinzufügen.</p>",
+    "difficulty_de": "Einfach",
+    "country_de": "Mittelmeerraum",
+    "tag_de": "einfache mediterrane Bowl",
+    "description_es": "Hummus cremoso con huevo cremoso, garbanzos crujientes, verduras, aceitunas y pita caliente.",
+    "name_es": "Bowl mediterráneo de hummus con huevo y garbanzos crujientes",
+    "base_es": "bowl mediterráneo fácil",
+    "ingredients_es": "220 g hummus, 2 huevos, 160 g garbanzos cocidos, 1/2 pepino, 140 g tomates cherry, 50 g aceitunas, 2 cdas perejil, 1 pita, 1 cda aceite de oliva, 1 cdta zaatar",
+    "recipe_es": "<p>Asa los garbanzos con un poco de aceite de oliva y zaatar.</p><p>Extiende el hummus en un bowl.</p><p>Añade huevo, verduras, aceitunas, garbanzos y pita.</p>",
+    "difficulty_es": "Fácil",
+    "country_es": "Mediterráneo",
+    "tag_es": "bowl mediterráneo fácil",
+    "description_fr": "Houmous crémeux avec oeuf mollet, pois chiches croustillants, légumes, olives et pita chaude.",
+    "name_fr": "Bol méditerranéen houmous, oeuf et pois chiches croustillants",
+    "base_fr": "bol méditerranéen facile",
+    "ingredients_fr": "220 g houmous, 2 oeufs, 160 g pois chiches cuits, 1/2 concombre, 140 g tomates cerises, 50 g olives, 2 c. à soupe persil, 1 pita, 1 c. à soupe huile d’olive, 1 c. à café zaatar",
+    "recipe_fr": "<p>Faites rôtir les pois chiches avec un peu d’huile d’olive et du zaatar.</p><p>Étalez le houmous dans un bol.</p><p>Ajoutez oeuf, légumes, olives, pois chiches et pita.</p>",
+    "difficulty_fr": "Facile",
+    "country_fr": "Méditerranée",
+    "tag_fr": "bol méditerranéen facile",
+    "description_ru": "Кремовый хумус с яйцом всмятку, хрустящим нутом, овощами, оливками и теплой питой.",
+    "name_ru": "Средиземноморская миска с хумусом, яйцом и хрустящим нутом",
+    "base_ru": "легкая средиземноморская миска",
+    "ingredients_ru": "220 г хумуса, 2 яйца, 160 г вареного нута, 1/2 огурца, 140 г помидоров черри, 50 г оливок, 2 ст. л. петрушки, 1 пита, 1 ст. л. оливкового масла, 1 ч. л. заатара",
+    "recipe_ru": "<p>Запеките нут с небольшим количеством оливкового масла и заатара.</p><p>Разложите хумус в миске.</p><p>Добавьте яйцо, овощи, оливки, нут и питу.</p>",
+    "difficulty_ru": "Легко",
+    "country_ru": "Средиземноморье",
+    "tag_ru": "легкая средиземноморская миска"
+  },
+  {
+    "id": 122,
     "source_id": "BR-C093",
     "name": "Бразилска тапиока креп с яйце и авокадо",
     "base": "безглутенов креп",
@@ -6655,7 +6710,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "безглютеновый блин"
   },
   {
-    "id": 122,
+    "id": 123,
     "source_id": "BR-C094",
     "name": "Тунизийска шакшука с нахут и хариса",
     "base": "пикантен тиган",
@@ -6710,7 +6765,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "острая сковорода"
   },
   {
-    "id": 123,
+    "id": 124,
     "source_id": "BR-C097",
     "name": "Израелска сабих чиния с патладжан и тахан",
     "base": "близкоизточна чиния",
@@ -6765,7 +6820,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Ближневосточное блюдо"
   },
   {
-    "id": 124,
+    "id": 125,
     "source_id": "BR-C099",
     "name": "Филипински чеснов ориз с яйце и домати",
     "base": "оризова закуска",
@@ -6820,7 +6875,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "рисовый завтрак"
   },
   {
-    "id": 125,
+    "id": 126,
     "source_id": "BR-C104",
     "name": "Грузински лобиани с билкова салата",
     "base": "пълнен хляб",
@@ -6875,7 +6930,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "фаршированный хлеб"
   },
   {
-    "id": 126,
+    "id": 127,
     "source_id": "BR-C106",
     "name": "Нигерийски акара с пипер сос и салата",
     "base": "бобени кюфтенца",
@@ -6930,7 +6985,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "фасолевые фрикадельки"
   },
   {
-    "id": 127,
+    "id": 128,
     "source_id": "BR-C107",
     "name": "Шведски ръжен сандвич със скариди и яйце",
     "base": "отворен сандвич",
@@ -6985,7 +7040,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "открытый бутерброд"
   },
   {
-    "id": 128,
+    "id": 129,
     "source_id": "BR-C111",
     "name": "Малайзийска наси лемак купа с яйце",
     "base": "оризова купа",
@@ -7040,7 +7095,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "рисовая миска"
   },
   {
-    "id": 129,
+    "id": 130,
     "source_id": "BR-C113",
     "name": "Индонезийска гадо-гадо купа с яйце",
     "base": "зеленчукова купа",
@@ -7095,7 +7150,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "овощная миска"
   },
   {
-    "id": 130,
+    "id": 131,
     "source_id": "BR-C114",
     "name": "Португалски сладък картоф със сардини и яйце",
     "base": "морски тост",
