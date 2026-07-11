@@ -1392,12 +1392,12 @@
                             <img src="${getRecipeImg(d)}" class="w-full h-48 object-cover" loading="lazy" onerror="this.onerror=null;this.src='${getRecipeFallbackImg(d)}'">
                             <button type="button" onclick="shareRecipe('${recipeShareKey(d)}', event)"
                                     aria-label="${escapeHtml(t('aria_share'))}"
-                                    class="absolute top-3 left-3 w-10 h-10 bg-ink/80 backdrop-blur-sm border border-gold-dim text-cream-dim hover:text-gold hover:border-gold flex items-center justify-center text-base active:scale-90 transition">
+                                    class="absolute top-3 right-3 w-10 h-10 bg-ink/80 backdrop-blur-sm border border-gold-dim text-cream-dim hover:text-gold hover:border-gold flex items-center justify-center text-base active:scale-90 transition">
                                 <span class="font-body text-[1.35rem] leading-none font-light" aria-hidden="true">&#8599;&#xfe0e;</span>
                             </button>
                             <button data-cocktail="${escapeHtml(d.name)}" onclick="toggleFavorite(this, event)"
                                     aria-label="Toggle favorite"
-                                    class="fav-btn absolute top-3 right-3 w-10 h-10 bg-ink/80 backdrop-blur-sm border ${isFav ? 'border-gold-bright text-gold-bright' : 'border-gold-dim text-cream-dim'} flex items-center justify-center text-base active:scale-90 transition">
+                                    class="fav-btn absolute top-3 left-3 w-10 h-10 bg-ink/80 backdrop-blur-sm border ${isFav ? 'border-gold-bright text-gold-bright' : 'border-gold-dim text-cream-dim'} flex items-center justify-center text-base active:scale-90 transition">
                                 ${isFav ? '◆' : '◇'}
                             </button>
                         </div>
@@ -1519,7 +1519,7 @@
 
             const isFav = !wasFav;
             btn.innerHTML = isFav ? '◆' : '◇';
-            btn.className = `fav-btn absolute top-3 right-3 w-10 h-10 bg-ink/70 backdrop-blur-sm border ${isFav ? 'border-gold-bright text-gold-bright' : 'border-gold-dim text-cream-dim'} flex items-center justify-center text-base hover:border-gold hover:text-gold active:scale-90 transition`;
+            btn.className = `fav-btn absolute top-3 left-3 w-10 h-10 bg-ink/70 backdrop-blur-sm border ${isFav ? 'border-gold-bright text-gold-bright' : 'border-gold-dim text-cream-dim'} flex items-center justify-center text-base hover:border-gold hover:text-gold active:scale-90 transition`;
 
             updateFavBar();
             if (showFavoritesOnly && !isFav) render();
