@@ -6,9 +6,9 @@
 
 ### Brunch 365
 - Android package: `eu.brunch365.twa`
-- Web start URL: `https://mixmaster365.eu/breakfast/`
+- Web start URL: `https://brunch.freefrom365.com/`
 - Manifest: `/breakfast/manifest.json`
-- Privacy policy: `https://mixmaster365.eu/privacy.html`
+- Privacy policy: `https://brunch.freefrom365.com/privacy.html`
 - App icon: `google-play-assets/icons/brunch-icon-512.png`
 - Phone screenshots: `google-play-assets/screenshots-play/brunch/`
 - Splash preview: `google-play-assets/splash-previews/brunch-splash.png`
@@ -28,7 +28,8 @@
 - Play-ready screenshots are PNG, 1080 x 1920, in `google-play-assets/screenshots-play/`.
 - Splash previews are PNG in `google-play-assets/splash-previews/`.
 - Contact sheet preview: `google-play-assets/screenshots-play/contact-sheet.png`
-- Both recipe collections currently contain 365 recipes.
+- Brunch currently has 236 published recipes and 12 image-ready recipes awaiting language review.
+- The release target remains 365 fully reviewed recipes with unique images.
 
 ## Before upload
 

@@ -502,6 +502,7 @@
                 filter_tequila:'Текила', filter_whisky:'Уиски',
                 filter_eggs:'Яйца', filter_oatmeal:'Каши', filter_pancakes:'Палачинки', filter_toast:'Тост', filter_bowls:'Купи', filter_soups:'Супи', filter_sweet:'Сладки', filter_legumes:'Бобови',
                 settings_title:'ЕЗИК', settings_subtitle:'Език и мерни единици', settings_units:'Мерни единици',
+                ingredients_label:'Съставки', steps_label:'Стъпки', ingredient_count:'съставки',
                 footer_contact:'Контакт', footer_rights:'© 2026 New Age Studio. Всички права запазени.', footer_note:'Рецепти за вдъхновение. Съобразявайте съставките с личните си нужди и алергии.',
                 share_text:'Brunch 365 - рецепти за всеки ден', toast_link_copied:'Линкът е копиран ✓',
                 aria_share:'Сподели', aria_top:'Нагоре', aria_settings:'Език',
@@ -536,6 +537,7 @@
                 filter_tequila:'Tequila', filter_whisky:'Whisky',
                 filter_eggs:'Eggs', filter_oatmeal:'Porridge', filter_pancakes:'Pancakes', filter_toast:'Toast', filter_bowls:'Bowls', filter_soups:'Soups', filter_sweet:'Sweet', filter_legumes:'Legumes',
                 settings_title:'LANGUAGE', settings_subtitle:'Language & units', settings_units:'Measurement units',
+                ingredients_label:'Ingredients', steps_label:'Method', ingredient_count:'ingredients',
                 footer_contact:'Contact', footer_rights:'© 2026 New Age Studio. All rights reserved.', footer_note:'Recipes for inspiration. Adjust ingredients to your needs and allergies.',
                 share_text:'Brunch 365 - everyday brunch recipes', toast_link_copied:'Link copied ✓',
                 aria_share:'Share', aria_top:'Top', aria_settings:'Language',
@@ -570,6 +572,7 @@
                 filter_tequila:'Tequila', filter_whisky:'Whisky',
                 filter_eggs:'Eier', filter_oatmeal:'Porridge', filter_pancakes:'Pfannkuchen', filter_toast:'Toast', filter_bowls:'Bowls', filter_soups:'Suppen', filter_sweet:'Süss', filter_legumes:'Hülsenfrüchte',
                 settings_title:'SPRACHE', settings_subtitle:'Sprache & Einheiten', settings_units:'Maßeinheiten',
+                ingredients_label:'Zutaten', steps_label:'Zubereitung', ingredient_count:'Zutaten',
                 footer_contact:'Kontakt', footer_rights:'© 2026 New Age Studio. Alle Rechte vorbehalten.', footer_note:'Rezepte zur Inspiration. Bitte Zutaten an persönliche Bedürfnisse und Allergien anpassen.',
                 share_text:'Brunch 365 - Brunch-Rezepte für jeden Tag', toast_link_copied:'Link kopiert ✓',
                 aria_share:'Teilen', aria_top:'Nach oben', aria_settings:'Sprache',
@@ -604,6 +607,7 @@
                 filter_tequila:'Tequila', filter_whisky:'Whisky',
                 filter_eggs:'Huevos', filter_oatmeal:'Gachas', filter_pancakes:'Tortitas', filter_toast:'Tostada', filter_bowls:'Bowls', filter_soups:'Sopas', filter_sweet:'Dulce', filter_legumes:'Legumbres',
                 settings_title:'IDIOMA', settings_subtitle:'Idioma y unidades', settings_units:'Unidades de medida',
+                ingredients_label:'Ingredientes', steps_label:'Preparación', ingredient_count:'ingredientes',
                 footer_contact:'Contacto', footer_rights:'© 2026 New Age Studio. Todos los derechos reservados.', footer_note:'Recetas para inspirarte. Ajusta los ingredientes a tus necesidades y alergias.',
                 share_text:'Brunch 365 - recetas de brunch para cada día', toast_link_copied:'Enlace copiado ✓',
                 aria_share:'Compartir', aria_top:'Arriba', aria_settings:'Idioma',
@@ -638,6 +642,7 @@
                 filter_tequila:'Текила', filter_whisky:'Виски',
                 filter_eggs:'Яйца', filter_oatmeal:'Каши', filter_pancakes:'Блины', filter_toast:'Тост', filter_bowls:'Боулы', filter_soups:'Супы', filter_sweet:'Сладкое', filter_legumes:'Бобовые',
                 settings_title:'ЯЗЫК', settings_subtitle:'Язык и единицы', settings_units:'Единицы измерения',
+                ingredients_label:'Ингредиенты', steps_label:'Приготовление', ingredient_count:'ингредиентов',
                 footer_contact:'Контакт', footer_rights:'© 2026 New Age Studio. Все права защищены.', footer_note:'Рецепты для вдохновения. Учитывайте свои потребности и аллергии.',
                 share_text:'Brunch 365 - рецепты для бранча на каждый день', toast_link_copied:'Ссылка скопирована ✓',
                 aria_share:'Поделиться', aria_top:'Наверх', aria_settings:'Язык',
@@ -675,6 +680,7 @@
             filter_tequila:'Tequila', filter_whisky:'Whisky',
             filter_eggs:'Oeufs', filter_oatmeal:'Porridge', filter_pancakes:'Pancakes', filter_toast:'Toast', filter_bowls:'Bols', filter_soups:'Soupes', filter_sweet:'Sucré', filter_legumes:'Légumineuses',
             settings_title:'LANGUE', settings_subtitle:'Langue et unités', settings_units:'Unités de mesure',
+            ingredients_label:'Ingrédients', steps_label:'Préparation', ingredient_count:'ingrédients',
             footer_contact:'Contact', footer_rights:'© 2026 New Age Studio. Tous droits réservés.', footer_note:'Recettes pour inspiration. Adaptez les ingrédients à vos besoins et allergies.',
             share_text:'Brunch 365 - recettes de brunch au quotidien', toast_link_copied:'Lien copié ✓',
             aria_share:'Partager', aria_top:'Haut', aria_settings:'Langue',
@@ -792,18 +798,18 @@
         });
     </script>
 
-    <div class="page-frame max-w-[520px] mx-auto min-h-screen px-[18px] pb-44 relative" style="z-index: 2;">
+    <div class="page-frame max-w-[520px] mx-auto min-h-screen px-[18px] pb-14 relative" style="z-index: 2;">
 
         <!-- HEADER -->
-        <header class="pt-10 pb-6 text-center relative">
+        <header class="pt-8 pb-5 text-center relative">
             <button onclick="openSettings()" data-i18n-aria="aria_settings" aria-label="Език"
-                class="absolute left-0 top-10 w-9 h-9 border border-gold-dim text-gold-dim hover:text-gold hover:border-gold flex items-center justify-center transition active:scale-90">
+                class="absolute left-0 top-8 w-9 h-9 border border-gold-dim text-gold-dim hover:text-gold hover:border-gold flex items-center justify-center transition active:scale-90">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
                     <circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18"/>
                 </svg>
             </button>
             <button onclick="shareApp()" data-i18n-aria="aria_share" aria-label="Сподели"
-                class="absolute right-0 top-10 w-9 h-9 border border-gold-dim text-gold-dim hover:text-gold hover:border-gold flex items-center justify-center transition active:scale-90">
+                class="absolute right-0 top-8 w-9 h-9 border border-gold-dim text-gold-dim hover:text-gold hover:border-gold flex items-center justify-center transition active:scale-90">
                 <span class="font-body text-[1.35rem] leading-none font-light" aria-hidden="true">&#8599;&#xfe0e;</span>
             </button>
             <div class="flex items-center justify-center mb-3 px-12">
@@ -829,8 +835,8 @@
         </div>
 
         <!-- BREAKFAST OF THE DAY -->
-        <section id="cotd-section" class="hidden mb-7">
-            <div class="deco-divider mb-5">
+        <section id="cotd-section" class="hidden mb-5">
+            <div class="deco-divider mb-3">
                 <span class="font-roman text-gold text-[0.6rem] tracking-[0.45em] uppercase whitespace-nowrap">✦ <span data-i18n="cotd_title">Брънч на деня</span> ✦</span>
             </div>
             <div id="cotd-card" class="deco-card overflow-hidden cursor-pointer active:scale-[0.99] transition-transform" onclick="goToCOTD()">
@@ -856,7 +862,7 @@
         </section>
 
         <!-- SEARCH -->
-        <div class="mb-5 relative">
+        <div class="mb-3 relative">
             <div class="border border-gold-dim relative">
                 <input
                     type="text"
@@ -874,12 +880,12 @@
         </div>
 
         <!-- FILTERS (menu sections) -->
-        <nav class="mb-4 overflow-x-auto no-scrollbar">
+        <nav class="mb-3 overflow-x-auto no-scrollbar">
             <div class="flex gap-3 px-1 pb-1 min-w-min" id="filters-container"></div>
         </nav>
 
         <!-- META BAR: count + favorites toggle -->
-        <div class="mb-6 flex justify-between items-center pt-2 border-t border-gold-dim/50">
+        <div class="mb-5 flex justify-between items-center pt-3 border-t border-gold-dim/50">
             <span id="result-count" class="font-roman text-cream-dim text-xs tracking-[0.3em] uppercase"></span>
             <button id="fav-toggle" onclick="toggleFavoritesView()" class="flex items-center gap-2 font-roman text-xs tracking-[0.25em] uppercase text-cream-dim hover:text-gold transition active:scale-95">
                 <span id="fav-icon" class="text-base leading-none">◇</span>
@@ -903,10 +909,10 @@
         </div>
 
         <!-- COCKTAIL LIST -->
-        <div id="cocktail-list" class="space-y-8 min-h-[40vh]"></div>
+        <div id="cocktail-list" class="space-y-6 min-h-[40vh]"></div>
 
         <!-- FOOTER -->
-        <footer class="mt-14 text-center">
+        <footer class="mt-10 text-center">
             <div class="deco-divider mb-5 max-w-[200px] mx-auto">
                 <span class="text-gold text-xs">❦</span>
             </div>
@@ -919,7 +925,7 @@
         </footer>
 
         <!-- FOOTER ORNAMENT -->
-        <div class="deco-divider mt-10 mb-2 max-w-[200px] mx-auto">
+        <div class="deco-divider mt-8 mb-2 max-w-[200px] mx-auto">
             <span class="text-gold text-xs">❦</span>
         </div>
     </div>
@@ -1376,7 +1382,7 @@
             if (d.time) parts.push(escapeHtml(d.time) + ' ' + t('meta_min'));
             if (d.difficulty) parts.push(escapeHtml(loc(d, 'difficulty') || d.difficulty));
             if (d.country) parts.push(escapeHtml(loc(d, 'country') || d.country));
-            if (d.ingredients) parts.push(String(loc(d,'ingredients')).split(',').filter(Boolean).length + ' съставки');
+            if (d.ingredients) parts.push(String(loc(d,'ingredients')).split(',').filter(Boolean).length + ' ' + t('ingredient_count'));
             parts.push(escapeHtml(document.title || 'Recipe 365'));
             return parts.join(' · ');
         }
@@ -1414,7 +1420,7 @@
                         <!-- Ingredients -->
                         ${d.ingredients ? `
                         <div class="px-5 pb-5">
-                            <div class="deco-divider mb-4"><span class="font-roman text-xs tracking-[0.28em] uppercase text-gold">съставки</span></div>
+                            <div class="deco-divider mb-4"><span class="font-roman text-xs tracking-[0.28em] uppercase text-gold">${t('ingredients_label')}</span></div>
                             <ul class="space-y-1.5">
                                 ${String(loc(d,'ingredients')).split(',').map(ing => ing.trim()).filter(Boolean).map(ing => `
                                 <li class="flex items-baseline gap-3">
@@ -1426,7 +1432,7 @@
 
                         <!-- Recipe -->
                         <div class="px-5 pb-6 pt-2 border-t border-gold-dim/30">
-                            <div class="deco-divider mb-4"><span class="font-roman text-xs tracking-[0.28em] uppercase text-gold">стъпки</span></div>
+                            <div class="deco-divider mb-4"><span class="font-roman text-xs tracking-[0.28em] uppercase text-gold">${t('steps_label')}</span></div>
                             <div class="recipe-content text-cream/80 text-base">
                                 ${convertUnits(loc(d,'recipe') || '')}
                             </div>
