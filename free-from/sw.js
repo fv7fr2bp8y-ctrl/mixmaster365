@@ -1,4 +1,4 @@
-const CACHE_NAME = "healthy-gut-365-v30";
+const CACHE_NAME = "healthy-gut-365-v31";
 const APP_SHELL = [
   "/",
   "/index.html",

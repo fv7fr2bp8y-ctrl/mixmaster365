@@ -816,10 +816,7 @@
             </button>
             <button onclick="shareApp()" data-i18n-aria="aria_share" aria-label="Сподели"
                 class="absolute right-0 top-10 w-9 h-9 border border-gold-dim text-gold-dim hover:text-gold hover:border-gold flex items-center justify-center transition active:scale-90">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
-                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-                </svg>
+                <span class="font-body text-[1.35rem] leading-none font-light" aria-hidden="true">&#8599;&#xfe0e;</span>
             </button>
             <div class="flex items-center justify-center mb-3 px-12">
                 <h1 class="font-body text-[3rem] leading-none text-cream tracking-[0.08em] font-semibold">Healthy Gut 365</h1>
@@ -1401,7 +1398,7 @@
                             <button type="button" onclick="shareRecipe('${recipeShareKey(d)}', event)"
                                     aria-label="${escapeHtml(t('aria_share'))}"
                                     class="absolute top-3 left-3 w-10 h-10 bg-ink/80 backdrop-blur-sm border border-gold-dim text-cream-dim hover:text-gold hover:border-gold flex items-center justify-center text-base active:scale-90 transition">
-                                ↗
+                                <span class="font-body text-[1.35rem] leading-none font-light" aria-hidden="true">&#8599;&#xfe0e;</span>
                             </button>
                             <button data-cocktail="${escapeHtml(d.name)}" onclick="toggleFavorite(this, event)"
                                     aria-label="Toggle favorite"

@@ -1,4 +1,4 @@
-const CACHE_NAME = "plant-based-365-v9";
+const CACHE_NAME = "plant-based-365-v10";
 const APP_SHELL = [
   "/",
   "/index.html",
