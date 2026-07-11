@@ -1180,7 +1180,9 @@
         }
 
         function matchesBase(cocktail, filter) {
-            if (!filter || !filter.match) return true;
+            if (!filter) return true;
+            if (typeof filter.test === 'function') return filter.test(cocktail);
+            if (!filter.match) return true;
             const haystack = [
                 cocktail.name,
                 cocktail.base,
@@ -1200,7 +1202,7 @@
             }
 
             const filterObj = activeFilters().find(f => f.key === currentFilter);
-            if (filterObj && filterObj.match) {
+            if (filterObj && (filterObj.match || typeof filterObj.test === 'function')) {
                 result = result.filter(c => matchesBase(c, filterObj));
             }
 
@@ -1345,10 +1347,10 @@
             const container = document.getElementById('filters-container');
             const list = activeList();
             container.innerHTML = activeFilters().map(f => {
-                const count = f.match
+                const count = (f.match || typeof f.test === 'function')
                     ? list.filter(c => c && c.name && matchesBase(c, f)).length
                     : list.filter(c => c && c.name).length;
-                if (count === 0 && f.match) return '';
+                if (count === 0 && (f.match || typeof f.test === 'function')) return '';
                 const isActive = currentFilter === f.key;
                 return `<button onclick="filterBy('${f.key}')" class="${isActive ? 'filter-active' : ''} shrink-0 font-roman text-xs uppercase text-cream-dim hover:text-gold transition whitespace-nowrap active:scale-95">
                     <span>${escapeHtml(t(f.key))} · ${count}</span>
