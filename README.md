@@ -28,7 +28,7 @@ Status verified from the generated `data.js` files on 10 July 2026:
 
 | App | Visible recipes | Images | Complete translated recipe records | Recipes with quantities |
 |---|---:|---:|---:|---:|
-| Brunch | 290 | 290 | 290 | 290 |
+| Brunch | 293 | 293 | 293 | 293 |
 | Healthy Gut | 153 | 153 | 153 | 91 |
 | Gluten Free | 167 | 167 | 167 | 105 |
 | Dairy Free | 161 | 161 | 161 | 99 |
@@ -37,7 +37,7 @@ Status verified from the generated `data.js` files on 10 July 2026:
 
 The six supported languages are Bulgarian, English, German, Spanish, French and Russian.
 
-The **290 complete Brunch recipes** milestone is finished. Future additions should continue in curated blocks with quantities, all translations and a real Drive image before they are published.
+The **293 complete Brunch recipes** milestone is finished. Future additions should continue in curated blocks with quantities, all translations and a real Drive image before they are published.
 
 ## Source of truth
 
