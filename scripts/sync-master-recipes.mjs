@@ -3,6 +3,7 @@ import path from "node:path";
 
 const root = path.resolve(import.meta.dirname, "..");
 const csvPath = process.argv[2] || "/tmp/freefrom365_master.csv";
+const targetApp = process.argv[3] || "";
 
 function parseCsv(text) {
   const rows = [];
@@ -118,6 +119,7 @@ const appConfigs = [
     dir: "breakfast",
     label: "Brunch",
     flag: "is_breakfast",
+    primaryApps: ["Brunch", "Breakfast"],
     slot: "breakfast_slot",
     featured: [
       "BR-C173", // Finnish Karelian pasties
@@ -745,7 +747,11 @@ function writeApp(rows, config) {
     (config.featured || []).map((sourceId, index) => [sourceId, index])
   );
   const recipes = rows
-    .filter((row) => isTrue(row[config.flag]))
+    .filter((row) =>
+      config.primaryApps
+        ? config.primaryApps.includes(row.app_primary)
+        : isTrue(row[config.flag])
+    )
     .filter((row) => imageFor(row))
     .sort((a, b) => {
       const aFeatured = featuredOrder.get(a.global_id);
@@ -776,7 +782,15 @@ const rows = recordsFromCsv(fs.readFileSync(csvPath, "utf8")).filter(
   (row) => row.status === "ready" && row.recipe_quality === "curated"
 );
 
-for (const config of appConfigs) {
+const selectedConfigs = targetApp
+  ? appConfigs.filter((config) => config.dir === targetApp)
+  : appConfigs;
+
+if (targetApp && selectedConfigs.length === 0) {
+  throw new Error(`Unknown app directory: ${targetApp}`);
+}
+
+for (const config of selectedConfigs) {
   const count = writeApp(rows, config);
   console.log(`Synced ${count} ${config.label} recipes.`);
 }
