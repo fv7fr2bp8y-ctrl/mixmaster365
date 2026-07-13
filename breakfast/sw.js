@@ -1,4 +1,6 @@
-const CACHE_NAME = "brunch365-v55";
+const CACHE_NAME = "brunch365-v56";
+const RUNTIME_CACHE_NAME = "brunch365-runtime-v1";
+const MAX_RUNTIME_ENTRIES = 48;
 const IS_PRODUCTION_HOST = self.location.hostname === "brunch.freefrom365.com";
 const BASE = IS_PRODUCTION_HOST ? "" : "/breakfast";
 const appPath = (path = "") => `${BASE}/${path}`.replace(/\/+/g, "/");
@@ -16,6 +18,12 @@ const APP_SHELL = [
   appPath("logo-source.png")
 ];
 
+async function trimCache(cacheName, maxEntries) {
+  const cache = await caches.open(cacheName);
+  const keys = await cache.keys();
+  await Promise.all(keys.slice(0, Math.max(0, keys.length - maxEntries)).map((request) => cache.delete(request)));
+}
+
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) =>
@@ -27,7 +35,11 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))))
+    caches.keys().then((keys) => Promise.all(
+      keys
+        .filter((key) => ![CACHE_NAME, RUNTIME_CACHE_NAME].includes(key))
+        .map((key) => caches.delete(key))
+    ))
   );
   self.clients.claim();
 });
@@ -63,7 +75,9 @@ self.addEventListener("fetch", (event) => {
       const update = fetch(event.request).then((response) => {
         if (response && (response.ok || response.type === "opaque")) {
           const copy = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+          caches.open(RUNTIME_CACHE_NAME)
+            .then((cache) => cache.put(event.request, copy))
+            .then(() => trimCache(RUNTIME_CACHE_NAME, MAX_RUNTIME_ENTRIES));
         }
         return response;
       }).catch(() => cached);

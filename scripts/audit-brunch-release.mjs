@@ -40,6 +40,24 @@ function expectPng(relativePath, width, height) {
   }
 }
 
+function normalizedWords(value) {
+  const stopWords = new Set(["с", "и", "на", "от", "за", "по", "в", "а"]);
+  return new Set(
+    String(value || "")
+      .toLocaleLowerCase("bg")
+      .normalize("NFKD")
+      .replace(/\p{M}/gu, "")
+      .match(/\p{L}{3,}/gu)
+      ?.filter((word) => !stopWords.has(word)) || []
+  );
+}
+
+function jaccard(left, right) {
+  const intersection = [...left].filter((word) => right.has(word)).length;
+  const union = new Set([...left, ...right]).size;
+  return union ? intersection / union : 0;
+}
+
 const context = { window: {} };
 try {
   vm.runInNewContext(
@@ -99,6 +117,30 @@ if (!Array.isArray(recipes)) {
       }
     });
   });
+
+  for (const field of ["name", ...languages.map((language) => `name_${language}`)]) {
+    const names = new Map();
+    recipes.forEach((recipe) => {
+      const normalized = [...normalizedWords(recipe[field])].sort().join(" ");
+      if (!normalized) return;
+      if (!names.has(normalized)) names.set(normalized, []);
+      names.get(normalized).push(recipe.source_id);
+    });
+    names.forEach((sourceIds) => {
+      if (sourceIds.length > 1) fail(`duplicate ${field}: ${sourceIds.join(", ")}`);
+    });
+  }
+
+  for (let leftIndex = 0; leftIndex < recipes.length; leftIndex++) {
+    const leftWords = normalizedWords(recipes[leftIndex].name);
+    for (let rightIndex = leftIndex + 1; rightIndex < recipes.length; rightIndex++) {
+      const rightWords = normalizedWords(recipes[rightIndex].name);
+      const unionSize = new Set([...leftWords, ...rightWords]).size;
+      if (unionSize >= 5 && jaccard(leftWords, rightWords) >= 0.82) {
+        fail(`near-duplicate names: ${recipes[leftIndex].source_id}, ${recipes[rightIndex].source_id}`);
+      }
+    }
+  }
 
   const expectedFeaturedCount = Math.min(72, recipes.length);
   const featuredRanks = recipes

@@ -432,7 +432,7 @@
         }, 1800);
     </script>
 
-    <script src="data.js?v=20260713-11"></script>
+    <script src="data.js?v=20260714-1"></script>
 
     <!-- ============ I18N + UNITS CORE ============ -->
     <script>
@@ -478,7 +478,7 @@
                 ingredients_label:'Съставки', steps_label:'Стъпки', ingredient_count:'съставки',
                 footer_contact:'Контакт', footer_privacy:'Поверителност', footer_rights:'© 2026 New Age Studio. Всички права запазени.', footer_note:'Рецепти за вдъхновение. Съобразявайте съставките с личните си нужди и алергии.',
                 share_text:'Brunch 365 - рецепти за всеки ден', toast_link_copied:'Линкът е копиран ✓',
-                aria_share:'Сподели', aria_top:'Нагоре', aria_settings:'Език',
+                aria_share:'Сподели', aria_favorite:'Добави в избрани', aria_unfavorite:'Премахни от избрани', aria_top:'Нагоре', aria_settings:'Език',
                 months:['Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември'],
             },
             en: {
@@ -513,7 +513,7 @@
                 ingredients_label:'Ingredients', steps_label:'Method', ingredient_count:'ingredients',
                 footer_contact:'Contact', footer_privacy:'Privacy', footer_rights:'© 2026 New Age Studio. All rights reserved.', footer_note:'Recipes for inspiration. Adjust ingredients to your needs and allergies.',
                 share_text:'Brunch 365 - everyday brunch recipes', toast_link_copied:'Link copied ✓',
-                aria_share:'Share', aria_top:'Top', aria_settings:'Language',
+                aria_share:'Share', aria_favorite:'Add to favorites', aria_unfavorite:'Remove from favorites', aria_top:'Top', aria_settings:'Language',
                 months:['January','February','March','April','May','June','July','August','September','October','November','December'],
             },
             de: {
@@ -548,7 +548,7 @@
                 ingredients_label:'Zutaten', steps_label:'Zubereitung', ingredient_count:'Zutaten',
                 footer_contact:'Kontakt', footer_privacy:'Datenschutz', footer_rights:'© 2026 New Age Studio. Alle Rechte vorbehalten.', footer_note:'Rezepte zur Inspiration. Bitte Zutaten an persönliche Bedürfnisse und Allergien anpassen.',
                 share_text:'Brunch 365 - Brunch-Rezepte für jeden Tag', toast_link_copied:'Link kopiert ✓',
-                aria_share:'Teilen', aria_top:'Nach oben', aria_settings:'Sprache',
+                aria_share:'Teilen', aria_favorite:'Zu Favoriten hinzufügen', aria_unfavorite:'Aus Favoriten entfernen', aria_top:'Nach oben', aria_settings:'Sprache',
                 months:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
             },
             es: {
@@ -583,7 +583,7 @@
                 ingredients_label:'Ingredientes', steps_label:'Preparación', ingredient_count:'ingredientes',
                 footer_contact:'Contacto', footer_privacy:'Privacidad', footer_rights:'© 2026 New Age Studio. Todos los derechos reservados.', footer_note:'Recetas para inspirarte. Ajusta los ingredientes a tus necesidades y alergias.',
                 share_text:'Brunch 365 - recetas de brunch para cada día', toast_link_copied:'Enlace copiado ✓',
-                aria_share:'Compartir', aria_top:'Arriba', aria_settings:'Idioma',
+                aria_share:'Compartir', aria_favorite:'Añadir a favoritos', aria_unfavorite:'Quitar de favoritos', aria_top:'Arriba', aria_settings:'Idioma',
                 months:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
             },
             ru: {
@@ -618,7 +618,7 @@
                 ingredients_label:'Ингредиенты', steps_label:'Приготовление', ingredient_count:'ингредиентов',
                 footer_contact:'Контакт', footer_privacy:'Конфиденциальность', footer_rights:'© 2026 New Age Studio. Все права защищены.', footer_note:'Рецепты для вдохновения. Учитывайте свои потребности и аллергии.',
                 share_text:'Brunch 365 - рецепты для бранча на каждый день', toast_link_copied:'Ссылка скопирована ✓',
-                aria_share:'Поделиться', aria_top:'Наверх', aria_settings:'Язык',
+                aria_share:'Поделиться', aria_favorite:'Добавить в избранное', aria_unfavorite:'Удалить из избранного', aria_top:'Наверх', aria_settings:'Язык',
                 months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
             },
         };
@@ -656,7 +656,7 @@
             ingredients_label:'Ingrédients', steps_label:'Préparation', ingredient_count:'ingrédients',
             footer_contact:'Contact', footer_privacy:'Confidentialité', footer_rights:'© 2026 New Age Studio. Tous droits réservés.', footer_note:'Recettes pour inspiration. Adaptez les ingrédients à vos besoins et allergies.',
             share_text:'Brunch 365 - recettes de brunch au quotidien', toast_link_copied:'Lien copié ✓',
-            aria_share:'Partager', aria_top:'Haut', aria_settings:'Langue',
+            aria_share:'Partager', aria_favorite:'Ajouter aux favoris', aria_unfavorite:'Retirer des favoris', aria_top:'Haut', aria_settings:'Langue',
             months:['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
         };
 
@@ -1000,12 +1000,6 @@
             } catch(e) {}
         })();
 
-        const dataBase       = "https://script.google.com/macros/s/AKfycbwtMLRmJa3Lccsz4YLh0UwCFG7O_BZv-H-U08lcZgmX4JkCXmco0PmhoKB6Oc3PdEUYtQ/exec";
-        const BREAKFAST_SHEET_ID = "1GRd1I9nZ8N1vSSngaTIM1PzP7NmXhrAWHhKmzi1XE1g";
-        const BREAKFAST_GID      = "83321663";
-        const apiUrl             = dataBase + `?ssid=${BREAKFAST_SHEET_ID}&gid=${BREAKFAST_GID}`;
-        const mocktailsUrl       = apiUrl;
-
         // === STATE ===
         let allCocktails  = [];
         let allMocktails  = [];
@@ -1260,6 +1254,7 @@
             const cotdImg = document.getElementById('cotd-img');
             cotdImg.onerror = () => { cotdImg.onerror = null; cotdImg.src = getRecipeFallbackImg(cotdCocktail); };
             cotdImg.src = getRecipeImg(cotdCocktail);
+            cotdImg.alt = loc(cotdCocktail, 'name');
             document.getElementById('cotd-name').textContent  = loc(cotdCocktail,'name');
             document.getElementById('cotd-base').textContent  = cotdCocktail.base ? '— ' + loc(cotdCocktail,'base') + ' —' : '';
             document.getElementById('cotd-icon').textContent  = '◇';
@@ -1303,33 +1298,13 @@
             document.getElementById('loader').classList.add('hidden');
         }
 
-        async function fetchWithTimeout(url, timeoutMs = 12000) {
-            const controller = new AbortController();
-            const timer = setTimeout(() => controller.abort(), timeoutMs);
-            try {
-                const res = await fetch(url, { signal: controller.signal, cache: 'no-store' });
-                if (!res.ok) throw new Error('Bad response');
-                return await res.json();
-            } finally {
-                clearTimeout(timer);
-            }
-        }
-
-        async function init() {
+        function init() {
             const localData = Array.isArray(window.BREAKFAST_DATA) ? window.BREAKFAST_DATA : [];
             if (localData.length) {
                 hydrateBreakfastData(localData);
                 return;
             }
-
-            try {
-                const data = await fetchWithTimeout(mocktailsUrl);
-                if (Array.isArray(data) && data.length) hydrateBreakfastData(data);
-            } catch (e) {
-                if (!localData.length) {
-                    document.getElementById('loader-text').innerHTML = `<span class='text-red-400'>${t('error_connection')}</span>`;
-                }
-            }
+            document.getElementById('loader-text').innerHTML = `<span class='text-red-400'>${t('error_connection')}</span>`;
         }
 
         // === RENDER ===
@@ -1382,14 +1357,14 @@
             return `
                     <article class="cocktail-card deco-card overflow-hidden" id="${cardId}" style="animation-delay: ${delay}s">
                         <div class="relative">
-                            <img src="${getRecipeImg(d)}" class="w-full h-48 object-cover" loading="lazy" onerror="this.onerror=null;this.src='${getRecipeFallbackImg(d)}'">
+                            <img src="${getRecipeImg(d)}" alt="${escapeHtml(loc(d,'name'))}" class="w-full h-48 object-cover" loading="lazy" onerror="this.onerror=null;this.src='${getRecipeFallbackImg(d)}'">
                             <button type="button" onclick="shareRecipe('${recipeShareKey(d)}', event)"
                                     aria-label="${escapeHtml(t('aria_share'))}"
                                     class="absolute top-3 right-3 w-10 h-10 bg-ink/80 backdrop-blur-sm border border-gold-dim text-cream-dim hover:text-gold hover:border-gold flex items-center justify-center text-base active:scale-90 transition">
                                 <span class="font-body text-[1.35rem] leading-none font-light" aria-hidden="true">&#8599;&#xfe0e;</span>
                             </button>
                             <button data-cocktail="${escapeHtml(d.name)}" onclick="toggleFavorite(this, event)"
-                                    aria-label="Toggle favorite"
+                                    aria-label="${escapeHtml(isFav ? t('aria_unfavorite') : t('aria_favorite'))}"
                                     class="fav-btn absolute top-3 left-3 w-10 h-10 bg-ink/80 backdrop-blur-sm border ${isFav ? 'border-gold-bright text-gold-bright' : 'border-gold-dim text-cream-dim'} flex items-center justify-center text-base active:scale-90 transition">
                                 ${isFav ? '◆' : '◇'}
                             </button>
@@ -1512,6 +1487,7 @@
 
             const isFav = !wasFav;
             btn.innerHTML = isFav ? '◆' : '◇';
+            btn.setAttribute('aria-label', t(isFav ? 'aria_unfavorite' : 'aria_favorite'));
             btn.className = `fav-btn absolute top-3 left-3 w-10 h-10 bg-ink/70 backdrop-blur-sm border ${isFav ? 'border-gold-bright text-gold-bright' : 'border-gold-dim text-cream-dim'} flex items-center justify-center text-base hover:border-gold hover:text-gold active:scale-90 transition`;
 
             updateFavBar();
@@ -1558,7 +1534,7 @@
 
         function cocktailOfTheDay() {
             closeAISheet();
-            const pool = allCocktails.filter(c => c && c.name);
+            const pool = activeList().filter(c => c && c.name);
             if (pool.length === 0) return;
             const today = new Date();
             const seed = today.getFullYear() * 1000 + today.getMonth() * 50 + today.getDate();
@@ -1595,7 +1571,7 @@
         // === STATS ===
         function showStats() {
             closeAISheet();
-            const valid = allCocktails.filter(c => c && c.name);
+            const valid = activeList().filter(c => c && c.name);
             const total = valid.length;
 
             const baseStats = {};

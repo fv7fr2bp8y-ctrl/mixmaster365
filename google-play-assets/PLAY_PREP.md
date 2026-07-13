@@ -1,6 +1,6 @@
 # Google Play prep
 
-Дата: 2026-07-06
+Дата: 2026-07-14
 
 ## Apps
 
@@ -30,8 +30,8 @@
 - Play-ready screenshots are PNG, 1080 x 1920, in `google-play-assets/screenshots-play/`.
 - Splash previews are PNG in `google-play-assets/splash-previews/`.
 - Contact sheet preview: `google-play-assets/screenshots-play/contact-sheet.png`
-- Brunch currently has 327 published recipes with images, quantities and six-language records.
-- The release target remains 365 fully reviewed recipes with unique images.
+- Brunch has 365 reviewed recipes, 365 unique Drive images, quantities and complete records in Bulgarian, English, Spanish, French, German and Russian.
+- The Brunch phone screenshots were regenerated from the current 365-recipe interface on 2026-07-14.
 
 ## Before upload
 
