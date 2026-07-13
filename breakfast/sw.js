@@ -1,24 +1,27 @@
-const CACHE_NAME = "brunch365-v54";
+const CACHE_NAME = "brunch365-v55";
+const IS_PRODUCTION_HOST = self.location.hostname === "brunch.freefrom365.com";
+const BASE = IS_PRODUCTION_HOST ? "" : "/breakfast";
+const appPath = (path = "") => `${BASE}/${path}`.replace(/\/+/g, "/");
 const APP_SHELL = [
-  "/",
-  "/index.html",
-  "/data.js",
-  "/manifest.json",
-  "/icon-192.png",
-  "/icon-512.png",
-  "/logo-source.png",
-  "/breakfast/",
-  "/breakfast/index.html",
-  "/breakfast/data.js",
-  "/breakfast/manifest.json",
-  "/breakfast/privacy.html",
-  "/breakfast/icon-192.png",
-  "/breakfast/icon-512.png",
-  "/breakfast/logo-source.png"
+  appPath(),
+  appPath("index.html"),
+  appPath("tailwind.css"),
+  appPath("data.js"),
+  appPath("manifest.json"),
+  appPath("privacy.html"),
+  appPath("icon-192.png"),
+  appPath("icon-512.png"),
+  appPath("icon-maskable-192.png"),
+  appPath("icon-maskable-512.png"),
+  appPath("logo-source.png")
 ];
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)).catch(() => {}));
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) =>
+      Promise.allSettled(APP_SHELL.map((url) => cache.add(url)))
+    )
+  );
   self.skipWaiting();
 });
 
@@ -33,10 +36,9 @@ self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
 
   const url = new URL(event.request.url);
-  const isAppShell = url.origin === self.location.origin && (url.pathname === "/" || url.pathname.startsWith("/breakfast/"));
-  const isGoogleAsset = /(^|\.)google\.com$/.test(url.hostname) || url.hostname.includes("googleusercontent.com");
+  const isSameOrigin = url.origin === self.location.origin;
 
-  if (isAppShell || event.request.mode === "navigate") {
+  if (event.request.mode === "navigate") {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
@@ -46,15 +48,26 @@ self.addEventListener("fetch", (event) => {
           }
           return response;
         })
-        .catch(() => caches.match(event.request).then((cached) => cached || caches.match("/") || caches.match("/breakfast/index.html")))
+        .catch(() => caches.match(event.request).then((cached) => cached || caches.match(appPath()) || caches.match(appPath("index.html"))))
     );
     return;
   }
 
-  if (isGoogleAsset) {
-    event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
+  if (isSameOrigin && APP_SHELL.includes(url.pathname)) {
+    event.respondWith(caches.match(event.request).then((cached) => cached || fetch(event.request)));
     return;
   }
 
-  event.respondWith(caches.match(event.request).then((cached) => cached || fetch(event.request)));
+  event.respondWith(
+    caches.match(event.request).then((cached) => {
+      const update = fetch(event.request).then((response) => {
+        if (response && (response.ok || response.type === "opaque")) {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+        }
+        return response;
+      }).catch(() => cached);
+      return cached || update;
+    })
+  );
 });

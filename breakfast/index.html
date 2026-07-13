@@ -4,49 +4,24 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Brunch 365">
+    <meta name="theme-color" content="#fff8ec">
+    <meta name="color-scheme" content="light">
+    <meta name="description" content="365 внимателно подбрани брънч рецепти със снимки, точни количества и шест езика.">
 
-    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Brunch 365</title>
 
-    <link rel="icon" href="icon-192.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
     <link rel="manifest" href="manifest.json">
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="tailwind.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Forum&family=Poiret+One&family=Cinzel:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        ink: '#0a0908',
-                        'ink-soft': '#161311',
-                        gold: {
-                            DEFAULT: '#c9a961',
-                            bright: '#e8c987',
-                            dim: '#7a6535',
-                            faint: 'rgba(201, 169, 97, 0.15)'
-                        },
-                        cream: {
-                            DEFAULT: '#f0e4cf',
-                            dim: '#b9a98a',
-                            faint: 'rgba(240, 228, 207, 0.5)'
-                        },
-                    },
-                    fontFamily: {
-                        display: ['"Poiret One"', 'serif'],
-                        roman: ['Forum', 'serif'],
-                        body: ['"Cormorant Garamond"', 'serif'],
-                    }
-                }
-            }
-        }
-    </script>
 
     <style>
         :root {
@@ -462,12 +437,12 @@
     <!-- ============ I18N + UNITS CORE ============ -->
     <script>
         const LANGS = [
-            { code: 'en', name: 'English',   flag: '🇬🇧' },
-            { code: 'es', name: 'Español',   flag: '🇪🇸' },
-            { code: 'de', name: 'Deutsch',   flag: '🇩🇪' },
-            { code: 'fr', name: 'Français',  flag: '🇫🇷' },
-            { code: 'ru', name: 'Русский',   flag: '🇷🇺' },
-            { code: 'bg', name: 'Български', flag: '🇧🇬' },
+            { code: 'en', name: 'English',   label: 'EN' },
+            { code: 'es', name: 'Español',   label: 'ES' },
+            { code: 'fr', name: 'Français',  label: 'FR' },
+            { code: 'de', name: 'Deutsch',   label: 'DE' },
+            { code: 'ru', name: 'Русский',   label: 'RU' },
+            { code: 'bg', name: 'Български', label: 'BG' },
         ];
 
         const I18N = {
@@ -501,7 +476,7 @@
                 filter_eggs:'Яйца', filter_oatmeal:'Каши', filter_pancakes:'Палачинки', filter_toast:'Тост', filter_bowls:'Купи', filter_soups:'Супи', filter_sweet:'Сладки', filter_legumes:'Бобови',
                 settings_title:'ЕЗИК', settings_subtitle:'Език и мерни единици', settings_units:'Мерни единици',
                 ingredients_label:'Съставки', steps_label:'Стъпки', ingredient_count:'съставки',
-                footer_contact:'Контакт', footer_rights:'© 2026 New Age Studio. Всички права запазени.', footer_note:'Рецепти за вдъхновение. Съобразявайте съставките с личните си нужди и алергии.',
+                footer_contact:'Контакт', footer_privacy:'Поверителност', footer_rights:'© 2026 New Age Studio. Всички права запазени.', footer_note:'Рецепти за вдъхновение. Съобразявайте съставките с личните си нужди и алергии.',
                 share_text:'Brunch 365 - рецепти за всеки ден', toast_link_copied:'Линкът е копиран ✓',
                 aria_share:'Сподели', aria_top:'Нагоре', aria_settings:'Език',
                 months:['Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември'],
@@ -536,7 +511,7 @@
                 filter_eggs:'Eggs', filter_oatmeal:'Porridge', filter_pancakes:'Pancakes', filter_toast:'Toast', filter_bowls:'Bowls', filter_soups:'Soups', filter_sweet:'Sweet', filter_legumes:'Legumes',
                 settings_title:'LANGUAGE', settings_subtitle:'Language & units', settings_units:'Measurement units',
                 ingredients_label:'Ingredients', steps_label:'Method', ingredient_count:'ingredients',
-                footer_contact:'Contact', footer_rights:'© 2026 New Age Studio. All rights reserved.', footer_note:'Recipes for inspiration. Adjust ingredients to your needs and allergies.',
+                footer_contact:'Contact', footer_privacy:'Privacy', footer_rights:'© 2026 New Age Studio. All rights reserved.', footer_note:'Recipes for inspiration. Adjust ingredients to your needs and allergies.',
                 share_text:'Brunch 365 - everyday brunch recipes', toast_link_copied:'Link copied ✓',
                 aria_share:'Share', aria_top:'Top', aria_settings:'Language',
                 months:['January','February','March','April','May','June','July','August','September','October','November','December'],
@@ -571,7 +546,7 @@
                 filter_eggs:'Eier', filter_oatmeal:'Porridge', filter_pancakes:'Pfannkuchen', filter_toast:'Toast', filter_bowls:'Bowls', filter_soups:'Suppen', filter_sweet:'Süss', filter_legumes:'Hülsenfrüchte',
                 settings_title:'SPRACHE', settings_subtitle:'Sprache & Einheiten', settings_units:'Maßeinheiten',
                 ingredients_label:'Zutaten', steps_label:'Zubereitung', ingredient_count:'Zutaten',
-                footer_contact:'Kontakt', footer_rights:'© 2026 New Age Studio. Alle Rechte vorbehalten.', footer_note:'Rezepte zur Inspiration. Bitte Zutaten an persönliche Bedürfnisse und Allergien anpassen.',
+                footer_contact:'Kontakt', footer_privacy:'Datenschutz', footer_rights:'© 2026 New Age Studio. Alle Rechte vorbehalten.', footer_note:'Rezepte zur Inspiration. Bitte Zutaten an persönliche Bedürfnisse und Allergien anpassen.',
                 share_text:'Brunch 365 - Brunch-Rezepte für jeden Tag', toast_link_copied:'Link kopiert ✓',
                 aria_share:'Teilen', aria_top:'Nach oben', aria_settings:'Sprache',
                 months:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
@@ -606,7 +581,7 @@
                 filter_eggs:'Huevos', filter_oatmeal:'Gachas', filter_pancakes:'Tortitas', filter_toast:'Tostada', filter_bowls:'Bowls', filter_soups:'Sopas', filter_sweet:'Dulce', filter_legumes:'Legumbres',
                 settings_title:'IDIOMA', settings_subtitle:'Idioma y unidades', settings_units:'Unidades de medida',
                 ingredients_label:'Ingredientes', steps_label:'Preparación', ingredient_count:'ingredientes',
-                footer_contact:'Contacto', footer_rights:'© 2026 New Age Studio. Todos los derechos reservados.', footer_note:'Recetas para inspirarte. Ajusta los ingredientes a tus necesidades y alergias.',
+                footer_contact:'Contacto', footer_privacy:'Privacidad', footer_rights:'© 2026 New Age Studio. Todos los derechos reservados.', footer_note:'Recetas para inspirarte. Ajusta los ingredientes a tus necesidades y alergias.',
                 share_text:'Brunch 365 - recetas de brunch para cada día', toast_link_copied:'Enlace copiado ✓',
                 aria_share:'Compartir', aria_top:'Arriba', aria_settings:'Idioma',
                 months:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
@@ -641,7 +616,7 @@
                 filter_eggs:'Яйца', filter_oatmeal:'Каши', filter_pancakes:'Блины', filter_toast:'Тост', filter_bowls:'Боулы', filter_soups:'Супы', filter_sweet:'Сладкое', filter_legumes:'Бобовые',
                 settings_title:'ЯЗЫК', settings_subtitle:'Язык и единицы', settings_units:'Единицы измерения',
                 ingredients_label:'Ингредиенты', steps_label:'Приготовление', ingredient_count:'ингредиентов',
-                footer_contact:'Контакт', footer_rights:'© 2026 New Age Studio. Все права защищены.', footer_note:'Рецепты для вдохновения. Учитывайте свои потребности и аллергии.',
+                footer_contact:'Контакт', footer_privacy:'Конфиденциальность', footer_rights:'© 2026 New Age Studio. Все права защищены.', footer_note:'Рецепты для вдохновения. Учитывайте свои потребности и аллергии.',
                 share_text:'Brunch 365 - рецепты для бранча на каждый день', toast_link_copied:'Ссылка скопирована ✓',
                 aria_share:'Поделиться', aria_top:'Наверх', aria_settings:'Язык',
                 months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
@@ -679,7 +654,7 @@
             filter_eggs:'Oeufs', filter_oatmeal:'Porridge', filter_pancakes:'Pancakes', filter_toast:'Toast', filter_bowls:'Bols', filter_soups:'Soupes', filter_sweet:'Sucré', filter_legumes:'Légumineuses',
             settings_title:'LANGUE', settings_subtitle:'Langue et unités', settings_units:'Unités de mesure',
             ingredients_label:'Ingrédients', steps_label:'Préparation', ingredient_count:'ingrédients',
-            footer_contact:'Contact', footer_rights:'© 2026 New Age Studio. Tous droits réservés.', footer_note:'Recettes pour inspiration. Adaptez les ingrédients à vos besoins et allergies.',
+            footer_contact:'Contact', footer_privacy:'Confidentialité', footer_rights:'© 2026 New Age Studio. Tous droits réservés.', footer_note:'Recettes pour inspiration. Adaptez les ingrédients à vos besoins et allergies.',
             share_text:'Brunch 365 - recettes de brunch au quotidien', toast_link_copied:'Lien copié ✓',
             aria_share:'Partager', aria_top:'Haut', aria_settings:'Langue',
             months:['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
@@ -749,7 +724,7 @@
         function openSettings() {
             const langGrid = LANGS.map(l => `
                 <button onclick="setLang('${l.code}')" class="border ${l.code===LANG?'border-gold text-gold-bright bg-ink-soft':'border-gold-dim text-cream-dim'} hover:border-gold hover:text-gold active:scale-[0.98] transition p-3 flex items-center gap-3">
-                    <span class="text-2xl">${l.flag}</span>
+                    <span class="w-8 h-8 border border-gold-dim inline-flex items-center justify-center font-roman text-[0.62rem] tracking-[0.08em]">${l.label}</span>
                     <span class="font-roman text-sm tracking-[0.1em]">${l.name}</span>
                 </button>`).join('');
             const unitBtn = (u, label) => `
@@ -918,6 +893,9 @@
             <a href="mailto:office@newage-studio.com" class="font-body italic text-cream text-lg hover:text-gold transition">
                 office@newage-studio.com
             </a>
+            <p class="mt-3">
+                <a href="privacy.html" class="font-roman text-gold-dim text-[0.62rem] tracking-[0.22em] uppercase hover:text-gold transition" data-i18n="footer_privacy">Поверителност</a>
+            </p>
             <p class="mt-5 font-roman text-cream-dim text-[0.58rem] tracking-[0.22em] uppercase" data-i18n="footer_rights">© 2026 New Age Studio. Всички права запазени.</p>
             <p class="mt-3 mx-auto max-w-sm font-body italic text-cream-dim text-sm leading-relaxed" data-i18n="footer_note">Рецепти за вдъхновение. Съобразявайте съставките с личните си нужди и алергии.</p>
         </footer>
