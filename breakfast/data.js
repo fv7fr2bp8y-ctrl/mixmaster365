@@ -15358,6 +15358,171 @@ window.BREAKFAST_DATA = [
   },
   {
     "id": 280,
+    "source_id": "BR-C180",
+    "name": "Български катми с мед и бяло сирене",
+    "base": "български ферментирали палачинки",
+    "icon": "◇",
+    "image": "https://drive.google.com/file/d/1G69VSASnkcTiryHrdrNWCWuUq3GoXWHo/view?usp=drivesdk",
+    "description": "Меки шуплести катми, намазани с масло и поднесени по български с мед и бяло саламурено сирене.",
+    "ingredients": "300 г пшенично брашно, 300 мл прясно мляко, 200 мл вода, 7 г суха мая, 10 г захар, 1/2 ч.л. сол, 40 г масло, 60 г мед, 160 г бяло саламурено сирене",
+    "recipe": "<p>Затопли млякото и водата до хладка температура; Разтвори маята и захарта, добави брашното и солта и разбъркай до гладка смес; Покрий и остави 45 минути, докато тестото стане шуплесто; Загрей широк тиган, намажи го леко с масло и сипи тънък слой тесто; Печи 2–3 минути, докато повърхността се покрие с мехурчета, обърни и допечи 1 минута; Намажи готовите катми с масло и поднеси с мед и натрошено сирене</p>",
+    "time": 70,
+    "difficulty": "Трудно",
+    "country": "България",
+    "tag": "български ферментирали палачинки",
+    "description_en": "Soft, bubbly fermented pancakes brushed with butter and served Bulgarian-style with honey and white brined cheese.",
+    "name_en": "Bulgarian katmi with honey and white cheese",
+    "base_en": "Bulgarian fermented pancakes",
+    "ingredients_en": "300 g wheat flour, 300 ml whole milk, 200 ml water, 7 g dry yeast, 10 g sugar, 1/2 tsp salt, 40 g butter, 60 g honey, 160 g white brined cheese",
+    "recipe_en": "<p>Warm the milk and water until lukewarm; Dissolve the yeast and sugar, add the flour and salt and whisk smooth; Cover and leave for 45 minutes until bubbly; Heat a wide pan, brush lightly with butter and pour in a thin layer of batter; Cook for 2–3 minutes until bubbles cover the surface, turn and cook for 1 minute; Brush the katmi with butter and serve with honey and crumbled cheese</p>",
+    "difficulty_en": "Hard",
+    "country_en": "Bulgaria",
+    "tag_en": "Bulgarian fermented pancakes",
+    "description_de": "Weiche, luftige Hefepfannkuchen, mit Butter bestrichen und bulgarisch mit Honig und Salzlakenkäse serviert.",
+    "name_de": "Bulgarische Katmi mit Honig und Weißkäse",
+    "base_de": "bulgarische Hefepfannkuchen",
+    "ingredients_de": "300 g Weizenmehl, 300 ml Vollmilch, 200 ml Wasser, 7 g Trockenhefe, 10 g Zucker, 1/2 TL Salz, 40 g Butter, 60 g Honig, 160 g Salzlakenkäse",
+    "recipe_de": "<p>Milch und Wasser lauwarm erwärmen; Hefe und Zucker darin lösen, Mehl und Salz zugeben und glatt rühren; Abdecken und 45 Minuten gehen lassen, bis Bläschen entstehen; Eine breite Pfanne erhitzen, dünn mit Butter bestreichen und eine dünne Teigschicht eingießen; 2–3 Minuten backen, bis die Oberfläche voller Bläschen ist, wenden und 1 Minute fertig backen; Mit Butter bestreichen und mit Honig und zerbröseltem Käse servieren</p>",
+    "difficulty_de": "Schwer",
+    "country_de": "Bulgarien",
+    "tag_de": "bulgarische Hefepfannkuchen",
+    "description_es": "Tortitas fermentadas suaves y esponjosas, untadas con mantequilla y servidas al estilo búlgaro con miel y queso blanco en salmuera.",
+    "name_es": "Katmi búlgaros con miel y queso blanco",
+    "base_es": "tortitas fermentadas búlgaras",
+    "ingredients_es": "300 g harina de trigo, 300 ml leche entera, 200 ml agua, 7 g levadura seca, 10 g azúcar, 1/2 cdta sal, 40 g mantequilla, 60 g miel, 160 g queso blanco en salmuera",
+    "recipe_es": "<p>Templa la leche y el agua; Disuelve la levadura y el azúcar, añade la harina y la sal y bate hasta que quede liso; Tapa y deja fermentar 45 minutos hasta que aparezcan burbujas; Calienta una sartén ancha, úntala con mantequilla y vierte una capa fina de masa; Cocina 2–3 minutos hasta que la superficie se llene de burbujas, gira y cocina 1 minuto; Unta los katmi con mantequilla y sirve con miel y queso desmenuzado</p>",
+    "difficulty_es": "Difícil",
+    "country_es": "Bulgaria",
+    "tag_es": "tortitas fermentadas búlgaras",
+    "description_fr": "Des crêpes fermentées souples et alvéolées, beurrées et servies à la bulgare avec du miel et du fromage blanc en saumure.",
+    "name_fr": "Katmi bulgares au miel et fromage blanc",
+    "base_fr": "crêpes fermentées bulgares",
+    "ingredients_fr": "300 g farine de blé, 300 ml lait entier, 200 ml eau, 7 g levure sèche, 10 g sucre, 1/2 c. à café de sel, 40 g beurre, 60 g miel, 160 g fromage blanc en saumure",
+    "recipe_fr": "<p>Tiédissez le lait et l’eau; Délayez la levure et le sucre, ajoutez la farine et le sel et fouettez jusqu’à consistance lisse; Couvrez et laissez fermenter 45 minutes jusqu’à formation de bulles; Chauffez une grande poêle, beurrez-la légèrement et versez une fine couche de pâte; Cuisez 2 à 3 minutes jusqu’à ce que la surface soit couverte de bulles, retournez et cuisez encore 1 minute; Beurrez les katmi et servez avec le miel et le fromage émietté</p>",
+    "difficulty_fr": "Difficile",
+    "country_fr": "Bulgarie",
+    "tag_fr": "crêpes fermentées bulgares",
+    "description_ru": "Мягкие пористые дрожжевые блины, смазанные маслом и поданные по-болгарски с мёдом и рассольным сыром.",
+    "name_ru": "Болгарские катми с мёдом и брынзой",
+    "base_ru": "болгарские дрожжевые блины",
+    "ingredients_ru": "300 г пшеничной муки, 300 мл цельного молока, 200 мл воды, 7 г сухих дрожжей, 10 г сахара, 1/2 ч. л. соли, 40 г сливочного масла, 60 г мёда, 160 г рассольного сыра",
+    "recipe_ru": "<p>Подогрейте молоко и воду до тёплого состояния; Растворите дрожжи и сахар, добавьте муку и соль и размешайте до гладкости; Накройте и оставьте на 45 минут до появления пузырьков; Разогрейте широкую сковороду, слегка смажьте маслом и налейте тонкий слой теста; Готовьте 2–3 минуты до пузырьков, переверните и пеките ещё 1 минуту; Смажьте катми маслом и подавайте с мёдом и раскрошенным сыром</p>",
+    "difficulty_ru": "Сложно",
+    "country_ru": "Болгария",
+    "tag_ru": "болгарские дрожжевые блины"
+  },
+  {
+    "id": 281,
+    "source_id": "BR-C181",
+    "name": "Индийска сабудана кичди с картофи и фъстъци",
+    "base": "индийска безглутенова закуска",
+    "icon": "◇",
+    "image": "https://drive.google.com/file/d/16Lzz1tM1Fh9kYS-glNDyN3yqnzf8DoeI/view?usp=drivesdk",
+    "description": "Ронлива закуска от перли тапиока с картофи, печени фъстъци, кимион, зелено чили и лайм.",
+    "ingredients": "220 г перли тапиока, 250 г картофи, 70 г печени фъстъци, 25 мл олио, 1 ч.л. кимион, 1 малка зелена люта чушка, 1/2 ч.л. захар, 1 лайм, 15 г кориандър, 3/4 ч.л. сол",
+    "recipe": "<p>Изплакни тапиоката, залей я с вода колкото да я покрие и остави 4 часа, после отцеди добре; Свари картофите до почти готовност и ги нарежи на малки кубчета; Смеси тапиоката със смлените фъстъци, захарта и солта; Загрей олиото, запържи кимиона и чилито за 30 секунди и добави картофите; Добави тапиоката и готви на умерен огън 5–7 минути, докато перлите станат прозрачни, без да бъркаш прекалено; Завърши със сок от лайм и кориандър</p>",
+    "time": 50,
+    "difficulty": "Трудно",
+    "country": "Индия",
+    "tag": "индийска безглутенова закуска",
+    "description_en": "A fluffy tapioca-pearl breakfast with potato, roasted peanuts, cumin, green chilli and lime.",
+    "name_en": "Indian sabudana khichdi with potato and peanuts",
+    "base_en": "Indian gluten-free breakfast",
+    "ingredients_en": "220 g tapioca pearls, 250 g potatoes, 70 g roasted peanuts, 25 ml neutral oil, 1 tsp cumin seeds, 1 small green chilli, 1/2 tsp sugar, 1 lime, 15 g coriander, 3/4 tsp salt",
+    "recipe_en": "<p>Rinse the tapioca, cover with just enough water and soak for 4 hours, then drain well; Boil the potatoes until almost tender and cut into small cubes; Mix the tapioca with the ground peanuts, sugar and salt; Heat the oil, fry the cumin and chilli for 30 seconds and add the potatoes; Add the tapioca and cook over medium heat for 5–7 minutes until the pearls turn translucent, stirring gently; Finish with lime juice and coriander</p>",
+    "difficulty_en": "Hard",
+    "country_en": "India",
+    "tag_en": "Indian gluten-free breakfast",
+    "description_de": "Ein lockeres Frühstück aus Tapiokaperlen mit Kartoffeln, gerösteten Erdnüssen, Kreuzkümmel, grüner Chili und Limette.",
+    "name_de": "Indisches Sabudana Khichdi mit Kartoffeln und Erdnüssen",
+    "base_de": "indisches glutenfreies Frühstück",
+    "ingredients_de": "220 g Tapiokaperlen, 250 g Kartoffeln, 70 g geröstete Erdnüsse, 25 ml neutrales Öl, 1 TL Kreuzkümmelsamen, 1 kleine grüne Chili, 1/2 TL Zucker, 1 Limette, 15 g Koriander, 3/4 TL Salz",
+    "recipe_de": "<p>Tapioka abspülen, knapp mit Wasser bedecken und 4 Stunden einweichen, dann gut abtropfen; Kartoffeln fast weich kochen und klein würfeln; Tapioka mit gemahlenen Erdnüssen, Zucker und Salz mischen; Öl erhitzen, Kreuzkümmel und Chili 30 Sekunden braten und Kartoffeln zugeben; Tapioka zugeben und bei mittlerer Hitze 5–7 Minuten garen, bis die Perlen durchsichtig sind, dabei vorsichtig rühren; Mit Limettensaft und Koriander abschließen</p>",
+    "difficulty_de": "Schwer",
+    "country_de": "Indien",
+    "tag_de": "indisches glutenfreies Frühstück",
+    "description_es": "Un desayuno suelto de perlas de tapioca con patata, cacahuetes tostados, comino, chile verde y lima.",
+    "name_es": "Sabudana khichdi indio con patata y cacahuetes",
+    "base_es": "desayuno indio sin gluten",
+    "ingredients_es": "220 g perlas de tapioca, 250 g patatas, 70 g cacahuetes tostados, 25 ml aceite neutro, 1 cdta semillas de comino, 1 chile verde pequeño, 1/2 cdta azúcar, 1 lima, 15 g cilantro, 3/4 cdta sal",
+    "recipe_es": "<p>Enjuaga la tapioca, cúbrela apenas con agua y déjala 4 horas, luego escúrrela bien; Cuece las patatas hasta que estén casi tiernas y córtalas en cubos pequeños; Mezcla la tapioca con los cacahuetes molidos, el azúcar y la sal; Calienta el aceite, fríe el comino y el chile 30 segundos y añade las patatas; Incorpora la tapioca y cocina 5–7 minutos a fuego medio hasta que las perlas estén transparentes, removiendo con suavidad; Termina con zumo de lima y cilantro</p>",
+    "difficulty_es": "Difícil",
+    "country_es": "India",
+    "tag_es": "desayuno indio sin gluten",
+    "description_fr": "Un petit-déjeuner léger de perles de tapioca avec pommes de terre, cacahuètes grillées, cumin, piment vert et citron vert.",
+    "name_fr": "Sabudana khichdi indien aux pommes de terre et cacahuètes",
+    "base_fr": "petit-déjeuner indien sans gluten",
+    "ingredients_fr": "220 g perles de tapioca, 250 g pommes de terre, 70 g cacahuètes grillées, 25 ml huile neutre, 1 c. à café de graines de cumin, 1 petit piment vert, 1/2 c. à café de sucre, 1 citron vert, 15 g coriandre, 3/4 c. à café de sel",
+    "recipe_fr": "<p>Rincez le tapioca, couvrez-le à peine d’eau et laissez tremper 4 heures, puis égouttez soigneusement; Faites cuire les pommes de terre presque à cœur et coupez-les en petits dés; Mélangez le tapioca avec les cacahuètes moulues, le sucre et le sel; Chauffez l’huile, faites revenir le cumin et le piment 30 secondes puis ajoutez les pommes de terre; Ajoutez le tapioca et cuisez 5 à 7 minutes à feu moyen jusqu’à ce que les perles deviennent translucides, en remuant délicatement; Terminez avec le jus de citron vert et la coriandre</p>",
+    "difficulty_fr": "Difficile",
+    "country_fr": "Inde",
+    "tag_fr": "petit-déjeuner indien sans gluten",
+    "description_ru": "Рассыпчатый завтрак из тапиоковых шариков с картофелем, жареным арахисом, кумином, зелёным чили и лаймом.",
+    "name_ru": "Индийская сабудана кичди с картофелем и арахисом",
+    "base_ru": "индийский безглютеновый завтрак",
+    "ingredients_ru": "220 г тапиоковых шариков, 250 г картофеля, 70 г жареного арахиса, 25 мл нейтрального масла, 1 ч. л. семян кумина, 1 маленький зелёный чили, 1/2 ч. л. сахара, 1 лайм, 15 г кинзы, 3/4 ч. л. соли",
+    "recipe_ru": "<p>Промойте тапиоку, едва залейте водой и оставьте на 4 часа, затем хорошо откиньте; Отварите картофель почти до готовности и нарежьте мелкими кубиками; Смешайте тапиоку с молотым арахисом, сахаром и солью; Разогрейте масло, обжарьте кумин и чили 30 секунд и добавьте картофель; Добавьте тапиоку и готовьте 5–7 минут на среднем огне до прозрачности шариков, осторожно перемешивая; Добавьте сок лайма и кинзу</p>",
+    "difficulty_ru": "Сложно",
+    "country_ru": "Индия",
+    "tag_ru": "индийский безглютеновый завтрак"
+  },
+  {
+    "id": 282,
+    "source_id": "BR-C182",
+    "name": "Американски бисквити с кремообразен гъбен сос",
+    "base": "американска солена закуска",
+    "icon": "◇",
+    "image": "https://drive.google.com/file/d/1GiSguhzLjvbnj3-_Lte7FNkbCm8EVTpC/view?usp=drivesdk",
+    "description": "Високи маслени бисквити на пластове с богат вегетариански сос от запечени гъби и черен пипер.",
+    "ingredients": "300 г пшенично брашно, 15 г бакпулвер, 1/2 ч.л. сода, 1 ч.л. сол, 100 г студено масло за тестото, 220 мл мътеница, 300 г печурки, 50 г шалот, 20 г масло за соса, 2 с.л. брашно за соса, 1 ч.л. мащерка, 450 мл прясно мляко, 1 ч.л. черен пипер",
+    "recipe": "<p>Загрей фурната на 220°C; Смеси брашното, бакпулвера, содата и солта, втрий студеното масло и добави мътеницата; Събери тестото без месене, прегъни го три пъти, разточи на 2,5 см и изрежи 6 бисквити; Печи 14–16 минути до златисто; За соса запечи гъбите и шалота в масло, добави мащерката и две лъжици брашно; Налей млякото постепенно и вари 4–5 минути до кремообразен сос; Подправи щедро с черен пипер и поднеси върху топлите разполовени бисквити</p>",
+    "time": 45,
+    "difficulty": "Трудно",
+    "country": "Световна кухня",
+    "tag": "американска солена закуска",
+    "description_en": "Tall flaky buttermilk biscuits with a rich vegetarian gravy of browned mushrooms and black pepper.",
+    "name_en": "Southern biscuits with creamy mushroom gravy",
+    "base_en": "American savory breakfast",
+    "ingredients_en": "300 g wheat flour, 15 g baking powder, 1/2 tsp baking soda, 1 tsp salt, 100 g cold butter for the dough, 220 ml buttermilk, 300 g button mushrooms, 50 g shallot, 20 g butter for the gravy, 2 tbsp flour for the gravy, 1 tsp thyme, 450 ml whole milk, 1 tsp black pepper",
+    "recipe_en": "<p>Heat the oven to 220°C; Mix the flour, baking powder, baking soda and salt, rub in the cold butter and add the buttermilk; Bring the dough together without kneading, fold it three times, roll to 2.5 cm and cut 6 biscuits; Bake for 14–16 minutes until golden; For the gravy, brown the mushrooms and shallot in butter, then add the thyme and two tablespoons of flour; Gradually add the milk and simmer for 4–5 minutes until creamy; Season generously with black pepper and serve over the warm split biscuits</p>",
+    "difficulty_en": "Hard",
+    "country_en": "World cuisine",
+    "tag_en": "American savory breakfast",
+    "description_de": "Hohe, blättrige Buttermilch-Biscuits mit einer kräftigen vegetarischen Sauce aus gebräunten Pilzen und schwarzem Pfeffer.",
+    "name_de": "Südstaaten-Biscuits mit cremiger Pilzsauce",
+    "base_de": "amerikanisches herzhaftes Frühstück",
+    "ingredients_de": "300 g Weizenmehl, 15 g Backpulver, 1/2 TL Natron, 1 TL Salz, 100 g kalte Butter für den Teig, 220 ml Buttermilch, 300 g Champignons, 50 g Schalotte, 20 g Butter für die Sauce, 2 EL Mehl für die Sauce, 1 TL Thymian, 450 ml Vollmilch, 1 TL schwarzer Pfeffer",
+    "recipe_de": "<p>Den Backofen auf 220°C vorheizen; Mehl, Backpulver, Natron und Salz mischen, kalte Butter einarbeiten und Buttermilch zugeben; Teig ohne Kneten zusammenfügen, dreimal falten, 2,5 cm dick ausrollen und 6 Biscuits ausstechen; 14–16 Minuten goldbraun backen; Für die Sauce Pilze und Schalotte in Butter bräunen, Thymian und zwei Esslöffel Mehl zugeben; Milch nach und nach einrühren und 4–5 Minuten cremig köcheln; Kräftig pfeffern und über den warmen halbierten Biscuits servieren</p>",
+    "difficulty_de": "Schwer",
+    "country_de": "Weltküche",
+    "tag_de": "amerikanisches herzhaftes Frühstück",
+    "description_es": "Biscuits altos y hojaldrados de suero de leche con una rica salsa vegetariana de setas doradas y pimienta negra.",
+    "name_es": "Biscuits sureños con salsa cremosa de setas",
+    "base_es": "desayuno salado estadounidense",
+    "ingredients_es": "300 g harina de trigo, 15 g levadura química, 1/2 cdta bicarbonato, 1 cdta sal, 100 g mantequilla fría para la masa, 220 ml suero de leche, 300 g champiñones, 50 g chalota, 20 g mantequilla para la salsa, 2 cdas harina para la salsa, 1 cdta tomillo, 450 ml leche entera, 1 cdta pimienta negra",
+    "recipe_es": "<p>Calienta el horno a 220°C; Mezcla la harina, la levadura, el bicarbonato y la sal, integra la mantequilla fría y añade el suero de leche; Une la masa sin amasar, pliégala tres veces, estírala a 2,5 cm y corta 6 biscuits; Hornea 14–16 minutos hasta dorar; Para la salsa, dora las setas y la chalota en mantequilla, añade el tomillo y dos cucharadas de harina; Incorpora la leche poco a poco y cuece 4–5 minutos hasta que quede cremosa; Añade abundante pimienta negra y sirve sobre los biscuits calientes abiertos</p>",
+    "difficulty_es": "Difícil",
+    "country_es": "Cocina mundial",
+    "tag_es": "desayuno salado estadounidense",
+    "description_fr": "De hauts biscuits feuilletés au babeurre nappés d’une riche sauce végétarienne aux champignons dorés et au poivre noir.",
+    "name_fr": "Biscuits du Sud à la sauce crémeuse aux champignons",
+    "base_fr": "petit-déjeuner salé américain",
+    "ingredients_fr": "300 g farine de blé, 15 g levure chimique, 1/2 c. à café de bicarbonate, 1 c. à café de sel, 100 g beurre froid pour la pâte, 220 ml babeurre, 300 g champignons de Paris, 50 g échalote, 20 g beurre pour la sauce, 2 c. à soupe de farine pour la sauce, 1 c. à café de thym, 450 ml lait entier, 1 c. à café de poivre noir",
+    "recipe_fr": "<p>Préchauffez le four à 220°C; Mélangez la farine, la levure, le bicarbonate et le sel, incorporez le beurre froid puis le babeurre; Rassemblez la pâte sans pétrir, pliez-la trois fois, étalez à 2,5 cm et découpez 6 biscuits; Cuisez 14 à 16 minutes jusqu’à coloration; Pour la sauce, faites dorer champignons et échalote dans le beurre, puis ajoutez le thym et deux cuillères de farine; Versez progressivement le lait et laissez épaissir 4 à 5 minutes; Poivrez généreusement et servez sur les biscuits chauds ouverts</p>",
+    "difficulty_fr": "Difficile",
+    "country_fr": "Cuisine du monde",
+    "tag_fr": "petit-déjeuner salé américain",
+    "description_ru": "Высокие слоёные бисквиты на пахте с насыщенным вегетарианским соусом из поджаренных грибов и чёрного перца.",
+    "name_ru": "Южные бисквиты со сливочным грибным соусом",
+    "base_ru": "американский несладкий завтрак",
+    "ingredients_ru": "300 г пшеничной муки, 15 г разрыхлителя, 1/2 ч. л. соды, 1 ч. л. соли, 100 г холодного масла для теста, 220 мл пахты, 300 г шампиньонов, 50 г шалота, 20 г масла для соуса, 2 ст. л. муки для соуса, 1 ч. л. тимьяна, 450 мл цельного молока, 1 ч. л. чёрного перца",
+    "recipe_ru": "<p>Разогрейте духовку до 220°C; Смешайте муку, разрыхлитель, соду и соль, разотрите с холодным маслом и добавьте пахту; Соберите тесто без вымешивания, сложите три раза, раскатайте до 2,5 см и вырежьте 6 бисквитов; Выпекайте 14–16 минут до золотистого цвета; Для соуса подрумяньте грибы и шалот в масле, добавьте тимьян и две ложки муки; Постепенно влейте молоко и варите 4–5 минут до кремовой густоты; Щедро приправьте перцем и подавайте на тёплых разрезанных бисквитах</p>",
+    "difficulty_ru": "Сложно",
+    "country_ru": "Мировая кухня",
+    "tag_ru": "американский несладкий завтрак"
+  },
+  {
+    "id": 283,
     "source_id": "BR-C123",
     "name": "Сръбска proja с фета, спанак и печена чушка",
     "base": "балкански царевичен хляб",
@@ -15412,7 +15577,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "балканский кукурузный хлеб"
   },
   {
-    "id": 281,
+    "id": 284,
     "source_id": "BR-C124",
     "name": "Белгийски вафли с круша, кисело мляко и лешници",
     "base": "вафли с круша",
@@ -15467,7 +15632,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "вафли с грушей"
   },
   {
-    "id": 282,
+    "id": 285,
     "source_id": "BR-C125",
     "name": "Пуерторикански Mallorca сандвич с яйце, шунка и сирене",
     "base": "сладко-солен сандвич",
@@ -15522,7 +15687,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "сладко-солёный сэндвич"
   },
   {
-    "id": 283,
+    "id": 286,
     "source_id": "BR-C126",
     "name": "Норвежки svele с brunost, горски плодове и кисело мляко",
     "base": "норвежки меки палачинки",
@@ -15577,7 +15742,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "норвежские оладьи"
   },
   {
-    "id": 284,
+    "id": 287,
     "source_id": "BR-C127",
     "name": "Чилийска marraqueta с авокадо, домат и бъркани яйца",
     "base": "чилийски яйчен сандвич",
@@ -15632,7 +15797,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "чилийский сэндвич с яйцом"
   },
   {
-    "id": 285,
+    "id": 288,
     "source_id": "BR-C128",
     "name": "Йорданска fatteh с нахут, тахан и кисело мляко",
     "base": "топъл нахут с хрупкава пита",
@@ -15687,7 +15852,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "тёплый нут с хрустящей питой"
   },
   {
-    "id": 286,
+    "id": 289,
     "source_id": "BR-C129",
     "name": "Костарикански gallo pinto с яйца и печен живовляк",
     "base": "ориз с черен боб",
@@ -15742,7 +15907,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "рис с чёрной фасолью"
   },
   {
-    "id": 287,
+    "id": 290,
     "source_id": "BR-C130",
     "name": "Нидерландски wentelteefjes с ябълка, канела и кисело мляко",
     "base": "нидерландски пържени филийки",
@@ -15797,7 +15962,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "нидерландские гренки"
   },
   {
-    "id": 288,
+    "id": 291,
     "source_id": "BR-C131",
     "name": "Иракски kahi с каймак, фурми и шамфъстък",
     "base": "слоеста иракска закуска",
@@ -15852,7 +16017,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "слоёная иракская выпечка"
   },
   {
-    "id": 289,
+    "id": 292,
     "source_id": "BR-C132",
     "name": "Чешки chlebíčky с яйце, цвекло и хрян",
     "base": "чешки отворени сандвичи",
@@ -15907,7 +16072,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "чешские открытые бутерброды"
   },
   {
-    "id": 290,
+    "id": 293,
     "source_id": "BR-C133",
     "name": "Кенийски mandazi с кардамон, ананас и кокосово кисело мляко",
     "base": "източноафрикански пържени хлебчета",
@@ -15962,7 +16127,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "восточноафриканский жареный хлеб"
   },
   {
-    "id": 291,
+    "id": 294,
     "source_id": "BR-C134",
     "name": "Албански byrek с праз, спанак и фета",
     "base": "балканска вита пита",
@@ -16017,7 +16182,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "балканский слоёный пирог"
   },
   {
-    "id": 292,
+    "id": 295,
     "source_id": "BR-C135",
     "name": "Пакистански aloo paratha с кисело мляко и краставично чътни",
     "base": "пълнени картофени питки",
@@ -16072,7 +16237,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "лепёшки с картофельной начинкой"
   },
   {
-    "id": 293,
+    "id": 296,
     "source_id": "BR-C136",
     "name": "Еквадорски bolón de verde със сирене и пържено яйце",
     "base": "топки от зелен живовляк",
@@ -16127,7 +16292,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "шарики из зелёного плантана"
   },
   {
-    "id": 294,
+    "id": 297,
     "source_id": "BR-C137",
     "name": "Латвийски ръжен пластов десерт с горски плодове и извара",
     "base": "ръжен десерт в чаши",
@@ -16182,7 +16347,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "слоёный ржаной десерт"
   },
   {
-    "id": 295,
+    "id": 298,
     "source_id": "BR-C138",
     "name": "Румънска mămăligă с гъби, поширано яйце и telemea",
     "base": "царевична каша с гъби",
@@ -16237,7 +16402,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "кукурузная каша с грибами"
   },
   {
-    "id": 296,
+    "id": 299,
     "source_id": "BR-C139",
     "name": "Хаитянска каша от зелен живовляк с кокос и банан",
     "base": "кокосова каша от живовляк",
@@ -16292,7 +16457,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "кокосовая каша из плантана"
   },
   {
-    "id": 297,
+    "id": 300,
     "source_id": "BR-C140",
     "name": "Саудитски mutabbaq с яйце, праз и домат",
     "base": "хрупкави пълнени квадрати",
@@ -16347,7 +16512,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "хрустящие квадраты с начинкой"
   },
   {
-    "id": 298,
+    "id": 301,
     "source_id": "BR-C141",
     "name": "Салвадорски pupusas с черен боб, сирене и curtido",
     "base": "пълнени царевични питки",
@@ -16402,7 +16567,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "кукурузные лепёшки с начинкой"
   },
   {
-    "id": 299,
+    "id": 302,
     "source_id": "BR-C142",
     "name": "Унгарско lecsó с яйца и ръжен тост",
     "base": "чушки и домати с яйца",
@@ -16457,7 +16622,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "перец и помидоры с яйцами"
   },
   {
-    "id": 300,
+    "id": 303,
     "source_id": "BR-C143",
     "name": "Мозамбикска каша от касава и кокос с манго и фъстъци",
     "base": "касава с кокос и манго",
@@ -16512,7 +16677,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "маниок с кокосом и манго"
   },
   {
-    "id": 301,
+    "id": 304,
     "source_id": "BR-C144",
     "name": "Тринидадски doubles с къри нахут и мангово чътни",
     "base": "тринидадски питки с къри нахут",
@@ -16567,7 +16732,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Тринидадские лепёшки с нутом карри"
   },
   {
-    "id": 302,
+    "id": 305,
     "source_id": "BR-C145",
     "name": "Ирландски boxty с поширани яйца, спанак и копърено кисело мляко",
     "base": "ирландски картофени палачинки",
@@ -16622,7 +16787,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Ирландские картофельные оладьи"
   },
   {
-    "id": 303,
+    "id": 306,
     "source_id": "BR-C146",
     "name": "Сенегалски thiakry с просо, кисело мляко и портокал",
     "base": "сенегалска купа с просо",
@@ -16677,7 +16842,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Сенегальская миска с пшеном"
   },
   {
-    "id": 304,
+    "id": 307,
     "source_id": "BR-C147",
     "name": "Малтийска ftira с риба тон, домати, каперси и яйце",
     "base": "малтийски сандвич с риба тон",
@@ -16732,7 +16897,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Мальтийский сэндвич с тунцом"
   },
   {
-    "id": 305,
+    "id": 308,
     "source_id": "BR-C149",
     "name": "Маврицийска farata с къри от маслен боб и доматено чътни",
     "base": "маврицийски питки с бобено къри",
@@ -16787,7 +16952,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Маврикийские лепёшки с фасолевым карри"
   },
   {
-    "id": 306,
+    "id": 309,
     "source_id": "BR-C150",
     "name": "Самоански panikeke с банан, кокосово кисело мляко и лайм",
     "base": "самоански бананови бухтички",
@@ -16842,7 +17007,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "самоанские банановые пончики"
   },
   {
-    "id": 307,
+    "id": 310,
     "source_id": "BR-C151",
     "name": "Бангладешки cholar dal с luchi и свежа салата",
     "base": "бенгалски дал с пухкави питки",
@@ -16897,7 +17062,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "бенгальский дал с пышными лепёшками"
   },
   {
-    "id": 308,
+    "id": 311,
     "source_id": "BR-C154",
     "name": "Колумбийска changua с поширани яйца, пресен лук и хляб",
     "base": "колумбийска млечна супа",
@@ -16952,7 +17117,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "колумбийский молочный суп"
   },
   {
-    "id": 309,
+    "id": 312,
     "source_id": "BR-C156",
     "name": "Угандийски katogo с матоке, червен боб и авокадо",
     "base": "угандийска яхния с матоке",
@@ -17007,7 +17172,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "угандийское рагу из матоке"
   },
   {
-    "id": 310,
+    "id": 313,
     "source_id": "BR-C158",
     "name": "Индийски pesarattu с джинджифилово-кокосово чътни",
     "base": "андхра палачинки от мунг",
@@ -17062,7 +17227,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "андхрские блины из зелёного маша"
   },
   {
-    "id": 311,
+    "id": 314,
     "source_id": "BR-C159",
     "name": "Арменски jingalov hats с билки и кисело мляко",
     "base": "арменски питки с билки",
@@ -17117,7 +17282,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "армянские лепёшки с зеленью"
   },
   {
-    "id": 312,
+    "id": 315,
     "source_id": "BR-C160",
     "name": "Полски racuchy с ябълки, кисело мляко и канела",
     "base": "полски ябълкови бухтички",
@@ -17172,7 +17337,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "польские дрожжевые оладьи с яблоками"
   },
   {
-    "id": 313,
+    "id": 316,
     "source_id": "BR-C161",
     "name": "Тунизийски brik с яйце, риба тон и каперси",
     "base": "тунизийски хрупкав brik",
@@ -17227,7 +17392,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "хрустящий тунисский брик с яйцом"
   },
   {
-    "id": 314,
+    "id": 317,
     "source_id": "BR-C162",
     "name": "Уелски rarebit с чедър, горчица и печени домати",
     "base": "уелски тост със сирене",
@@ -17282,7 +17447,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "валлийский сырный тост"
   },
   {
-    "id": 315,
+    "id": 318,
     "source_id": "BR-C163",
     "name": "Бирмански mohinga с риба, оризови нудъли и яйце",
     "base": "бирманска рибена супа",
@@ -17337,7 +17502,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "мьянманский рыбный суп с лапшой"
   },
   {
-    "id": 316,
+    "id": 319,
     "source_id": "BR-C165",
     "name": "Северноирландски soda farls с гъби, яйца и печени домати",
     "base": "северноирландски содени питки",
@@ -17392,7 +17557,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "североирландские содовые лепёшки"
   },
   {
-    "id": 317,
+    "id": 320,
     "source_id": "BR-C167",
     "name": "Нигерийски moi moi с просено pap и доматен релиш",
     "base": "нигерийски пудинг от боб",
@@ -17447,7 +17612,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "нигерийский паровой пудинг из фасоли"
   },
   {
-    "id": 318,
+    "id": 321,
     "source_id": "BR-C168",
     "name": "Австрийски Palatschinken с извара и кайсиев компот",
     "base": "виенски тънки палачинки",
