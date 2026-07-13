@@ -121,6 +121,7 @@ const appConfigs = [
     flag: "is_breakfast",
     primaryApps: ["Brunch", "Breakfast"],
     slot: "breakfast_slot",
+    featuredNewest: 72,
     featured: [
       "BR-C173", // Finnish Karelian pasties
       "BR-C169", // Tanzanian vitumbua
@@ -743,19 +744,58 @@ function recipeFor(row, index) {
 }
 
 function writeApp(rows, config) {
-  const featuredOrder = new Map(
-    (config.featured || []).map((sourceId, index) => [sourceId, index])
-  );
-  const recipes = rows
+  const eligibleRows = rows
     .filter((row) =>
       config.primaryApps
         ? config.primaryApps.includes(row.app_primary)
         : isTrue(row[config.flag])
     )
-    .filter((row) => imageFor(row))
+    .filter((row) => imageFor(row));
+
+  const featuredIds = [...(config.featured || [])];
+  if (config.featuredNewest && featuredIds.length < config.featuredNewest) {
+    const fixedIds = new Set(featuredIds);
+    const recent = eligibleRows
+      .filter((row) => !fixedIds.has(row.global_id))
+      .sort((a, b) => Number(b[config.slot] || 0) - Number(a[config.slot] || 0))
+      .slice(0, config.featuredNewest - featuredIds.length);
+
+    const groupFor = (row) => {
+      const text = `${row.canonical_name_bg || ""} ${row.tag || ""} ${row.ingredients_bg || ""}`.toLowerCase();
+      if (/риб|сьомг|пъстър|тон|скарид|морск/.test(text)) return "fish";
+      if (/яйц|омлет|шакшук|менемен|фритат/.test(text)) return "eggs";
+      if (/палачин|галет|доса|креп|вафл|рости|лефсе/.test(text)) return "pancakes";
+      if (/хляб|питк|тост|сандвич|пирож|банич|скон|качит|печив/.test(text)) return "breads";
+      if (/боб|нахут|леща|дал|грах/.test(text)) return "legumes";
+      if (/каша|ориз|овес|киноа|просо|мюсли|гранола/.test(text)) return "bowls";
+      if (/плод|ябъл|круш|манго|банан|портокал|малин|боровин|мед|слад/.test(text)) return "sweet";
+      return "world";
+    };
+
+    const groups = new Map();
+    recent.forEach((row) => {
+      const group = groupFor(row);
+      if (!groups.has(group)) groups.set(group, []);
+      groups.get(group).push(row.global_id);
+    });
+    const buckets = Array.from(groups.values()).sort((a, b) => b.length - a.length);
+    while (buckets.some((bucket) => bucket.length)) {
+      buckets.forEach((bucket) => {
+        if (bucket.length) featuredIds.push(bucket.shift());
+      });
+    }
+  }
+
+  const featuredOrder = new Map(
+    featuredIds.map((sourceId, index) => [sourceId, index])
+  );
+  const physicalFeaturedOrder = new Map(
+    (config.featured || []).map((sourceId, index) => [sourceId, index])
+  );
+  const recipes = eligibleRows
     .sort((a, b) => {
-      const aFeatured = featuredOrder.get(a.global_id);
-      const bFeatured = featuredOrder.get(b.global_id);
+      const aFeatured = physicalFeaturedOrder.get(a.global_id);
+      const bFeatured = physicalFeaturedOrder.get(b.global_id);
       if (aFeatured !== undefined || bFeatured !== undefined) {
         if (aFeatured === undefined) return 1;
         if (bFeatured === undefined) return -1;
