@@ -457,7 +457,7 @@
         }, 1800);
     </script>
 
-    <script src="data.js?v=20260713-9"></script>
+    <script src="data.js?v=20260713-11"></script>
 
     <!-- ============ I18N + UNITS CORE ============ -->
     <script>
@@ -1104,8 +1104,12 @@
         }
 
         function mixBreakfastOrder(items) {
+            const featured = items
+                .filter(item => Number.isInteger(item && item.featured_rank))
+                .sort((a, b) => a.featured_rank - b.featured_rank);
+            const regularItems = items.filter(item => !Number.isInteger(item && item.featured_rank));
             const groups = new Map();
-            items.filter(c => c && c.name).forEach(item => {
+            regularItems.filter(c => c && c.name).forEach(item => {
                 const key = String(item.base || 'други').trim().toLowerCase() || 'други';
                 if (!groups.has(key)) groups.set(key, []);
                 groups.get(key).push(item);
@@ -1124,8 +1128,8 @@
                     }
                 });
             }
-            const invalid = items.filter(c => !c || !c.name);
-            return mixed.concat(invalid);
+            const invalid = regularItems.filter(c => !c || !c.name);
+            return featured.concat(mixed, invalid);
         }
 
         function escapeHtml(s) {

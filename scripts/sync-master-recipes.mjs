@@ -114,7 +114,26 @@ function imageFor(row) {
 }
 
 const appConfigs = [
-  { dir: "breakfast", label: "Brunch", flag: "is_breakfast", slot: "breakfast_slot" },
+  {
+    dir: "breakfast",
+    label: "Brunch",
+    flag: "is_breakfast",
+    slot: "breakfast_slot",
+    featured: [
+      "BR-C173", // Finnish Karelian pasties
+      "BR-C169", // Tanzanian vitumbua
+      "BR-C170", // Peruvian tacu tacu
+      "BR-C148", // Azerbaijani pumpkin qutab
+      "BR-C166", // Thai khao tom goong
+      "BR-C172", // Bosnian ustipci
+      "BR-C153", // Filipino tortang talong
+      "BR-C157", // Emirati balaleet
+      "BR-C171", // Mongolian boortsog
+      "BR-C152", // Estonian kiluvoileib
+      "BR-C164", // Georgian chvishtari
+      "BR-C155", // Maldivian mas huni
+    ],
+  },
   { dir: "free-from", label: "Healthy Gut", flag: "is_healthy_gut", slot: "healthy_gut_slot" },
   { dir: "gluten-free", label: "Gluten Free", flag: "is_gluten_free", slot: "gluten_free_slot" },
   { dir: "dairy-free", label: "Dairy Free", flag: "is_dairy_free", slot: "dairy_free_slot" },
@@ -195,6 +214,12 @@ function countryFor(row) {
     ["румън", "Румъния"], ["хаитян", "Хаити"], ["саудит", "Саудитска Арабия"],
     ["салвадор", "Салвадор"], ["унгар", "Унгария"], ["мозамбик", "Мозамбик"],
     ["тринидад", "Тринидад и Тобаго"], ["ирланд", "Ирландия"], ["сенегал", "Сенегал"],
+    ["малтий", "Малта"], ["азербайджан", "Азербайджан"], ["мавриций", "Мавриций"],
+    ["самоан", "Самоа"], ["бангладеш", "Бангладеш"], ["естон", "Естония"],
+    ["малдив", "Малдиви"], ["уганд", "Уганда"], ["емирати", "ОАЕ"],
+    ["уелс", "Уелс"], ["бирман", "Мианмар"], ["мианмар", "Мианмар"],
+    ["северноирланд", "Северна Ирландия"], ["танзаний", "Танзания"],
+    ["монгол", "Монголия"], ["боснен", "Босна и Херцеговина"], ["карелск", "Финландия"],
     ["латино", "Латинска Америка"], ["тайван", "Тайван"], ["колумб", "Колумбия"],
     ["кений", "Кения"], ["калифорн", "САЩ"],
   ];
@@ -262,6 +287,20 @@ function countryForLang(row, lang, bgCountry) {
       "Колумбия": "Colombia",
       "Кения": "Kenya",
       "Франция": "France",
+      "Малта": "Malta",
+      "Азербайджан": "Azerbaijan",
+      "Мавриций": "Mauritius",
+      "Самоа": "Samoa",
+      "Бангладеш": "Bangladesh",
+      "Естония": "Estonia",
+      "Малдиви": "Maldives",
+      "Уганда": "Uganda",
+      "Уелс": "Wales",
+      "Мианмар": "Myanmar",
+      "Северна Ирландия": "Northern Ireland",
+      "Танзания": "Tanzania",
+      "Монголия": "Mongolia",
+      "Босна и Херцеговина": "Bosnia and Herzegovina",
     },
     de: {
       "Турция": "Türkei",
@@ -322,6 +361,20 @@ function countryForLang(row, lang, bgCountry) {
       "Колумбия": "Kolumbien",
       "Кения": "Kenia",
       "Франция": "Frankreich",
+      "Малта": "Malta",
+      "Азербайджан": "Aserbaidschan",
+      "Мавриций": "Mauritius",
+      "Самоа": "Samoa",
+      "Бангладеш": "Bangladesch",
+      "Естония": "Estland",
+      "Малдиви": "Malediven",
+      "Уганда": "Uganda",
+      "Уелс": "Wales",
+      "Мианмар": "Myanmar",
+      "Северна Ирландия": "Nordirland",
+      "Танзания": "Tansania",
+      "Монголия": "Mongolei",
+      "Босна и Херцеговина": "Bosnien und Herzegowina",
     },
     es: {
       "Турция": "Turquía",
@@ -382,6 +435,20 @@ function countryForLang(row, lang, bgCountry) {
       "Колумбия": "Colombia",
       "Кения": "Kenia",
       "Франция": "Francia",
+      "Малта": "Malta",
+      "Азербайджан": "Azerbaiyán",
+      "Мавриций": "Mauricio",
+      "Самоа": "Samoa",
+      "Бангладеш": "Bangladés",
+      "Естония": "Estonia",
+      "Малдиви": "Maldivas",
+      "Уганда": "Uganda",
+      "Уелс": "Gales",
+      "Мианмар": "Myanmar",
+      "Северна Ирландия": "Irlanda del Norte",
+      "Танзания": "Tanzania",
+      "Монголия": "Mongolia",
+      "Босна и Херцеговина": "Bosnia y Herzegovina",
     },
     fr: {
       "Турция": "Turquie",
@@ -442,6 +509,20 @@ function countryForLang(row, lang, bgCountry) {
       "Колумбия": "Colombie",
       "Кения": "Kenya",
       "Франция": "France",
+      "Малта": "Malte",
+      "Азербайджан": "Azerbaïdjan",
+      "Мавриций": "Maurice",
+      "Самоа": "Samoa",
+      "Бангладеш": "Bangladesh",
+      "Естония": "Estonie",
+      "Малдиви": "Maldives",
+      "Уганда": "Ouganda",
+      "Уелс": "Pays de Galles",
+      "Мианмар": "Myanmar",
+      "Северна Ирландия": "Irlande du Nord",
+      "Танзания": "Tanzanie",
+      "Монголия": "Mongolie",
+      "Босна и Херцеговина": "Bosnie-Herzégovine",
     },
     ru: {
       "Турция": "Турция",
@@ -502,6 +583,20 @@ function countryForLang(row, lang, bgCountry) {
       "Колумбия": "Колумбия",
       "Кения": "Кения",
       "Франция": "Франция",
+      "Малта": "Мальта",
+      "Азербайджан": "Азербайджан",
+      "Мавриций": "Маврикий",
+      "Самоа": "Самоа",
+      "Бангладеш": "Бангладеш",
+      "Естония": "Эстония",
+      "Малдиви": "Мальдивы",
+      "Уганда": "Уганда",
+      "Уелс": "Уэльс",
+      "Мианмар": "Мьянма",
+      "Северна Ирландия": "Северная Ирландия",
+      "Танзания": "Танзания",
+      "Монголия": "Монголия",
+      "Босна и Херцеговина": "Босния и Герцеговина",
     },
   };
   return maps[lang]?.[bgCountry] || row[`country_${lang}`] || bgCountry;
@@ -646,11 +741,29 @@ function recipeFor(row, index) {
 }
 
 function writeApp(rows, config) {
+  const featuredOrder = new Map(
+    (config.featured || []).map((sourceId, index) => [sourceId, index])
+  );
   const recipes = rows
     .filter((row) => isTrue(row[config.flag]))
     .filter((row) => imageFor(row))
-    .sort((a, b) => Number(a[config.slot] || 9999) - Number(b[config.slot] || 9999))
-    .map(recipeFor);
+    .sort((a, b) => {
+      const aFeatured = featuredOrder.get(a.global_id);
+      const bFeatured = featuredOrder.get(b.global_id);
+      if (aFeatured !== undefined || bFeatured !== undefined) {
+        if (aFeatured === undefined) return 1;
+        if (bFeatured === undefined) return -1;
+        return aFeatured - bFeatured;
+      }
+      return Number(a[config.slot] || 9999) - Number(b[config.slot] || 9999);
+    })
+    .map((row, index) => {
+      const featuredRank = featuredOrder.get(row.global_id);
+      return {
+        ...recipeFor(row, index),
+        ...(featuredRank === undefined ? {} : { featured_rank: featuredRank }),
+      };
+    });
 
   fs.writeFileSync(
     path.join(root, config.dir, "data.js"),
