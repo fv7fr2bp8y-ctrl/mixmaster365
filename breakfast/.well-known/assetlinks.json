@@ -7,7 +7,8 @@
       "namespace": "android_app",
       "package_name": "eu.brunch365.twa",
       "sha256_cert_fingerprints": [
-        "6F:90:3D:D0:10:27:7E:1B:59:AA:4B:CD:5C:BB:62:6A:D8:C8:DE:8E:DC:C6:F9:10:C3:DE:8D:D2:2C:B0:D7:D8"
+        "6F:90:3D:D0:10:27:7E:1B:59:AA:4B:CD:5C:BB:62:6A:D8:C8:DE:8E:DC:C6:F9:10:C3:DE:8D:D2:2C:B0:D7:D8",
+        "A5:96:34:56:E6:0D:BD:59:6A:0C:EE:7D:96:C2:DD:95:CD:C4:29:78:4A:4A:19:2A:59:6F:28:50:5D:C5:2D:B5"
       ]
     }
   }

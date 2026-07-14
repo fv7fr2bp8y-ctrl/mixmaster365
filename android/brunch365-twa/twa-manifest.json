@@ -1,0 +1,50 @@
+{
+  "packageId": "eu.brunch365.twa",
+  "host": "brunch.freefrom365.com",
+  "name": "Brunch 365",
+  "launcherName": "Brunch 365",
+  "display": "standalone",
+  "themeColor": "#E0A25E",
+  "themeColorDark": "#E0A25E",
+  "navigationColor": "#FFF8EC",
+  "navigationColorDark": "#FFF8EC",
+  "navigationDividerColor": "#D8C5AA",
+  "navigationDividerColorDark": "#D8C5AA",
+  "backgroundColor": "#FFF8EC",
+  "enableNotifications": false,
+  "startUrl": "/",
+  "iconUrl": "https://brunch.freefrom365.com/icon-512.png",
+  "maskableIconUrl": "https://brunch.freefrom365.com/icon-maskable-512.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "signing.keystore",
+    "alias": "brunch365"
+  },
+  "appVersionName": "1",
+  "appVersionCode": 1,
+  "shortcuts": [],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://brunch.freefrom365.com/manifest.json",
+  "fallbackType": "customtabs",
+  "features": {},
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "isMetaQuest": false,
+  "fullScopeUrl": "https://brunch.freefrom365.com/",
+  "minSdkVersion": 21,
+  "orientation": "portrait-primary",
+  "fingerprints": [],
+  "additionalTrustedOrigins": [],
+  "retainedBundles": [],
+  "protocolHandlers": [],
+  "fileHandlers": [],
+  "launchHandlerClientMode": "",
+  "displayOverride": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "appVersion": "1"
+}

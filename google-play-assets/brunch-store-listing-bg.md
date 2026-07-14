@@ -1,5 +1,8 @@
 # Brunch 365 - Google Play listing draft
 
+Support: `support@freefrom365.com`
+Privacy policy: https://brunch.freefrom365.com/privacy.html
+
 ## Short description
 365 вдъхновяващи брънч рецепти със снимки, количества и шест езика.
 

@@ -238,7 +238,7 @@ node -e "JSON.parse(require('fs').readFileSync('breakfast/.well-known/assetlinks
 - споделяне на директен URL `?r=<global_id>`;
 - езиците в правилния ред;
 - преведени съставки, количества, държави и стъпки;
-- contact `office@newage-studio.com`;
+- contact `support@freefrom365.com`;
 - privacy линк и back-to-top;
 - липса на console errors и счупени снимки.
 
@@ -332,4 +332,3 @@ Repository вече се намира в OneDrive:
 3. При платено Android съдържание: Google Play Billing и server-side entitlement.
 4. Периодичен editorial review на рецепти и преводи.
 5. Подмяна на рецепта само след сравнение и пълен release audit.
-
