@@ -383,7 +383,7 @@
                 age_disclaimer:'Този сайт съдържа алкохолно съдържание. Достъпът е разрешен само за пълнолетни.',
                 loader_text:'Подготвяне на бара', intro_subtitle:'Ателие за вкусове', intro_status:'Подготвяне на бара...',
                 scan_title:'АНАЛИЗ', scan_subtitle:'Разпознати бутилки', scan_loading:'Анализирам снимката...',
-                scan_detected:'Разпознати спиртове', scan_none:'Не разпознах алкохол на снимката. Опитай с по-ясна снимка.', scan_error:'Скенерът не е достъпен в момента. Опитай пак след малко.',
+                scan_detected:'Разпознати спиртове', scan_none:'Не разпознах алкохол на снимката. Опитай с по-ясна снимка.', scan_no_match:'Разпознах спиртовете, но нямам коктейл с тях.', scan_error:'Скенерът не е достъпен в момента. Опитай пак след малко.',
                 scan_suggestions:'Предложения', close:'Затвори',
                 ai_button:'Препоръка на бармана', ai_title:'ПРЕПОРЪКА', ai_subtitle:'Какво да приготвим?',
                 ai_scan_title:'Снимай бутилките', ai_scan_desc:'AI предлага коктейл от наличното',
@@ -427,7 +427,7 @@
                 age_disclaimer:'This site contains alcohol content. Access is for adults only.',
                 loader_text:'Preparing the bar', intro_subtitle:'Atelier of flavors', intro_status:'Preparing the bar...',
                 scan_title:'ANALYSIS', scan_subtitle:'Detected bottles', scan_loading:'Analyzing the photo...',
-                scan_detected:'Detected spirits', scan_none:'No alcohol detected. Try a clearer photo.', scan_error:'Scanner unavailable right now. Please try again shortly.',
+                scan_detected:'Detected spirits', scan_none:'No alcohol detected. Try a clearer photo.', scan_no_match:'I recognised the spirits, but have no cocktail for them.', scan_error:'Scanner unavailable right now. Please try again shortly.',
                 scan_suggestions:'Suggestions', close:'Close',
                 ai_button:"Bartender's pick", ai_title:'SUGGESTION', ai_subtitle:'What shall we make?',
                 ai_scan_title:'Scan the bottles', ai_scan_desc:'AI suggests a cocktail from what you have',
@@ -471,7 +471,7 @@
                 age_disclaimer:'Diese Seite enthält Alkoholinhalte. Zugang nur für Erwachsene.',
                 loader_text:'Bar wird vorbereitet', intro_subtitle:'Atelier der Aromen', intro_status:'Bar wird vorbereitet...',
                 scan_title:'ANALYSE', scan_subtitle:'Erkannte Flaschen', scan_loading:'Foto wird analysiert...',
-                scan_detected:'Erkannte Spirituosen', scan_none:'Kein Alkohol erkannt. Versuche ein klareres Foto.', scan_error:'Scanner derzeit nicht verfügbar. Bitte versuche es gleich erneut.',
+                scan_detected:'Erkannte Spirituosen', scan_none:'Kein Alkohol erkannt. Versuche ein klareres Foto.', scan_no_match:'Spirituosen erkannt, aber kein passender Cocktail vorhanden.', scan_error:'Scanner derzeit nicht verfügbar. Bitte versuche es gleich erneut.',
                 scan_suggestions:'Vorschläge', close:'Schließen',
                 ai_button:'Empfehlung des Barkeepers', ai_title:'EMPFEHLUNG', ai_subtitle:'Was sollen wir machen?',
                 ai_scan_title:'Flaschen scannen', ai_scan_desc:'KI schlägt einen Cocktail vor',
@@ -515,7 +515,7 @@
                 age_disclaimer:'Este sitio contiene contenido con alcohol. Acceso solo para adultos.',
                 loader_text:'Preparando la barra', intro_subtitle:'Taller de sabores', intro_status:'Preparando la barra...',
                 scan_title:'ANÁLISIS', scan_subtitle:'Botellas detectadas', scan_loading:'Analizando la foto...',
-                scan_detected:'Licores detectados', scan_none:'No se detectó alcohol. Prueba con una foto más clara.', scan_error:'El escáner no está disponible ahora. Inténtalo de nuevo en un momento.',
+                scan_detected:'Licores detectados', scan_none:'No se detectó alcohol. Prueba con una foto más clara.', scan_no_match:'Reconocí los licores, pero no tengo ningún cóctel con ellos.', scan_error:'El escáner no está disponible ahora. Inténtalo de nuevo en un momento.',
                 scan_suggestions:'Sugerencias', close:'Cerrar',
                 ai_button:'Recomendación del barman', ai_title:'SUGERENCIA', ai_subtitle:'¿Qué preparamos?',
                 ai_scan_title:'Escanea las botellas', ai_scan_desc:'La IA sugiere un cóctel con lo que tienes',
@@ -559,7 +559,7 @@
                 age_disclaimer:'Сайт содержит информацию об алкоголе. Доступ только для совершеннолетних.',
                 loader_text:'Готовим бар', intro_subtitle:'Ателье вкусов', intro_status:'Готовим бар...',
                 scan_title:'АНАЛИЗ', scan_subtitle:'Распознанные бутылки', scan_loading:'Анализирую фото...',
-                scan_detected:'Распознанные напитки', scan_none:'Алкоголь не распознан. Попробуйте более чёткое фото.', scan_error:'Сканер сейчас недоступен. Попробуйте чуть позже.',
+                scan_detected:'Распознанные напитки', scan_none:'Алкоголь не распознан. Попробуйте более чёткое фото.', scan_no_match:'Напитки распознаны, но подходящего коктейля нет.', scan_error:'Сканер сейчас недоступен. Попробуйте чуть позже.',
                 scan_suggestions:'Предложения', close:'Закрыть',
                 ai_button:'Совет бармена', ai_title:'ПОДБОР', ai_subtitle:'Что приготовим?',
                 ai_scan_title:'Сфотографируй бутылки', ai_scan_desc:'ИИ предложит коктейль из наличного',
@@ -1163,7 +1163,7 @@
         const mocktailsUrl   = dataBase + "?gid=116292126";  // mocktails
         // Scanner calls this Apps Script proxy; the Gemini key lives there, never in this file.
         // Deploy scripts/scanner_proxy.gs as a Web app and paste its /exec URL here.
-        const SCANNER_PROXY_URL = "";
+        const SCANNER_PROXY_URL = "https://script.google.com/macros/s/AKfycbxWXzZMrp3xwbx78We4UI5sft5GDA86Zuf-Au2U0Md5DvXLwtcNp7nm7n5QMWbUaMD1rA/exec";
 
         // === STATE ===
         let allCocktails  = [];
@@ -1662,12 +1662,14 @@
         function showScanResults(spirits) {
             document.getElementById('scan-status').classList.add('hidden');
 
+            const none = document.getElementById('scan-none');
+            none.querySelector('p').textContent = t('scan_none'); // may hold an error from a previous scan
+
             if (!spirits.length) {
-                const none = document.getElementById('scan-none');
-                none.querySelector('p').textContent = t('scan_none'); // may hold an error from a previous scan
                 none.classList.remove('hidden');
                 return;
             }
+            none.classList.add('hidden');
 
             // Show detected spirits as tags
             const spiritsEl = document.getElementById('scan-spirits');
@@ -1688,7 +1690,8 @@
             const picks = matched.sort(() => Math.random() - 0.5).slice(0, 5);
 
             if (!picks.length) {
-                document.getElementById('scan-none').classList.remove('hidden');
+                none.querySelector('p').textContent = t('scan_no_match'); // spirits found, catalogue has none
+                none.classList.remove('hidden');
                 return;
             }
 
