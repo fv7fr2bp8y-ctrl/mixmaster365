@@ -71,7 +71,7 @@ favorites and recipe sharing do not require an account.
 
 - App icon: `google-play-assets/icons/brunch-icon-512.png`
 - Feature graphic: `google-play-assets/feature-graphics/brunch-1024x500.png`
-- Phone screenshots: `google-play-assets/screenshots-play/brunch/`
+- Four phone screenshots (1080 x 1920): `google-play-assets/screenshots-play/brunch/`
 - Localized listings: `google-play-assets/store-listings/brunch/`
 
 ## Signing and Digital Asset Links

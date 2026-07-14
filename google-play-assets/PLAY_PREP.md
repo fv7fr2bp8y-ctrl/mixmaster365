@@ -31,7 +31,7 @@
 - Splash previews are PNG in `google-play-assets/splash-previews/`.
 - Contact sheet preview: `google-play-assets/screenshots-play/contact-sheet.png`
 - Brunch has 365 reviewed recipes, 365 unique Drive images, quantities and complete records in Bulgarian, English, Spanish, French, German and Russian.
-- The Brunch phone screenshots were regenerated from the current 365-recipe interface on 2026-07-14.
+- The four Brunch phone screenshots were regenerated from the current 365-recipe interface on 2026-07-14 at 1080 x 1920.
 
 ## Before upload
 
