@@ -1,7 +1,8 @@
-const CACHE_NAME = 'mixmaster-v10';
+const CACHE_NAME = 'mixmaster-v13';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
+  '/data.js',
   '/manifest.json',
   '/icon-192.png',
   '/icon-512.png',
@@ -12,11 +13,17 @@ const STATIC_ASSETS = [
 // Install — cache static assets
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(STATIC_ASSETS.map(url => {
-        return new Request(url, { mode: 'no-cors' });
-      })).catch(() => {});
-    })
+    caches.open(CACHE_NAME).then(cache =>
+      // One asset at a time on purpose: cache.addAll() is all-or-nothing, so a single
+      // flaky CDN response left the whole cache empty and offline silently never worked.
+      Promise.allSettled(STATIC_ASSETS.map(async url => {
+        if (!url.startsWith('http')) return cache.add(url);
+        // Third-party (Tailwind, fonts) answers no-cors with an opaque response, which
+        // cache.add() rejects — cache.put() accepts it, so offline keeps its styling.
+        const request = new Request(url, { mode: 'no-cors' });
+        return cache.put(request, await fetch(request));
+      }))
+    )
   );
   self.skipWaiting();
 });

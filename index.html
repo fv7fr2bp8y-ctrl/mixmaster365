@@ -15,6 +15,7 @@
     <link rel="manifest" href="/manifest.json">
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="data.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Forum&family=Poiret+One&family=Cinzel:wght@400;500;700&display=swap" rel="stylesheet">
@@ -1333,36 +1334,48 @@
         }
 
         // === INIT ===
+        function indexList(list) {
+            const arr = Array.isArray(list) ? list.slice() : [];
+            arr.forEach((c, i) => { if (c) c._idx = i; });
+            return arr;
+        }
+
+        function paint() {
+            renderFilters();
+            render();
+            renderCOTD();
+            document.getElementById('loader').classList.add('hidden');
+        }
+
         async function init() {
+            // data.js ships the catalogue with the app, so a cold start does not wait on
+            // Apps Script and the app works offline. The endpoints remain the fallback.
+            const local = window.MIXMASTER_DATA;
+            if (local && Array.isArray(local.mocktails) && local.mocktails.length) {
+                allMocktails = indexList(local.mocktails);
+                if (!underAge) allCocktails = indexList(local.cocktails);
+                paint();
+                return;
+            }
+
             try {
                 if (underAge) {
                     // Under 18 — load mocktails first, skip cocktails
                     const res = await fetch(mocktailsUrl);
-                    const data = await res.json();
-                    allMocktails = Array.isArray(data) ? data : [];
-                    allMocktails.forEach((c, i) => { if (c) c._idx = i; });
+                    allMocktails = indexList(await res.json());
                 } else {
                     // Adult — load cocktails first (critical path)
                     const res = await fetch(apiUrl);
-                    const data = await res.json();
-                    allCocktails = Array.isArray(data) ? data : [];
-                    allCocktails.forEach((c, i) => { if (c) c._idx = i; });
+                    allCocktails = indexList(await res.json());
 
                     // Load mocktails silently in background
                     fetch(mocktailsUrl)
                         .then(r => r.json())
-                        .then(d => {
-                            if (!Array.isArray(d)) return;
-                            allMocktails = d;
-                            allMocktails.forEach((c, i) => { if (c) c._idx = i; });
-                        })
+                        .then(d => { allMocktails = indexList(d); })
                         .catch(() => {});
                 }
 
-                renderFilters();
-                render();
-                renderCOTD();
-                document.getElementById('loader').classList.add('hidden');
+                paint();
 
             } catch (e) {
                 document.getElementById('loader-text').innerHTML = `<span class='text-red-400'>${t('error_connection')}</span>`;
