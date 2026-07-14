@@ -24,11 +24,11 @@ Host-based routing is defined in `vercel.json`. Every PWA is served at the root 
 
 ## Current status
 
-Status verified from the generated `data.js` files on 13 July 2026:
+Status verified from the generated `data.js` files on 14 July 2026:
 
 | App | Visible recipes | Images | Complete translated recipe records | Recipes with quantities |
 |---|---:|---:|---:|---:|
-| Brunch | 316 | 316 | 316 | 316 |
+| Brunch | 365 | 365 | 365 | 365 |
 | Healthy Gut | 153 | 153 | 153 | 91 |
 | Gluten Free | 167 | 167 | 167 | 105 |
 | Dairy Free | 161 | 161 | 161 | 99 |
@@ -37,7 +37,7 @@ Status verified from the generated `data.js` files on 13 July 2026:
 
 The six supported languages are Bulgarian, English, German, Spanish, French and Russian.
 
-The **316 complete Brunch recipes** milestone is finished. Future additions should continue in curated blocks with quantities, all translations and a real Drive image before they are published.
+The **365 complete Brunch recipes** milestone is finished. The complete operating, maintenance, release and backup guide is in [`BRUNCH365_README.md`](BRUNCH365_README.md). Future recipes should be prepared in curated blocks, but should replace weaker entries or remain drafts unless the product is intentionally expanded beyond 365.
 
 ## Source of truth
 
@@ -209,12 +209,12 @@ Do not stage unrelated OneDrive files, generated contact sheets, old icon candid
 
 Current priority order:
 
-1. Review the 48-recipe Brunch expansion in all six languages and polish any machine-assisted phrasing.
-2. Complete quantities for all existing recipes in the other five apps.
-3. Continue each catalogue toward 365 carefully curated recipes.
-4. Perform a six-app editorial, translation and accessibility review.
-5. Finalize icons, splash screens, manifests, privacy pages and screenshots.
-6. Prepare and validate the six Google Play packages.
+1. Prepare and validate the Brunch Android bundle and Play Console listing.
+2. Decide the Brunch free/freemium model and use Google Play Billing for paid Android content.
+3. Complete quantities for all existing recipes in the other five apps.
+4. Continue the other catalogues toward 365 carefully curated recipes.
+5. Perform a six-app editorial, translation and accessibility review.
+6. Prepare and validate the remaining Google Play packages.
 
 ## MixMaster365 boundary
 
