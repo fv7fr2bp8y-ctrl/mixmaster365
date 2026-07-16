@@ -1,0 +1,50 @@
+{
+  "packageId": "eu.mixmaster365.twa",
+  "host": "mixmaster365.eu",
+  "name": "365 Mocktails · Atelier",
+  "launcherName": "365 Mocktails",
+  "display": "standalone",
+  "themeColor": "#6fae83",
+  "themeColorDark": "#0a0908",
+  "navigationColor": "#0a0908",
+  "navigationColorDark": "#0a0908",
+  "navigationDividerColor": "#0a0908",
+  "navigationDividerColorDark": "#0a0908",
+  "backgroundColor": "#0a0908",
+  "enableNotifications": true,
+  "startUrl": "/mocktails/",
+  "iconUrl": "https://mixmaster365.eu/mocktails/icon-512.png",
+  "maskableIconUrl": "https://mixmaster365.eu/mocktails/icon-512.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "./signing.keystore",
+    "alias": "my-key-alias"
+  },
+  "appVersionName": "2",
+  "appVersionCode": 2,
+  "shortcuts": [],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://mixmaster365.eu/mocktails/manifest.json",
+  "fallbackType": "customtabs",
+  "features": {
+    "playBilling": {
+      "enabled": true
+    }
+  },
+  "alphaDependencies": {
+    "enabled": true
+  },
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "isMetaQuest": false,
+  "fullScopeUrl": "https://mixmaster365.eu/mocktails/",
+  "minSdkVersion": 23,
+  "orientation": "portrait",
+  "fingerprints": [],
+  "additionalTrustedOrigins": [],
+  "retainedBundles": [],
+  "protocolHandlers": [],
+  "fileHandlers": [],
+  "launchHandlerClientMode": "",
+  "appVersion": "2"
+}

@@ -2,3 +2,5 @@ _working/
 .vercel
 mixmaster-v2-release/*.aab
 mixmaster-v2-release/*.apk
+mocktails-v2-release/*.aab
+mocktails-v2-release/*.apk
