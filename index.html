@@ -366,11 +366,11 @@
     <!-- ============ I18N + UNITS CORE ============ -->
     <script>
         const LANGS = [
-            { code: 'en', name: 'English',   flag: '🇬🇧' },
-            { code: 'de', name: 'Deutsch',   flag: '🇩🇪' },
-            { code: 'es', name: 'Español',   flag: '🇪🇸' },
-            { code: 'ru', name: 'Русский',   flag: '🇷🇺' },
-            { code: 'bg', name: 'Български', flag: '🇧🇬' },
+            { code: 'en', name: 'English'   },
+            { code: 'de', name: 'Deutsch'   },
+            { code: 'es', name: 'Español'   },
+            { code: 'ru', name: 'Русский'   },
+            { code: 'bg', name: 'Български' },
         ];
 
         const I18N = {
@@ -671,7 +671,7 @@
         function openSettings() {
             const langGrid = LANGS.map(l => `
                 <button onclick="setLang('${l.code}')" class="border ${l.code===LANG?'border-gold text-gold-bright bg-ink-soft':'border-gold-dim text-cream-dim'} hover:border-gold hover:text-gold active:scale-[0.98] transition p-3 flex items-center gap-3">
-                    <span class="text-2xl">${l.flag}</span>
+                    <span class="font-roman text-xs tracking-[0.2em] text-gold border border-gold-dim w-9 h-7 flex items-center justify-center shrink-0">${l.code.toUpperCase()}</span>
                     <span class="font-roman text-sm tracking-[0.1em]">${l.name}</span>
                 </button>`).join('');
             const unitBtn = (u, label) => `
