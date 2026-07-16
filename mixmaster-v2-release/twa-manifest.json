@@ -1,0 +1,50 @@
+{
+  "packageId": "eu.mixmaster365.app",
+  "host": "mixmaster365.eu",
+  "name": "MixMaster · Atelier",
+  "launcherName": "MixMaster",
+  "display": "standalone",
+  "themeColor": "#c9a961",
+  "themeColorDark": "#0a0908",
+  "navigationColor": "#0a0908",
+  "navigationColorDark": "#0a0908",
+  "navigationDividerColor": "#0a0908",
+  "navigationDividerColorDark": "#0a0908",
+  "backgroundColor": "#0a0908",
+  "enableNotifications": true,
+  "startUrl": "/",
+  "iconUrl": "https://mixmaster365.eu/icon-512.png",
+  "maskableIconUrl": "https://mixmaster365.eu/icon-512.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "./signing.keystore",
+    "alias": "my-key-alias"
+  },
+  "appVersionName": "2",
+  "appVersionCode": 2,
+  "shortcuts": [],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://mixmaster365.eu/manifest.json",
+  "fallbackType": "customtabs",
+  "features": {
+    "playBilling": {
+      "enabled": true
+    }
+  },
+  "alphaDependencies": {
+    "enabled": true
+  },
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "isMetaQuest": false,
+  "fullScopeUrl": "https://mixmaster365.eu/",
+  "minSdkVersion": 23,
+  "orientation": "portrait",
+  "fingerprints": [],
+  "additionalTrustedOrigins": [],
+  "retainedBundles": [],
+  "protocolHandlers": [],
+  "fileHandlers": [],
+  "launchHandlerClientMode": "",
+  "appVersion": "2"
+}
