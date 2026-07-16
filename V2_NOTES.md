@@ -1,5 +1,7 @@
 # MixMaster v2 — бележки
 
+## ✅ ПУСНАТ: 16.07.2026 — merge в main, живо на mixmaster365.eu (комит 5b577f6)
+
 ## Къде сме
 Работим в **отделен worktree**: `App Projects/MixMaster365-v2`, клон `mixmaster-v2` (от `main`).
 Главната папка `App Projects/MixMaster365` е на друг клон и по нея работи **паралелна сесия** (FreeFrom365 / Brunch). Не я пипаме.
