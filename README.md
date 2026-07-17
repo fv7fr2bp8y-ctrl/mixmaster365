@@ -182,6 +182,10 @@ Each recipe directory contains:
 
 The six apps intentionally share the Brunch visual and interaction system: light editorial layout, recipe of the day, image-only visible catalogue, search, compact filters, favourites, language settings and direct recipe sharing.
 
+## Support and privacy
+
+All six recipe applications use `support@tastemaster.eu` as their public support address. Each app has its own `privacy.html` page linked from the footer; keep that address synchronized across the interface, privacy pages and Google Play listings.
+
 When changing cached application files, increment the cache name in the relevant `sw.js` so installed PWAs receive the update.
 
 ## Deployment

@@ -1,23 +1,18 @@
-const CACHE_NAME = "healthy-gut-365-v31";
+const CACHE_NAME = "healthy-gut-365-v32";
+const APP_ROOT = self.location.hostname.endsWith(".freefrom365.com") ? "" : "/free-from";
 const APP_SHELL = [
-  "/",
-  "/index.html",
-  "/data.js",
-  "/manifest.json",
-  "/icon-192.png",
-  "/icon-512.png",
-  "/logo-source.png",
-  "/free-from/",
-  "/free-from/index.html",
-  "/free-from/data.js",
-  "/free-from/manifest.json",
-  "/free-from/icon-192.png",
-  "/free-from/icon-512.png",
-  "/free-from/logo-source.png"
+  `${APP_ROOT}/`,
+  `${APP_ROOT}/index.html`,
+  `${APP_ROOT}/data.js`,
+  `${APP_ROOT}/manifest.json`,
+  `${APP_ROOT}/privacy.html`,
+  `${APP_ROOT}/icon-192.png`,
+  `${APP_ROOT}/icon-512.png`,
+  `${APP_ROOT}/logo-source.png`
 ];
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)).catch(() => {}));
+  event.waitUntil(caches.open(CACHE_NAME).then((cache) => Promise.allSettled(APP_SHELL.map((url) => cache.add(url)))));
   self.skipWaiting();
 });
 
@@ -32,7 +27,9 @@ self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
 
   const url = new URL(event.request.url);
-  const isAppShell = url.origin === self.location.origin && (url.pathname === "/" || url.pathname.startsWith("/free-from/"));
+  const isAppShell = url.origin === self.location.origin && (
+    url.pathname === `${APP_ROOT}/` || url.pathname.startsWith(`${APP_ROOT}/`)
+  );
   const isGoogleAsset = /(^|\.)google\.com$/.test(url.hostname) || url.hostname.includes("googleusercontent.com");
 
   if (isAppShell || event.request.mode === "navigate") {
@@ -45,7 +42,7 @@ self.addEventListener("fetch", (event) => {
           }
           return response;
         })
-        .catch(() => caches.match(event.request).then((cached) => cached || caches.match("/") || caches.match("/free-from/index.html")))
+        .catch(() => caches.match(event.request).then((cached) => cached || caches.match(`${APP_ROOT}/`) || caches.match(`${APP_ROOT}/index.html`)))
     );
     return;
   }

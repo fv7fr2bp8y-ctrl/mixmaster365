@@ -471,12 +471,12 @@
     <!-- ============ I18N + UNITS CORE ============ -->
     <script>
         const LANGS = [
-            { code: 'en', name: 'English',   flag: '🇬🇧' },
-            { code: 'es', name: 'Español',   flag: '🇪🇸' },
-            { code: 'de', name: 'Deutsch',   flag: '🇩🇪' },
-            { code: 'fr', name: 'Français',  flag: '🇫🇷' },
-            { code: 'ru', name: 'Русский',   flag: '🇷🇺' },
-            { code: 'bg', name: 'Български', flag: '🇧🇬' },
+            { code: 'en', name: 'English',   label: 'EN' },
+            { code: 'es', name: 'Español',   label: 'ES' },
+            { code: 'fr', name: 'Français',  label: 'FR' },
+            { code: 'de', name: 'Deutsch',   label: 'DE' },
+            { code: 'ru', name: 'Русский',   label: 'RU' },
+            { code: 'bg', name: 'Български', label: 'BG' },
         ];
 
         const I18N = {
@@ -509,7 +509,7 @@
                 filter_tequila:'Текила', filter_whisky:'Уиски',
                 filter_breakfast:'Закуска', filter_lunch:'Обяд', filter_dinner:'Вечеря', filter_salad:'Салата', filter_snack:'Снак', filter_dessert:'Десерт',
                 settings_title:'ЕЗИК', settings_subtitle:'Език и мерни единици', settings_units:'Мерни единици',
-                footer_contact:'Контакт', footer_rights:'© 2026 New Age Studio. Всички права запазени.', footer_note:'Рецепти за вдъхновение. Съобразявайте съставките с личните си нужди и алергии.',
+                footer_contact:'Контакт', footer_privacy:'Поверителност', footer_rights:'© 2026 New Age Studio. Всички права запазени.', footer_note:'Рецепти за вдъхновение. Съобразявайте съставките с личните си нужди и алергии.',
                 share_text:'Gluten Free 365 - без глутен', toast_link_copied:'Линкът е копиран ✓',
                 aria_share:'Сподели', aria_top:'Нагоре', aria_settings:'Език',
                 months:['Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември'],
@@ -543,7 +543,7 @@
                 filter_tequila:'Tequila', filter_whisky:'Whisky',
                 filter_breakfast:'Breakfast', filter_lunch:'Lunch', filter_dinner:'Dinner', filter_salad:'Salad', filter_snack:'Snack', filter_dessert:'Dessert',
                 settings_title:'LANGUAGE', settings_subtitle:'Language & units', settings_units:'Measurement units',
-                footer_contact:'Contact', footer_rights:'© 2026 New Age Studio. All rights reserved.', footer_note:'Recipes for inspiration. Adjust ingredients to your needs and allergies.',
+                footer_contact:'Contact', footer_privacy:'Privacy', footer_rights:'© 2026 New Age Studio. All rights reserved.', footer_note:'Recipes for inspiration. Adjust ingredients to your needs and allergies.',
                 share_text:'Gluten Free 365 - everyday gluten-free recipes', toast_link_copied:'Link copied ✓',
                 aria_share:'Share', aria_top:'Top', aria_settings:'Language',
                 months:['January','February','March','April','May','June','July','August','September','October','November','December'],
@@ -577,7 +577,7 @@
                 filter_tequila:'Tequila', filter_whisky:'Whisky',
                 filter_breakfast:'Frühstück', filter_lunch:'Mittagessen', filter_dinner:'Abendessen', filter_salad:'Salat', filter_snack:'Snack', filter_dessert:'Dessert',
                 settings_title:'SPRACHE', settings_subtitle:'Sprache & Einheiten', settings_units:'Maßeinheiten',
-                footer_contact:'Kontakt', footer_rights:'© 2026 New Age Studio. Alle Rechte vorbehalten.', footer_note:'Rezepte zur Inspiration. Bitte Zutaten an persönliche Bedürfnisse und Allergien anpassen.',
+                footer_contact:'Kontakt', footer_privacy:'Datenschutz', footer_rights:'© 2026 New Age Studio. Alle Rechte vorbehalten.', footer_note:'Rezepte zur Inspiration. Bitte Zutaten an persönliche Bedürfnisse und Allergien anpassen.',
                 share_text:'Gluten Free 365 - glutenfreie Rezepte für jeden Tag', toast_link_copied:'Link kopiert ✓',
                 aria_share:'Teilen', aria_top:'Nach oben', aria_settings:'Sprache',
                 months:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
@@ -611,7 +611,7 @@
                 filter_tequila:'Tequila', filter_whisky:'Whisky',
                 filter_breakfast:'Desayuno', filter_lunch:'Comida', filter_dinner:'Cena', filter_salad:'Ensalada', filter_snack:'Snack', filter_dessert:'Postre',
                 settings_title:'IDIOMA', settings_subtitle:'Idioma y unidades', settings_units:'Unidades de medida',
-                footer_contact:'Contacto', footer_rights:'© 2026 New Age Studio. Todos los derechos reservados.', footer_note:'Recetas para inspirarte. Ajusta los ingredientes a tus necesidades y alergias.',
+                footer_contact:'Contacto', footer_privacy:'Privacidad', footer_rights:'© 2026 New Age Studio. Todos los derechos reservados.', footer_note:'Recetas para inspirarte. Ajusta los ingredientes a tus necesidades y alergias.',
                 share_text:'Gluten Free 365 - recetas sin gluten para cada día', toast_link_copied:'Enlace copiado ✓',
                 aria_share:'Compartir', aria_top:'Arriba', aria_settings:'Idioma',
                 months:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
@@ -645,7 +645,7 @@
                 filter_tequila:'Текила', filter_whisky:'Виски',
                 filter_breakfast:'Завтрак', filter_lunch:'Обед', filter_dinner:'Ужин', filter_salad:'Салат', filter_snack:'Снэк', filter_dessert:'Десерт',
                 settings_title:'ЯЗЫК', settings_subtitle:'Язык и единицы', settings_units:'Единицы измерения',
-                footer_contact:'Контакт', footer_rights:'© 2026 New Age Studio. Все права защищены.', footer_note:'Рецепты для вдохновения. Учитывайте свои потребности и аллергии.',
+                footer_contact:'Контакт', footer_privacy:'Конфиденциальность', footer_rights:'© 2026 New Age Studio. Все права защищены.', footer_note:'Рецепты для вдохновения. Учитывайте свои потребности и аллергии.',
                 share_text:'Gluten Free 365 - рецепты без глютена', toast_link_copied:'Ссылка скопирована ✓',
                 aria_share:'Поделиться', aria_top:'Наверх', aria_settings:'Язык',
                 months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
@@ -679,7 +679,7 @@
             error_connection:'Connexion perdue',
             filter_all:'Tous', filter_easy:'Facile', filter_under20:'Moins de 20 min', filter_under30:'Moins de 30 min', meta_min:'min',
             settings_title:'LANGUE', settings_subtitle:'Langue et unités', settings_units:'Unités de mesure',
-            footer_contact:'Contact', footer_rights:'© 2026 New Age Studio. Tous droits réservés.', footer_note:'Recettes pour inspiration. Adaptez les ingrédients à vos besoins et allergies.',
+            footer_contact:'Contact', footer_privacy:'Confidentialité', footer_rights:'© 2026 New Age Studio. Tous droits réservés.', footer_note:'Recettes pour inspiration. Adaptez les ingrédients à vos besoins et allergies.',
             share_text:'Gluten Free 365 - recettes sans gluten au quotidien', toast_link_copied:'Lien copié ✓',
             aria_share:'Partager', aria_top:'Haut', aria_settings:'Langue',
             months:['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
@@ -749,7 +749,7 @@
         function openSettings() {
             const langGrid = LANGS.map(l => `
                 <button onclick="setLang('${l.code}')" class="border ${l.code===LANG?'border-gold text-gold-bright bg-ink-soft':'border-gold-dim text-cream-dim'} hover:border-gold hover:text-gold active:scale-[0.98] transition p-3 flex items-center gap-3">
-                    <span class="text-2xl">${l.flag}</span>
+                    <span class="w-8 h-8 border border-gold-dim inline-flex items-center justify-center font-roman text-[0.62rem] tracking-[0.08em]">${l.label}</span>
                     <span class="font-roman text-sm tracking-[0.1em]">${l.name}</span>
                 </button>`).join('');
             const unitBtn = (u, label) => `
@@ -923,9 +923,12 @@
                 <span class="text-gold text-xs">❦</span>
             </div>
             <p class="font-roman text-gold text-[0.65rem] tracking-[0.35em] uppercase mb-2" data-i18n="footer_contact">Контакт</p>
-            <a href="mailto:office@newage-studio.com" class="font-body italic text-cream text-lg hover:text-gold transition">
-                office@newage-studio.com
+            <a href="mailto:support@tastemaster.eu" class="font-body italic text-cream text-lg hover:text-gold transition">
+                support@tastemaster.eu
             </a>
+            <div class="mt-3">
+                <a href="privacy.html" class="font-roman text-gold-dim text-[0.62rem] tracking-[0.22em] uppercase hover:text-gold transition" data-i18n="footer_privacy">Поверителност</a>
+            </div>
             <p class="mt-5 font-roman text-cream-dim text-[0.58rem] tracking-[0.22em] uppercase" data-i18n="footer_rights">© 2026 New Age Studio. Всички права запазени.</p>
             <p class="mt-3 mx-auto max-w-sm font-body italic text-cream-dim text-sm leading-relaxed" data-i18n="footer_note">Рецепти за вдъхновение. Съобразявайте съставките с личните си нужди и алергии.</p>
         </footer>
