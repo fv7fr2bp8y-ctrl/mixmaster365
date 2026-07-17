@@ -1,5 +1,157 @@
 # Meat Free 365 - Google Play listing
 
+Този файл съдържа целия ред за създаване и публикуване на приложението, готовите отговори за декларациите и текстовете за шестте езика.
+
+## 1. Create app
+
+От Google Play Console избери **All apps -> Create app** и въведи:
+
+- App name: `Meat Free 365`
+- Default language: `English (United States) - en-US`
+- App or game: `App`
+- Free or paid: `Free`
+- Developer Program Policies: потвърди
+- US export laws: потвърди
+
+Package name след качването на bundle трябва да бъде точно:
+
+`eu.meatfree365.twa`
+
+Името на пакета не може да се сменя след създаването на приложението.
+
+## 2. Store settings
+
+Отвори **Grow users -> Store presence -> Store settings**:
+
+- App or game: `App`
+- Category: `Food & Drink`
+- Tags: `Recipes`, `Cooking`, `Vegetarian` (ако са налични)
+- Email: `support@tastemaster.eu`
+- Website: `https://meat-free.freefrom365.com/`
+- Phone: остави празно
+- External marketing: може да остане включено
+
+## 3. App content declarations
+
+### Privacy policy
+
+`https://meat-free.freefrom365.com/privacy.html`
+
+### Ads
+
+На въпроса дали приложението съдържа реклами избери **No**.
+
+### Sign in details / App access
+
+На въпроса дали част от приложението е ограничена избери **No**.
+
+Текст при поискване на пояснение:
+
+`All functionality is available without sign-in, payment, membership or special access.`
+
+### Content rating
+
+- Category: `All Other App Types`
+- Downloaded app ratings-relevant content: `No`
+- User content sharing: `No`
+- Promotion or sale of age-restricted products or activities: `No`
+- Violence, sexual content, offensive language, gambling or controlled substances: `No`
+- Приложението зарежда онлайн рецепти и снимки, но няма потребителско съдържание или комуникация между потребители.
+
+### Target audience and content
+
+- Target age groups: `13-15`, `16-17`, `18 and over`
+- App designed primarily for children: `No`
+- Appeal to children: `No`
+- Ads: `No`
+
+### Data safety
+
+За текущата версия на приложението:
+
+- Does your app collect or share any of the required user data types? `No`
+- Is all user data encrypted in transit? `Yes`
+- Account creation: `No account creation`
+- Data deletion request: не се изисква, защото няма профил или сървърно съхранявани лични данни
+
+Тези отговори са валидни, докато няма включени Vercel Web Analytics, Speed Insights, реклами, профили или друг SDK за проследяване. Езикът, мерните единици и любимите рецепти се пазят само локално на устройството.
+
+### Health apps
+
+- Is this a health app? `No`
+- Приложението е каталог с рецепти и не предоставя медицински съвети, диагноза или здравно наблюдение.
+
+### Other declarations
+
+- Government app: `No`
+- Financial features: `No`
+- News app: `No`
+- Advertising ID: `No`
+
+## 4. Main store listing
+
+Първо попълни английската локализация от секцията **English (United States) - en-US** по-долу. След това избери **Manage translations -> Add your own translation** и добави:
+
+1. Spanish (Spain) - `es-ES`
+2. French (France) - `fr-FR`
+3. German - `de-DE`
+4. Russian - `ru-RU`
+5. Bulgarian - `bg`
+
+За всяка локализация постави съответните App name, Short description и Full description от този файл.
+
+### Graphics
+
+- App icon: `google-play-assets/icons/meat-free-icon-512.png`
+- Feature graphic: `google-play-assets/feature-graphics/meat-free-1024x500.png`
+- Phone screenshots, в този ред:
+  1. `google-play-assets/screenshots-play/meat-free/01-home.png`
+  2. `google-play-assets/screenshots-play/meat-free/02-catalog.png`
+  3. `google-play-assets/screenshots-play/meat-free/03-recipe.png`
+  4. `google-play-assets/screenshots-play/meat-free/04-languages.png`
+- Video: остави празно
+- Tablet, Chromebook и XR изображения: засега остави празни
+
+## 5. Countries and pricing
+
+От **Reach and devices -> Countries / regions** избери всички желани държави. За глобално издание може да избереш **Add countries / regions -> Select all available countries / regions**.
+
+Приложението остава **Free**. По-късно могат да се добавят покупки или абонамент, но Data safety, App access и Play Billing декларациите трябва да се обновят.
+
+## 6. Production release
+
+Отвори **Test and release -> Production -> Create new release**.
+
+Качи:
+
+`android/meat-free-twa/app-release-bundle.aab`
+
+Въведи:
+
+- Release name: `Meat Free 365 v1.0`
+- Release notes: постави целия блок от секцията **Release notes - paste as one block** по-долу
+
+След качването отвори **Protected with Play -> Play app signing** и копирай **SHA-256 certificate fingerprint** от секцията **App signing key certificate**. Това не е Upload key certificate. Новият fingerprint трябва да се добави към `.well-known/assetlinks.json`, преди да започне пълното разпространение.
+
+## 7. Final review
+
+Преди **Start rollout to Production** провери:
+
+- Package: `eu.meatfree365.twa`
+- Privacy URL се отваря публично
+- Има икона, feature graphic и поне 4 телефонни скрийншота
+- Шестте store listing локализации са записани
+- Content rating е издаден
+- Data safety е завършен
+- Ads е `No`
+- App access е `No restrictions`
+- Category е `Food & Drink`
+- Държавите са избрани
+- Google Play app-signing SHA-256 е добавен и публикуван в Digital Asset Links
+- Няма нерешени грешки в Publishing overview
+
+Когато всички проверки са зелени, избери **Send changes for review** или **Start rollout to Production**, според показвания бутон.
+
 ## App setup
 
 - App name: `Meat Free 365`
