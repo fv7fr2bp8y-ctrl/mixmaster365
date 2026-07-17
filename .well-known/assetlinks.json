@@ -41,5 +41,15 @@
         "6F:90:3D:D0:10:27:7E:1B:59:AA:4B:CD:5C:BB:62:6A:D8:C8:DE:8E:DC:C6:F9:10:C3:DE:8D:D2:2C:B0:D7:D8"
       ]
     }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "eu.plantbased365.twa",
+      "sha256_cert_fingerprints": [
+        "10:BC:C0:2F:35:81:77:6F:01:45:C5:EE:80:C7:B0:40:59:22:6F:D8:0B:B6:FA:49:4D:ED:95:FA:A6:D9:F7:85"
+      ]
+    }
   }
 ]
