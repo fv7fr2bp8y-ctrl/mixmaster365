@@ -2,7 +2,7 @@
 
 **Package:** `eu.mixmaster365.app` · **Version code:** 2 · **Category:** Food & Drink · **Rating:** Mature 17+
 **Privacy:** https://mixmaster365.eu/privacy.html
-**Signing:** Use mine → `MixMaster - Google Play package/signing.keystore` (пароли в `signing-key-info.txt`)
+**Signing:** Use mine → `local-archive/legacy-google-play/MixMaster - Google Play package/signing.keystore` (пароли в `signing-key-info.txt`)
 **PWABuilder URL:** https://mixmaster365.eu/ · ☑ Google Play Billing
 
 **Файлове (в тази папка):** icon-512.png · feature-graphic.png (1024×500) · store-en-1..4.png (1080×1920)

@@ -1,7 +1,7 @@
 # 365 Mocktails v2 — Play release пакет (16.07.2026)
 
 **Package:** `eu.mixmaster365.twa` · **Version code:** 2 · **Category:** Food & Drink · **Rating:** Everyone
-**Keystore:** `MixMaster365/Mocktails - Play keystores/използвания-6E85 (по-нов)/`
+**Keystore:** `MixMaster365/local-archive/legacy-google-play/Mocktails - Play keystores/използвания-6E85 (по-нов)/`
 ⚠️ Ако Play каже „signed with the wrong key" — кажи ми, пребилдвам с резервния (2 мин).
 
 **Промо:** в Console смени `mocktails_premium` на **€1.99** — кодът вече показва ~~€2.99~~ €1.99.

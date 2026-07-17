@@ -506,6 +506,7 @@
                 error_connection:'Връзката прекъсна',
                 filter_all:'Всички', filter_vodka:'Водка', filter_gin:'Джин', filter_rum:'Ром',
                 filter_easy:'Лесно', filter_under20:'До 20 мин', filter_under30:'До 30 мин', meta_min:'мин',
+                section_ingredients:'съставки', section_steps:'стъпки', meta_ingredient_one:'съставка', meta_ingredient_many:'съставки',
                 filter_tequila:'Текила', filter_whisky:'Уиски',
                 filter_breakfast:'Закуска', filter_lunch:'Обяд', filter_dinner:'Вечеря', filter_salad:'Салата', filter_snack:'Снак', filter_dessert:'Десерт',
                 settings_title:'ЕЗИК', settings_subtitle:'Език и мерни единици', settings_units:'Мерни единици',
@@ -540,6 +541,7 @@
                 error_connection:'Connection lost',
                 filter_all:'All', filter_vodka:'Vodka', filter_gin:'Gin', filter_rum:'Rum',
                 filter_easy:'Easy', filter_under20:'Under 20 min', filter_under30:'Under 30 min', meta_min:'min',
+                section_ingredients:'ingredients', section_steps:'steps', meta_ingredient_one:'ingredient', meta_ingredient_many:'ingredients',
                 filter_tequila:'Tequila', filter_whisky:'Whisky',
                 filter_breakfast:'Breakfast', filter_lunch:'Lunch', filter_dinner:'Dinner', filter_salad:'Salad', filter_snack:'Snack', filter_dessert:'Dessert',
                 settings_title:'LANGUAGE', settings_subtitle:'Language & units', settings_units:'Measurement units',
@@ -574,6 +576,7 @@
                 error_connection:'Verbindung unterbrochen',
                 filter_all:'Alle', filter_vodka:'Wodka', filter_gin:'Gin', filter_rum:'Rum',
                 filter_easy:'Einfach', filter_under20:'Unter 20 Min', filter_under30:'Unter 30 Min', meta_min:'Min',
+                section_ingredients:'Zutaten', section_steps:'Zubereitung', meta_ingredient_one:'Zutat', meta_ingredient_many:'Zutaten',
                 filter_tequila:'Tequila', filter_whisky:'Whisky',
                 filter_breakfast:'Frühstück', filter_lunch:'Mittagessen', filter_dinner:'Abendessen', filter_salad:'Salat', filter_snack:'Snack', filter_dessert:'Dessert',
                 settings_title:'SPRACHE', settings_subtitle:'Sprache & Einheiten', settings_units:'Maßeinheiten',
@@ -608,6 +611,7 @@
                 error_connection:'Conexión perdida',
                 filter_all:'Todos', filter_vodka:'Vodka', filter_gin:'Ginebra', filter_rum:'Ron',
                 filter_easy:'Fácil', filter_under20:'Hasta 20 min', filter_under30:'Hasta 30 min', meta_min:'min',
+                section_ingredients:'ingredientes', section_steps:'preparación', meta_ingredient_one:'ingrediente', meta_ingredient_many:'ingredientes',
                 filter_tequila:'Tequila', filter_whisky:'Whisky',
                 filter_breakfast:'Desayuno', filter_lunch:'Comida', filter_dinner:'Cena', filter_salad:'Ensalada', filter_snack:'Snack', filter_dessert:'Postre',
                 settings_title:'IDIOMA', settings_subtitle:'Idioma y unidades', settings_units:'Unidades de medida',
@@ -642,6 +646,7 @@
                 error_connection:'Соединение прервано',
                 filter_all:'Все', filter_vodka:'Водка', filter_gin:'Джин', filter_rum:'Ром',
                 filter_easy:'Легко', filter_under20:'До 20 мин', filter_under30:'До 30 мин', meta_min:'мин',
+                section_ingredients:'ингредиенты', section_steps:'приготовление', meta_ingredient_one:'ингредиент', meta_ingredient_many:'ингредиентов',
                 filter_tequila:'Текила', filter_whisky:'Виски',
                 filter_breakfast:'Завтрак', filter_lunch:'Обед', filter_dinner:'Ужин', filter_salad:'Салат', filter_snack:'Снэк', filter_dessert:'Десерт',
                 settings_title:'ЯЗЫК', settings_subtitle:'Язык и единицы', settings_units:'Единицы измерения',
@@ -678,6 +683,7 @@
             load_more:'Charger plus', alert_empty:'La sélection est vide. Effacez les filtres.',
             error_connection:'Connexion perdue',
             filter_all:'Tous', filter_easy:'Facile', filter_under20:'Moins de 20 min', filter_under30:'Moins de 30 min', meta_min:'min',
+            section_ingredients:'ingrédients', section_steps:'préparation', meta_ingredient_one:'ingrédient', meta_ingredient_many:'ingrédients',
             settings_title:'LANGUE', settings_subtitle:'Langue et unités', settings_units:'Unités de mesure',
             footer_contact:'Contact', footer_privacy:'Confidentialité', footer_rights:'© 2026 New Age Studio. Tous droits réservés.', footer_note:'Recettes pour inspiration. Adaptez les ingrédients à vos besoins et allergies.',
             share_text:'Gluten Free 365 - recettes sans gluten au quotidien', toast_link_copied:'Lien copié ✓',
@@ -1172,7 +1178,21 @@
             return Number.isFinite(Number(num)) ? String(Number(num)) : '';
         }
 
-        function activeList()    { return currentMode === 'mocktails' ? allMocktails : allCocktails; }
+        function hasLanguageContent(item) {
+            if (!item || !/\d/.test(String(item.ingredients || ''))) return false;
+            if (LANG === 'bg') return true;
+            return ['name', 'ingredients', 'recipe'].every(field => {
+                const translated = String(item[field + '_' + LANG] || '').trim();
+                const original = String(item[field] || '').trim();
+                return translated && translated !== original &&
+                    (field !== 'ingredients' || /\d/.test(translated));
+            });
+        }
+
+        function activeList() {
+            const list = currentMode === 'mocktails' ? allMocktails : allCocktails;
+            return list.filter(hasLanguageContent);
+        }
         function activeFilters() { return currentMode === 'mocktails' ? MOCKTAIL_FILTERS : FILTERS; }
 
         // Localized field accessor — falls back to original Bulgarian
@@ -1384,7 +1404,11 @@
             if (d.time) parts.push(escapeHtml(d.time) + ' ' + t('meta_min'));
             if (d.difficulty) parts.push(escapeHtml(loc(d, 'difficulty') || d.difficulty));
             if (d.country) parts.push(escapeHtml(loc(d, 'country') || d.country));
-            if (d.ingredients) parts.push(String(loc(d,'ingredients')).split(',').filter(Boolean).length + ' съставки');
+            if (d.ingredients) {
+                const ingredientCount = String(loc(d,'ingredients')).split(',').filter(Boolean).length;
+                const ingredientWord = ingredientCount === 1 ? t('meta_ingredient_one') : t('meta_ingredient_many');
+                parts.push(`${ingredientCount} ${ingredientWord}`);
+            }
             parts.push(escapeHtml(document.title || 'Recipe 365'));
             return parts.join(' · ');
         }
@@ -1422,7 +1446,7 @@
                         <!-- Ingredients -->
                         ${d.ingredients ? `
                         <div class="px-5 pb-5">
-                            <div class="deco-divider mb-4"><span class="font-roman text-xs tracking-[0.28em] uppercase text-gold">съставки</span></div>
+                            <div class="deco-divider mb-4"><span class="font-roman text-xs tracking-[0.28em] uppercase text-gold">${escapeHtml(t('section_ingredients'))}</span></div>
                             <ul class="space-y-1.5">
                                 ${String(loc(d,'ingredients')).split(',').map(ing => ing.trim()).filter(Boolean).map(ing => `
                                 <li class="flex items-baseline gap-3">
@@ -1434,7 +1458,7 @@
 
                         <!-- Recipe -->
                         <div class="px-5 pb-6 pt-2 border-t border-gold-dim/30">
-                            <div class="deco-divider mb-4"><span class="font-roman text-xs tracking-[0.28em] uppercase text-gold">стъпки</span></div>
+                            <div class="deco-divider mb-4"><span class="font-roman text-xs tracking-[0.28em] uppercase text-gold">${escapeHtml(t('section_steps'))}</span></div>
                             <div class="recipe-content text-cream/80 text-base">
                                 ${convertUnits(loc(d,'recipe') || '')}
                             </div>

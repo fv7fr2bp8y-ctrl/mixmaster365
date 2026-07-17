@@ -1,5 +1,10 @@
 _working/
 .vercel
+.DS_Store
+**/.DS_Store
+local-assets/
+local-archive/
+android/*/gradlew.bat
 mixmaster-v2-release/*.aab
 mixmaster-v2-release/*.apk
 mocktails-v2-release/*.aab

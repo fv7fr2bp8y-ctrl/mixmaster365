@@ -25,7 +25,7 @@ Healthy Gut 365 is the gluten-free and dairy-free recipe app inside the MixMaste
 
 ## Google Sheet
 
-- Spreadsheet title: `healthy_gut_365_final`
+- Spreadsheet title: `healthy_gut_365_final` (local export: `local-assets/data-exports/healthy_gut_365_final.xlsx`)
 - Spreadsheet ID: `1GT8j75VnRNwtqfhoc3XiUFyZQeETDi_bRGs1ALSyMBM`
 - URL: `https://docs.google.com/spreadsheets/d/1GT8j75VnRNwtqfhoc3XiUFyZQeETDi_bRGs1ALSyMBM/edit`
 - Main tab: `healthy_gut_365`
@@ -72,7 +72,7 @@ https://drive.google.com/thumbnail?id=<FILE_ID>&sz=w1200
 Local generated images are archived under:
 
 ```text
-healthy-gut-generated-images/
+local-assets/generated/healthy-gut/
 ```
 
 Known batches:
@@ -193,4 +193,3 @@ driveImages 36
 missingImg 0
 uniqueIds 36
 ```
-

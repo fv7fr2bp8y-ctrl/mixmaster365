@@ -116,7 +116,7 @@ For the next batch:
 3. Save/copy the generated images into:
 
 ```text
-healthy-gut-generated-images/batch-037-048/
+local-assets/generated/healthy-gut/batch-037-048/
 ```
 
 4. Make a contact sheet for QA.
@@ -195,4 +195,3 @@ https://docs.google.com/spreadsheets/d/1GT8j75VnRNwtqfhoc3XiUFyZQeETDi_bRGs1ALSy
 - валидирай, че app има 48 рецепти, 48 Drive images, 0 missing;
 - commit и push към `main`.
 ```
-
