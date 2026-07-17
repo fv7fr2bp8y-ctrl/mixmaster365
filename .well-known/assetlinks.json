@@ -61,5 +61,15 @@
         "9E:8A:25:59:60:43:F0:5E:BB:AD:EE:F5:5C:79:F4:E2:C0:87:03:A0:02:82:3B:F0:91:4A:75:DE:C7:8E:86:76"
       ]
     }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "eu.dairyfree365.twa",
+      "sha256_cert_fingerprints": [
+        "B2:EF:9D:61:C1:95:AA:35:64:14:D3:AF:E6:82:9C:46:B8:A1:4E:71:F1:4A:1D:C2:17:66:BB:EA:7B:01:E4:83"
+      ]
+    }
   }
 ]

@@ -1172,7 +1172,21 @@
             return Number.isFinite(Number(num)) ? String(Number(num)) : '';
         }
 
-        function activeList()    { return currentMode === 'mocktails' ? allMocktails : allCocktails; }
+        function hasLanguageContent(item) {
+            if (!item || !/\d/.test(String(item.ingredients || ''))) return false;
+            if (LANG === 'bg') return true;
+            return ['name', 'ingredients', 'recipe'].every(field => {
+                const translated = String(item[field + '_' + LANG] || '').trim();
+                const original = String(item[field] || '').trim();
+                return translated && translated !== original &&
+                    (field !== 'ingredients' || /\d/.test(translated));
+            });
+        }
+
+        function activeList() {
+            const list = currentMode === 'mocktails' ? allMocktails : allCocktails;
+            return list.filter(hasLanguageContent);
+        }
         function activeFilters() { return currentMode === 'mocktails' ? MOCKTAIL_FILTERS : FILTERS; }
 
         // Localized field accessor — falls back to original Bulgarian
