@@ -3,9 +3,13 @@ const path = require('path');
 const { chromium } = require('playwright');
 
 const root = path.resolve(__dirname, '..');
-const logo = fs.readFileSync(path.join(root, 'plant-based', 'logo-source.png')).toString('base64');
-const food = fs.readFileSync(path.join(root, 'google-play-assets', 'feature-graphics', 'plant-based-food.png')).toString('base64');
-const output = path.join(root, 'google-play-assets', 'feature-graphics', 'plant-based-1024x500.png');
+const appSlug = process.env.APP_SLUG || 'plant-based';
+const appName = process.env.APP_NAME || 'Plant Based 365';
+const subtitle = process.env.APP_SUBTITLE || 'Без животински продукти';
+const meta = process.env.APP_META || 'Растителни рецепти · 6 езика';
+const logo = fs.readFileSync(path.join(root, appSlug, 'logo-source.png')).toString('base64');
+const food = fs.readFileSync(path.join(root, 'google-play-assets', 'feature-graphics', `${appSlug}-food.png`)).toString('base64');
+const output = path.join(root, 'google-play-assets', 'feature-graphics', `${appSlug}-1024x500.png`);
 
 (async () => {
   const browser = await chromium.launch({
@@ -31,10 +35,10 @@ const output = path.join(root, 'google-play-assets', 'feature-graphics', 'plant-
     </style>
     <section class="brand">
       <img class="logo" src="data:image/png;base64,${logo}" alt="">
-      <h1>Plant Based 365</h1>
+      <h1>${appName}</h1>
       <div class="rule"></div>
-      <div class="subtitle">Без животински продукти</div>
-      <div class="meta">Растителни рецепти · 6 езика</div>
+      <div class="subtitle">${subtitle}</div>
+      <div class="meta">${meta}</div>
     </section>
     <img class="food" src="data:image/png;base64,${food}" alt="">
   `, { waitUntil: 'load' });

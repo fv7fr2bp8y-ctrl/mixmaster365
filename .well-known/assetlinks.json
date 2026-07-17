@@ -51,5 +51,15 @@
         "10:BC:C0:2F:35:81:77:6F:01:45:C5:EE:80:C7:B0:40:59:22:6F:D8:0B:B6:FA:49:4D:ED:95:FA:A6:D9:F7:85"
       ]
     }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "eu.meatfree365.twa",
+      "sha256_cert_fingerprints": [
+        "9E:8A:25:59:60:43:F0:5E:BB:AD:EE:F5:5C:79:F4:E2:C0:87:03:A0:02:82:3B:F0:91:4A:75:DE:C7:8E:86:76"
+      ]
+    }
   }
 ]
