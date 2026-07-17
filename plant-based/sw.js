@@ -1,4 +1,4 @@
-const CACHE_NAME = "plant-based-365-v11";
+const CACHE_NAME = "plant-based-365-v12";
 const APP_ROOT = self.location.hostname.endsWith(".freefrom365.com") ? "" : "/plant-based";
 const APP_SHELL = [
   `${APP_ROOT}/`,

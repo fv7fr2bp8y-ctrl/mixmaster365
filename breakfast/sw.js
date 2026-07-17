@@ -1,4 +1,4 @@
-const CACHE_NAME = "brunch365-v58";
+const CACHE_NAME = "brunch365-v59";
 const RUNTIME_CACHE_NAME = "brunch365-runtime-v1";
 const MAX_RUNTIME_ENTRIES = 48;
 const IS_PRODUCTION_HOST = self.location.hostname === "brunch.freefrom365.com";

@@ -1,4 +1,4 @@
-const CACHE_NAME = "meat-free-365-v11";
+const CACHE_NAME = "meat-free-365-v12";
 const APP_ROOT = self.location.hostname.endsWith(".freefrom365.com") ? "" : "/meat-free";
 const APP_SHELL = [
   `${APP_ROOT}/`,

@@ -1,4 +1,4 @@
-const CACHE_NAME = "healthy-gut-365-v32";
+const CACHE_NAME = "healthy-gut-365-v33";
 const APP_ROOT = self.location.hostname.endsWith(".freefrom365.com") ? "" : "/free-from";
 const APP_SHELL = [
   `${APP_ROOT}/`,

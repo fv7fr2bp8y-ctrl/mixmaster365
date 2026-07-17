@@ -184,7 +184,7 @@ The six apps intentionally share the Brunch visual and interaction system: light
 
 ## Support and privacy
 
-All six recipe applications use `support@tastemaster.eu` as their public support address. Each app has its own `privacy.html` page linked from the footer; keep that address synchronized across the interface, privacy pages and Google Play listings.
+All six recipe applications use `support@tastemaster.eu` for general support and `privacy@tastemaster.eu` for privacy requests. Each app has its own `privacy.html` page linked from the footer; keep both addresses synchronized across the interfaces, privacy pages and Google Play listings.
 
 When changing cached application files, increment the cache name in the relevant `sw.js` so installed PWAs receive the update.
 
