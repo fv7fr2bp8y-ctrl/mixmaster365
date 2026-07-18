@@ -13,11 +13,11 @@ Status synchronized from `Master_Recipes` on 18 July 2026:
 | App | Ready source pool | Published | Remaining to 365 |
 |---|---:|---:|---:|
 | Brunch | 365 | 365 | 0 |
-| Healthy Gut | 249 | 249 | 116 |
-| Gluten Free | 277 | 277 | 88 |
-| Dairy Free | 296 | 296 | 69 |
-| Meat Free | 389 | 365 | 0 |
-| Plant Based | 245 | 245 | 120 |
+| Healthy Gut | 252 | 252 | 113 |
+| Gluten Free | 280 | 280 | 85 |
+| Dairy Free | 299 | 299 | 66 |
+| Meat Free | 392 | 365 | 0 |
+| Plant Based | 248 | 248 | 117 |
 
 The source pool may contain more than 365 suitable recipes. Each generated app publishes at most 365, ordered by its app slot. This leaves an editorial reserve without bloating the public catalogue.
 

@@ -575,7 +575,7 @@ window.BREAKFAST_DATA = [
     "name_de": "Mexikanische Chilaquiles Verdes mit Ei",
     "base_de": "Mexikanischer Brunch",
     "ingredients_de": "120 g Maistortillas, 250 ml Salsa Verde, 2 Eier, 160 g schwarze Bohnen, 1 Avocado, 2 EL Koriander, 1 Limette, 1/4 Zwiebel",
-    "recipe_de": "<p>Die Tortillas knusprig rösten.</p><p>Die Salsa verde mit den Bohnen erhitzen und die Tortillas kurz unterrühren.</p><p>Mit Ei, Avocado, Limette und Koriander servieren.</p>",
+    "recipe_de": "<p>Die Tortillas knusprig rösten.</p><p>Die Salsa Verde mit den Bohnen erhitzen und die Tortillas kurz unterrühren.</p><p>Mit Ei, Avocado, Limette und Koriander servieren.</p>",
     "difficulty_de": "Mittel",
     "country_de": "Mexiko",
     "tag_de": "Mexikanischer Brunch",
@@ -3785,7 +3785,7 @@ window.BREAKFAST_DATA = [
     "difficulty_fr": "Facile",
     "country_fr": "Brésil",
     "tag_fr": "petit déjeuner tropical",
-    "description_ru": "Легкий блинчик из тапиоки с кокосовым кремом, манго, лаймом и семенами чиа.",
+    "description_ru": "Легкий блинчик из тапиоки с кокосовыми сливками, манго, лаймом и семенами чиа.",
     "name_ru": "Бразильская тапиока с кокосом, манго и лаймом",
     "base_ru": "тропический завтрак",
     "ingredients_ru": "120 г гранулированной тапиоки, 160 г кокосового йогурта, 1 манго, 1 лайм, 1 ст. л. чиа, 2 ст. л. мяты, 20 г кокосовой стружки",
@@ -4588,12 +4588,12 @@ window.BREAKFAST_DATA = [
     "tag_en": "Levantine pasta",
     "description_de": "Geschmack nach gerösteter Paprika, Walnüssen und Granatapfelmelasse, serviert mit Kichererbsen und frischen Gurken.",
     "name_de": "Syrische Muhammara-Schüssel mit Kichererbsen und Gurken",
-    "base_de": "Levantinische Pasta",
+    "base_de": "Levantische Pasta",
     "ingredients_de": "180 g geröstete rote Paprika, 60 g Walnüsse, 220 g Kichererbsen, 1 EL Granatapfelmelasse, 1 Zitrone, 1/2 TL Kreuzkümmel, 1 Gurke, 2 EL Olivenöl",
     "recipe_de": "<p>Paprika, Walnüsse, Zitrone, Kreuzkümmel und Granatapfelmelasse pürieren.</p><p>Mit warmen Kichererbsen, Gurke und Olivenöl servieren – ein erfrischendes Frühstück.</p>",
     "difficulty_de": "Einfach",
     "country_de": "Libanon",
-    "tag_de": "Levantinische Pasta",
+    "tag_de": "Levantische Pasta",
     "description_es": "Sabor a pimiento asado, nueces y melaza de granada, servido con garbanzos y pepinos frescos.",
     "name_es": "Bol de muhammara sirio con garbanzos y pepinos",
     "base_es": "Pasta levantina",
@@ -4697,7 +4697,7 @@ window.BREAKFAST_DATA = [
     "country_en": "Mexico",
     "tag_en": "corn snack",
     "description_de": "Weiche Maispolenta mit roten Bohnen, Salsa Roja, Avocado und Limette.",
-    "name_de": "Mexikanische Tamale-Schale mit roten Bohnen und Salsa Roja",
+    "name_de": "Mexikanische Tamale-Schüssel mit roten Bohnen und Salsa Roja",
     "base_de": "Maissnack",
     "ingredients_de": "140 g Masarepa oder Maisgrieß, 180 g rote Bohnen, 180 g Salsa Roja, 1 Avocado, 1 Limette, 1/2 TL Kreuzkümmel, 2 EL Koriander",
     "recipe_de": "<p>Die Maisbasis einkochen lassen, bis sie dickflüssig und cremig ist.</p><p>Die Bohnen mit Kreuzkümmel erhitzen.</p><p>Zusammen mit Salsa Roja, Avocado, Limette und Koriander in einer Schüssel anrichten.</p>",
@@ -8361,6 +8361,171 @@ window.BREAKFAST_DATA = [
   },
   {
     "id": 153,
+    "source_id": "PB-C028",
+    "name": "Индийско къри с нахут и спанак",
+    "base": "индийско ястие",
+    "icon": "◇",
+    "image": "https://drive.google.com/file/d/12GEK-lMJzSQBDyVcEcoEw0nskiNGtUje/view?usp=drivesdk",
+    "description": "Сочно къри с нахут, много спанак, домати и ароматни подправки, поднесено с ориз басмати.",
+    "ingredients": "480 г сварен нахут, 350 г спанак, 500 г нарязани домати, 240 г ориз басмати, 1 глава лук, 3 скилидки чесън, 20 г джинджифил, 2 ч.л. гарам масала, 1 ч.л. кимион, 1/2 ч.л. куркума, 1 с.л. олио, 1/2 лимон, 1 ч.л. сол",
+    "recipe": "<p>Свари ориза</p><p>Запържи лука, чесъна и джинджифила</p><p>Добави подправките и доматите</p><p>Сложи нахута и вари 12 минути</p><p>Разбъркай спанака до омекване и завърши с лимон</p>",
+    "time": 30,
+    "difficulty": "Средно",
+    "country": "Индия",
+    "tag": "индийско ястие",
+    "description_en": "Juicy chickpea curry with plenty of spinach, tomatoes and fragrant spices, served with basmati rice.",
+    "name_en": "Indian chickpea and spinach curry",
+    "base_en": "Indian dinner",
+    "ingredients_en": "480 g cooked chickpeas, 350 g spinach, 500 g chopped tomatoes, 240 g basmati rice, 1 onion, 3 garlic cloves, 20 g ginger, 2 tsp garam masala, 1 tsp cumin, 1/2 tsp turmeric, 1 tbsp oil, 1/2 lemon, 1 tsp salt",
+    "recipe_en": "<p>Cook the rice</p><p>Sauté the onion, garlic and ginger</p><p>Add the spices and tomatoes</p><p>Stir in the chickpeas and simmer for 12 minutes</p><p>Fold in the spinach until wilted and finish with lemon</p>",
+    "difficulty_en": "Medium",
+    "country_en": "India",
+    "tag_en": "Indian dinner",
+    "description_de": "Saftiges Kichererbsencurry mit viel Spinat, Tomaten und duftenden Gewürzen, serviert mit Basmatireis.",
+    "name_de": "Indisches Kichererbsen-Spinat-Curry",
+    "base_de": "indisches Abendessen",
+    "ingredients_de": "480 g gekochte Kichererbsen, 350 g Spinat, 500 g gehackte Tomaten, 240 g Basmatireis, 1 Zwiebel, 3 Knoblauchzehen, 20 g Ingwer, 2 TL Garam Masala, 1 TL Kreuzkümmel, 1/2 TL Kurkuma, 1 EL Öl, 1/2 Zitrone, 1 TL Salz",
+    "recipe_de": "<p>Reis kochen</p><p>Zwiebel, Knoblauch und Ingwer anbraten</p><p>Gewürze und Tomaten zugeben</p><p>Kichererbsen einrühren und 12 Minuten köcheln</p><p>Spinat zusammenfallen lassen und mit Zitrone abschmecken</p>",
+    "difficulty_de": "Mittel",
+    "country_de": "Indien",
+    "tag_de": "indisches Abendessen",
+    "description_es": "Curry jugoso de garbanzos con abundantes espinacas, tomate y especias aromáticas, servido con arroz basmati.",
+    "name_es": "Curry indio de garbanzos y espinacas",
+    "base_es": "cena india",
+    "ingredients_es": "480 g garbanzos cocidos, 350 g espinacas, 500 g tomates troceados, 240 g arroz basmati, 1 cebolla, 3 dientes de ajo, 20 g jengibre, 2 cdta garam masala, 1 cdta comino, 1/2 cdta cúrcuma, 1 cda aceite, 1/2 limón, 1 cdta sal",
+    "recipe_es": "<p>Cuece el arroz</p><p>Sofríe la cebolla, el ajo y el jengibre</p><p>Añade las especias y los tomates</p><p>Incorpora los garbanzos y cocina 12 minutos</p><p>Añade las espinacas hasta que se ablanden y termina con limón</p>",
+    "difficulty_es": "Media",
+    "country_es": "India",
+    "tag_es": "cena india",
+    "description_fr": "Curry généreux de pois chiches avec beaucoup d’épinards, des tomates et des épices parfumées, servi avec du riz basmati.",
+    "name_fr": "Curry indien de pois chiches aux épinards",
+    "base_fr": "dîner indien",
+    "ingredients_fr": "480 g pois chiches cuits, 350 g épinards, 500 g tomates concassées, 240 g riz basmati, 1 oignon, 3 gousses d’ail, 20 g gingembre, 2 c. à café garam masala, 1 c. à café cumin, 1/2 c. à café curcuma, 1 c. à soupe huile, 1/2 citron, 1 c. à café sel",
+    "recipe_fr": "<p>Cuire le riz</p><p>Faire revenir l’oignon, l’ail et le gingembre</p><p>Ajouter les épices et les tomates</p><p>Incorporer les pois chiches et mijoter 12 minutes</p><p>Ajouter les épinards jusqu’à ce qu’ils tombent et terminer avec le citron</p>",
+    "difficulty_fr": "Moyen",
+    "country_fr": "Inde",
+    "tag_fr": "dîner indien",
+    "description_ru": "Сочное карри с нутом, большим количеством шпината, помидорами и ароматными специями, поданное с рисом басмати.",
+    "name_ru": "Индийское карри с нутом и шпинатом",
+    "base_ru": "индийский ужин",
+    "ingredients_ru": "480 г варёного нута, 350 г шпината, 500 г нарезанных помидоров, 240 г риса басмати, 1 луковица, 3 зубчика чеснока, 20 г имбиря, 2 ч. л. гарам масалы, 1 ч. л. кумина, 1/2 ч. л. куркумы, 1 ст. л. масла, 1/2 лимона, 1 ч. л. соли",
+    "recipe_ru": "<p>Сварите рис</p><p>Обжарьте лук, чеснок и имбирь</p><p>Добавьте специи и помидоры</p><p>Вмешайте нут и варите 12 минут</p><p>Добавьте шпинат, дайте ему осесть и завершите лимоном</p>",
+    "difficulty_ru": "Средне",
+    "country_ru": "Индия",
+    "tag_ru": "индийский ужин"
+  },
+  {
+    "id": 154,
+    "source_id": "PB-C029",
+    "name": "Оризова купа с мисо патладжан и едамаме",
+    "base": "японско ястие",
+    "icon": "◇",
+    "image": "https://drive.google.com/file/d/1pr6nnWLtG3eTpwCucUEebrkSG6-Ve4wm/view?usp=drivesdk",
+    "description": "Топла купа с ориз, глазирани с мисо патладжани, едамаме, краставица, моркови и сусам.",
+    "ingredients": "280 г ориз, 700 г патладжани, 300 г едамаме, 1 краставица, 2 моркова, 3 с.л. мисо без глутен, 2 с.л. тамари без глутен, 2 с.л. оризов оцет, 1 с.л. кленов сироп, 1 ч.л. сусамово олио, 2 ч.л. сусам",
+    "recipe": "<p>Свари ориза</p><p>Нарежи патладжаните и ги запечи до омекване</p><p>Смеси мисото, тамарито, оцета и сиропа</p><p>Глазирай патладжаните и допечи 5 минути</p><p>Подреди с едамаме и зеленчуците върху ориза</p>",
+    "time": 35,
+    "difficulty": "Средно",
+    "country": "Япония",
+    "tag": "японско ястие",
+    "description_en": "Warm rice bowl with miso-glazed eggplant, edamame, cucumber, carrot and sesame.",
+    "name_en": "Rice bowl with miso eggplant and edamame",
+    "base_en": "Japanese rice bowl",
+    "ingredients_en": "280 g rice, 700 g eggplant, 300 g edamame, 1 cucumber, 2 carrots, 3 tbsp gluten-free miso, 2 tbsp gluten-free tamari, 2 tbsp rice vinegar, 1 tbsp maple syrup, 1 tsp sesame oil, 2 tsp sesame seeds",
+    "recipe_en": "<p>Cook the rice</p><p>Cut and roast the eggplant until tender</p><p>Mix the miso, tamari, vinegar and syrup</p><p>Glaze the eggplant and roast for 5 more minutes</p><p>Arrange with edamame and vegetables over the rice</p>",
+    "difficulty_en": "Medium",
+    "country_en": "Japan",
+    "tag_en": "Japanese rice bowl",
+    "description_de": "Warme Reisschale mit Miso-glasierten Auberginen, Edamame, Gurke, Karotten und Sesam.",
+    "name_de": "Reisschale mit Miso-Aubergine und Edamame",
+    "base_de": "japanische Reisschale",
+    "ingredients_de": "280 g Reis, 700 g Auberginen, 300 g Edamame, 1 Gurke, 2 Karotten, 3 EL glutenfreies Miso, 2 EL glutenfreie Tamari, 2 EL Reisessig, 1 EL Ahornsirup, 1 TL Sesamöl, 2 TL Sesam",
+    "recipe_de": "<p>Reis kochen</p><p>Auberginen schneiden und weich rösten</p><p>Miso, Tamari, Essig und Sirup mischen</p><p>Auberginen glasieren und weitere 5 Minuten rösten</p><p>Mit Edamame und Gemüse auf dem Reis anrichten</p>",
+    "difficulty_de": "Mittel",
+    "country_de": "Japan",
+    "tag_de": "japanische Reisschale",
+    "description_es": "Bol caliente de arroz con berenjena glaseada con miso, edamame, pepino, zanahoria y sésamo.",
+    "name_es": "Bol de arroz con berenjena al miso y edamame",
+    "base_es": "bol japonés de arroz",
+    "ingredients_es": "280 g arroz, 700 g berenjena, 300 g edamame, 1 pepino, 2 zanahorias, 3 cda miso sin gluten, 2 cda tamari sin gluten, 2 cda vinagre de arroz, 1 cda sirope de arce, 1 cdta aceite de sésamo, 2 cdta sésamo",
+    "recipe_es": "<p>Cuece el arroz</p><p>Corta y asa la berenjena hasta que esté tierna</p><p>Mezcla el miso, tamari, vinagre y sirope</p><p>Glasea la berenjena y asa 5 minutos más</p><p>Coloca sobre el arroz con edamame y verduras</p>",
+    "difficulty_es": "Media",
+    "country_es": "Japón",
+    "tag_es": "bol japonés de arroz",
+    "description_fr": "Bol de riz chaud avec aubergine glacée au miso, edamame, concombre, carottes et sésame.",
+    "name_fr": "Bol de riz à l’aubergine miso et aux edamame",
+    "base_fr": "bol de riz japonais",
+    "ingredients_fr": "280 g riz, 700 g aubergines, 300 g edamame, 1 concombre, 2 carottes, 3 c. à soupe miso sans gluten, 2 c. à soupe tamari sans gluten, 2 c. à soupe vinaigre de riz, 1 c. à soupe sirop d’érable, 1 c. à café huile de sésame, 2 c. à café sésame",
+    "recipe_fr": "<p>Cuire le riz</p><p>Couper et rôtir les aubergines jusqu’à tendreté</p><p>Mélanger le miso, le tamari, le vinaigre et le sirop</p><p>Glacer les aubergines et rôtir encore 5 minutes</p><p>Disposer avec les edamame et les légumes sur le riz</p>",
+    "difficulty_fr": "Moyen",
+    "country_fr": "Japon",
+    "tag_fr": "bol de riz japonais",
+    "description_ru": "Тёплая чаша с рисом, баклажаном в глазури мисо, эдамаме, огурцом, морковью и кунжутом.",
+    "name_ru": "Рисовая чаша с баклажаном мисо и эдамаме",
+    "base_ru": "японская рисовая чаша",
+    "ingredients_ru": "280 г риса, 700 г баклажанов, 300 г эдамаме, 1 огурец, 2 моркови, 3 ст. л. безглютенового мисо, 2 ст. л. безглютенового тамари, 2 ст. л. рисового уксуса, 1 ст. л. кленового сиропа, 1 ч. л. кунжутного масла, 2 ч. л. кунжута",
+    "recipe_ru": "<p>Сварите рис</p><p>Нарежьте и запеките баклажаны до мягкости</p><p>Смешайте мисо, тамари, уксус и сироп</p><p>Смажьте баклажаны глазурью и запекайте ещё 5 минут</p><p>Выложите на рис с эдамаме и овощами</p>",
+    "difficulty_ru": "Средне",
+    "country_ru": "Япония",
+    "tag_ru": "японская рисовая чаша"
+  },
+  {
+    "id": 155,
+    "source_id": "PB-C030",
+    "name": "Пълнени чушки с киноа, леща и тиквички",
+    "base": "средиземноморско ястие",
+    "icon": "◇",
+    "image": "https://drive.google.com/file/d/1KY_9MIluavzAoaH2NNFyyWawyrWCmbx1/view?usp=drivesdk",
+    "description": "Печени червени чушки с пълнеж от киноа, зелена леща, тиквички, домати и лимонови подправки.",
+    "ingredients": "3 големи червени чушки, 180 г киноа, 300 г сварена зелена леща, 1 средна тиквичка, 300 г домати, 1 глава лук, 2 скилидки чесън, 2 ч.л. мащерка, 1 лимон, 2 с.л. зехтин, 1 ч.л. сол, 1/2 ч.л. черен пипер",
+    "recipe": "<p>Разполови чушките и ги запечи 10 минути</p><p>Свари киноата</p><p>Запържи лука, чесъна и тиквичката</p><p>Добави доматите, лещата, киноата и подправките</p><p>Напълни чушките и печи още 20 минути</p>",
+    "time": 45,
+    "difficulty": "Трудно",
+    "country": "Средиземноморие",
+    "tag": "средиземноморско ястие",
+    "description_en": "Roasted red peppers filled with quinoa, green lentils, zucchini, tomatoes and lemony herbs.",
+    "name_en": "Peppers stuffed with quinoa, lentils and zucchini",
+    "base_en": "Mediterranean dinner",
+    "ingredients_en": "3 large red peppers, 180 g quinoa, 300 g cooked green lentils, 1 medium zucchini, 300 g tomatoes, 1 onion, 2 garlic cloves, 2 tsp thyme, 1 lemon, 2 tbsp olive oil, 1 tsp salt, 1/2 tsp black pepper",
+    "recipe_en": "<p>Halve the peppers and roast for 10 minutes</p><p>Cook the quinoa</p><p>Sauté the onion, garlic and zucchini</p><p>Add the tomatoes, lentils, quinoa and seasonings</p><p>Fill the peppers and bake for another 20 minutes</p>",
+    "difficulty_en": "Hard",
+    "country_en": "Mediterranean",
+    "tag_en": "Mediterranean dinner",
+    "description_de": "Geröstete rote Paprika mit einer Füllung aus Quinoa, grünen Linsen, Zucchini, Tomaten und zitronigen Kräutern.",
+    "name_de": "Paprika mit Quinoa, Linsen und Zucchini gefüllt",
+    "base_de": "mediterranes Abendessen",
+    "ingredients_de": "3 große rote Paprika, 180 g Quinoa, 300 g gekochte grüne Linsen, 1 mittelgroße Zucchini, 300 g Tomaten, 1 Zwiebel, 2 Knoblauchzehen, 2 TL Thymian, 1 Zitrone, 2 EL Olivenöl, 1 TL Salz, 1/2 TL schwarzer Pfeffer",
+    "recipe_de": "<p>Paprika halbieren und 10 Minuten rösten</p><p>Quinoa kochen</p><p>Zwiebel, Knoblauch und Zucchini anbraten</p><p>Tomaten, Linsen, Quinoa und Gewürze zugeben</p><p>Paprika füllen und weitere 20 Minuten backen</p>",
+    "difficulty_de": "Schwer",
+    "country_de": "Mittelmeerraum",
+    "tag_de": "mediterranes Abendessen",
+    "description_es": "Pimientos rojos asados rellenos de quinoa, lentejas verdes, calabacín, tomate y hierbas con limón.",
+    "name_es": "Pimientos rellenos de quinoa, lentejas y calabacín",
+    "base_es": "cena mediterránea",
+    "ingredients_es": "3 pimientos rojos grandes, 180 g quinoa, 300 g lentejas verdes cocidas, 1 calabacín mediano, 300 g tomates, 1 cebolla, 2 dientes de ajo, 2 cdta tomillo, 1 limón, 2 cda aceite de oliva, 1 cdta sal, 1/2 cdta pimienta negra",
+    "recipe_es": "<p>Parte los pimientos y ásalos 10 minutos</p><p>Cuece la quinoa</p><p>Sofríe la cebolla, el ajo y el calabacín</p><p>Añade tomate, lentejas, quinoa y condimentos</p><p>Rellena los pimientos y hornea 20 minutos más</p>",
+    "difficulty_es": "Difícil",
+    "country_es": "Mediterráneo",
+    "tag_es": "cena mediterránea",
+    "description_fr": "Poivrons rouges rôtis farcis de quinoa, lentilles vertes, courgette, tomates et herbes citronnées.",
+    "name_fr": "Poivrons farcis au quinoa, lentilles et courgette",
+    "base_fr": "dîner méditerranéen",
+    "ingredients_fr": "3 gros poivrons rouges, 180 g quinoa, 300 g lentilles vertes cuites, 1 courgette moyenne, 300 g tomates, 1 oignon, 2 gousses d’ail, 2 c. à café thym, 1 citron, 2 c. à soupe huile d’olive, 1 c. à café sel, 1/2 c. à café poivre noir",
+    "recipe_fr": "<p>Couper les poivrons en deux et rôtir 10 minutes</p><p>Cuire le quinoa</p><p>Faire revenir l’oignon, l’ail et la courgette</p><p>Ajouter tomates, lentilles, quinoa et assaisonnements</p><p>Farcir les poivrons et cuire encore 20 minutes</p>",
+    "difficulty_fr": "Difficile",
+    "country_fr": "Méditerranée",
+    "tag_fr": "dîner méditerranéen",
+    "description_ru": "Запечённые красные перцы с начинкой из киноа, зелёной чечевицы, кабачка, помидоров и лимонных трав.",
+    "name_ru": "Перцы, фаршированные киноа, чечевицей и кабачком",
+    "base_ru": "средиземноморский ужин",
+    "ingredients_ru": "3 крупных красных перца, 180 г киноа, 300 г варёной зелёной чечевицы, 1 средний кабачок, 300 г помидоров, 1 луковица, 2 зубчика чеснока, 2 ч. л. тимьяна, 1 лимон, 2 ст. л. оливкового масла, 1 ч. л. соли, 1/2 ч. л. чёрного перца",
+    "recipe_ru": "<p>Разрежьте перцы пополам и запекайте 10 минут</p><p>Сварите киноа</p><p>Обжарьте лук, чеснок и кабачок</p><p>Добавьте помидоры, чечевицу, киноа и приправы</p><p>Наполните перцы и запекайте ещё 20 минут</p>",
+    "difficulty_ru": "Сложно",
+    "country_ru": "Средиземноморье",
+    "tag_ru": "средиземноморский ужин"
+  },
+  {
+    "id": 156,
     "source_id": "BR-E001",
     "name": "Ягодов тост с рикота, мед и шамфъстък",
     "base": "лесен красив брънч",
@@ -8415,7 +8580,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "легкий красивый бранч"
   },
   {
-    "id": 154,
+    "id": 157,
     "source_id": "BR-E002",
     "name": "Прасковен тост с бурата, чили мед и мента",
     "base": "лесен летен брънч",
@@ -8470,7 +8635,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "легкий летний бранч"
   },
   {
-    "id": 155,
+    "id": 158,
     "source_id": "BR-E003",
     "name": "Зелени яйчени тартинки с авокадо и краставица",
     "base": "лесен протеинов брънч",
@@ -8525,7 +8690,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "легкий белковый бранч"
   },
   {
-    "id": 156,
+    "id": 159,
     "source_id": "BR-E004",
     "name": "Лимонови котидж палачинки с боровинки",
     "base": "лесни пухкави палачинки",
@@ -8580,7 +8745,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "легкие пышные панкейки"
   },
   {
-    "id": 157,
+    "id": 160,
     "source_id": "BR-E005",
     "name": "Розов хумус тост с авокадо и рохко яйце",
     "base": "лесен цветен брънч",
@@ -8635,7 +8800,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "легкий цветной бранч"
   },
   {
-    "id": 158,
+    "id": 161,
     "source_id": "BR-E006",
     "name": "Капрезе яйца на фурна с чери домати и моцарела",
     "base": "лесен топъл брънч",
@@ -8690,7 +8855,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "легкий теплый бранч"
   },
   {
-    "id": 159,
+    "id": 162,
     "source_id": "BR-E007",
     "name": "Смокинов тост с козе сирене, орехи и мащерка",
     "base": "лесен красив брънч",
@@ -8745,7 +8910,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "легкий красивый бранч"
   },
   {
-    "id": 160,
+    "id": 163,
     "source_id": "BR-E009",
     "name": "Йогурт купа с банан, тахан, горски плодове и гранола",
     "base": "лесна сладка купа",
@@ -8800,7 +8965,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "легкая сладкая миска"
   },
   {
-    "id": 161,
+    "id": 164,
     "source_id": "BR-E012",
     "name": "Тост със страчатела, домати и босилково олио",
     "base": "лесен италиански тост",
@@ -8855,7 +9020,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "легкий итальянский тост"
   },
   {
-    "id": 162,
+    "id": 165,
     "source_id": "BR-C091",
     "name": "Корейски кимчи картофени палачинки с яйце",
     "base": "корейски брънч",
@@ -8910,7 +9075,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Корейский бранч"
   },
   {
-    "id": 163,
+    "id": 166,
     "source_id": "BR-C093",
     "name": "Бразилска тапиока креп с яйце и авокадо",
     "base": "безглутенов креп",
@@ -8965,7 +9130,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "безглютеновый блин"
   },
   {
-    "id": 164,
+    "id": 167,
     "source_id": "BR-C094",
     "name": "Тунизийска шакшука с нахут и хариса",
     "base": "пикантен тиган",
@@ -9020,7 +9185,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "острая сковорода"
   },
   {
-    "id": 165,
+    "id": 168,
     "source_id": "BR-C095",
     "name": "Датски ръжен тост с гъби, яйце и копър",
     "base": "северен тост",
@@ -9075,7 +9240,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "северный тост"
   },
   {
-    "id": 166,
+    "id": 169,
     "source_id": "BR-C096",
     "name": "Гръцка купа с йогурт, смокини и шамфъстък",
     "base": "сладка купа",
@@ -9130,7 +9295,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "сладкая миска"
   },
   {
-    "id": 167,
+    "id": 170,
     "source_id": "BR-C097",
     "name": "Израелска сабих чиния с патладжан и тахан",
     "base": "близкоизточна чиния",
@@ -9185,7 +9350,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Ближневосточное блюдо"
   },
   {
-    "id": 168,
+    "id": 171,
     "source_id": "BR-C098",
     "name": "Колумбийска арепа с боб, авокадо и яйце",
     "base": "латино брънч",
@@ -9224,12 +9389,12 @@ window.BREAKFAST_DATA = [
     "tag_es": "brunch latino",
     "description_fr": "Arepa chaude au maïs garnie de haricots noirs, d'avocat, d'œuf et de salsa fraîche.",
     "name_fr": "Arepa colombienne aux haricots, à l'avocat et aux œufs",
-    "base_fr": "Brunch latino",
+    "base_fr": "brunch latino",
     "ingredients_fr": "140 g farine pour arepa, 180 g haricots noirs, 2 oeufs, 1 avocat, 2 tomates, 1 citron vert, 2 c. à soupe coriandre, 60 g fromage",
     "recipe_fr": "<p>Pétrissez les arepas et faites-les frire à la poêle.</p><p>Faites chauffer les haricots avec les épices.</p><p>Garnissez les arepas de haricots, d'œuf, d'avocat, de salsa et d'un peu de fromage.</p>",
     "difficulty_fr": "Facile",
     "country_fr": "Amérique latine",
-    "tag_fr": "Brunch latino",
+    "tag_fr": "brunch latino",
     "description_ru": "Теплая кукурузная арепа с черной фасолью, авокадо, яйцом и свежей сальсой.",
     "name_ru": "Колумбийская арепа с фасолью, авокадо и яйцом",
     "base_ru": "Латинский бранч",
@@ -9240,7 +9405,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Латинский бранч"
   },
   {
-    "id": 169,
+    "id": 172,
     "source_id": "BR-C099",
     "name": "Филипински чеснов ориз с яйце и домати",
     "base": "оризова закуска",
@@ -9295,7 +9460,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "рисовый завтрак"
   },
   {
-    "id": 170,
+    "id": 173,
     "source_id": "BR-C100",
     "name": "Ливанска лабне питка със заатар и зеленчуци",
     "base": "левантски тост",
@@ -9350,7 +9515,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Левантийский тост"
   },
   {
-    "id": 171,
+    "id": 174,
     "source_id": "BR-C101",
     "name": "Тайландски кокосови оризови палачинки с манго",
     "base": "тропически палачинки",
@@ -9405,7 +9570,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "тропические блинчики"
   },
   {
-    "id": 172,
+    "id": 175,
     "source_id": "BR-C103",
     "name": "Австрийски кайзершмарн с горски плодове",
     "base": "сладък брънч",
@@ -9460,7 +9625,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "сладкий бранч"
   },
   {
-    "id": 173,
+    "id": 176,
     "source_id": "BR-C104",
     "name": "Грузински лобиани с билкова салата",
     "base": "пълнен хляб",
@@ -9515,7 +9680,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "фаршированный хлеб"
   },
   {
-    "id": 174,
+    "id": 177,
     "source_id": "BR-C105",
     "name": "Марокански мсемен с мед, бадеми и портокал",
     "base": "слоести палачинки",
@@ -9564,13 +9729,13 @@ window.BREAKFAST_DATA = [
     "name_ru": "Марокканский мсемен с медом, миндалем и апельсином.",
     "base_ru": "слоёные блины",
     "ingredients_ru": "160 г муки, 60 г манки, 30 г сливочного масла, 2 ст. л. меда, 30 г миндаля, 1 апельсин, 1 ст. л. мяты, 1/4 ч. л. соли",
-    "recipe_ru": "<p>Замесите тесто из муки, манной крупы и соли.</p><p>Раскатайте тонко, смажьте маслом и сложите.</p><p>Выпекайте в форме и подавайте с медом, миндалем, апельсином и мятой.</p>",
+    "recipe_ru": "<p>Замесите тесто из муки, манной крупы и соли.</p><p>Раскатайте тонко, смажьте маслом и сложите.</p><p>Выпекайте на противне и подавайте с медом, миндалем, апельсином и мятой.</p>",
     "difficulty_ru": "Средне",
     "country_ru": "Марокко",
     "tag_ru": "слоёные блины"
   },
   {
-    "id": 175,
+    "id": 178,
     "source_id": "BR-C108",
     "name": "Италианска фритата с тиквички и босилек",
     "base": "яйчен брънч",
@@ -9625,7 +9790,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "яичный бранч"
   },
   {
-    "id": 176,
+    "id": 179,
     "source_id": "BR-C109",
     "name": "Френска елдена галета с яйце и гъби",
     "base": "елдена галета",
@@ -9680,7 +9845,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "ржаные панировочные сухари"
   },
   {
-    "id": 177,
+    "id": 180,
     "source_id": "BR-C112",
     "name": "Български банички чашки със спанак и яйце",
     "base": "български брънч",
@@ -9735,7 +9900,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Болгарский бранч"
   },
   {
-    "id": 178,
+    "id": 181,
     "source_id": "BR-C113",
     "name": "Индонезийска гадо-гадо купа с яйце",
     "base": "зеленчукова купа",
@@ -9790,7 +9955,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "овощная миска"
   },
   {
-    "id": 179,
+    "id": 182,
     "source_id": "BR-C115",
     "name": "Немска селска закуска с картофи и яйца",
     "base": "картофен тиган",
@@ -9845,7 +10010,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "картофельная сковорода"
   },
   {
-    "id": 180,
+    "id": 183,
     "source_id": "BR-C116",
     "name": "Аржентинска проволета с яйца и чимичури",
     "base": "сиренен тиган",
@@ -9900,7 +10065,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "сковорода для сыра"
   },
   {
-    "id": 181,
+    "id": 184,
     "source_id": "BR-E013",
     "name": "Солена овесена каша с гъби и спанак",
     "base": "лесна солена каша",
@@ -9955,7 +10120,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простая несладкая каша"
   },
   {
-    "id": 182,
+    "id": 185,
     "source_id": "BR-E014",
     "name": "Печени овесени ядки с ябълка, канела и орехи",
     "base": "лесна печена каша",
@@ -10010,7 +10175,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простая запечённая овсянка"
   },
   {
-    "id": 183,
+    "id": 186,
     "source_id": "BR-E015",
     "name": "Лимонови печени овесени ядки с боровинки",
     "base": "лесна плодова закуска",
@@ -10065,7 +10230,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простой фруктовый завтрак"
   },
   {
-    "id": 184,
+    "id": 187,
     "source_id": "BR-E016",
     "name": "Нахутен омлет със зеленчуци и авокадо",
     "base": "лесен растителен омлет",
@@ -10120,7 +10285,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простой омлет на растительной основе"
   },
   {
-    "id": 185,
+    "id": 188,
     "source_id": "BR-E017",
     "name": "Киноа каша с круша, бадеми и канела",
     "base": "лесна безглутенова каша",
@@ -10175,7 +10340,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простая безглютеновая каша"
   },
   {
-    "id": 186,
+    "id": 189,
     "source_id": "BR-E018",
     "name": "Кремообразна полента с печени домати и бял боб",
     "base": "лесна солена купа",
@@ -10230,7 +10395,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простая пикантная миска"
   },
   {
-    "id": 187,
+    "id": 190,
     "source_id": "BR-E019",
     "name": "Хаш със сладък картоф, черен боб и кейл",
     "base": "цветен растителен тиган",
@@ -10285,7 +10450,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "красочная сковорода на растительной основе"
   },
   {
-    "id": 188,
+    "id": 191,
     "source_id": "BR-E020",
     "name": "Тост с бял боб, гъби и мащерка",
     "base": "лесен растителен тост",
@@ -10340,7 +10505,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простой тост на растительной основе"
   },
   {
-    "id": 189,
+    "id": 192,
     "source_id": "BR-E021",
     "name": "Тост с рикота, грах, лимон и мента",
     "base": "свеж зелен тост",
@@ -10395,7 +10560,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "свежий зеленый тост"
   },
   {
-    "id": 190,
+    "id": 193,
     "source_id": "BR-E022",
     "name": "Солена котидж купа с краставица и репички",
     "base": "лесна протеинова купа",
@@ -10450,7 +10615,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простой протеиновый боул"
   },
   {
-    "id": 191,
+    "id": 194,
     "source_id": "BR-E023",
     "name": "Йогурт купа с круша, орехи и канела",
     "base": "лесна сладка купа",
@@ -10505,7 +10670,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простая сладкая миска"
   },
   {
-    "id": 192,
+    "id": 195,
     "source_id": "BR-E024",
     "name": "Нощни овесени ядки с банан и фъстъчено масло",
     "base": "лесна закуска без готвене",
@@ -10560,7 +10725,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простой завтрак без готовки"
   },
   {
-    "id": 193,
+    "id": 196,
     "source_id": "BR-E025",
     "name": "Солена просена каша с тиквички и босилково песто",
     "base": "лесна солена каша",
@@ -10615,7 +10780,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простая несладкая каша"
   },
   {
-    "id": 194,
+    "id": 197,
     "source_id": "BR-E026",
     "name": "Йогурт купа с тиквена гранола и горски плодове",
     "base": "хрупкава сладка купа",
@@ -10670,7 +10835,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "хрустящая сладкая миска"
   },
   {
-    "id": 195,
+    "id": 198,
     "source_id": "BR-E027",
     "name": "Нощни овесени ядки „морковена торта“",
     "base": "лесна закуска без готвене",
@@ -10725,7 +10890,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Простой завтрак, не требующий готовки"
   },
   {
-    "id": 196,
+    "id": 199,
     "source_id": "BR-E028",
     "name": "Царевични фритери с авокадо и доматена салса",
     "base": "цветни зеленчукови фритери",
@@ -10780,7 +10945,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "красочные овощные оладьи"
   },
   {
-    "id": 197,
+    "id": 200,
     "source_id": "BR-E029",
     "name": "Топъл тиган с нахут, спанак и печени чушки",
     "base": "лесен растителен тиган",
@@ -10835,7 +11000,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простой рецепт на растительной основе на сковороде"
   },
   {
-    "id": 198,
+    "id": 201,
     "source_id": "BR-E030",
     "name": "Крепове от червена леща с домати и билки",
     "base": "лесни безглутенови крепове",
@@ -10890,7 +11055,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простые безглютеновые блинчики"
   },
   {
-    "id": 199,
+    "id": 202,
     "source_id": "BR-E031",
     "name": "Топла купа с бял боб, домати и спанак",
     "base": "лесна бобова купа",
@@ -10945,7 +11110,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простой рецепт бобовой миски"
   },
   {
-    "id": 200,
+    "id": 203,
     "source_id": "BR-E032",
     "name": "Печена фета с нахут и чери домати",
     "base": "лесен средиземноморски тиган",
@@ -11000,7 +11165,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простое средиземноморское блюдо на сковороде"
   },
   {
-    "id": 201,
+    "id": 204,
     "source_id": "BR-E033",
     "name": "Мисо оризова купа с гъби и едамаме",
     "base": "лесна японска купа",
@@ -11055,7 +11220,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простая японская миска"
   },
   {
-    "id": 202,
+    "id": 205,
     "source_id": "BR-E034",
     "name": "Тост с намачкан грах, фета и репички",
     "base": "свеж зелен тост",
@@ -11110,7 +11275,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "свежий зеленый тост"
   },
   {
-    "id": 203,
+    "id": 206,
     "source_id": "BR-E035",
     "name": "Какаов чиа пудинг с череши",
     "base": "лесен шоколадов пудинг",
@@ -11165,7 +11330,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простой шоколадный пудинг"
   },
   {
-    "id": 204,
+    "id": 207,
     "source_id": "BR-E036",
     "name": "Елдени палачинки с круша и бадеми",
     "base": "лесни безглутенови палачинки",
@@ -11220,7 +11385,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простые безглютеновые блинчики"
   },
   {
-    "id": 205,
+    "id": 208,
     "source_id": "BR-E037",
     "name": "Солени мъфини с тиквички и царевица",
     "base": "лесни зеленчукови мъфини",
@@ -11275,7 +11440,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простые овощные маффины"
   },
   {
-    "id": 206,
+    "id": 209,
     "source_id": "BR-E038",
     "name": "Страта с домати, босилек и моцарела",
     "base": "лесно печено ястие",
@@ -11330,7 +11495,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простой запеченный бранч"
   },
   {
-    "id": 207,
+    "id": 210,
     "source_id": "BR-E039",
     "name": "Печен френски тост с горски плодове",
     "base": "лесен сладък брънч",
@@ -11385,7 +11550,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простой сладкий бранч"
   },
   {
-    "id": 208,
+    "id": 211,
     "source_id": "BR-E040",
     "name": "Овесени скоунс с ябълка и чедър",
     "base": "лесно солено печиво",
@@ -11440,7 +11605,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простая несладкая выпечка"
   },
   {
-    "id": 209,
+    "id": 212,
     "source_id": "BR-E041",
     "name": "Малка шакшука с бял боб",
     "base": "лесен протеинов тиган",
@@ -11495,7 +11660,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простой рецепт протеинового блюда на сковороде"
   },
   {
-    "id": 210,
+    "id": 213,
     "source_id": "BR-E042",
     "name": "Закусъчни тортили с яйца и спанак",
     "base": "лесна закуска за из път",
@@ -11550,7 +11715,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Удобный завтрак, который можно взять с собой."
   },
   {
-    "id": 211,
+    "id": 214,
     "source_id": "BR-E043",
     "name": "Закусъчен кускус с портокал, фурми и шамфъстък",
     "base": "бърза плодова купа",
@@ -11605,7 +11770,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "быстрая фруктовая тарелка"
   },
   {
-    "id": 212,
+    "id": 215,
     "source_id": "BR-E044",
     "name": "Оризов пудинг с кайсии и шамфъстък",
     "base": "кремообразна сладка купа",
@@ -11660,7 +11825,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "сливочно-сладкая чаша"
   },
   {
-    "id": 213,
+    "id": 216,
     "source_id": "BR-E045",
     "name": "Печен сладък картоф с йогурт и тахан",
     "base": "лесен сладко-солен брънч",
@@ -11715,7 +11880,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простой бранч со сладкими и солеными блюдами"
   },
   {
-    "id": 214,
+    "id": 217,
     "source_id": "BR-E046",
     "name": "Тост с бял боб и печени чушки",
     "base": "лесен растителен тост",
@@ -11770,7 +11935,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простой тост на растительной основе"
   },
   {
-    "id": 215,
+    "id": 218,
     "source_id": "BR-E049",
     "name": "Капрезе киноа купа с яйце",
     "base": "лесна протеинова купа",
@@ -11825,7 +11990,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простой протеиновый боул"
   },
   {
-    "id": 216,
+    "id": 219,
     "source_id": "BR-E050",
     "name": "Хрупкава тофу купа със сусам",
     "base": "лесна растителна купа",
@@ -11880,7 +12045,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простой растительный боул"
   },
   {
-    "id": 217,
+    "id": 220,
     "source_id": "BR-E051",
     "name": "Картофен тиган с темпе и чушки",
     "base": "засищащ растителен тиган",
@@ -11935,7 +12100,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "сытный растительный хаш"
   },
   {
-    "id": 218,
+    "id": 221,
     "source_id": "BR-E052",
     "name": "Кокосова просена каша с манго",
     "base": "тропическа безглутенова каша",
@@ -11990,7 +12155,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "тропическая безглютеновая каша"
   },
   {
-    "id": 219,
+    "id": 222,
     "source_id": "BR-E053",
     "name": "Печени овесени чашки с банан и боровинки",
     "base": "лесна закуска за приготвяне",
@@ -12045,7 +12210,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Простой завтрак, который можно приготовить заранее."
   },
   {
-    "id": 220,
+    "id": 223,
     "source_id": "BR-E054",
     "name": "Бадемови палачинки с портокал",
     "base": "лесни безглутенови палачинки",
@@ -12100,7 +12265,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простые безглютеновые блинчики"
   },
   {
-    "id": 221,
+    "id": 224,
     "source_id": "BR-E055",
     "name": "Тост със салата от нахут и авокадо",
     "base": "лесен растителен тост",
@@ -12155,7 +12320,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простой тост на растительной основе"
   },
   {
-    "id": 222,
+    "id": 225,
     "source_id": "BR-E056",
     "name": "Тост с рикота и печено грозде",
     "base": "красив сладко-солен тост",
@@ -12210,7 +12375,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "красивый сладко-соленый тост"
   },
   {
-    "id": 223,
+    "id": 226,
     "source_id": "BR-E057",
     "name": "Яйчени мъфини с броколи и чедър",
     "base": "лесна протеинова закуска",
@@ -12265,7 +12430,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простой протеиновый завтрак"
   },
   {
-    "id": 224,
+    "id": 227,
     "source_id": "BR-E060",
     "name": "Закусъчни бисквити с фурми и тахан",
     "base": "лесна закуска за из път",
@@ -12320,7 +12485,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Удобный завтрак, который можно взять с собой."
   },
   {
-    "id": 225,
+    "id": 228,
     "source_id": "BR-E061",
     "name": "Солена ечемичена каша с гъби и праз",
     "base": "топла солена каша",
@@ -12375,7 +12540,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "теплая ароматная каша"
   },
   {
-    "id": 226,
+    "id": 229,
     "source_id": "BR-E062",
     "name": "Доматена супа с бял боб и спанак",
     "base": "лесна супа",
@@ -12430,7 +12595,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простой суп на завтрак"
   },
   {
-    "id": 227,
+    "id": 230,
     "source_id": "BR-E063",
     "name": "Супа от червена леща с кокос и спанак",
     "base": "бюджетна супа",
@@ -12485,7 +12650,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "недорогой суп"
   },
   {
-    "id": 228,
+    "id": 231,
     "source_id": "BR-E064",
     "name": "Грахова супа с мента и поширано яйце",
     "base": "пролетна супа",
@@ -12540,7 +12705,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "весенний суп"
   },
   {
-    "id": 229,
+    "id": 232,
     "source_id": "BR-E065",
     "name": "Купа с печен карфиол, нахут и тахан",
     "base": "растителна купа",
@@ -12595,7 +12760,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "миска на растительной основе"
   },
   {
-    "id": 230,
+    "id": 233,
     "source_id": "BR-E066",
     "name": "Топла салата от леща и печени моркови",
     "base": "топла салата",
@@ -12650,7 +12815,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "теплый салат"
   },
   {
-    "id": 231,
+    "id": 234,
     "source_id": "BR-E067",
     "name": "Купа с кафяв ориз, кимчи и хрупкаво тофу",
     "base": "корейска купа",
@@ -12705,7 +12870,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Корейская миска"
   },
   {
-    "id": 232,
+    "id": 235,
     "source_id": "BR-E068",
     "name": "Солени печени овесени ядки със спанак и домати",
     "base": "солено печиво",
@@ -12760,7 +12925,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "несладкая выпечка"
   },
   {
-    "id": 233,
+    "id": 236,
     "source_id": "BR-E069",
     "name": "Картофена фритата със спанак",
     "base": "яйчена закуска",
@@ -12815,7 +12980,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "яичный бранч"
   },
   {
-    "id": 234,
+    "id": 237,
     "source_id": "BR-E071",
     "name": "Бананови овесени гофрети",
     "base": "лесна сладка закуска",
@@ -12870,7 +13035,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простой сладкий завтрак"
   },
   {
-    "id": 235,
+    "id": 238,
     "source_id": "BR-E072",
     "name": "Ябълков крамбъл с елда и овес",
     "base": "плодова закуска",
@@ -12925,7 +13090,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "фруктовый завтрак"
   },
   {
-    "id": 236,
+    "id": 239,
     "source_id": "BR-E073",
     "name": "Пълнени чушки с киноа и черен боб",
     "base": "лесно основно",
@@ -12980,7 +13145,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простое основное блюдо"
   },
   {
-    "id": 237,
+    "id": 240,
     "source_id": "BR-E074",
     "name": "Доматено печиво с леща и спанак",
     "base": "бюджетно печиво",
@@ -13035,7 +13200,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "бюджетная выпечка"
   },
   {
-    "id": 238,
+    "id": 241,
     "source_id": "BR-E076",
     "name": "Средиземноморска купа с риба тон и нахут",
     "base": "бърза протеинова купа",
@@ -13090,7 +13255,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "быстрая протеиновая миска"
   },
   {
-    "id": 239,
+    "id": 242,
     "source_id": "BR-E077",
     "name": "Пилешки кюфтенца със спанак",
     "base": "протеинова закуска",
@@ -13145,7 +13310,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "белковый завтрак"
   },
   {
-    "id": 240,
+    "id": 243,
     "source_id": "BR-E078",
     "name": "Сусамова салата със соба и хрупкаво тофу",
     "base": "азиатска салата",
@@ -13200,7 +13365,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Азиатский салат с лапшой"
   },
   {
-    "id": 241,
+    "id": 244,
     "source_id": "BR-E079",
     "name": "Крем супа от тиквички и бял боб",
     "base": "лесна зеленчукова супа",
@@ -13255,7 +13420,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простой овощной суп"
   },
   {
-    "id": 242,
+    "id": 245,
     "source_id": "BR-E080",
     "name": "Печени круши с овес и орехи",
     "base": "лесна плодова закуска",
@@ -13310,7 +13475,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простой фруктовый завтрак"
   },
   {
-    "id": 243,
+    "id": 246,
     "source_id": "BR-E081",
     "name": "Кремообразна полента с печени домати и яйце",
     "base": "топла закуска",
@@ -13365,7 +13530,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "теплый завтрак"
   },
   {
-    "id": 244,
+    "id": 247,
     "source_id": "BR-E082",
     "name": "Нахутени палачинки с тиквички",
     "base": "лесни солени палачинки",
@@ -13420,7 +13585,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простые несладкие блинчики"
   },
   {
-    "id": 245,
+    "id": 248,
     "source_id": "BR-E084",
     "name": "Мисо супа с гъби, ориз и тофу",
     "base": "лека супа",
@@ -13475,7 +13640,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "легкий суп"
   },
   {
-    "id": 246,
+    "id": 249,
     "source_id": "BR-E085",
     "name": "Турски кюфтенца от червена леща",
     "base": "бюджетна растителна рецепта",
@@ -13530,7 +13695,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "бюджетный рецепт для растений"
   },
   {
-    "id": 247,
+    "id": 250,
     "source_id": "BR-E086",
     "name": "Гръцки гигантски боб със спанак",
     "base": "бобено печиво",
@@ -13585,7 +13750,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "запеканка из бобов"
   },
   {
-    "id": 248,
+    "id": 251,
     "source_id": "BR-E087",
     "name": "Просена каша с горски плодове",
     "base": "безглутенова каша",
@@ -13640,7 +13805,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "безглютеновая каша"
   },
   {
-    "id": 249,
+    "id": 252,
     "source_id": "BR-E090",
     "name": "Картофени кюфтета с пушена сьомга",
     "base": "рибен брънч",
@@ -13695,7 +13860,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "рыбный бранч"
   },
   {
-    "id": 250,
+    "id": 253,
     "source_id": "BR-E091",
     "name": "Пуешки кюфтенца с ябълка",
     "base": "протеинова закуска",
@@ -13750,7 +13915,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "белковый завтрак"
   },
   {
-    "id": 251,
+    "id": 254,
     "source_id": "BR-E092",
     "name": "Печени чашки с банан и киноа",
     "base": "закуска за носене",
@@ -13805,7 +13970,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "переносной завтрак"
   },
   {
-    "id": 252,
+    "id": 255,
     "source_id": "BR-E094",
     "name": "Тост с бял боб, домати и спанак",
     "base": "бюджетен тост",
@@ -13860,7 +14025,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "бюджетный тост"
   },
   {
-    "id": 253,
+    "id": 256,
     "source_id": "BR-E095",
     "name": "Солена оризова каша с гъби и яйце",
     "base": "топла оризова каша",
@@ -13915,7 +14080,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "теплая рисовая каша"
   },
   {
-    "id": 254,
+    "id": 257,
     "source_id": "BR-E096",
     "name": "Тиквена овесена каша с круша",
     "base": "сезонна каша",
@@ -13970,7 +14135,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "сезонная каша"
   },
   {
-    "id": 255,
+    "id": 258,
     "source_id": "BR-E097",
     "name": "Царевични кюфтета с тиквички",
     "base": "зеленчукови кюфтета",
@@ -14025,7 +14190,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "овощные фрикадельки"
   },
   {
-    "id": 256,
+    "id": 259,
     "source_id": "BR-E098",
     "name": "Тиган със зеле, картофи и яйца",
     "base": "бюджетен тиган",
@@ -14080,7 +14245,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "бюджетная сковорода"
   },
   {
-    "id": 257,
+    "id": 260,
     "source_id": "BR-E099",
     "name": "Овчарски пай с леща и гъби",
     "base": "семейно печиво",
@@ -14135,7 +14300,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "семейная выпечка"
   },
   {
-    "id": 258,
+    "id": 261,
     "source_id": "BR-E100",
     "name": "Пълнозърнест wrap с хумус и печени зеленчуци",
     "base": "лесен wrap",
@@ -14190,7 +14355,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "простая обертка"
   },
   {
-    "id": 259,
+    "id": 262,
     "source_id": "BR-E103",
     "name": "Тост със сардини и домати",
     "base": "рибен тост",
@@ -14245,7 +14410,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "рыбный тост"
   },
   {
-    "id": 260,
+    "id": 263,
     "source_id": "BR-E104",
     "name": "Пилешка супа с царевица и ориз",
     "base": "семейна супа",
@@ -14300,7 +14465,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "семейный суп"
   },
   {
-    "id": 261,
+    "id": 264,
     "source_id": "BR-E105",
     "name": "Бурито с картофи, боб и яйца",
     "base": "засищащо бурито",
@@ -14355,7 +14520,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "начинка для буррито"
   },
   {
-    "id": 262,
+    "id": 265,
     "source_id": "BR-E106",
     "name": "Солени овесени кюфтета с морков",
     "base": "овесени кюфтета",
@@ -14410,7 +14575,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "овсяные фрикадельки"
   },
   {
-    "id": 263,
+    "id": 266,
     "source_id": "BR-E107",
     "name": "Яхния от нахут, домати и спанак",
     "base": "бърза яхния",
@@ -14465,7 +14630,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "быстрое рагу"
   },
   {
-    "id": 264,
+    "id": 267,
     "source_id": "BR-E108",
     "name": "Печен оризов пудинг с ябълка",
     "base": "оризов пудинг",
@@ -14520,7 +14685,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "рисовый пудинг"
   },
   {
-    "id": 265,
+    "id": 268,
     "source_id": "BR-E110",
     "name": "Лимонова супа от червена леща",
     "base": "лещена супа",
@@ -14575,7 +14740,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "чечевичный суп"
   },
   {
-    "id": 266,
+    "id": 269,
     "source_id": "BR-E112",
     "name": "Тофу скръмбъл с картофи и спанак",
     "base": "веган тиган",
@@ -14630,7 +14795,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "веганская сковорода"
   },
   {
-    "id": 267,
+    "id": 270,
     "source_id": "BR-E113",
     "name": "Печиво с патладжан, домати и нахут",
     "base": "зеленчуково печиво",
@@ -14685,7 +14850,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "овощное тесто"
   },
   {
-    "id": 268,
+    "id": 271,
     "source_id": "BR-E115",
     "name": "Пилешки кюфтета с тиквички",
     "base": "пилешки кюфтета",
@@ -14740,7 +14905,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "куриные фрикадельки"
   },
   {
-    "id": 269,
+    "id": 272,
     "source_id": "BR-E116",
     "name": "Печени картофи с доматена леща",
     "base": "достъпно основно",
@@ -14795,7 +14960,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "доступный базовый"
   },
   {
-    "id": 270,
+    "id": 273,
     "source_id": "BR-E117",
     "name": "Шотландски картофени питки с боб и печени домати",
     "base": "картофени питки",
@@ -14850,7 +15015,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "картофельные оладьи"
   },
   {
-    "id": 271,
+    "id": 274,
     "source_id": "BR-E120",
     "name": "Тосканска брускета с бял боб и печени домати",
     "base": "бобен тост",
@@ -14905,7 +15070,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "тост с фасолью"
   },
   {
-    "id": 272,
+    "id": 275,
     "source_id": "BR-E121",
     "name": "Марокански багрир с портокал, мед и бадеми",
     "base": "грисови палачинки",
@@ -14960,7 +15125,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "блинчики из манной крупы"
   },
   {
-    "id": 273,
+    "id": 276,
     "source_id": "BR-E122",
     "name": "Полски ябълкови палачинки с извара",
     "base": "ябълкови палачинки",
@@ -15015,7 +15180,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "яблочные блины"
   },
   {
-    "id": 274,
+    "id": 277,
     "source_id": "BR-E123",
     "name": "Ливанска питка с лабне, нахут и билки",
     "base": "питка с лабне",
@@ -15070,7 +15235,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "хлеб с лабне"
   },
   {
-    "id": 275,
+    "id": 278,
     "source_id": "BR-E124",
     "name": "Бразилски тапиока палачинки с банан и кокос",
     "base": "тапиока палачинки",
@@ -15125,7 +15290,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "блинчики из тапиоки"
   },
   {
-    "id": 276,
+    "id": 279,
     "source_id": "BR-E125",
     "name": "Корейски зеленчукови оризови палачинки",
     "base": "оризови палачинки",
@@ -15180,7 +15345,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "рисовые блинчики"
   },
   {
-    "id": 277,
+    "id": 280,
     "source_id": "BR-E126",
     "name": "Нидерландски ръжен сандвич с ябълка и зряло сирене",
     "base": "ръжен сандвич",
@@ -15235,7 +15400,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "ржаной бутерброд"
   },
   {
-    "id": 278,
+    "id": 281,
     "source_id": "BR-E128",
     "name": "Калифорнийски чиа пудинг с цитруси и овес",
     "base": "чиа пудинг",
@@ -15290,7 +15455,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "пудинг из семян чиа"
   },
   {
-    "id": 279,
+    "id": 282,
     "source_id": "BR-E129",
     "name": "Филипинско чампорадо с кокос и банан",
     "base": "шоколадова оризова каша",
@@ -15345,7 +15510,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "шоколадная рисовая каша"
   },
   {
-    "id": 280,
+    "id": 283,
     "source_id": "BR-E130",
     "name": "Ямайски калалу с печен плантан и яйца",
     "base": "зеленчуков тиган",
@@ -15400,7 +15565,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "овощная сковорода"
   },
   {
-    "id": 281,
+    "id": 284,
     "source_id": "BR-E131",
     "name": "Ирански куку сабзи с орехи и кисело мляко",
     "base": "билков омлет",
@@ -15429,7 +15594,7 @@ window.BREAKFAST_DATA = [
     "difficulty_de": "Mittel",
     "country_de": "Iran",
     "tag_de": "Kräuteromelett",
-    "description_es": "Tortilla persa gruesa de hierbas con perejil, cilantro, eneldo, nueces y agracejo.",
+    "description_es": "Tortilla persa espesa con hierbas, perejil, cilantro, eneldo, nueces y agracejo.",
     "name_es": "Kuku sabzi iraní con nueces y yogur.",
     "base_es": "tortilla de hierbas",
     "ingredients_es": "6 huevos, 80 g de perejil, 60 g de cilantro, 40 g de eneldo, 4 ramitas de cebolleta, 40 g de nueces, 25 g de agracejo seco, 120 g de yogur",
@@ -15455,7 +15620,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "омлет с травами"
   },
   {
-    "id": 282,
+    "id": 285,
     "source_id": "BR-E132",
     "name": "Китайски лучени палачинки с яйце и краставица",
     "base": "лучени палачинки",
@@ -15510,7 +15675,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "луковые блинчики"
   },
   {
-    "id": 283,
+    "id": 286,
     "source_id": "BR-E133",
     "name": "Мексикански енфрихоладас с яйце и авокадо",
     "base": "бобени тортили",
@@ -15565,7 +15730,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "тортильи из бобов"
   },
   {
-    "id": 284,
+    "id": 287,
     "source_id": "BR-E134",
     "name": "Гръцки дакос с домати, фета и нахут",
     "base": "критски сухар",
@@ -15620,7 +15785,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Критский сухарик"
   },
   {
-    "id": 285,
+    "id": 288,
     "source_id": "BR-E135",
     "name": "Турско гьозлеме със спанак и фета",
     "base": "пълнена питка",
@@ -15675,7 +15840,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "фаршированный хлеб"
   },
   {
-    "id": 286,
+    "id": 289,
     "source_id": "BR-E137",
     "name": "Новозеландски хаш с кумара, грах и поширано яйце",
     "base": "хаш от сладък картоф",
@@ -15730,7 +15895,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "рагу из сладкого картофеля"
   },
   {
-    "id": 287,
+    "id": 290,
     "source_id": "BR-E138",
     "name": "Тунизийски лаблаби с нахут, хляб и яйце",
     "base": "нахутена супа",
@@ -15785,7 +15950,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "суп из нута"
   },
   {
-    "id": 288,
+    "id": 291,
     "source_id": "BR-E140",
     "name": "Южноафрикански мили пап с доматен релиш и яйца",
     "base": "царевична каша",
@@ -15840,7 +16005,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "кукурузная каша"
   },
   {
-    "id": 289,
+    "id": 292,
     "source_id": "BR-E141",
     "name": "Френска сока с печени домати и билки",
     "base": "нахутена палачинка",
@@ -15895,7 +16060,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "блинчик из нута"
   },
   {
-    "id": 290,
+    "id": 293,
     "source_id": "BR-E142",
     "name": "Корейски геран бап със спанак и сусам",
     "base": "оризова купа с яйце",
@@ -15950,7 +16115,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "рисовая миска с яйцом"
   },
   {
-    "id": 291,
+    "id": 294,
     "source_id": "BR-E143",
     "name": "Бразилски тапиока палачинки със сирене и домат",
     "base": "тапиока палачинки",
@@ -16005,7 +16170,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "блинчики из тапиоки"
   },
   {
-    "id": 292,
+    "id": 295,
     "source_id": "BR-E144",
     "name": "Полски картофени плацки с гъби и кисело мляко",
     "base": "картофени палачинки",
@@ -16060,7 +16225,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "картофельные оладьи"
   },
   {
-    "id": 293,
+    "id": 296,
     "source_id": "BR-E146",
     "name": "Сингапурски кая тост с рохки яйца",
     "base": "сингапурски тост",
@@ -16115,7 +16280,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "сингапурский тост"
   },
   {
-    "id": 294,
+    "id": 297,
     "source_id": "BR-E148",
     "name": "Португалски мигас с кейл, боб и поширано яйце",
     "base": "хлебна купа",
@@ -16170,7 +16335,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "деревенские мигас"
   },
   {
-    "id": 295,
+    "id": 298,
     "source_id": "BR-E149",
     "name": "Нигерийски акара с царевичен оги и доматен релиш",
     "base": "бобени питки",
@@ -16225,7 +16390,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "бобовые лепешки"
   },
   {
-    "id": 296,
+    "id": 299,
     "source_id": "BR-E150",
     "name": "Швейцарски рьощи с праз и яйца на очи",
     "base": "картофено рьощи",
@@ -16280,7 +16445,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "картофельные рёшти"
   },
   {
-    "id": 297,
+    "id": 300,
     "source_id": "BR-E151",
     "name": "Виетнамски бань сео с тофу, мунг боб и билки",
     "base": "оризова палачинка",
@@ -16335,7 +16500,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "рисовый блин"
   },
   {
-    "id": 298,
+    "id": 301,
     "source_id": "BR-E152",
     "name": "Ливански манакеш със заатар, лабне и домати",
     "base": "плосък хляб",
@@ -16390,7 +16555,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "лепешка"
   },
   {
-    "id": 299,
+    "id": 302,
     "source_id": "BR-C117",
     "name": "Швейцарско Bircher мюсли с ябълка, лешници и горски плодове",
     "base": "швейцарска овесена закуска",
@@ -16445,7 +16610,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "швейцарский овсяный завтрак"
   },
   {
-    "id": 300,
+    "id": 303,
     "source_id": "BR-C119",
     "name": "Южноиндийски appam с кокосова зеленчукова яхния",
     "base": "ферментирали оризови палачинки",
@@ -16500,7 +16665,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "ферментированные рисовые блинчики"
   },
   {
-    "id": 301,
+    "id": 304,
     "source_id": "BR-C120",
     "name": "Венецуелски cachapas със сирене, черен боб и авокадо",
     "base": "царевични палачинки",
@@ -16555,7 +16720,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "блины из свежей кукурузы"
   },
   {
-    "id": 302,
+    "id": 305,
     "source_id": "BR-C121",
     "name": "Украински syrnyky с горски плодове и кисело мляко",
     "base": "палачинки от извара",
@@ -16610,7 +16775,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "творожные сырники"
   },
   {
-    "id": 303,
+    "id": 306,
     "source_id": "BR-C122",
     "name": "Хърватски soparnik с манголд, лук и чеснов зехтин",
     "base": "далматинска зелена пита",
@@ -16665,7 +16830,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "далматинский зелёный пирог"
   },
   {
-    "id": 304,
+    "id": 307,
     "source_id": "BR-C123",
     "name": "Сръбска proja с фета, спанак и печена чушка",
     "base": "балкански царевичен хляб",
@@ -16720,7 +16885,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "балканский кукурузный хлеб"
   },
   {
-    "id": 305,
+    "id": 308,
     "source_id": "BR-C124",
     "name": "Белгийски вафли с круша, кисело мляко и лешници",
     "base": "вафли с круша",
@@ -16775,7 +16940,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "вафли с грушей"
   },
   {
-    "id": 306,
+    "id": 309,
     "source_id": "BR-C126",
     "name": "Норвежки svele с brunost, горски плодове и кисело мляко",
     "base": "норвежки меки палачинки",
@@ -16830,7 +16995,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "норвежские оладьи"
   },
   {
-    "id": 307,
+    "id": 310,
     "source_id": "BR-C127",
     "name": "Чилийска marraqueta с авокадо, домат и бъркани яйца",
     "base": "чилийски яйчен сандвич",
@@ -16885,7 +17050,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "чилийский сэндвич с яйцом"
   },
   {
-    "id": 308,
+    "id": 311,
     "source_id": "BR-C128",
     "name": "Йорданска fatteh с нахут, тахан и кисело мляко",
     "base": "топъл нахут с хрупкава пита",
@@ -16940,7 +17105,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "тёплый нут с хрустящей питой"
   },
   {
-    "id": 309,
+    "id": 312,
     "source_id": "BR-C129",
     "name": "Костарикански gallo pinto с яйца и печен живовляк",
     "base": "ориз с черен боб",
@@ -16995,7 +17160,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "рис с чёрной фасолью"
   },
   {
-    "id": 310,
+    "id": 313,
     "source_id": "BR-C130",
     "name": "Нидерландски wentelteefjes с ябълка, канела и кисело мляко",
     "base": "нидерландски пържени филийки",
@@ -17050,7 +17215,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "нидерландские гренки"
   },
   {
-    "id": 311,
+    "id": 314,
     "source_id": "BR-C131",
     "name": "Иракски kahi с каймак, фурми и шамфъстък",
     "base": "слоеста иракска закуска",
@@ -17105,7 +17270,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "слоёная иракская выпечка"
   },
   {
-    "id": 312,
+    "id": 315,
     "source_id": "BR-C132",
     "name": "Чешки chlebíčky с яйце, цвекло и хрян",
     "base": "чешки отворени сандвичи",
@@ -17160,7 +17325,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "чешские открытые бутерброды"
   },
   {
-    "id": 313,
+    "id": 316,
     "source_id": "BR-C133",
     "name": "Кенийски mandazi с кардамон, ананас и кокосово кисело мляко",
     "base": "източноафрикански пържени хлебчета",
@@ -17215,7 +17380,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "восточноафриканский жареный хлеб"
   },
   {
-    "id": 314,
+    "id": 317,
     "source_id": "BR-C134",
     "name": "Албански byrek с праз, спанак и фета",
     "base": "балканска вита пита",
@@ -17270,7 +17435,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "балканский слоёный пирог"
   },
   {
-    "id": 315,
+    "id": 318,
     "source_id": "BR-C135",
     "name": "Пакистански aloo paratha с кисело мляко и краставично чътни",
     "base": "пълнени картофени питки",
@@ -17325,7 +17490,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "лепёшки с картофельной начинкой"
   },
   {
-    "id": 316,
+    "id": 319,
     "source_id": "BR-C136",
     "name": "Еквадорски bolón de verde със сирене и пържено яйце",
     "base": "топки от зелен живовляк",
@@ -17380,7 +17545,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "шарики из зелёного плантана"
   },
   {
-    "id": 317,
+    "id": 320,
     "source_id": "BR-C137",
     "name": "Латвийски ръжен пластов десерт с горски плодове и извара",
     "base": "ръжен десерт в чаши",
@@ -17435,7 +17600,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "слоёный ржаной десерт"
   },
   {
-    "id": 318,
+    "id": 321,
     "source_id": "BR-C138",
     "name": "Румънска mămăligă с гъби, поширано яйце и telemea",
     "base": "царевична каша с гъби",
@@ -17490,7 +17655,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "кукурузная каша с грибами"
   },
   {
-    "id": 319,
+    "id": 322,
     "source_id": "BR-C139",
     "name": "Хаитянска каша от зелен живовляк с кокос и банан",
     "base": "кокосова каша от живовляк",
@@ -17545,7 +17710,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "кокосовая каша из плантана"
   },
   {
-    "id": 320,
+    "id": 323,
     "source_id": "BR-C140",
     "name": "Саудитски mutabbaq с яйце, праз и домат",
     "base": "хрупкави пълнени квадрати",
@@ -17600,7 +17765,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "хрустящие квадраты с начинкой"
   },
   {
-    "id": 321,
+    "id": 324,
     "source_id": "BR-C141",
     "name": "Салвадорски pupusas с черен боб, сирене и curtido",
     "base": "пълнени царевични питки",
@@ -17655,7 +17820,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "кукурузные лепёшки с начинкой"
   },
   {
-    "id": 322,
+    "id": 325,
     "source_id": "BR-C142",
     "name": "Унгарско lecsó с яйца и ръжен тост",
     "base": "чушки и домати с яйца",
@@ -17710,7 +17875,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "перец и помидоры с яйцами"
   },
   {
-    "id": 323,
+    "id": 326,
     "source_id": "BR-C143",
     "name": "Мозамбикска каша от касава и кокос с манго и фъстъци",
     "base": "касава с кокос и манго",
@@ -17765,7 +17930,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "маниок с кокосом и манго"
   },
   {
-    "id": 324,
+    "id": 327,
     "source_id": "BR-C144",
     "name": "Тринидадски doubles с къри нахут и мангово чътни",
     "base": "тринидадски питки с къри нахут",
@@ -17820,7 +17985,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Тринидадские лепёшки с нутом карри"
   },
   {
-    "id": 325,
+    "id": 328,
     "source_id": "BR-C145",
     "name": "Ирландски boxty с поширани яйца, спанак и копърено кисело мляко",
     "base": "ирландски картофени палачинки",
@@ -17875,7 +18040,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Ирландские картофельные оладьи"
   },
   {
-    "id": 326,
+    "id": 329,
     "source_id": "BR-C146",
     "name": "Сенегалски thiakry с просо, кисело мляко и портокал",
     "base": "сенегалска купа с просо",
@@ -17930,7 +18095,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Сенегальская миска с пшеном"
   },
   {
-    "id": 327,
+    "id": 330,
     "source_id": "BR-C148",
     "name": "Азербайджански тиквен qutab с кисело мляко, орехи и нар",
     "base": "азербайджански пълнени питки",
@@ -17985,7 +18150,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "азербайджанская лепёшка с начинкой"
   },
   {
-    "id": 328,
+    "id": 331,
     "source_id": "BR-C149",
     "name": "Маврицийска farata с къри от маслен боб и доматено чътни",
     "base": "маврицийски питки с бобено къри",
@@ -18040,7 +18205,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "Маврикийские лепёшки с фасолевым карри"
   },
   {
-    "id": 329,
+    "id": 332,
     "source_id": "BR-C150",
     "name": "Самоански panikeke с банан, кокосово кисело мляко и лайм",
     "base": "самоански бананови бухтички",
@@ -18095,7 +18260,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "самоанские банановые пончики"
   },
   {
-    "id": 330,
+    "id": 333,
     "source_id": "BR-C151",
     "name": "Бангладешки cholar dal с luchi и свежа салата",
     "base": "бенгалски дал с пухкави питки",
@@ -18150,7 +18315,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "бенгальский дал с пышными лепёшками"
   },
   {
-    "id": 331,
+    "id": 334,
     "source_id": "BR-C153",
     "name": "Филипински tortang talong с доматен релиш и чеснов ориз",
     "base": "филипински омлет с патладжан",
@@ -18205,7 +18370,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "филиппинский омлет с баклажаном"
   },
   {
-    "id": 332,
+    "id": 335,
     "source_id": "BR-C154",
     "name": "Колумбийска changua с поширани яйца, пресен лук и хляб",
     "base": "колумбийска млечна супа",
@@ -18260,7 +18425,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "колумбийский молочный суп"
   },
   {
-    "id": 333,
+    "id": 336,
     "source_id": "BR-C156",
     "name": "Угандийски katogo с матоке, червен боб и авокадо",
     "base": "угандийска яхния с матоке",
@@ -18315,7 +18480,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "угандийское рагу из матоке"
   },
   {
-    "id": 334,
+    "id": 337,
     "source_id": "BR-C157",
     "name": "Емиратски balaleet с шафран, кардамон и омлет",
     "base": "емирати сладко-солена закуска",
@@ -18370,7 +18535,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "эмиратский сладко-солёный завтрак"
   },
   {
-    "id": 335,
+    "id": 338,
     "source_id": "BR-C158",
     "name": "Индийски pesarattu с джинджифилово-кокосово чътни",
     "base": "андхра палачинки от мунг",
@@ -18425,7 +18590,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "андхрские блины из зелёного маша"
   },
   {
-    "id": 336,
+    "id": 339,
     "source_id": "BR-C159",
     "name": "Арменски jingalov hats с билки и кисело мляко",
     "base": "арменски питки с билки",
@@ -18480,7 +18645,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "армянские лепёшки с зеленью"
   },
   {
-    "id": 337,
+    "id": 340,
     "source_id": "BR-C160",
     "name": "Полски racuchy с ябълки, кисело мляко и канела",
     "base": "полски ябълкови бухтички",
@@ -18535,7 +18700,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "польские дрожжевые оладьи с яблоками"
   },
   {
-    "id": 338,
+    "id": 341,
     "source_id": "BR-C162",
     "name": "Уелски rarebit с чедър, горчица и печени домати",
     "base": "уелски тост със сирене",
@@ -18590,7 +18755,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "валлийский сырный тост"
   },
   {
-    "id": 339,
+    "id": 342,
     "source_id": "BR-C164",
     "name": "Грузински chvishtari със sulguni и орехова салата",
     "base": "грузински царевични питки",
@@ -18645,7 +18810,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "грузинские кукурузные лепёшки с сыром"
   },
   {
-    "id": 340,
+    "id": 343,
     "source_id": "BR-C165",
     "name": "Северноирландски soda farls с гъби, яйца и печени домати",
     "base": "северноирландски содени питки",
@@ -18700,7 +18865,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "североирландские содовые лепёшки"
   },
   {
-    "id": 341,
+    "id": 344,
     "source_id": "BR-C167",
     "name": "Нигерийски moi moi с просено pap и доматен релиш",
     "base": "нигерийски пудинг от боб",
@@ -18755,7 +18920,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "нигерийский паровой пудинг из фасоли"
   },
   {
-    "id": 342,
+    "id": 345,
     "source_id": "BR-C168",
     "name": "Австрийски Palatschinken с извара и кайсиев компот",
     "base": "виенски тънки палачинки",
@@ -18810,7 +18975,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "тонкие венские блинчики"
   },
   {
-    "id": 343,
+    "id": 346,
     "source_id": "BR-C169",
     "name": "Танзанийски vitumbua с кокос, кардамон и манго",
     "base": "танзанийски оризови питки",
@@ -18865,7 +19030,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "танзанийские рисово-кокосовые лепёшки"
   },
   {
-    "id": 344,
+    "id": 347,
     "source_id": "BR-C170",
     "name": "Перуански tacu tacu с яйце и salsa criolla",
     "base": "перуански оризово-бобени питки",
@@ -18920,7 +19085,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "перуанские рисово-фасолевые котлеты"
   },
   {
-    "id": 345,
+    "id": 348,
     "source_id": "BR-C171",
     "name": "Монголски boortsog с кисело мляко и горски плодове",
     "base": "монголски пържени хлебчета",
@@ -18975,7 +19140,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "монгольские жареные пышки"
   },
   {
-    "id": 346,
+    "id": 349,
     "source_id": "BR-C172",
     "name": "Босненски uštipci с айвар и сирене",
     "base": "босненски солени бухтички",
@@ -19030,7 +19195,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "боснийские солёные пончики"
   },
   {
-    "id": 347,
+    "id": 350,
     "source_id": "BR-C173",
     "name": "Финландски карелски пирожки с яйчено масло",
     "base": "финландски ръжени пирожки",
@@ -19085,7 +19250,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "финские ржаные пирожки"
   },
   {
-    "id": 348,
+    "id": 351,
     "source_id": "BR-C174",
     "name": "Българска млечна попара със сирене, масло и орехи",
     "base": "българска традиционна закуска",
@@ -19140,7 +19305,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "традиционный болгарский завтрак"
   },
   {
-    "id": 349,
+    "id": 352,
     "source_id": "BR-C175",
     "name": "Турски чълбър с поширани яйца и масло с пул бибер",
     "base": "турска яйчена закуска",
@@ -19195,7 +19360,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "турецкий яичный завтрак"
   },
   {
-    "id": 350,
+    "id": 353,
     "source_id": "BR-C177",
     "name": "Етиопска чечебса с бербере и кисело мляко",
     "base": "етиопска пикантна закуска",
@@ -19250,7 +19415,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "эфиопский пряный завтрак"
   },
   {
-    "id": 351,
+    "id": 354,
     "source_id": "BR-C178",
     "name": "Френски яйца кокот с гъби и препечен хляб",
     "base": "френска яйчена закуска",
@@ -19305,7 +19470,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "французский завтрак с запечёнными яйцами"
   },
   {
-    "id": 352,
+    "id": 355,
     "source_id": "BR-C180",
     "name": "Български катми с мед и бяло сирене",
     "base": "български ферментирали палачинки",
@@ -19360,7 +19525,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "болгарские дрожжевые блины"
   },
   {
-    "id": 353,
+    "id": 356,
     "source_id": "BR-C181",
     "name": "Индийска сабудана кичди с картофи и фъстъци",
     "base": "индийска безглутенова закуска",
@@ -19415,7 +19580,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "индийский безглютеновый завтрак"
   },
   {
-    "id": 354,
+    "id": 357,
     "source_id": "BR-C182",
     "name": "Американски бисквити с кремообразен гъбен сос",
     "base": "американска солена закуска",
@@ -19470,7 +19635,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "американский несладкий завтрак"
   },
   {
-    "id": 355,
+    "id": 358,
     "source_id": "BR-C184",
     "name": "Мексикански молетес с черен боб, сирене и пико де гайо",
     "base": "мексикански отворен сандвич",
@@ -19525,7 +19690,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "мексиканский открытый сэндвич"
   },
   {
-    "id": 356,
+    "id": 359,
     "source_id": "BR-C185",
     "name": "Ливански манакиш със заатар, лабне и зеленчуци",
     "base": "ливанска плоска питка",
@@ -19580,7 +19745,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "ливанская лепёшка на завтрак"
   },
   {
-    "id": 357,
+    "id": 360,
     "source_id": "BR-C187",
     "name": "Сефарадски бурекас със спанак и сирене",
     "base": "сефарадско солено печиво",
@@ -19635,7 +19800,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "сефардская солёная выпечка"
   },
   {
-    "id": 358,
+    "id": 361,
     "source_id": "BR-C188",
     "name": "Бразилски пао де кейжо с папая и лайм",
     "base": "бразилски безглутенови хлебчета",
@@ -19690,7 +19855,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "бразильский безглютеновый сырный хлеб"
   },
   {
-    "id": 359,
+    "id": 362,
     "source_id": "BR-C189",
     "name": "Турски симит с яйце, сирене и маслини",
     "base": "турска сусамова закуска",
@@ -19745,7 +19910,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "турецкий кунжутный завтрак"
   },
   {
-    "id": 360,
+    "id": 363,
     "source_id": "BR-C190",
     "name": "Гръцка бугаца с грисов крем и канела",
     "base": "гръцко сладко печиво",
@@ -19800,7 +19965,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "греческая сладкая выпечка"
   },
   {
-    "id": 361,
+    "id": 364,
     "source_id": "BR-C191",
     "name": "Корейски хоток с кафява захар, канела и орехи",
     "base": "корейска сладка улична закуска",
@@ -19855,7 +20020,7 @@ window.BREAKFAST_DATA = [
     "tag_ru": "корейский сладкий уличный завтрак"
   },
   {
-    "id": 362,
+    "id": 365,
     "source_id": "BR-C192",
     "name": "Саудитски масуб с банани, фурми и мед",
     "base": "саудитска бананова купа",
@@ -19908,170 +20073,5 @@ window.BREAKFAST_DATA = [
     "difficulty_ru": "Легко",
     "country_ru": "Саудовская Аравия",
     "tag_ru": "саудовская банановая чаша"
-  },
-  {
-    "id": 363,
-    "source_id": "BR-C193",
-    "name": "Угандийски ролекс с омлет, зеле и домат",
-    "base": "угандийска улична закуска",
-    "icon": "◇",
-    "image": "https://drive.google.com/file/d/143CMV1K5EwbItzT0klt8D8NyLW2i9mBQ/view?usp=drivesdk",
-    "description": "Меко домашно чапати, навито около сочен омлет със зеле, домат и червен лук — обичана угандийска улична закуска.",
-    "ingredients": "300 г пшенично брашно, 180 мл хладка вода, 45 мл олио, 6 г сол, 6 яйца, 200 г зеле, 180 г домати, 80 г червен лук, 1 малка люта чушка, 1/2 ч.л. черен пипер",
-    "recipe": "<p>Омеси брашното, водата, 15 мл олио и половината сол до меко тесто и остави 20 минути</p><p>Раздели на 4, разточи тънко и изпечи чапатите в сух тиган, като ги намазваш леко с олио</p><p>Разбий яйцата с настърганото зеле, домата, лука, лютата чушка, останалата сол и пипера</p><p>Изпечи четири широки тънки омлета</p><p>Постави всеки омлет върху топло чапати, навий стегнато и разрежи напречно</p><p>Поднеси веднага с допълнителен домат и лук</p>",
-    "time": 50,
-    "difficulty": "Трудно",
-    "country": "Уганда",
-    "tag": "угандийска улична закуска",
-    "description_en": "Soft homemade chapati rolled around a juicy omelette with cabbage, tomato and red onion — a beloved Ugandan street breakfast.",
-    "name_en": "Ugandan rolex with omelette, cabbage and tomato",
-    "base_en": "Ugandan street breakfast",
-    "ingredients_en": "300 g wheat flour, 180 ml lukewarm water, 45 ml neutral oil, 6 g salt, 6 eggs, 200 g cabbage, 180 g tomatoes, 80 g red onion, 1 small chilli, 1/2 tsp black pepper",
-    "recipe_en": "<p>Knead the flour, water, 15 ml oil and half the salt into a soft dough and rest for 20 minutes</p><p>Divide into 4, roll thinly and cook the chapatis in a dry pan, brushing lightly with oil</p><p>Beat the eggs with shredded cabbage, tomato, onion, chilli, remaining salt and pepper</p><p>Cook four broad thin omelettes</p><p>Place each omelette on a warm chapati, roll tightly and cut across</p><p>Serve immediately with extra tomato and onion</p>",
-    "difficulty_en": "Hard",
-    "country_en": "Uganda",
-    "tag_en": "Ugandan street breakfast",
-    "description_de": "Weiches hausgemachtes Chapati um ein saftiges Omelett mit Kohl, Tomate und roter Zwiebel — ein beliebtes ugandisches Straßenfrühstück.",
-    "name_de": "Ugandischer Rolex mit Omelett, Kohl und Tomate",
-    "base_de": "ugandisches Straßenfrühstück",
-    "ingredients_de": "300 g Weizenmehl, 180 ml lauwarmes Wasser, 45 ml neutrales Öl, 6 g Salz, 6 Eier, 200 g Kohl, 180 g Tomaten, 80 g rote Zwiebel, 1 kleine Chili, 1/2 TL schwarzer Pfeffer",
-    "recipe_de": "<p>Mehl, Wasser, 15 ml Öl und die Hälfte des Salzes zu weichem Teig kneten und 20 Minuten ruhen lassen</p><p>In 4 Stücke teilen, dünn ausrollen und Chapatis in einer trockenen Pfanne backen, leicht mit Öl bestreichen</p><p>Eier mit fein geschnittenem Kohl, Tomate, Zwiebel, Chili, restlichem Salz und Pfeffer verquirlen</p><p>Vier breite dünne Omeletts braten</p><p>Je ein Omelett auf ein warmes Chapati legen, fest rollen und quer schneiden</p><p>Sofort mit zusätzlicher Tomate und Zwiebel servieren</p>",
-    "difficulty_de": "Schwer",
-    "country_de": "Uganda",
-    "tag_de": "ugandisches Straßenfrühstück",
-    "description_es": "Chapati casero suave enrollado alrededor de una tortilla jugosa con col, tomate y cebolla roja, un desayuno callejero muy querido en Uganda.",
-    "name_es": "Rolex ugandés con tortilla, col y tomate",
-    "base_es": "desayuno callejero ugandés",
-    "ingredients_es": "300 g harina de trigo, 180 ml agua templada, 45 ml aceite neutro, 6 g sal, 6 huevos, 200 g col, 180 g tomates, 80 g cebolla roja, 1 chile pequeño, 1/2 cdta pimienta negra",
-    "recipe_es": "<p>Amasa harina, agua, 15 ml de aceite y la mitad de la sal hasta obtener una masa suave y reposa 20 minutos</p><p>Divide en 4, estira fino y cocina los chapatis en sartén seca, pincelando con aceite</p><p>Bate los huevos con col, tomate, cebolla, chile, la sal restante y pimienta</p><p>Cocina cuatro tortillas anchas y finas</p><p>Coloca cada tortilla sobre un chapati caliente, enrolla bien y corta</p><p>Sirve enseguida con tomate y cebolla extra</p>",
-    "difficulty_es": "Difícil",
-    "country_es": "Uganda",
-    "tag_es": "desayuno callejero ugandés",
-    "description_fr": "Chapati maison moelleux roulé autour d’une omelette juteuse au chou, à la tomate et à l’oignon rouge, petit-déjeuner de rue emblématique en Ouganda.",
-    "name_fr": "Rolex ougandais à l’omelette, chou et tomate",
-    "base_fr": "petit-déjeuner de rue ougandais",
-    "ingredients_fr": "300 g farine de blé, 180 ml eau tiède, 45 ml huile neutre, 6 g sel, 6 œufs, 200 g chou, 180 g tomates, 80 g oignon rouge, 1 petit piment, 1/2 c. à café poivre noir",
-    "recipe_fr": "<p>Pétrissez farine, eau, 15 ml d’huile et la moitié du sel en pâte souple et laissez reposer 20 minutes</p><p>Divisez en 4, étalez finement et cuisez les chapatis à sec en les huilant légèrement</p><p>Fouettez les œufs avec chou, tomate, oignon, piment, reste du sel et poivre</p><p>Cuisez quatre omelettes larges et fines</p><p>Posez chacune sur un chapati chaud, roulez serré et coupez</p><p>Servez aussitôt avec un supplément de tomate et d’oignon</p>",
-    "difficulty_fr": "Difficile",
-    "country_fr": "Ouganda",
-    "tag_fr": "petit-déjeuner de rue ougandais",
-    "description_ru": "Мягкая домашняя чапати, свёрнутая вокруг сочного омлета с капустой, помидором и красным луком — любимый уличный завтрак Уганды.",
-    "name_ru": "Угандийский ролекс с омлетом, капустой и помидором",
-    "base_ru": "угандийский уличный завтрак",
-    "ingredients_ru": "300 г пшеничной муки, 180 мл тёплой воды, 45 мл нейтрального масла, 6 г соли, 6 яиц, 200 г капусты, 180 г помидоров, 80 г красного лука, 1 маленький перец чили, 1/2 ч.л. чёрного перца",
-    "recipe_ru": "<p>Замесите муку, воду, 15 мл масла и половину соли в мягкое тесто и оставьте на 20 минут</p><p>Разделите на 4 части, тонко раскатайте и испеките чапати на сухой сковороде, слегка смазывая маслом</p><p>Взбейте яйца с капустой, помидором, луком, чили, оставшейся солью и перцем</p><p>Приготовьте четыре широких тонких омлета</p><p>Положите каждый омлет на тёплую чапати, плотно сверните и разрежьте</p><p>Подавайте сразу с дополнительными помидорами и луком</p>",
-    "difficulty_ru": "Сложно",
-    "country_ru": "Уганда",
-    "tag_ru": "угандийский уличный завтрак"
-  },
-  {
-    "id": 364,
-    "source_id": "BR-C194",
-    "name": "Доминиканско мангу с яйца, пържено сирене и червен лук",
-    "base": "доминиканска плантан закуска",
-    "icon": "◇",
-    "image": "https://drive.google.com/file/d/1fLlMxmBiDEwYC55LPh1KOkdZC4LXQ61O/view?usp=drivesdk",
-    "description": "Кадифено пюре от зелени банани с ярък маринован червен лук, яйца на очи и златисто пържено сирене.",
-    "ingredients": "1 кг зелени банани плантан, 8 г сол, 40 г масло, 150 г червен лук, 60 мл ябълков оцет, 180 мл вода от варенето, 4 яйца, 250 г сирене за печене, 35 мл олио",
-    "recipe": "<p>Обели плантаните, нарежи ги и вари в подсолена вода 18–22 минути до много меки</p><p>Задуши нарязания лук в 10 мл олио, добави оцета и 60 мл вода и вари 3 минути</p><p>Запази част от водата на бананите, отцеди и намачкай с маслото, като постепенно добавяш течност до кадифено пюре</p><p>Нарежи сиренето и го запечи в тиган до златиста коричка</p><p>Изпържи яйцата на очи в останалото олио</p><p>Поднеси мангуто с лука, яйцата и сиренето</p>",
-    "time": 45,
-    "difficulty": "Трудно",
-    "country": "Доминиканска република",
-    "tag": "доминиканска плантан закуска",
-    "description_en": "Velvety mashed green plantains with bright pickled red onion, sunny fried eggs and golden fried white cheese.",
-    "name_en": "Dominican mangú with eggs, fried cheese and red onion",
-    "base_en": "Dominican plantain breakfast",
-    "ingredients_en": "1 kg green plantains, 8 g salt, 40 g butter, 150 g red onion, 60 ml apple cider vinegar, 180 ml plantain cooking water, 4 eggs, 250 g frying cheese, 35 ml neutral oil",
-    "recipe_en": "<p>Peel and cut the plantains, then boil in salted water for 18–22 minutes until very soft</p><p>Soften the sliced onion in 10 ml oil, add the vinegar and 60 ml water and simmer for 3 minutes</p><p>Reserve some cooking water, drain and mash the plantains with butter, adding liquid gradually until velvety</p><p>Slice and pan-fry the cheese until golden</p><p>Fry the eggs sunny-side up in the remaining oil</p><p>Serve the mangú with the onions, eggs and cheese</p>",
-    "difficulty_en": "Hard",
-    "country_en": "Dominican Republic",
-    "tag_en": "Dominican plantain breakfast",
-    "description_de": "Samtiges Püree aus grünen Kochbananen mit eingelegten roten Zwiebeln, Spiegeleiern und goldbraunem Bratkäse.",
-    "name_de": "Dominikanisches Mangú mit Eiern, Bratkäse und roten Zwiebeln",
-    "base_de": "dominikanisches Kochbananenfrühstück",
-    "ingredients_de": "1 kg grüne Kochbananen, 8 g Salz, 40 g Butter, 150 g rote Zwiebel, 60 ml Apfelessig, 180 ml Kochwasser, 4 Eier, 250 g Bratkäse, 35 ml neutrales Öl",
-    "recipe_de": "<p>Kochbananen schälen, schneiden und 18–22 Minuten in Salzwasser sehr weich kochen</p><p>Zwiebelscheiben in 10 ml Öl weich dünsten, Essig und 60 ml Wasser zugeben und 3 Minuten köcheln</p><p>Etwas Kochwasser aufbewahren, Bananen abgießen und mit Butter zerdrücken, dabei Flüssigkeit bis zur samtigen Konsistenz zugeben</p><p>Käse in Scheiben schneiden und goldbraun braten</p><p>Eier im restlichen Öl als Spiegeleier braten</p><p>Mangú mit Zwiebeln, Eiern und Käse servieren</p>",
-    "difficulty_de": "Schwer",
-    "country_de": "Dominikanische Republik",
-    "tag_de": "dominikanisches Kochbananenfrühstück",
-    "description_es": "Puré aterciopelado de plátano verde con cebolla roja encurtida, huevos fritos y queso blanco dorado.",
-    "name_es": "Mangú dominicano con huevos, queso frito y cebolla roja",
-    "base_es": "desayuno dominicano de plátano",
-    "ingredients_es": "1 kg plátanos verdes, 8 g sal, 40 g mantequilla, 150 g cebolla roja, 60 ml vinagre de manzana, 180 ml agua de cocción, 4 huevos, 250 g queso para freír, 35 ml aceite neutro",
-    "recipe_es": "<p>Pela y corta los plátanos y hiérvelos en agua con sal 18–22 minutos hasta que estén muy tiernos</p><p>Ablanda la cebolla en 10 ml de aceite, añade vinagre y 60 ml de agua y cuece 3 minutos</p><p>Reserva agua de cocción, escurre y maja los plátanos con mantequilla, añadiendo líquido hasta que queden cremosos</p><p>Corta y fríe el queso hasta dorarlo</p><p>Fríe los huevos en el aceite restante</p><p>Sirve el mangú con cebolla, huevos y queso</p>",
-    "difficulty_es": "Difícil",
-    "country_es": "República Dominicana",
-    "tag_es": "desayuno dominicano de plátano",
-    "description_fr": "Purée veloutée de bananes plantains vertes avec oignon rouge mariné, œufs au plat et fromage blanc doré.",
-    "name_fr": "Mangú dominicain aux œufs, fromage frit et oignon rouge",
-    "base_fr": "petit-déjeuner dominicain à la banane plantain",
-    "ingredients_fr": "1 kg bananes plantains vertes, 8 g sel, 40 g beurre, 150 g oignon rouge, 60 ml vinaigre de cidre, 180 ml eau de cuisson, 4 œufs, 250 g fromage à griller, 35 ml huile neutre",
-    "recipe_fr": "<p>Pelez et coupez les plantains puis cuisez-les 18 à 22 minutes dans l’eau salée jusqu’à grande tendreté</p><p>Faites fondre l’oignon dans 10 ml d’huile, ajoutez vinaigre et 60 ml d’eau et mijotez 3 minutes</p><p>Réservez de l’eau de cuisson, égouttez et écrasez les plantains avec le beurre en ajoutant le liquide jusqu’à texture veloutée</p><p>Tranchez et poêlez le fromage jusqu’à coloration</p><p>Faites cuire les œufs au plat dans le reste d’huile</p><p>Servez le mangú avec oignons, œufs et fromage</p>",
-    "difficulty_fr": "Difficile",
-    "country_fr": "République dominicaine",
-    "tag_fr": "petit-déjeuner dominicain à la banane plantain",
-    "description_ru": "Бархатное пюре из зелёных плантанов с ярким маринованным красным луком, глазуньей и золотистым жареным сыром.",
-    "name_ru": "Доминиканское мангу с яйцами, жареным сыром и красным луком",
-    "base_ru": "доминиканский завтрак из плантанов",
-    "ingredients_ru": "1 кг зелёных плантанов, 8 г соли, 40 г сливочного масла, 150 г красного лука, 60 мл яблочного уксуса, 180 мл отвара, 4 яйца, 250 г сыра для жарки, 35 мл нейтрального масла",
-    "recipe_ru": "<p>Очистите и нарежьте плантаны, варите в подсоленной воде 18–22 минуты до полной мягкости</p><p>Размягчите лук в 10 мл масла, добавьте уксус и 60 мл воды и тушите 3 минуты</p><p>Сохраните часть отвара, слейте воду и разомните плантаны со сливочным маслом, постепенно добавляя отвар до бархатной текстуры</p><p>Нарежьте сыр и обжарьте до золотистой корочки</p><p>Приготовьте глазунью на оставшемся масле</p><p>Подавайте мангу с луком, яйцами и сыром</p>",
-    "difficulty_ru": "Сложно",
-    "country_ru": "Доминиканская Республика",
-    "tag_ru": "доминиканский завтрак из плантанов"
-  },
-  {
-    "id": 365,
-    "source_id": "BR-C195",
-    "name": "Китайски дзянбин с яйце, пресен лук и хрупкав крекер",
-    "base": "китайски солен уличен креп",
-    "icon": "◇",
-    "image": "https://drive.google.com/file/d/1LCgOJKDq3LirOCQZwFyS9BE7ZJwa6TMI/view?usp=drivesdk",
-    "description": "Тънък солен креп с яйце, пресен лук, сусам и пикантно-сладък сос, сгънат около шумно хрупкав крекер.",
-    "ingredients": "180 г пшенично брашно, 60 г брашно от мунг боб, 420 мл вода, 4 яйца, 50 г пресен лук, 30 г кориандър, 20 г сусам, 80 г сладък бобен сос, 30 г лют сос, 8 уонтон кори, 45 мл олио",
-    "recipe": "<p>Разбий двете брашна с водата и остави сместа 15 минути</p><p>Изпечи уонтон корите в тънък слой олио до златисто и ги отцеди</p><p>Изсипи четвърт от сместа в леко намаслен тиган и разнеси на много тънък кръг</p><p>Чукни яйце отгоре, разнеси го и поръси с пресен лук, кориандър и сусам</p><p>Обърни за кратко, намажи със сладък и лют сос и постави хрупкава кора</p><p>Сгъни на правоъгълник и поднеси веднага; повтори за останалите порции</p>",
-    "time": 40,
-    "difficulty": "Средно",
-    "country": "Китай",
-    "tag": "китайски солен уличен креп",
-    "description_en": "A thin savoury crepe with egg, scallions, sesame and sweet-spicy sauce, folded around a shatteringly crisp cracker.",
-    "name_en": "Chinese jianbing with egg, scallions and crisp cracker",
-    "base_en": "Chinese savoury street crepe",
-    "ingredients_en": "180 g wheat flour, 60 g mung bean flour, 420 ml water, 4 eggs, 50 g scallions, 30 g coriander, 20 g sesame seeds, 80 g sweet bean sauce, 30 g chilli sauce, 8 wonton wrappers, 45 ml neutral oil",
-    "recipe_en": "<p>Whisk both flours with the water and rest for 15 minutes</p><p>Fry the wonton wrappers in a shallow layer of oil until golden and drain</p><p>Pour a quarter of the batter into a lightly oiled pan and spread into a very thin circle</p><p>Crack an egg on top, spread it and scatter with scallions, coriander and sesame</p><p>Flip briefly, brush with sweet bean and chilli sauces and add a crisp wrapper</p><p>Fold into a rectangle and serve immediately; repeat for the remaining portions</p>",
-    "difficulty_en": "Medium",
-    "country_en": "China",
-    "tag_en": "Chinese savoury street crepe",
-    "description_de": "Dünner herzhafter Crêpe mit Ei, Frühlingszwiebeln, Sesam und süß-scharfer Sauce, um einen knackigen Cracker gefaltet.",
-    "name_de": "Chinesischer Jianbing mit Ei, Frühlingszwiebeln und knusprigem Cracker",
-    "base_de": "chinesischer herzhafter Straßencrêpe",
-    "ingredients_de": "180 g Weizenmehl, 60 g Mungbohnenmehl, 420 ml Wasser, 4 Eier, 50 g Frühlingszwiebeln, 30 g Koriander, 20 g Sesam, 80 g süße Bohnensauce, 30 g Chilisauce, 8 Wontonblätter, 45 ml neutrales Öl",
-    "recipe_de": "<p>Beide Mehlsorten mit Wasser verquirlen und 15 Minuten ruhen lassen</p><p>Wontonblätter in wenig Öl goldbraun und knusprig braten, abtropfen lassen</p><p>Ein Viertel des Teigs in eine leicht geölte Pfanne geben und sehr dünn verteilen</p><p>Ein Ei darauf schlagen, verstreichen und mit Frühlingszwiebeln, Koriander und Sesam bestreuen</p><p>Kurz wenden, mit Bohnen- und Chilisauce bestreichen und einen Cracker auflegen</p><p>Rechteckig falten und sofort servieren; mit den übrigen Portionen wiederholen</p>",
-    "difficulty_de": "Mittel",
-    "country_de": "China",
-    "tag_de": "chinesischer herzhafter Straßencrêpe",
-    "description_es": "Crepe salado fino con huevo, cebolleta, sésamo y salsa dulce picante, plegado alrededor de una lámina muy crujiente.",
-    "name_es": "Jianbing chino con huevo, cebolleta y crujiente",
-    "base_es": "crepe salado callejero chino",
-    "ingredients_es": "180 g harina de trigo, 60 g harina de judía mungo, 420 ml agua, 4 huevos, 50 g cebolleta, 30 g cilantro, 20 g sésamo, 80 g salsa dulce de judía, 30 g salsa picante, 8 láminas de wonton, 45 ml aceite neutro",
-    "recipe_es": "<p>Bate las dos harinas con el agua y reposa 15 minutos</p><p>Fríe las láminas de wonton en poco aceite hasta dorarlas y escúrrelas</p><p>Vierte un cuarto de la masa en una sartén aceitada y extiéndela muy fina</p><p>Casca un huevo encima, repártelo y añade cebolleta, cilantro y sésamo</p><p>Da la vuelta brevemente, unta con las dos salsas y coloca una lámina crujiente</p><p>Pliega en rectángulo y sirve enseguida; repite con el resto</p>",
-    "difficulty_es": "Media",
-    "country_es": "China",
-    "tag_es": "crepe salado callejero chino",
-    "description_fr": "Fine crêpe salée à l’œuf, ciboule, sésame et sauce douce-piquante, repliée autour d’une tuile très croustillante.",
-    "name_fr": "Jianbing chinois à l’œuf, ciboule et tuile croustillante",
-    "base_fr": "crêpe salée de rue chinoise",
-    "ingredients_fr": "180 g farine de blé, 60 g farine de haricot mungo, 420 ml eau, 4 œufs, 50 g ciboule, 30 g coriandre, 20 g sésame, 80 g sauce de haricots douce, 30 g sauce pimentée, 8 feuilles de wonton, 45 ml huile neutre",
-    "recipe_fr": "<p>Fouettez les deux farines avec l’eau et laissez reposer 15 minutes</p><p>Faites frire les feuilles de wonton dans un fond d’huile jusqu’à coloration puis égouttez</p><p>Versez un quart de pâte dans une poêle légèrement huilée et étalez très finement</p><p>Cassez un œuf dessus, étalez-le et parsemez de ciboule, coriandre et sésame</p><p>Retournez brièvement, badigeonnez des deux sauces et posez une tuile croustillante</p><p>Pliez en rectangle et servez aussitôt; recommencez pour les autres portions</p>",
-    "difficulty_fr": "Moyen",
-    "country_fr": "Chine",
-    "tag_fr": "crêpe salée de rue chinoise",
-    "description_ru": "Тонкий несладкий блин с яйцом, зелёным луком, кунжутом и сладко-острым соусом, сложенный вокруг хрустящей пластинки.",
-    "name_ru": "Китайский цзяньбин с яйцом, зелёным луком и хрустящей пластинкой",
-    "base_ru": "китайский несладкий уличный блин",
-    "ingredients_ru": "180 г пшеничной муки, 60 г муки из маша, 420 мл воды, 4 яйца, 50 г зелёного лука, 30 г кинзы, 20 г кунжута, 80 г сладкого бобового соуса, 30 г острого соуса, 8 листов вонтон, 45 мл нейтрального масла",
-    "recipe_ru": "<p>Взбейте обе муки с водой и оставьте на 15 минут</p><p>Обжарьте листы вонтон в небольшом количестве масла до золотистого хруста и обсушите</p><p>Вылейте четверть теста на смазанную сковороду и распределите очень тонким кругом</p><p>Разбейте сверху яйцо, размажьте и посыпьте луком, кинзой и кунжутом</p><p>Ненадолго переверните, смажьте двумя соусами и положите хрустящий лист</p><p>Сложите прямоугольником и сразу подавайте; повторите с остальными порциями</p>",
-    "difficulty_ru": "Средне",
-    "country_ru": "Китай",
-    "tag_ru": "китайский несладкий уличный блин"
   }
 ];
