@@ -29,11 +29,11 @@ Status synchronized from the master spreadsheet and verified from the generated 
 | App | Visible recipes | Images | Complete translated recipe records | Recipes with quantities |
 |---|---:|---:|---:|---:|
 | Brunch | 365 | 365 | 365 | 365 |
-| Healthy Gut | 255 | 255 | 255 | 255 |
-| Gluten Free | 283 | 283 | 283 | 283 |
-| Dairy Free | 302 | 302 | 302 | 302 |
+| Healthy Gut | 258 | 258 | 258 | 258 |
+| Gluten Free | 286 | 286 | 286 | 286 |
+| Dairy Free | 305 | 305 | 305 | 305 |
 | Meat Free | 365 | 365 | 365 | 365 |
-| Plant Based | 251 | 251 | 251 | 251 |
+| Plant Based | 254 | 254 | 254 | 254 |
 
 The six supported languages are Bulgarian, English, German, Spanish, French and Russian.
 
