@@ -78,6 +78,7 @@ const reports = apps.map(([app, directory]) => {
     complete,
     images: images.length,
     remaining: Math.max(0, target - recipes.length),
+    overTarget: Math.max(0, recipes.length - target),
     duplicateIds: ids.length - new Set(ids).size,
     duplicateImages: images.length - new Set(images).size,
     missing,
@@ -85,12 +86,13 @@ const reports = apps.map(([app, directory]) => {
 });
 
 console.table(
-  reports.map(({ app, total, complete, images, remaining, duplicateIds, duplicateImages }) => ({
+  reports.map(({ app, total, complete, images, remaining, overTarget, duplicateIds, duplicateImages }) => ({
     app,
     total,
     complete,
     images,
     remaining,
+    overTarget,
     duplicateIds,
     duplicateImages,
   }))

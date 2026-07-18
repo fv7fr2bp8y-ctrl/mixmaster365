@@ -6,17 +6,32 @@ Run the current audit with:
 node scripts/audit-all-recipes.mjs
 ```
 
+## Verified status
+
+Status synchronized from `Master_Recipes` on 18 July 2026:
+
+| App | Ready source pool | Published | Remaining to 365 |
+|---|---:|---:|---:|
+| Brunch | 365 | 365 | 0 |
+| Healthy Gut | 246 | 246 | 119 |
+| Gluten Free | 274 | 274 | 91 |
+| Dairy Free | 293 | 293 | 72 |
+| Meat Free | 386 | 365 | 0 |
+| Plant Based | 242 | 242 | 123 |
+
+The source pool may contain more than 365 suitable recipes. Each generated app publishes at most 365, ordered by its app slot. This leaves an editorial reserve without bloating the public catalogue.
+
 ## Fill plan to 365
 
 Brunch is complete and must not be changed while the other catalogues are being expanded.
 
 The remaining five apps share dietary-compatible recipes through stable source IDs. The most efficient editorial plan is:
 
-1. Add 126 carefully curated recipes that are plant-based, gluten-free, dairy-free and meat-free. Reuse each approved recipe and Drive image in every compatible app.
-2. Use the first 48 for Meat Free, the first 117 for Dairy Free, the first 121 for Gluten Free and all 126 for Plant Based and Healthy Gut.
-3. Add 24 additional Healthy Gut recipes that are gluten-free and dairy-free, with carefully selected fish or lean meat where appropriate.
+1. Add 72 carefully curated recipes that are plant-based, gluten-free, dairy-free and suitable for Healthy Gut. This completes Dairy Free and raises all compatible pools together.
+2. Continue with 47 additional plant-based recipes selected to complete Healthy Gut and strengthen the Gluten Free reserve. The public catalogues remain capped at 365.
+3. Add 4 final Plant Based recipes, which may use gluten-containing whole grains when that improves variety and keeps the dietary flags accurate.
 
-This reaches 365 in every app with 150 new recipe records and images instead of creating 562 unrelated duplicates.
+This reaches 365 in every app with 123 new recipe records and images instead of creating separate duplicates for each catalogue.
 
 ## Batch rules
 

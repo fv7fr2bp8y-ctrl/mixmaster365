@@ -24,18 +24,20 @@ Host-based routing is defined in `vercel.json`. Every PWA is served at the root 
 
 ## Current status
 
-Status verified from the generated `data.js` files on 14 July 2026:
+Status synchronized from the master spreadsheet and verified from the generated `data.js` files on 18 July 2026:
 
 | App | Visible recipes | Images | Complete translated recipe records | Recipes with quantities |
 |---|---:|---:|---:|---:|
 | Brunch | 365 | 365 | 365 | 365 |
-| Healthy Gut | 153 | 153 | 153 | 91 |
-| Gluten Free | 167 | 167 | 167 | 105 |
-| Dairy Free | 161 | 161 | 161 | 99 |
-| Meat Free | 195 | 195 | 195 | 133 |
-| Plant Based | 143 | 143 | 143 | 81 |
+| Healthy Gut | 246 | 246 | 246 | 246 |
+| Gluten Free | 274 | 274 | 274 | 274 |
+| Dairy Free | 293 | 293 | 293 | 293 |
+| Meat Free | 365 | 365 | 365 | 365 |
+| Plant Based | 242 | 242 | 242 | 242 |
 
 The six supported languages are Bulgarian, English, German, Spanish, French and Russian.
+
+`Meat Free` has a larger ready source pool in the master sheet, but the generated public catalogue is intentionally capped at 365 recipes. See [`RECIPE_CATALOG_STATUS.md`](RECIPE_CATALOG_STATUS.md) for the current fill plan and remaining counts.
 
 The **365 complete Brunch recipes** milestone is finished. The complete operating, maintenance, release and backup guide is in [`BRUNCH365_README.md`](BRUNCH365_README.md). Future recipes should be prepared in curated blocks, but should replace weaker entries or remain drafts unless the product is intentionally expanded beyond 365.
 

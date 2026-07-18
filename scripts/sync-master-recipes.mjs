@@ -137,11 +137,11 @@ const appConfigs = [
       "BR-C155", // Maldivian mas huni
     ],
   },
-  { dir: "free-from", label: "Healthy Gut", flag: "is_healthy_gut", slot: "healthy_gut_slot" },
-  { dir: "gluten-free", label: "Gluten Free", flag: "is_gluten_free", slot: "gluten_free_slot" },
-  { dir: "dairy-free", label: "Dairy Free", flag: "is_dairy_free", slot: "dairy_free_slot" },
-  { dir: "meat-free", label: "Meat Free", flag: "is_meat_free", slot: "meat_free_slot" },
-  { dir: "plant-based", label: "Plant Based", flag: "is_plant_based", slot: "plant_based_slot" },
+  { dir: "free-from", label: "Healthy Gut", flag: "is_healthy_gut", slot: "healthy_gut_slot", limit: 365 },
+  { dir: "gluten-free", label: "Gluten Free", flag: "is_gluten_free", slot: "gluten_free_slot", limit: 365 },
+  { dir: "dairy-free", label: "Dairy Free", flag: "is_dairy_free", slot: "dairy_free_slot", limit: 365 },
+  { dir: "meat-free", label: "Meat Free", flag: "is_meat_free", slot: "meat_free_slot", limit: 365 },
+  { dir: "plant-based", label: "Plant Based", flag: "is_plant_based", slot: "plant_based_slot", limit: 365 },
 ];
 
 function difficultyFor(row) {
@@ -805,7 +805,7 @@ function writeApp(rows, config) {
   const physicalFeaturedOrder = new Map(
     (config.featured || []).map((sourceId, index) => [sourceId, index])
   );
-  const recipes = eligibleRows
+  const orderedRows = eligibleRows
     .sort((a, b) => {
       const aFeatured = physicalFeaturedOrder.get(a.global_id);
       const bFeatured = physicalFeaturedOrder.get(b.global_id);
@@ -815,7 +815,9 @@ function writeApp(rows, config) {
         return aFeatured - bFeatured;
       }
       return Number(a[config.slot] || 9999) - Number(b[config.slot] || 9999);
-    })
+    });
+  const recipes = orderedRows
+    .slice(0, config.limit || orderedRows.length)
     .map((row, index) => {
       const featuredRank = featuredOrder.get(row.global_id);
       return {
