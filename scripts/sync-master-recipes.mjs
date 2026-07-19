@@ -140,7 +140,7 @@ const appConfigs = [
   { dir: "free-from", label: "Healthy Gut", flag: "is_healthy_gut", slot: "healthy_gut_slot", limit: 365 },
   { dir: "gluten-free", label: "Gluten Free", flag: "is_gluten_free", slot: "gluten_free_slot", limit: 365 },
   { dir: "dairy-free", label: "Dairy Free", flag: "is_dairy_free", slot: "dairy_free_slot", limit: 365 },
-  { dir: "meat-free", label: "Vegetarian", flag: "is_meat_free", slot: "meat_free_slot", limit: 365 },
+  { dir: "meat-free", label: "Vegetarian", flag: "is_meat_free", slot: "meat_free_slot", limit: 365, excludeSeafood: true },
   { dir: "plant-based", label: "Vegan", flag: "is_plant_based", slot: "plant_based_slot", limit: 365 },
 ];
 
@@ -763,6 +763,11 @@ function writeApp(rows, config) {
         ? config.primaryApps.includes(row.app_primary)
         : isTrue(row[config.flag])
     )
+    .filter((row) => {
+      if (!config.excludeSeafood) return true;
+      const text = `${row.canonical_name_bg || ""} ${row.name_en || ""} ${row.ingredients_bg || ""} ${row.ingredients_en || ""} ${row.ingredients_qty_bg || ""} ${row.ingredients_qty_en || ""}`.toLowerCase();
+      return !/(риба|риба\s*тон|сьомга|треска|лаврак|скарид|мид|калмар|октопод|морски дар|fish|salmon|tuna|cod|sea bass|shrimp|prawn|mussel|squid|octopus|seafood)/i.test(text);
+    })
     .filter((row) => imageFor(row));
 
   const featuredIds = [...(config.featured || [])];
