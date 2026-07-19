@@ -871,7 +871,7 @@
             </div>
             <div id="cotd-card" class="deco-card overflow-hidden cursor-pointer active:scale-[0.99] transition-transform" onclick="goToCOTD()">
                 <div class="relative">
-                    <img id="cotd-img" src="" alt="" class="w-full aspect-[4/3] object-cover">
+                    <img id="cotd-img" src="" alt="" class="w-full aspect-[3/2] object-cover">
                     <div class="absolute top-4 left-4 border border-gold-dim bg-ink/80 backdrop-blur-sm px-3 py-2 text-center min-w-[44px]">
                         <div id="cotd-day" class="font-body text-2xl text-gold-bright leading-none"></div>
                         <div id="cotd-month" class="font-roman text-gold-dim text-[0.55rem] tracking-[0.25em] uppercase mt-0.5"></div>
@@ -1431,7 +1431,7 @@
             return `
                     <article class="cocktail-card deco-card overflow-hidden" id="${cardId}" style="animation-delay: ${delay}s">
                         <div class="relative">
-                            <img src="${getRecipeImg(d)}" alt="${escapeHtml(loc(d,'name'))}" class="w-full aspect-[4/3] object-cover" loading="lazy" onerror="this.onerror=null;this.src='${getRecipeFallbackImg(d)}'">
+                            <img src="${getRecipeImg(d)}" alt="${escapeHtml(loc(d,'name'))}" class="w-full aspect-[3/2] object-cover" loading="lazy" onerror="this.onerror=null;this.src='${getRecipeFallbackImg(d)}'">
                             <button type="button" onclick="shareRecipe('${recipeShareKey(d)}', event)"
                                     aria-label="${escapeHtml(t('aria_share'))}"
                                     class="absolute top-3 right-3 w-10 h-10 bg-ink/80 backdrop-blur-sm border border-gold-dim text-cream-dim hover:text-gold hover:border-gold flex items-center justify-center text-base active:scale-90 transition">
