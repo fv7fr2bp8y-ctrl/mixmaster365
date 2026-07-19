@@ -20,8 +20,8 @@ const apps = [
   ["Healthy Gut", "free-from"],
   ["Gluten Free", "gluten-free"],
   ["Dairy Free", "dairy-free"],
-  ["Meat Free", "meat-free"],
-  ["Plant Based", "plant-based"],
+  ["Vegetarian", "meat-free"],
+  ["Vegan", "plant-based"],
 ];
 
 function loadRecipes(directory) {

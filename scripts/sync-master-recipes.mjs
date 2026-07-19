@@ -140,8 +140,8 @@ const appConfigs = [
   { dir: "free-from", label: "Healthy Gut", flag: "is_healthy_gut", slot: "healthy_gut_slot", limit: 365 },
   { dir: "gluten-free", label: "Gluten Free", flag: "is_gluten_free", slot: "gluten_free_slot", limit: 365 },
   { dir: "dairy-free", label: "Dairy Free", flag: "is_dairy_free", slot: "dairy_free_slot", limit: 365 },
-  { dir: "meat-free", label: "Meat Free", flag: "is_meat_free", slot: "meat_free_slot", limit: 365 },
-  { dir: "plant-based", label: "Plant Based", flag: "is_plant_based", slot: "plant_based_slot", limit: 365 },
+  { dir: "meat-free", label: "Vegetarian", flag: "is_meat_free", slot: "meat_free_slot", limit: 365 },
+  { dir: "plant-based", label: "Vegan", flag: "is_plant_based", slot: "plant_based_slot", limit: 365 },
 ];
 
 function difficultyFor(row) {

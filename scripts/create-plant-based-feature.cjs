@@ -4,7 +4,7 @@ const { chromium } = require('playwright');
 
 const root = path.resolve(__dirname, '..');
 const appSlug = process.env.APP_SLUG || 'plant-based';
-const appName = process.env.APP_NAME || 'Plant Based 365';
+const appName = process.env.APP_NAME || 'Vegan 365';
 const subtitle = process.env.APP_SUBTITLE || 'Без животински продукти';
 const meta = process.env.APP_META || 'Растителни рецепти · 6 езика';
 const logo = fs.readFileSync(path.join(root, appSlug, 'logo-source.png')).toString('base64');

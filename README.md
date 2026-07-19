@@ -15,8 +15,8 @@ Do not mix their data or deployment work. Recipe-app changes belong in the six a
 | Healthy Gut 365 | `free-from/` | https://healthy-gut.freefrom365.com |
 | Gluten Free 365 | `gluten-free/` | https://gluten-free.freefrom365.com |
 | Dairy Free 365 | `dairy-free/` | https://dairy-free.freefrom365.com |
-| Meat Free 365 | `meat-free/` | https://meat-free.freefrom365.com |
-| Plant Based 365 | `plant-based/` | https://plant-based.freefrom365.com |
+| Vegetarian 365 | `meat-free/` | https://meat-free.freefrom365.com |
+| Vegan 365 | `plant-based/` | https://plant-based.freefrom365.com |
 
 `https://freefrom365.com` and `https://www.freefrom365.com` currently redirect to Healthy Gut 365. The old `breakfast.freefrom365.com` address redirects to `brunch.freefrom365.com`.
 
@@ -32,12 +32,12 @@ Status synchronized from the master spreadsheet and verified from the generated 
 | Healthy Gut | 258 | 258 | 258 | 258 |
 | Gluten Free | 286 | 286 | 286 | 286 |
 | Dairy Free | 305 | 305 | 305 | 305 |
-| Meat Free | 365 | 365 | 365 | 365 |
-| Plant Based | 254 | 254 | 254 | 254 |
+| Vegetarian | 365 | 365 | 365 | 365 |
+| Vegan | 254 | 254 | 254 | 254 |
 
 The six supported languages are Bulgarian, English, German, Spanish, French and Russian.
 
-`Meat Free` has a larger ready source pool in the master sheet, but the generated public catalogue is intentionally capped at 365 recipes. See [`RECIPE_CATALOG_STATUS.md`](RECIPE_CATALOG_STATUS.md) for the current fill plan and remaining counts.
+`Vegetarian` has a larger ready source pool in the master sheet, but the generated public catalogue is intentionally capped at 365 recipes. See [`RECIPE_CATALOG_STATUS.md`](RECIPE_CATALOG_STATUS.md) for the current fill plan and remaining counts.
 
 The **365 complete Brunch recipes** milestone is finished. The complete operating, maintenance, release and backup guide is in [`BRUNCH365_README.md`](BRUNCH365_README.md). Future recipes should be prepared in curated blocks, but should replace weaker entries or remain drafts unless the product is intentionally expanded beyond 365.
 

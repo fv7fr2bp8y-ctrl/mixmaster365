@@ -16,8 +16,8 @@ Status synchronized from `Master_Recipes` on 18 July 2026:
 | Healthy Gut | 258 | 258 | 107 |
 | Gluten Free | 286 | 286 | 79 |
 | Dairy Free | 305 | 305 | 60 |
-| Meat Free | 398 | 365 | 0 |
-| Plant Based | 254 | 254 | 111 |
+| Vegetarian | 398 | 365 | 0 |
+| Vegan | 254 | 254 | 111 |
 
 The source pool may contain more than 365 suitable recipes. Each generated app publishes at most 365, ordered by its app slot. This leaves an editorial reserve without bloating the public catalogue.
 
@@ -29,7 +29,7 @@ The remaining five apps share dietary-compatible recipes through stable source I
 
 1. Add 72 carefully curated recipes that are plant-based, gluten-free, dairy-free and suitable for Healthy Gut. This completes Dairy Free and raises all compatible pools together.
 2. Continue with 47 additional plant-based recipes selected to complete Healthy Gut and strengthen the Gluten Free reserve. The public catalogues remain capped at 365.
-3. Add 4 final Plant Based recipes, which may use gluten-containing whole grains when that improves variety and keeps the dietary flags accurate.
+3. Add 4 final Vegan recipes, which may use gluten-containing whole grains when that improves variety and keeps the dietary flags accurate.
 
 This reaches 365 in every app with 123 new recipe records and images instead of creating separate duplicates for each catalogue.
 
