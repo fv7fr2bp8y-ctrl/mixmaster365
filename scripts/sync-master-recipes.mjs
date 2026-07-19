@@ -142,6 +142,14 @@ const appConfigs = [
   { dir: "dairy-free", label: "Dairy Free", flag: "is_dairy_free", slot: "dairy_free_slot", limit: 365 },
   { dir: "meat-free", label: "Vegetarian", flag: "is_meat_free", slot: "meat_free_slot", limit: 365, excludeSeafood: true },
   { dir: "plant-based", label: "Vegan", flag: "is_plant_based", slot: "plant_based_slot", limit: 365 },
+  {
+    dir: "seafood",
+    label: "Seafood",
+    flag: "is_seafood",
+    slot: "seafood_slot",
+    limit: 365,
+    ingredientSeparator: " || ",
+  },
 ];
 
 function difficultyFor(row) {
@@ -621,14 +629,14 @@ function countryForLang(row, lang, bgCountry) {
   return maps[lang]?.[bgCountry] || row[`country_${lang}`] || bgCountry;
 }
 
-function localizedRecipeFields(row, lang, fallbacks) {
+function localizedRecipeFields(row, lang, fallbacks, ingredientSeparator = ", ") {
   const ingredientsSource = ingredientsFor(row, lang);
   const stepsSource = translatedField(row, lang, "steps", row.steps_bg);
   return {
     name: translatedField(row, lang, "name", row.canonical_name_bg),
     description: translatedField(row, lang, "description", row.description_bg),
     base: translatedField(row, lang, "tag", fallbacks.base),
-    ingredients: splitList(ingredientsSource).join(", "),
+    ingredients: splitList(ingredientsSource).join(ingredientSeparator),
     recipe: paragraphs(stepsSource),
     difficulty: difficultyForLang(row, lang),
     country: countryForLang(row, lang, fallbacks.country),
@@ -685,19 +693,19 @@ function applyEditorialOverrides(recipe) {
   return overrides ? { ...recipe, ...overrides } : recipe;
 }
 
-function recipeFor(row, index) {
+function recipeFor(row, index, ingredientSeparator = ", ") {
   const base = row.tag || titleCaseBg(row.meal_type);
-  const ingredients = splitList(ingredientsFor(row)).join(", ");
+  const ingredients = splitList(ingredientsFor(row)).join(ingredientSeparator);
   const recipe = paragraphs(row.steps_bg);
   const difficulty = difficultyFor(row);
   const country = countryFor(row);
   const tag = row.tag || row.recipe_quality || "curated";
   const fallbacks = { base, country, tag };
-  const en = localizedRecipeFields(row, "en", fallbacks);
-  const de = localizedRecipeFields(row, "de", fallbacks);
-  const es = localizedRecipeFields(row, "es", fallbacks);
-  const fr = localizedRecipeFields(row, "fr", fallbacks);
-  const ru = localizedRecipeFields(row, "ru", fallbacks);
+  const en = localizedRecipeFields(row, "en", fallbacks, ingredientSeparator);
+  const de = localizedRecipeFields(row, "de", fallbacks, ingredientSeparator);
+  const es = localizedRecipeFields(row, "es", fallbacks, ingredientSeparator);
+  const fr = localizedRecipeFields(row, "fr", fallbacks, ingredientSeparator);
+  const ru = localizedRecipeFields(row, "ru", fallbacks, ingredientSeparator);
 
   return applyEditorialOverrides({
     id: index + 1,
@@ -826,7 +834,7 @@ function writeApp(rows, config) {
     .map((row, index) => {
       const featuredRank = featuredOrder.get(row.global_id);
       return {
-        ...recipeFor(row, index),
+        ...recipeFor(row, index, config.ingredientSeparator),
         ...(featuredRank === undefined ? {} : { featured_rank: featuredRank }),
       };
     });

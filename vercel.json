@@ -139,6 +139,26 @@
       "has": [
         {
           "type": "host",
+          "value": "seafood.freefrom365.com"
+        }
+      ],
+      "dest": "/seafood/"
+    },
+    {
+      "src": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "seafood.freefrom365.com"
+        }
+      ],
+      "dest": "/seafood/$1"
+    },
+    {
+      "src": "/",
+      "has": [
+        {
+          "type": "host",
           "value": "freefrom365.com"
         }
       ],

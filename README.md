@@ -2,10 +2,10 @@
 
 This repository contains two separate product families:
 
-1. **FreeFrom365 recipe apps**: six light recipe PWAs that share one curated recipe catalogue.
+1. **FreeFrom365 recipe apps**: seven light recipe PWAs that share one curated recipe catalogue.
 2. **MixMaster365**: the existing cocktail and mocktail app at the repository root.
 
-Do not mix their data or deployment work. Recipe-app changes belong in the six app directories and the shared master spreadsheet. The root MixMaster files should only be changed when the cocktail app is explicitly in scope.
+Do not mix their data or deployment work. Recipe-app changes belong in the seven app directories and the shared master spreadsheet. The root MixMaster files should only be changed when the cocktail app is explicitly in scope.
 
 ## Live recipe apps
 
@@ -17,6 +17,7 @@ Do not mix their data or deployment work. Recipe-app changes belong in the six a
 | Dairy Free 365 | `dairy-free/` | https://dairy-free.freefrom365.com |
 | Vegetarian 365 | `meat-free/` | https://meat-free.freefrom365.com |
 | Vegan 365 | `plant-based/` | https://plant-based.freefrom365.com |
+| Seafood 365 | `seafood/` | https://seafood.freefrom365.com |
 
 `https://freefrom365.com` and `https://www.freefrom365.com` currently redirect to Healthy Gut 365. The old `breakfast.freefrom365.com` address redirects to `brunch.freefrom365.com`.
 
@@ -24,7 +25,7 @@ Host-based routing is defined in `vercel.json`. Every PWA is served at the root 
 
 ## Current status
 
-Status synchronized from the master spreadsheet and verified from the generated `data.js` files on 18 July 2026:
+Status synchronized from the master spreadsheet and verified from the generated `data.js` files on 19 July 2026:
 
 | App | Visible recipes | Images | Complete translated recipe records | Recipes with quantities |
 |---|---:|---:|---:|---:|
@@ -34,6 +35,7 @@ Status synchronized from the master spreadsheet and verified from the generated 
 | Dairy Free | 305 | 305 | 305 | 305 |
 | Vegetarian | 365 | 365 | 365 | 365 |
 | Vegan | 254 | 254 | 254 | 254 |
+| Seafood | 32 | 32 | 32 | 32 |
 
 The six supported languages are Bulgarian, English, German, Spanish, French and Russian.
 
@@ -111,7 +113,7 @@ curl -L "https://docs.google.com/spreadsheets/d/1wxcQ28CslNUa_7-hrhkIKEuO6fF2HAk
   -o /tmp/freefrom365_master.csv
 ```
 
-Generate the six local data files:
+Generate the seven local data files:
 
 ```bash
 node scripts/sync-master-recipes.mjs /tmp/freefrom365_master.csv
@@ -125,6 +127,7 @@ The script writes:
 - `dairy-free/data.js`
 - `meat-free/data.js`
 - `plant-based/data.js`
+- `seafood/data.js`
 
 Never hand-edit these generated files. Fix the master sheet and run the sync again.
 
@@ -136,14 +139,15 @@ Check JavaScript syntax and all manifests:
 for file in \
   scripts/sync-master-recipes.mjs \
   breakfast/data.js free-from/data.js gluten-free/data.js \
-  dairy-free/data.js meat-free/data.js plant-based/data.js
+  dairy-free/data.js meat-free/data.js plant-based/data.js seafood/data.js
 do
   node --check "$file"
 done
 
 for file in \
   breakfast/manifest.json free-from/manifest.json gluten-free/manifest.json \
-  dairy-free/manifest.json meat-free/manifest.json plant-based/manifest.json
+  dairy-free/manifest.json meat-free/manifest.json plant-based/manifest.json \
+  seafood/manifest.json
 do
   node -e "JSON.parse(require('fs').readFileSync('$file', 'utf8'))"
 done
@@ -152,14 +156,14 @@ done
 Count the generated recipes:
 
 ```bash
-for dir in breakfast free-from gluten-free dairy-free meat-free plant-based
+for dir in breakfast free-from gluten-free dairy-free meat-free plant-based seafood
 do
   printf '%s: ' "$dir"
   node -e "global.window={};require('./$dir/data.js');console.log(window.BREAKFAST_DATA.length)"
 done
 ```
 
-Before publishing, open all six apps at desktop and mobile widths and verify:
+Before publishing, open all seven apps at desktop and mobile widths and verify:
 
 - splash and icon render without a frame inside a frame;
 - the recipe of the day has a valid image and opens correctly;
@@ -182,11 +186,11 @@ Each recipe directory contains:
 - `icon-192.png` and `icon-512.png`: PWA icons;
 - splash/icon artwork used by that app.
 
-The six apps intentionally share the Brunch visual and interaction system: light editorial layout, recipe of the day, image-only visible catalogue, search, compact filters, favourites, language settings and direct recipe sharing.
+The seven apps intentionally share the Brunch visual and interaction system: light editorial layout, recipe of the day, image-only visible catalogue, search, compact filters, favourites, language settings and direct recipe sharing.
 
 ## Support and privacy
 
-All six recipe applications use `support@tastemaster.eu` for general support and `privacy@tastemaster.eu` for privacy requests. Each app has its own `privacy.html` page linked from the footer; keep both addresses synchronized across the interfaces, privacy pages and Google Play listings.
+All seven recipe applications use `support@tastemaster.eu` for general support and `privacy@tastemaster.eu` for privacy requests. Each app has its own `privacy.html` page linked from the footer; keep both addresses synchronized across the interfaces, privacy pages and Google Play listings.
 
 When changing cached application files, increment the cache name in the relevant `sw.js` so installed PWAs receive the update.
 
@@ -197,7 +201,7 @@ The recipe apps are deployed through the Vercel project connected to this reposi
 Normal release flow:
 
 1. Update the master spreadsheet and Drive assets.
-2. Export the CSV and synchronize all six apps.
+2. Export the CSV and synchronize all seven apps.
 3. Review the generated counts and diff.
 4. Run syntax, manifest and browser checks.
 5. Commit only the intended files.
@@ -217,13 +221,13 @@ Current priority order:
 
 1. Prepare and validate the Brunch Android bundle and Play Console listing.
 2. Decide the Brunch free/freemium model and use Google Play Billing for paid Android content.
-3. Complete quantities for all existing recipes in the other five apps.
+3. Complete quantities for all existing recipes in the other six apps.
 4. Continue the other catalogues toward 365 carefully curated recipes.
-5. Perform a six-app editorial, translation and accessibility review.
+5. Perform a seven-app editorial, translation and accessibility review.
 6. Prepare and validate the remaining Google Play packages.
 
 ## MixMaster365 boundary
 
 The repository root (`index.html`, root `manifest.json`, root `sw.js`, `mocktails/` and the MixMaster assets) belongs to the cocktail application at https://mixmaster365.eu.
 
-MixMaster has its own spreadsheet, image pipeline, PWA settings and Google Play package. It is not part of the FreeFrom365 master recipe sync. Do not modify it while working on Brunch or the five dietary apps unless the task explicitly asks for MixMaster changes.
+MixMaster has its own spreadsheet, image pipeline, PWA settings and Google Play package. It is not part of the FreeFrom365 master recipe sync. Do not modify it while working on Brunch or the six specialist recipe apps unless the task explicitly asks for MixMaster changes.
