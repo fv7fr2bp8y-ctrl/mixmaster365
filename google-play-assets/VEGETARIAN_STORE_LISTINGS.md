@@ -1,4 +1,4 @@
-# Meat Free 365 - Google Play listing
+# Vegetarian 365 - Google Play listing
 
 Този файл съдържа целия ред за създаване и публикуване на приложението, готовите отговори за декларациите и текстовете за шестте езика.
 
@@ -6,7 +6,7 @@
 
 От Google Play Console избери **All apps -> Create app** и въведи:
 
-- App name: `Meat Free 365`
+- App name: `Vegetarian 365`
 - Default language: `English (United States) - en-US`
 - App or game: `App`
 - Free or paid: `Free`
@@ -102,13 +102,13 @@ Package name след качването на bundle трябва да бъде 
 
 ### Graphics
 
-- App icon: `google-play-assets/icons/meat-free-icon-512.png`
-- Feature graphic: `google-play-assets/feature-graphics/meat-free-1024x500.png`
+- App icon: `google-play-assets/icons/vegetarian-icon-512.png`
+- Feature graphic: `google-play-assets/feature-graphics/vegetarian-1024x500.png`
 - Phone screenshots, в този ред:
-  1. `google-play-assets/screenshots-play/meat-free/01-home.png`
-  2. `google-play-assets/screenshots-play/meat-free/02-catalog.png`
-  3. `google-play-assets/screenshots-play/meat-free/03-recipe.png`
-  4. `google-play-assets/screenshots-play/meat-free/04-languages.png`
+  1. `google-play-assets/screenshots-play/vegetarian/01-home.png`
+  2. `google-play-assets/screenshots-play/vegetarian/02-catalog.png`
+  3. `google-play-assets/screenshots-play/vegetarian/03-recipe.png`
+  4. `google-play-assets/screenshots-play/vegetarian/04-languages.png`
 - Video: остави празно
 - Tablet, Chromebook и XR изображения: засега остави празни
 
@@ -128,7 +128,7 @@ Package name след качването на bundle трябва да бъде 
 
 Въведи:
 
-- Release name: `Meat Free 365 v1.0`
+- Release name: `Vegetarian 365 v1.0`
 - Release notes: постави целия блок от секцията **Release notes - paste as one block** по-долу
 
 След качването отвори **Protected with Play -> Play app signing** и копирай **SHA-256 certificate fingerprint** от секцията **App signing key certificate**. Това не е Upload key certificate. Новият fingerprint трябва да се добави към `.well-known/assetlinks.json`, преди да започне пълното разпространение.
@@ -154,7 +154,7 @@ Package name след качването на bundle трябва да бъде 
 
 ## App setup
 
-- App name: `Meat Free 365`
+- App name: `Vegetarian 365`
 - Package name: `eu.meatfree365.twa`
 - App type: App
 - Pricing: Free
@@ -170,21 +170,21 @@ Package name след качването на bundle трябва да бъде 
 
 **App name**
 
-Meat Free 365
+Vegetarian 365
 
 **Short description**
 
-Inspiring meat-free recipes with photos, exact quantities and smart filters.
+365 vegetarian recipes with photos, exact quantities and smart filters.
 
 **Full description**
 
-Discover colourful meat-free cooking from around the world with Meat Free 365.
+Discover colourful vegetarian cooking from around the world with Vegetarian 365.
 
-Browse more than 240 carefully selected vegetarian recipes for breakfast, lunch, dinner, snacks and special occasions. Every available recipe includes a food photo, clear ingredient quantities and practical step-by-step instructions.
+Explore 365 carefully selected vegetarian recipes for breakfast, lunch, dinner, snacks and special occasions. Every available recipe includes a food photo, clear ingredient quantities and practical step-by-step instructions.
 
 Find the right dish quickly with search and useful filters. Save favourites, share recipes with friends and explore a different featured recipe every day.
 
-Meat Free 365 supports English, Spanish, French, German, Russian and Bulgarian. Recipes are shown in each language only when their translation is ready.
+Vegetarian 365 supports English, Spanish, French, German, Russian and Bulgarian. Recipes are shown in each language only when their translation is ready.
 
 No account is required. The app contains no advertising.
 
@@ -192,7 +192,7 @@ No account is required. The app contains no advertising.
 
 **Nombre de la aplicación**
 
-Meat Free 365
+Vegetarian 365
 
 **Descripción breve**
 
@@ -200,13 +200,13 @@ Recetas sin carne con fotos, cantidades exactas y filtros prácticos.
 
 **Descripción completa**
 
-Descubre una cocina sin carne, colorida y variada, con Meat Free 365.
+Descubre una cocina sin carne, colorida y variada, con Vegetarian 365.
 
-Explora más de 240 recetas vegetarianas cuidadosamente seleccionadas para desayunos, comidas, cenas, tentempiés y ocasiones especiales. Cada receta disponible incluye una foto, cantidades claras e instrucciones prácticas paso a paso.
+Explora 365 recetas vegetarianas cuidadosamente seleccionadas para desayunos, comidas, cenas, tentempiés y ocasiones especiales. Cada receta disponible incluye una foto, cantidades claras e instrucciones prácticas paso a paso.
 
 Encuentra el plato adecuado con la búsqueda y los filtros. Guarda tus favoritas, comparte recetas y descubre una propuesta diferente cada día.
 
-Meat Free 365 está disponible en inglés, español, francés, alemán, ruso y búlgaro. En cada idioma solo se muestran las recetas cuya traducción está terminada.
+Vegetarian 365 está disponible en inglés, español, francés, alemán, ruso y búlgaro. En cada idioma solo se muestran las recetas cuya traducción está terminada.
 
 No se necesita una cuenta. La aplicación no contiene publicidad.
 
@@ -214,7 +214,7 @@ No se necesita una cuenta. La aplicación no contiene publicidad.
 
 **Nom de l'application**
 
-Meat Free 365
+Vegetarian 365
 
 **Description courte**
 
@@ -222,13 +222,13 @@ Recettes sans viande avec photos, quantités précises et filtres pratiques.
 
 **Description complète**
 
-Découvrez une cuisine sans viande colorée et variée avec Meat Free 365.
+Découvrez une cuisine sans viande colorée et variée avec Vegetarian 365.
 
-Parcourez plus de 240 recettes végétariennes soigneusement sélectionnées pour le petit-déjeuner, le déjeuner, le dîner, les en-cas et les occasions spéciales. Chaque recette disponible comprend une photo, des quantités claires et des instructions pratiques étape par étape.
+Parcourez 365 recettes végétariennes soigneusement sélectionnées pour le petit-déjeuner, le déjeuner, le dîner, les en-cas et les occasions spéciales. Chaque recette disponible comprend une photo, des quantités claires et des instructions pratiques étape par étape.
 
 Trouvez rapidement le bon plat grâce à la recherche et aux filtres. Enregistrez vos favoris, partagez des recettes et découvrez chaque jour une nouvelle suggestion.
 
-Meat Free 365 est disponible en anglais, espagnol, français, allemand, russe et bulgare. Seules les recettes dont la traduction est terminée apparaissent dans la langue choisie.
+Vegetarian 365 est disponible en anglais, espagnol, français, allemand, russe et bulgare. Seules les recettes dont la traduction est terminée apparaissent dans la langue choisie.
 
 Aucun compte n'est nécessaire. L'application ne contient aucune publicité.
 
@@ -236,7 +236,7 @@ Aucun compte n'est nécessaire. L'application ne contient aucune publicité.
 
 **App-Name**
 
-Meat Free 365
+Vegetarian 365
 
 **Kurzbeschreibung**
 
@@ -244,13 +244,13 @@ Fleischfreie Rezepte mit Fotos, genauen Mengen und praktischen Filtern.
 
 **Vollständige Beschreibung**
 
-Entdecke mit Meat Free 365 eine farbenfrohe und abwechslungsreiche fleischfreie Küche.
+Entdecke mit Vegetarian 365 eine farbenfrohe und abwechslungsreiche fleischfreie Küche.
 
-Stöbere in mehr als 240 sorgfältig ausgewählten vegetarischen Rezepten für Frühstück, Mittagessen, Abendessen, Snacks und besondere Anlässe. Jedes verfügbare Rezept enthält ein Foto, klare Mengenangaben und praktische Schritt-für-Schritt-Anleitungen.
+Entdecke 365 sorgfältig ausgewählte vegetarische Rezepte für Frühstück, Mittagessen, Abendessen, Snacks und besondere Anlässe. Jedes verfügbare Rezept enthält ein Foto, klare Mengenangaben und praktische Schritt-für-Schritt-Anleitungen.
 
 Mit Suche und Filtern findest du schnell das passende Gericht. Speichere Favoriten, teile Rezepte und entdecke jeden Tag einen neuen Vorschlag.
 
-Meat Free 365 unterstützt Englisch, Spanisch, Französisch, Deutsch, Russisch und Bulgarisch. In jeder Sprache werden nur vollständig übersetzte Rezepte angezeigt.
+Vegetarian 365 unterstützt Englisch, Spanisch, Französisch, Deutsch, Russisch und Bulgarisch. In jeder Sprache werden nur vollständig übersetzte Rezepte angezeigt.
 
 Es ist kein Konto erforderlich. Die App enthält keine Werbung.
 
@@ -258,7 +258,7 @@ Es ist kein Konto erforderlich. Die App enthält keine Werbung.
 
 **Название приложения**
 
-Meat Free 365
+Vegetarian 365
 
 **Краткое описание**
 
@@ -266,13 +266,13 @@ Meat Free 365
 
 **Полное описание**
 
-Откройте для себя яркую и разнообразную кухню без мяса вместе с Meat Free 365.
+Откройте для себя яркую и разнообразную кухню без мяса вместе с Vegetarian 365.
 
-В приложении собрано более 240 тщательно отобранных вегетарианских рецептов для завтрака, обеда, ужина, перекуса и особых случаев. Каждый доступный рецепт содержит фотографию, понятные количества ингредиентов и практичные пошаговые инструкции.
+В приложении собрано 365 тщательно отобранных вегетарианских рецептов для завтрака, обеда, ужина, перекуса и особых случаев. Каждый доступный рецепт содержит фотографию, понятные количества ингредиентов и практичные пошаговые инструкции.
 
 Используйте поиск и фильтры, сохраняйте избранное, делитесь рецептами и каждый день открывайте новое блюдо дня.
 
-Meat Free 365 поддерживает английский, испанский, французский, немецкий, русский и болгарский языки. На выбранном языке отображаются только полностью переведённые рецепты.
+Vegetarian 365 поддерживает английский, испанский, французский, немецкий, русский и болгарский языки. На выбранном языке отображаются только полностью переведённые рецепты.
 
 Регистрация не требуется. В приложении нет рекламы.
 
@@ -280,7 +280,7 @@ Meat Free 365 поддерживает английский, испанский,
 
 **Име на приложението**
 
-Meat Free 365
+Vegetarian 365
 
 **Кратко описание**
 
@@ -288,13 +288,13 @@ Meat Free 365
 
 **Пълно описание**
 
-Открий цветна и разнообразна кухня без месо с Meat Free 365.
+Открий цветна и разнообразна кухня без месо с Vegetarian 365.
 
-Разгледай над 240 внимателно подбрани вегетариански рецепти за закуска, обяд, вечеря, междинни хапвания и специални поводи. Всяка достъпна рецепта има снимка, ясни количества на съставките и практични инструкции стъпка по стъпка.
+Разгледай 365 внимателно подбрани вегетариански рецепти за закуска, обяд, вечеря, междинни хапвания и специални поводи. Всяка достъпна рецепта има снимка, ясни количества на съставките и практични инструкции стъпка по стъпка.
 
 Намери подходящото ястие бързо с търсене и полезни филтри. Запазвай любими, споделяй рецепти и откривай различно предложение всеки ден.
 
-Meat Free 365 поддържа английски, испански, френски, немски, руски и български. На избрания език се показват само рецептите с готов превод.
+Vegetarian 365 поддържа английски, испански, френски, немски, руски и български. На избрания език се показват само рецептите с готов превод.
 
 Не е необходим профил. Приложението няма реклами.
 
@@ -302,37 +302,37 @@ Meat Free 365 поддържа английски, испански, френс�
 
 **Release name**
 
-Meat Free 365 v1.0
+Vegetarian 365 v1.0
 
 **Release notes - paste as one block**
 
 ```text
 <en-US>
-First release of Meat Free 365 with more than 240 recipes, photos, precise quantities, search, filters, favourites and six languages.
+First release of Vegetarian 365 with 365 recipes, photos, precise quantities, search, filters, favourites and six languages.
 </en-US>
 <es-ES>
-Primera versión de Meat Free 365 con más de 240 recetas, fotos, cantidades precisas, búsqueda, filtros, favoritos y seis idiomas.
+Primera versión de Vegetarian 365 con 365 recetas, fotos, cantidades precisas, búsqueda, filtros, favoritos y seis idiomas.
 </es-ES>
 <fr-FR>
-Première version de Meat Free 365 avec plus de 240 recettes, photos, quantités précises, recherche, filtres, favoris et six langues.
+Première version de Vegetarian 365 avec 365 recettes, photos, quantités précises, recherche, filtres, favoris et six langues.
 </fr-FR>
 <de-DE>
-Erste Version von Meat Free 365 mit mehr als 240 Rezepten, Bildern, genauen Mengenangaben, Suche, Filtern, Favoriten und sechs Sprachen.
+Erste Version von Vegetarian 365 mit 365 Rezepten, Bildern, genauen Mengenangaben, Suche, Filtern, Favoriten und sechs Sprachen.
 </de-DE>
 <ru-RU>
-Первый выпуск Meat Free 365: более 240 рецептов с фотографиями, точными количествами, поиском, фильтрами, избранным и шестью языками.
+Первый выпуск Vegetarian 365: 365 рецептов с фотографиями, точными количествами, поиском, фильтрами, избранным и шестью языками.
 </ru-RU>
 <bg>
-Първо издание на Meat Free 365 с над 240 рецепти, снимки, точни количества, търсене, филтри, любими и шест езика.
+Първо издание на Vegetarian 365 с 365 рецепти, снимки, точни количества, търсене, филтри, любими и шест езика.
 </bg>
 ```
 
 ## Upload files
 
 - App bundle: `android/meat-free-twa/app-release-bundle.aab`
-- App icon: `google-play-assets/icons/meat-free-icon-512.png`
-- Feature graphic: `google-play-assets/feature-graphics/meat-free-1024x500.png`
-- Phone screenshots: `google-play-assets/screenshots-play/meat-free/01-home.png` through `04-languages.png`
+- App icon: `google-play-assets/icons/vegetarian-icon-512.png`
+- Feature graphic: `google-play-assets/feature-graphics/vegetarian-1024x500.png`
+- Phone screenshots: `google-play-assets/screenshots-play/vegetarian/01-home.png` through `04-languages.png`
 
 ## Signing
 

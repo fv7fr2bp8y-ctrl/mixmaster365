@@ -1,7 +1,7 @@
 {
   "name": "Vegetarian 365",
   "short_name": "Vegetarian 365",
-  "description": "Рецепти без месо, подредени за бързо готвене.",
+  "description": "365 вегетариански рецепти със снимки и точни количества.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
