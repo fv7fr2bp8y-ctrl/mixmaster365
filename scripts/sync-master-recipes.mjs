@@ -149,6 +149,18 @@ const appConfigs = [
     slot: "seafood_slot",
     limit: 365,
     ingredientSeparator: " || ",
+    featured: [
+      "SEA-C033", // whole roasted sea bass
+      "SEA-C036", // clams and prawns
+      "SEA-C066", // Galician octopus
+      "SEA-C039", // mustard salmon
+      "SEA-C038", // Belgian mussels
+      "SEA-C037", // bouillabaisse
+      "SEA-C034", // swordfish rolls
+      "SEA-C035", // tuna and potato stew
+      "SEA-C040", // Norwegian fish cakes
+      "SEA-C041", // Icelandic fish and potatoes
+    ],
   },
 ];
 

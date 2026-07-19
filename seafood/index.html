@@ -1115,8 +1115,12 @@
         }
 
         function mixBreakfastOrder(items) {
+            const featured = items
+                .filter(item => item && item.name && Number.isFinite(Number(item.featured_rank)))
+                .sort((a, b) => Number(a.featured_rank) - Number(b.featured_rank));
+            const featuredItems = new Set(featured);
             const groups = new Map();
-            items.filter(c => c && c.name).forEach(item => {
+            items.filter(c => c && c.name && !featuredItems.has(c)).forEach(item => {
                 const key = String(item.base || 'други').trim().toLowerCase() || 'други';
                 if (!groups.has(key)) groups.set(key, []);
                 groups.get(key).push(item);
@@ -1136,7 +1140,7 @@
                 });
             }
             const invalid = items.filter(c => !c || !c.name);
-            return mixed.concat(invalid);
+            return featured.concat(mixed, invalid);
         }
 
         function escapeHtml(s) {
