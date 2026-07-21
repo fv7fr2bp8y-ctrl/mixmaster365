@@ -20,8 +20,8 @@
     "path": "/Users/spasspasov/Library/CloudStorage/OneDrive-Personal/App Projects/MixMaster365/android/dairy-free-twa/android.keystore",
     "alias": "dairyfree365"
   },
-  "appVersionName": "1",
-  "appVersionCode": 1,
+  "appVersionName": "1.1",
+  "appVersionCode": 2,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://dairy-free.freefrom365.com/manifest.json",
@@ -43,5 +43,5 @@
   "fileHandlers": [],
   "launchHandlerClientMode": "",
   "displayOverride": [],
-  "appVersion": "1"
+  "appVersion": "1.1"
 }

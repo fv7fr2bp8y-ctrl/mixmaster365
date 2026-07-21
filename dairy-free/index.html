@@ -340,6 +340,22 @@
         .recipe-content p { margin: 0.4em 0; }
         .recipe-content ul, .recipe-content ol { padding-left: 1.2em; margin: 0.4em 0; }
 
+        .recipe-accordion > summary {
+            list-style: none;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .recipe-accordion > summary::-webkit-details-marker { display: none; }
+        .accordion-chevron {
+            width: 9px;
+            height: 9px;
+            border-right: 1px solid currentColor;
+            border-bottom: 1px solid currentColor;
+            transform: rotate(45deg);
+            transition: transform 0.25s ease;
+        }
+        .recipe-accordion[open] .accordion-chevron { transform: rotate(225deg); }
+
         /* Safe area for iPhone notch / home bar */
         .safe-bottom { padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); }
 
@@ -500,6 +516,7 @@
                 stats_rec_line1:'Сега, около {hour}:00 ч., е подходящо за {rec}.',
                 stats_rec_line2:'Най-разнообразната ви категория е {base} с {count} опции.',
                 count_word_one:'рецепта', count_word_many:'рецепти',
+                ingredient_count:'съставки', ingredients_title:'съставки', steps_title:'стъпки',
                 empty_fav:'Все още нямате избрани.', empty_fav_hint:'— ОТБЕЛЕЖЕТЕ С ◇ —',
                 empty_search:'Няма съвпадение с «{q}»', empty_selection:'Тази селекция е празна.',
                 load_more:'Зареди още', alert_empty:'Селекцията е празна. Изчистете филтрите.',
@@ -534,6 +551,7 @@
                 stats_rec_line1:"Right now, around {hour}:00, it's a good time for {rec}.",
                 stats_rec_line2:'Your most diverse category is {base} with {count} options.',
                 count_word_one:'recipe', count_word_many:'recipes',
+                ingredient_count:'ingredients', ingredients_title:'ingredients', steps_title:'steps',
                 empty_fav:'You have no favorites yet.', empty_fav_hint:'— MARK WITH ◇ —',
                 empty_search:'No match for «{q}»', empty_selection:'This selection is empty.',
                 load_more:'Load more', alert_empty:'Selection is empty. Clear the filters.',
@@ -568,6 +586,7 @@
                 stats_rec_line1:'Jetzt, gegen {hour}:00 Uhr, passt {rec}.',
                 stats_rec_line2:'Deine vielfältigste Kategorie ist {base} mit {count} Optionen.',
                 count_word_one:'Rezept', count_word_many:'Rezepte',
+                ingredient_count:'Zutaten', ingredients_title:'Zutaten', steps_title:'Zubereitung',
                 empty_fav:'Noch keine Favoriten.', empty_fav_hint:'— MIT ◇ MARKIEREN —',
                 empty_search:'Kein Treffer für «{q}»', empty_selection:'Diese Auswahl ist leer.',
                 load_more:'Mehr laden', alert_empty:'Auswahl ist leer. Filter zurücksetzen.',
@@ -601,7 +620,8 @@
                 stats_time_evening:'una idea acogedora para la noche', stats_time_late:'algo sencillo para más tarde',
                 stats_rec_line1:'Ahora, sobre las {hour}:00, es buen momento para {rec}.',
                 stats_rec_line2:'Tu categoría más variada es {base} con {count} opciones.',
-                count_word_one:'recipe', count_word_many:'recipes',
+                count_word_one:'receta', count_word_many:'recetas',
+                ingredient_count:'ingredientes', ingredients_title:'ingredientes', steps_title:'preparación',
                 empty_fav:'Aún no tienes favoritos.', empty_fav_hint:'— MARCA CON ◇ —',
                 empty_search:'Sin coincidencias para «{q}»', empty_selection:'Esta selección está vacía.',
                 load_more:'Cargar más', alert_empty:'La selección está vacía. Borra los filtros.',
@@ -636,6 +656,7 @@
                 stats_rec_line1:'Сейчас, около {hour}:00, подходит {rec}.',
                 stats_rec_line2:'Самая разнообразная категория — {base}, {count} вариантов.',
                 count_word_one:'рецепт', count_word_many:'рецептов',
+                ingredient_count:'ингредиентов', ingredients_title:'ингредиенты', steps_title:'приготовление',
                 empty_fav:'Пока нет избранного.', empty_fav_hint:'— ОТМЕТЬТЕ ◇ —',
                 empty_search:'Нет совпадений с «{q}»', empty_selection:'Этот раздел пуст.',
                 load_more:'Показать ещё', alert_empty:'Раздел пуст. Сбросьте фильтры.',
@@ -673,6 +694,7 @@
             stats_rec_line1:"En ce moment, vers {hour}:00, c'est idéal pour {rec}.",
             stats_rec_line2:'Votre catégorie la plus variée est {base}, avec {count} options.',
             count_word_one:'recette', count_word_many:'recettes',
+            ingredient_count:'ingrédients', ingredients_title:'ingrédients', steps_title:'préparation',
             empty_fav:"Vous n'avez pas encore de favoris.", empty_fav_hint:'— MARQUEZ AVEC ◇ —',
             empty_search:'Aucun résultat pour «{q}»', empty_selection:'Cette sélection est vide.',
             load_more:'Charger plus', alert_empty:'La sélection est vide. Effacez les filtres.',
@@ -1398,9 +1420,15 @@
             if (d.time) parts.push(escapeHtml(d.time) + ' ' + t('meta_min'));
             if (d.difficulty) parts.push(escapeHtml(loc(d, 'difficulty') || d.difficulty));
             if (d.country) parts.push(escapeHtml(loc(d, 'country') || d.country));
-            if (d.ingredients) parts.push(String(loc(d,'ingredients')).split(',').filter(Boolean).length + ' съставки');
+            if (d.ingredients) parts.push(ingredientItems(loc(d,'ingredients')).length + ' ' + t('ingredient_count'));
             parts.push(escapeHtml(document.title || 'Recipe 365'));
             return parts.join(' · ');
+        }
+
+        function ingredientItems(value) {
+            const text = String(value || '');
+            const separator = text.includes('||') ? /\s*\|\|\s*/ : /,\s*/;
+            return text.split(separator).map(item => item.trim()).filter(Boolean);
         }
 
         function renderCard(d, i) {
@@ -1435,24 +1463,34 @@
 
                         <!-- Ingredients -->
                         ${d.ingredients ? `
-                        <div class="px-5 pb-5">
-                            <div class="deco-divider mb-4"><span class="font-roman text-xs tracking-[0.28em] uppercase text-gold">съставки</span></div>
-                            <ul class="space-y-1.5">
-                                ${String(loc(d,'ingredients')).split(',').map(ing => ing.trim()).filter(Boolean).map(ing => `
-                                <li class="flex items-baseline gap-3">
-                                    <span class="text-gold text-[0.5rem] shrink-0 mt-1">◆</span>
-                                    <span class="font-roman text-cream-dim text-sm">${escapeHtml(convertUnits(ing))}</span>
-                                </li>`).join('')}
-                            </ul>
-                        </div>` : ''}
+                        <details class="recipe-accordion border-t border-gold-dim/30">
+                            <summary class="flex min-h-14 items-center justify-between gap-4 px-5 py-4 text-gold hover:text-gold-bright transition">
+                                <span class="font-roman text-xs tracking-[0.28em] uppercase">${escapeHtml(t('ingredients_title'))} · ${ingredientItems(loc(d,'ingredients')).length}</span>
+                                <span class="accordion-chevron shrink-0" aria-hidden="true"></span>
+                            </summary>
+                            <div class="px-5 pb-5">
+                                <ul class="space-y-1.5">
+                                    ${ingredientItems(loc(d,'ingredients')).map(ing => `
+                                    <li class="flex items-baseline gap-3">
+                                        <span class="text-gold text-[0.5rem] shrink-0 mt-1">◆</span>
+                                        <span class="font-roman text-cream-dim text-sm">${escapeHtml(convertUnits(ing))}</span>
+                                    </li>`).join('')}
+                                </ul>
+                            </div>
+                        </details>` : ''}
 
                         <!-- Recipe -->
-                        <div class="px-5 pb-6 pt-2 border-t border-gold-dim/30">
-                            <div class="deco-divider mb-4"><span class="font-roman text-xs tracking-[0.28em] uppercase text-gold">стъпки</span></div>
-                            <div class="recipe-content text-cream/80 text-base">
-                                ${convertUnits(loc(d,'recipe') || '')}
+                        <details class="recipe-accordion border-t border-gold-dim/30">
+                            <summary class="flex min-h-14 items-center justify-between gap-4 px-5 py-4 text-gold hover:text-gold-bright transition">
+                                <span class="font-roman text-xs tracking-[0.28em] uppercase">${escapeHtml(t('steps_title'))}</span>
+                                <span class="accordion-chevron shrink-0" aria-hidden="true"></span>
+                            </summary>
+                            <div class="px-5 pb-6">
+                                <div class="recipe-content text-cream/80 text-base">
+                                    ${convertUnits(loc(d,'recipe') || '')}
+                                </div>
                             </div>
-                        </div>
+                        </details>
                     </article>
                 `;
         }
