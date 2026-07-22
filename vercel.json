@@ -26,6 +26,26 @@
       "has": [
         {
           "type": "host",
+          "value": "apps.tastemaster.eu"
+        }
+      ],
+      "dest": "/culinary-apps/"
+    },
+    {
+      "src": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "apps.tastemaster.eu"
+        }
+      ],
+      "dest": "/culinary-apps/$1"
+    },
+    {
+      "src": "/",
+      "has": [
+        {
+          "type": "host",
           "value": "brunch.freefrom365.com"
         }
       ],
