@@ -6,6 +6,26 @@
       "has": [
         {
           "type": "host",
+          "value": "apps.tastemaster365.com"
+        }
+      ],
+      "dest": "/culinary-apps/"
+    },
+    {
+      "src": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "apps.tastemaster365.com"
+        }
+      ],
+      "dest": "/culinary-apps/$1"
+    },
+    {
+      "src": "/",
+      "has": [
+        {
+          "type": "host",
           "value": "brunch.freefrom365.com"
         }
       ],
