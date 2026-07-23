@@ -71,5 +71,15 @@
         "B2:EF:9D:61:C1:95:AA:35:64:14:D3:AF:E6:82:9C:46:B8:A1:4E:71:F1:4A:1D:C2:17:66:BB:EA:7B:01:E4:83"
       ]
     }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "eu.seafood365.twa",
+      "sha256_cert_fingerprints": [
+        "EA:15:BE:12:CC:E0:5A:AD:2B:A8:56:BD:31:CD:C5:76:5F:C6:7C:16:2C:05:C9:72:70:35:8D:33:21:B3:0B:17"
+      ]
+    }
   }
 ]
