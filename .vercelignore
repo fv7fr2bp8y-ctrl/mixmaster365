@@ -1,0 +1,10 @@
+.git/
+android/
+generated-images/
+Google Play packages/
+google-play-assets/screenshots/
+google-play-assets/screenshots-play/
+*.aab
+*.apk
+*.keystore
+.DS_Store
