@@ -1,4 +1,4 @@
-const CACHE_NAME = "gluten-free-365-v13";
+const CACHE_NAME = "gluten-free-365-v14";
 const APP_ROOT = self.location.hostname.endsWith(".freefrom365.com") ? "" : "/gluten-free";
 const APP_SHELL = [
   `${APP_ROOT}/`,

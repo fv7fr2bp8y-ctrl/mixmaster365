@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "eu.glutenfree365.twa",
+      "sha256_cert_fingerprints": [
+        "15:F3:71:0A:1E:A7:C9:1D:63:52:EE:6F:5B:7D:96:FD:74:5A:CA:C4:E2:50:95:6C:20:84:88:67:58:6B:29:87"
+      ]
+    }
+  }
+]
