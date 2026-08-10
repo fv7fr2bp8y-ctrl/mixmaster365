@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mock365-v2';
+const CACHE_NAME = 'mock365-v3';
 const STATIC = [
   '/mocktails/',
   '/mocktails/index.html',
