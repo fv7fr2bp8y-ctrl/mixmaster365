@@ -2,6 +2,8 @@
 
 Prepared: 2026-08-11
 
+Google Play status: submitted for review on 2026-08-11. Managed publishing is enabled, so the approved release must be published from Publishing overview.
+
 ## Google Play upload
 
 - Upload file: `vegetarian-365-v1.2.0-code4-api36.aab`
@@ -60,4 +62,3 @@ Mise à jour pour Android 16, avec des liens de recettes améliorés et des corr
 ### ru-RU
 
 Обновлено для Android 16: улучшены ссылки на рецепты и исправлены переводы. Включает 365 вегетарианских рецептов с фотографиями, точными количествами, поиском, фильтрами, избранным и шестью языками.
-
