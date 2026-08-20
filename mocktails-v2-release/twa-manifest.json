@@ -4,13 +4,13 @@
   "name": "365 Mocktails · Atelier",
   "launcherName": "365 Mocktails",
   "display": "standalone",
-  "themeColor": "#6fae83",
-  "themeColorDark": "#0a0908",
-  "navigationColor": "#0a0908",
-  "navigationColorDark": "#0a0908",
-  "navigationDividerColor": "#0a0908",
-  "navigationDividerColorDark": "#0a0908",
-  "backgroundColor": "#0a0908",
+  "themeColor": "#6FAE83",
+  "themeColorDark": "#0A0908",
+  "navigationColor": "#0A0908",
+  "navigationColorDark": "#0A0908",
+  "navigationDividerColor": "#0A0908",
+  "navigationDividerColorDark": "#0A0908",
+  "backgroundColor": "#0A0908",
   "enableNotifications": true,
   "startUrl": "/mocktails/",
   "iconUrl": "https://mixmaster365.eu/mocktails/icon-512.png",
@@ -20,8 +20,8 @@
     "path": "./signing.keystore",
     "alias": "my-key-alias"
   },
-  "appVersionName": "2",
-  "appVersionCode": 2,
+  "appVersionName": "4",
+  "appVersionCode": 4,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://mixmaster365.eu/mocktails/manifest.json",
@@ -32,7 +32,7 @@
     }
   },
   "alphaDependencies": {
-    "enabled": true
+    "enabled": false
   },
   "enableSiteSettingsShortcut": true,
   "isChromeOSOnly": false,
@@ -46,5 +46,6 @@
   "protocolHandlers": [],
   "fileHandlers": [],
   "launchHandlerClientMode": "",
-  "appVersion": "2"
+  "displayOverride": [],
+  "appVersion": "4"
 }

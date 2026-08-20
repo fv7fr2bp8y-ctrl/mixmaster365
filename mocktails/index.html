@@ -614,16 +614,16 @@
         })();
 
         // --- Premium (freemium gating) ---
-        const FREE_COCKTAILS = 30;          // first N cocktail ids are free
+        const FREE_MOCKTAILS = 30;          // first N mocktail ids are free
         const PREMIUM_SKU    = 'mocktails_premium';
-        const PRICE_LABEL    = '€1.99';
-        const OLD_PRICE      = '€2.99'; // промо: показва се зачертана
+        let premiumPrice = null;
+        let premiumPriceLabel = '';
+        let digitalGoodsServicePromise = null;
         let isPremium = false;
         try { isPremium = localStorage.getItem('mock365-premium') === '1'; } catch(e) {}
 
         function isLocked(item) {
-            // Mocktails always free; cocktails beyond the free sample need premium
-            return !isPremium && Number(item && item.id) > FREE_COCKTAILS;
+            return !isPremium && Number(item && item.id) > FREE_MOCKTAILS;
         }
         function setPremium(v) {
             isPremium = !!v;
@@ -638,6 +638,60 @@
             let s = (I18N[LANG] && I18N[LANG][key]) || (I18N.bg[key]) || key;
             if (vars) for (const k in vars) s = s.replace('{'+k+'}', vars[k]);
             return s;
+        }
+
+        function getGooglePlayBillingService() {
+            if (!('getDigitalGoodsService' in window)) return Promise.resolve(null);
+            if (!digitalGoodsServicePromise) {
+                digitalGoodsServicePromise = window.getDigitalGoodsService('https://play.google.com/billing')
+                    .catch(error => {
+                        digitalGoodsServicePromise = null;
+                        throw error;
+                    });
+            }
+            return digitalGoodsServicePromise;
+        }
+
+        function formatStorePrice(price) {
+            if (!price || !price.currency || price.value == null) return '';
+            try {
+                return new Intl.NumberFormat(navigator.language || LANG, {
+                    style: 'currency',
+                    currency: price.currency
+                }).format(Number(price.value));
+            } catch (e) {
+                return `${price.currency} ${price.value}`;
+            }
+        }
+
+        function premiumPriceSuffix() {
+            return premiumPriceLabel ? ` · ${escapeHtml(premiumPriceLabel)}` : '';
+        }
+
+        function updatePremiumPriceUI() {
+            const cta = document.getElementById('paywall-cta');
+            if (cta) cta.innerHTML = escapeHtml(t('paywall_cta')) + premiumPriceSuffix();
+            const settingsModal = document.getElementById('settings-modal');
+            if (settingsModal && !settingsModal.classList.contains('hidden')) openSettings();
+        }
+
+        async function loadPremiumPrice() {
+            try {
+                const svc = await getGooglePlayBillingService();
+                if (!svc) return null;
+                const details = await svc.getDetails([PREMIUM_SKU]);
+                const item = details && details.find(d => d.itemId === PREMIUM_SKU);
+                if (!item || !item.price) return null;
+                premiumPrice = {
+                    currency: item.price.currency,
+                    value: String(item.price.value)
+                };
+                premiumPriceLabel = formatStorePrice(premiumPrice);
+                updatePremiumPriceUI();
+                return premiumPrice;
+            } catch (e) {
+                return null;
+            }
         }
 
         // --- Units (ml <-> oz) ---
@@ -691,7 +745,7 @@
                 <div class="mt-7">
                     ${ isPremium
                         ? `<div class="border border-gold text-gold-bright py-3 text-center font-roman text-xs tracking-[0.3em] uppercase">✦ ${escapeHtml(t('settings_premium_on'))} ✦</div>`
-                        : `<button onclick="closeSettings(); openPaywall()" class="btn-gold w-full py-3 font-roman text-xs tracking-[0.2em] uppercase">✦ ${escapeHtml(t('settings_unlock'))} · <s class="opacity-60">${OLD_PRICE}</s> ${PRICE_LABEL} ✦</button>` }
+                        : `<button onclick="closeSettings(); openPaywall()" class="btn-gold w-full py-3 font-roman text-xs tracking-[0.2em] uppercase">✦ ${escapeHtml(t('settings_unlock'))}${premiumPriceSuffix()} ✦</button>` }
                 </div>`;
             document.getElementById('settings-modal').classList.remove('hidden');
         }
@@ -729,7 +783,7 @@
                 </div>`;
             document.getElementById('paywall-content').innerHTML =
                 benefit(t('paywall_b1')) + benefit(t('paywall_b2')) + benefit(t('paywall_b3'));
-            document.getElementById('paywall-cta').innerHTML = escapeHtml(t('paywall_cta')) + ' · <s class="opacity-60">' + OLD_PRICE + '</s> ' + PRICE_LABEL;
+            document.getElementById('paywall-cta').innerHTML = escapeHtml(t('paywall_cta')) + premiumPriceSuffix();
             document.getElementById('paywall-restore').textContent = t('paywall_restore');
             // In the Android app → show buy/restore; on the web → show Google Play badge instead
             const inApp = isTWA();
@@ -753,19 +807,16 @@
             // Google Play Billing via Digital Goods API (works inside the TWA / Android app)
             if (!('getDigitalGoodsService' in window)) { showToast(t('premium_app_only')); return; }
             try {
-                const svc = await window.getDigitalGoodsService('https://play.google.com/billing');
-                let amount = { currency: 'EUR', value: '3.99' };
-                try {
-                    const details = await svc.getDetails([PREMIUM_SKU]);
-                    if (details && details[0] && details[0].price) amount = details[0].price;
-                } catch(e) {}
+                const svc = await getGooglePlayBillingService();
+                if (!svc) throw new Error('Google Play Billing unavailable');
+                const amount = premiumPrice || await loadPremiumPrice() || { currency: 'USD', value: '0' };
                 const pr = new PaymentRequest(
                     [{ supportedMethods: 'https://play.google.com/billing', data: { sku: PREMIUM_SKU } }],
-                    { total: { label: 'MixMaster Premium', amount } }
+                    { total: { label: '365 Mocktails Premium', amount } }
                 );
                 const resp = await pr.show();
-                const token = resp.details && resp.details.token;
-                try { if (svc.acknowledge) await svc.acknowledge(token, 'onetime'); } catch(e) {}
+                const token = resp.details && (resp.details.token || resp.details.purchaseToken);
+                if (token && svc.acknowledge) await svc.acknowledge(token, 'onetime');
                 await resp.complete('success');
                 closePaywall();
                 setPremium(true);
@@ -777,9 +828,10 @@
         async function restorePremium() {
             if (!('getDigitalGoodsService' in window)) { showToast(t('premium_app_only')); return; }
             try {
-                const svc = await window.getDigitalGoodsService('https://play.google.com/billing');
+                const svc = await getGooglePlayBillingService();
+                if (!svc) throw new Error('Google Play Billing unavailable');
                 const purchases = await svc.listPurchases();
-                if (purchases && purchases.some(p => p.itemId === PREMIUM_SKU)) {
+                if (purchases && purchases.some(p => p.itemId === PREMIUM_SKU || p.sku === PREMIUM_SKU)) {
                     closePaywall();
                     setPremium(true);
                 } else {
@@ -790,17 +842,21 @@
 
         // On launch inside the app, silently restore entitlement
         async function checkPremiumEntitlement() {
-            if (isPremium) return;
             if (!('getDigitalGoodsService' in window)) return;
             try {
-                const svc = await window.getDigitalGoodsService('https://play.google.com/billing');
+                const svc = await getGooglePlayBillingService();
+                if (!svc) return;
                 const purchases = await svc.listPurchases();
-                if (purchases && purchases.some(p => p.itemId === PREMIUM_SKU)) setPremium(true);
+                setPremium(!!(purchases && purchases.some(p => p.itemId === PREMIUM_SKU || p.sku === PREMIUM_SKU)));
             } catch (e) {}
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            applyStaticI18n(); checkPremiumEntitlement();
+            applyStaticI18n();
+            if (isTWA()) {
+                loadPremiumPrice();
+                checkPremiumEntitlement();
+            }
             // Show "Get it on Google Play" badge only on the web (not inside the app)
             if (!isTWA()) { var b=document.getElementById('play-badge'); if(b) b.classList.remove('hidden'); }
         });
@@ -1543,7 +1599,7 @@
                             <div class="text-gold mb-3 opacity-80 flex justify-center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="5" y="11" width="14" height="9"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
                             <div class="font-roman text-gold text-xs tracking-[0.3em] uppercase mb-5">${escapeHtml(t('locked_title'))}</div>
                             <button onclick="openPaywall()" class="btn-gold w-full py-3 font-roman text-xs tracking-[0.2em] uppercase">
-                                ${escapeHtml(t('unlock_btn'))} · <s class="opacity-60">${OLD_PRICE}</s> ${PRICE_LABEL}
+                                ${escapeHtml(t('unlock_btn'))}${premiumPriceSuffix()}
                             </button>
                         </div>` : `
                         <!-- Ingredients -->
