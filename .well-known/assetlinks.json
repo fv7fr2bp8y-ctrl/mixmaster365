@@ -49,7 +49,10 @@
       "namespace": "android_app",
       "package_name": "eu.plantbased365.twa",
       "sha256_cert_fingerprints": [
-        "10:BC:C0:2F:35:81:77:6F:01:45:C5:EE:80:C7:B0:40:59:22:6F:D8:0B:B6:FA:49:4D:ED:95:FA:A6:D9:F7:85"
+        "10:BC:C0:2F:35:81:77:6F:01:45:C5:EE:80:C7:B0:40:59:22:6F:D8:0B:B6:FA:49:4D:ED:95:FA:A6:D9:F7:85",
+        "E6:40:21:7C:54:88:2C:1A:85:05:AD:39:A3:D8:78:F6:7E:78:FA:30:1C:90:AE:41:D6:7D:01:CC:BF:03:04:5B",
+        "80:A4:1D:C1:14:90:C9:5A:52:E8:20:EC:30:08:C2:83:54:BB:2D:5B:D2:D4:40:7E:39:7B:9B:4B:C0:BA:A5:96",
+        "14:03:9C:D7:AC:D1:09:08:09:83:9A:D3:1C:8F:94:83:0D:A2:8D:A9:1F:9D:C4:74:EB:A7:89:7F:3A:9D:D7:B9"
       ]
     }
   },
@@ -69,7 +72,10 @@
       "namespace": "android_app",
       "package_name": "eu.dairyfree365.twa",
       "sha256_cert_fingerprints": [
-        "B2:EF:9D:61:C1:95:AA:35:64:14:D3:AF:E6:82:9C:46:B8:A1:4E:71:F1:4A:1D:C2:17:66:BB:EA:7B:01:E4:83"
+        "B2:EF:9D:61:C1:95:AA:35:64:14:D3:AF:E6:82:9C:46:B8:A1:4E:71:F1:4A:1D:C2:17:66:BB:EA:7B:01:E4:83",
+        "76:11:76:6D:09:B7:9C:FD:43:0B:BD:CC:79:DB:E4:0F:C5:D5:F9:1B:87:5C:7E:FF:C3:AB:14:1D:34:E8:91:87",
+        "6C:B8:AB:8F:D3:DC:42:72:B0:D2:2C:7B:4D:5E:46:11:11:F1:3C:60:A3:53:0C:7C:60:49:D5:4A:D6:6E:03:B9",
+        "B2:ED:53:82:D8:67:06:8E:0B:03:5F:13:48:77:E8:E9:DF:A4:8B:3D:19:5A:AA:A1:5F:3A:23:C1:2A:0B:34:C3"
       ]
     }
   },
