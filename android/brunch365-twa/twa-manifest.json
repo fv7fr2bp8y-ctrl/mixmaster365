@@ -18,7 +18,7 @@
   "splashScreenFadeOutDuration": 300,
   "signingKey": {
     "path": "signing.keystore",
-    "alias": "brunch365"
+    "alias": "my-key-alias"
   },
   "appVersionName": "2.0.0",
   "appVersionCode": 2,
