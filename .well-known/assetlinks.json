@@ -1,6 +1,8 @@
 [
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "eu.mixmaster365.app",
@@ -11,7 +13,9 @@
     }
   },
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "eu.mixmaster365.twa",
@@ -21,7 +25,9 @@
     }
   },
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "eu.brunch365.twa",
@@ -33,7 +39,9 @@
     }
   },
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "eu.healthygut365.twa",
@@ -44,7 +52,9 @@
     }
   },
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "eu.plantbased365.twa",
@@ -57,7 +67,9 @@
     }
   },
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "eu.meatfree365.twa",
@@ -67,7 +79,9 @@
     }
   },
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "eu.dairyfree365.twa",
@@ -80,12 +94,28 @@
     }
   },
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "eu.seafood365.twa",
       "sha256_cert_fingerprints": [
-        "EA:15:BE:12:CC:E0:5A:AD:2B:A8:56:BD:31:CD:C5:76:5F:C6:7C:16:2C:05:C9:72:70:35:8D:33:21:B3:0B:17"
+        "EA:15:BE:12:CC:E0:5A:AD:2B:A8:56:BD:31:CD:C5:76:5F:C6:7C:16:2C:05:C9:72:70:35:8D:33:21:B3:0B:17",
+        "93:75:3C:9E:1D:59:18:A7:A2:38:B3:F1:9D:B2:48:34:D5:8B:A8:7E:C2:DD:C7:BB:D6:70:88:E3:79:83:75:6E"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "eu.glutenfree365.twa",
+      "sha256_cert_fingerprints": [
+        "15:F3:71:0A:1E:A7:C9:1D:63:52:EE:6F:5B:7D:96:FD:74:5A:CA:C4:E2:50:95:6C:20:84:88:67:58:6B:29:87",
+        "0D:5C:E4:9F:F4:D6:5B:15:9B:62:42:16:7C:A5:7D:20:B5:86:CB:D5:F8:DC:AE:B4:F1:FD:D5:D9:FB:73:5F:4A"
       ]
     }
   }
